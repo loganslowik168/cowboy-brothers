@@ -1,0 +1,7 @@
+# NetBeans
+nbproject/private/
+.nb-gradle/
+
+# Build output
+target/
+build/
