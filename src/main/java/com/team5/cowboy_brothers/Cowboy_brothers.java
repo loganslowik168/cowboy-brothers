@@ -12,7 +12,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
     private final int BOX_SIZE = 50; // Size of the box
     private final int MOVE_SPEED = 5; // Movement speed of the box
 
-    public Cowboy_brothers() {
+    public Cowboy_brothers() { // constructor
         setTitle("Cowboy Brothers Key Input");
         setSize(800, 800); // Set window size to 800x800
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,7 +21,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
         new Cowboy_brothers();
     }
@@ -49,19 +49,19 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         repaint(); // Repaint the frame to update the box position
     }
     
-    public void EndProgram(int exitCode){
+    public void EndProgram(int exitCode){ // responsible for terminating the program intentionally using keybinds or menu options
         System.out.println("-- End program execution --");
         System.exit(exitCode);
         
     }
     
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) { 
         // Not used
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics g) { // draw box
         super.paint(g);
         g.setColor(Color.RED);
         g.fillRect(boxX, boxY, BOX_SIZE, BOX_SIZE); // Draw the red box
@@ -70,7 +70,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         drawSmileyFace(g, boxX + BOX_SIZE / 2, boxY + BOX_SIZE / 2);
     }
 
-    private void drawSmileyFace(Graphics g, int centerX, int centerY) {
+    private void drawSmileyFace(Graphics g, int centerX, int centerY) { // draw a smily face on the box
         int radius = BOX_SIZE / 2 - 10; // Radius of the face
         // Draw face
         g.setColor(Color.YELLOW);
@@ -85,7 +85,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         g.drawArc(centerX - radius / 2, centerY - radius / 4, radius, radius / 2, 0, -180);
     }
 
-    private void updateTitle() {
+    private void updateTitle() { // update window title too contain the player coordinates
         setTitle("Cowboy Brothers Key Input - X: " + boxX + ", Y: " + boxY);
     }
 }
