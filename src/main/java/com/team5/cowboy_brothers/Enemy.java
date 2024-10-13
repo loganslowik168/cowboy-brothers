@@ -40,6 +40,15 @@ public class Enemy {
         
     }
     
+    //Collision detection
+    private boolean collide(){
+        //get position of enemy if overlap return true else false
+        
+        
+        
+        return false;
+    }
+    
     
     
     
