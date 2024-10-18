@@ -18,4 +18,7 @@ public class PathNode {
         this.prev=null;
         this.next=null;
     }
+    public int getData(){
+        return data;
+    }
 }
