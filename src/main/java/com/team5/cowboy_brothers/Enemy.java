@@ -18,10 +18,35 @@ public class Enemy extends Rectangle {
     private String IDName;
     private boolean alive;
     private int species;
+    
+    
+    
     private int[] siz={3,2,1}, sig = {1,2,3}, pathway;
+    
+    
     Color color;
     private int boX, boY, BoW=20,BoH=20;
-    private final int MOVE_SPEED = 5; // Movement speed of the box
+    private final int MOVE_SPEED = 50; // Movement speed of the box
+    
+    DblLinkList Level1, Level2, Level3, PersonalList;
+    /*public void ListSettup(){
+        int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
+        for(int i=0; i<lv1A.length;i++){
+            Level1.insertAtEnd(lv1A[i]);
+        }
+        int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
+        for(int i=0; i<Lv2A.length;i++){
+            Level2.insertAtEnd(lv1A[i]);
+        }
+        int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
+        for(int i=0; i<Lv3A.length;i++){
+            Level3.insertAtEnd(lv1A[i]);
+        }
+    }
+    */
+    
+    
+    
     public Enemy(){
         IDName=null;
         alive=false;
@@ -30,13 +55,26 @@ public class Enemy extends Rectangle {
     }
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
-    public Enemy(String s, int i, int x, int y, Color color){
+    public Enemy(String s, int k, int x, int y, Color color){
         IDName =s;
         alive=true;
-        species=i;
+        species=k;
         boX=x;
         boY=y;
         this.color=color;
+        int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
+        for(int i=0; i<lv1A.length;i++){
+            Level1.insertAtEnd(lv1A[i]);
+        }
+        int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
+        for(int i=0; i<Lv2A.length;i++){
+            Level2.insertAtEnd(Lv2A[i]);
+        }
+        int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
+        for(int i=0; i<Lv3A.length;i++){
+            Level3.insertAtEnd(Lv3A[i]);
+        }
+        path();
         
     }
     
@@ -59,7 +97,7 @@ public class Enemy extends Rectangle {
         boY+=y;
     }
     public void setBoW(int w){
-        BoW=y;
+        BoW=w;
     }
     public void setBoH(int h){
         BoH=h;
@@ -67,8 +105,21 @@ public class Enemy extends Rectangle {
     //The predefined path will be set here
     public void path(){
         switch(this.species){
-            case 1-> pathway=siz;
-            case 2->pathway=sig;
+            case 1 -> {
+                for(int m=1;m<Level1.sizeL();m++){
+                    PersonalList.insertAtEnd(Level1.getvalue(m).getData());
+                }
+            }
+            case 2 -> {
+                for(int m=1;m<Level2.sizeL();m++){
+                    PersonalList.insertAtEnd(Level2.getvalue(m).getData());
+                }
+            }
+            case 3 -> {
+                for(int m=1;m<Level3.sizeL();m++){
+                    PersonalList.insertAtEnd(Level3.getvalue(m).getData());
+                }
+            }
         }
     }
     public void setColor(Color color){
