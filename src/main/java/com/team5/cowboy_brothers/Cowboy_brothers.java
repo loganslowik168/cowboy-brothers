@@ -29,8 +29,10 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         
        // timer.start();
         //Enemy obj and obstacle instantiation
-        en1=new Enemy("Jerry",1,50,50, Color.blue);
+        en1=new Enemy("Jerry",2,50,50, Color.blue);
         Ob1=new Enemy("Obstacle",1,150,50, Color.BLACK);
+        en1.setBoH(100);
+        
         floor =new Enemy("Floor", 1,10,250,Color.orange);
         floor.setBoH(50);
         floor.setBoW(500);
@@ -40,6 +42,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
     public static void main(String[] args) {
         System.out.println("-- Begin program execution --");
         new Cowboy_brothers();
+        
     }
 
     @Override
@@ -70,7 +73,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
             case KeyEvent.VK_ESCAPE ->               // Terminate the program
                 EndProgram(0);
         }
-        updateTitle(); // Update the window title to reflect the coordinates
+        //updateTitle(); // Update the window title to reflect the coordinates
         checkCollision();
         repaint(); // Repaint the frame to update the box position
     }
@@ -97,11 +100,14 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         g.setColor(Color.RED);
         g.fillRect(boxX, boxY, BOX_SIZE, BOX_SIZE); // Draw the red box
         
-        en1.draw(g);
-        Ob1.draw(g);
-        floor.draw(g);
+        //en1.draw(g);
+        //Ob1.draw(g);
+        //floor.draw(g);
         // Draw a smiley face in the center of the box
         //drawSmileyFace(g, boxX + BOX_SIZE / 2, boxY + BOX_SIZE / 2);
+    }
+    public void EnemyPaint(DblLinkList L, Enemy e){
+        
     }
     
     public void checkCollision(){
@@ -111,7 +117,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         }
     }
 
-    private void drawSmileyFace(Graphics g, int centerX, int centerY) {
+    /*private void drawSmileyFace(Graphics g, int centerX, int centerY) {
         int radius = BOX_SIZE / 2 - 10; // Radius of the face
         // Draw face
         g.setColor(Color.YELLOW);
@@ -128,5 +134,5 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
 
     private void updateTitle() {
         setTitle("Cowboy Brothers Key Input - X: " + boxX + ", Y: " + boxY);
-    }
+    }*/
 }
