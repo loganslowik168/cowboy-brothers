@@ -9,11 +9,11 @@ package com.team5.cowboy_brothers;
  * @author matth
  */
 public class PathNode {
-    int[] data;
+    int data;
     PathNode prev;
     PathNode next;
     
-    public PathNode(int[] data){
+    public PathNode(int data){
         this.data=data;
         this.prev=null;
         this.next=null;
