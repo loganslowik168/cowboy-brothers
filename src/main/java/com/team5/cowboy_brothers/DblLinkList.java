@@ -25,6 +25,35 @@ public void traverseForward()
 		current = current.next; 
 	} 
 } 
+
+
+//Returns the Node at count g
+public PathNode getvalue(int g){
+    int count=1;
+    PathNode current = head;
+    if(g==1){
+        return head;
+    }else{
+        while(count<g){
+            current= current.next;
+            count++;
+        }
+        return current;
+    }
+
+}
+
+
+//returns size of linked list
+public int sizeL(){
+    int count = 1;
+    PathNode current = head;
+    while((current.next)!=null){
+        current = current.next;
+        count++;
+    }
+    return count;
+}
 // Traversing from tail to the head 
 public void traverseBackward() 
 { 
@@ -36,7 +65,7 @@ public void traverseBackward()
 } 
 
     public void insertAtEnd(int data) 
-{ 
+    { 
 	PathNode temp = new PathNode(data); 
 	if (tail == null) { 
 		head = temp; 
@@ -47,6 +76,6 @@ public void traverseBackward()
 		temp.prev = tail; 
 		tail = temp; 
 	} 
-} 
+    } 
 
 }
