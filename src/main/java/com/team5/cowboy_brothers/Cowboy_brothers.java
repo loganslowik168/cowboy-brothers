@@ -69,6 +69,8 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         // Draw a smiley face in the center of the box
         drawSmileyFace(g, boxX + BOX_SIZE / 2, boxY + BOX_SIZE / 2);
     }
+    
+    
 
     private void drawSmileyFace(Graphics g, int centerX, int centerY) {
         int radius = BOX_SIZE / 2 - 10; // Radius of the face
