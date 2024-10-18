@@ -13,4 +13,9 @@ public class PathNode {
     PathNode prev;
     PathNode next;
     
+    public PathNode(int[] data){
+        this.data=data;
+        this.prev=null;
+        this.next=null;
+    }
 }
