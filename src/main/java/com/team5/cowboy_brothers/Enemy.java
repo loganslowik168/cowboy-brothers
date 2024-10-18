@@ -29,6 +29,9 @@ public class Enemy extends Rectangle {
     private final int MOVE_SPEED = 50; // Movement speed of the box
     
     DblLinkList Level1, Level2, Level3, PersonalList;
+    int[] Lv1A={50,55,60,65,70,75,80,85,90,95,100};
+    int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
+    int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
     /*public void ListSettup(){
         int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
         for(int i=0; i<lv1A.length;i++){
@@ -56,24 +59,16 @@ public class Enemy extends Rectangle {
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
     public Enemy(String s, int k, int x, int y, Color color){
+        Level1.insertAtEnd(Lv1A[0]);
+        Level2.insertAtEnd(Lv2A[0]);
+        Level3.insertAtEnd(Lv3A[0]);
         IDName =s;
         alive=true;
         species=k;
         boX=x;
         boY=y;
         this.color=color;
-        int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
-        for(int i=0; i<lv1A.length;i++){
-            Level1.insertAtEnd(lv1A[i]);
-        }
-        int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
-        for(int i=0; i<Lv2A.length;i++){
-            Level2.insertAtEnd(Lv2A[i]);
-        }
-        int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
-        for(int i=0; i<Lv3A.length;i++){
-            Level3.insertAtEnd(Lv3A[i]);
-        }
+        
         path();
         
     }
@@ -104,10 +99,25 @@ public class Enemy extends Rectangle {
     }
     //The predefined path will be set here
     public void path(){
+        /*int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
+        for(int i=0; i<lv1A.length;i++){
+            Level1.insertAtEnd(lv1A[i]);
+        }
+        int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
+        for(int i=0; i<Lv2A.length;i++){
+            Level2.insertAtEnd(Lv2A[i]);
+        }
+        int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
+        for(int i=0; i<Lv3A.length;i++){
+            Level3.insertAtEnd(Lv3A[i]);
+        }*/
+        
+        
+        
         switch(this.species){
             case 1 -> {
                 for(int m=1;m<Level1.sizeL();m++){
-                    PersonalList.insertAtEnd(Level1.getvalue(m).getData());
+                    PersonalList.insertAtEnd((Level1.getvalue(m)).getData());
                 }
             }
             case 2 -> {
@@ -119,6 +129,9 @@ public class Enemy extends Rectangle {
                 for(int m=1;m<Level3.sizeL();m++){
                     PersonalList.insertAtEnd(Level3.getvalue(m).getData());
                 }
+            }
+            case -1->{
+                break;
             }
         }
     }
