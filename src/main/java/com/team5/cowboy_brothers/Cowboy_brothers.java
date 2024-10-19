@@ -31,7 +31,7 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         //Enemy obj and obstacle instantiation
         en1=new Enemy("Jerry",2,50,50, Color.blue);
         Ob1=new Enemy("Obstacle",1,150,50, Color.BLACK);
-        en1.setBoH(100);
+       // en1.setBoH(100);
         
         floor =new Enemy("Floor", 1,10,250,Color.orange);
         floor.setBoH(50);
@@ -100,9 +100,9 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         g.setColor(Color.RED);
         g.fillRect(boxX, boxY, BOX_SIZE, BOX_SIZE); // Draw the red box
         
-        //en1.draw(g);
-        //Ob1.draw(g);
-        //floor.draw(g);
+        en1.draw(g);
+        Ob1.draw(g);
+        floor.draw(g);
         // Draw a smiley face in the center of the box
         //drawSmileyFace(g, boxX + BOX_SIZE / 2, boxY + BOX_SIZE / 2);
     }
