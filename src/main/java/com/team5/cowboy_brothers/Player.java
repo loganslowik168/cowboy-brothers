@@ -1,12 +1,14 @@
 package com.team5.cowboy_brothers;
+import java.io.*;
 
-public class Player {
+public class Player implements Serializable{
     private static final int NUM_OF_LEVELS = 5;
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
     private int currentScore;
     private int[] highScores;
+    private String sprite; //sprite name6
     private static final int MOVE_SPEED = 1;
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
@@ -73,6 +75,27 @@ public class Player {
     public void setHighScores(int[] highScores) {
         if (highScores != null && highScores.length == NUM_OF_LEVELS) {
             System.arraycopy(highScores, 0, this.highScores, 0, NUM_OF_LEVELS);
+        }
+    }
+    // Serialize the Player object
+    public void serialize(String filename) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(this);
+            System.out.println("Player serialized successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Deserialize the Player object
+    public static Player deserialize(String filename) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            Player player = (Player) in.readObject();
+            System.out.println("Player deserialized successfully.");
+            return player;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
