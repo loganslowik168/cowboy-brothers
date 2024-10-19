@@ -59,9 +59,9 @@ public class Enemy extends Rectangle {
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
     public Enemy(String s, int k, int x, int y, Color color){
-        Level1.insertAtEnd(Lv1A[0]);
-        Level2.insertAtEnd(Lv2A[0]);
-        Level3.insertAtEnd(Lv3A[0]);
+        //Level1.insertAtEnd(Lv1A[0]);
+        //Level2.insertAtEnd(Lv2A[0]);
+        //Level3.insertAtEnd(Lv3A[0]);
         IDName =s;
         alive=true;
         species=k;
@@ -69,7 +69,7 @@ public class Enemy extends Rectangle {
         boY=y;
         this.color=color;
         
-        path();
+        //path();
         
     }
     
