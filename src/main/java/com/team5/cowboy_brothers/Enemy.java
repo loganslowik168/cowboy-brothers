@@ -16,9 +16,9 @@ import java.awt.event.*;
  */
 public class Enemy extends Rectangle {
     private String IDName;
-    private boolean alive;
+    private boolean alive, forward=true;
     private int species;
-    
+    int count=0;
     
     
     private int[] siz={3,2,1}, sig = {1,2,3}, pathway;
@@ -32,6 +32,7 @@ public class Enemy extends Rectangle {
     int[] Lv1A={50,55,60,65,70,75,80,85,90,95,100};
     int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
     int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
+    int[] YPosit= {240,240,240,240,240,240,240,240,240,240};
     /*public void ListSettup(){
         int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
         for(int i=0; i<lv1A.length;i++){
@@ -58,7 +59,7 @@ public class Enemy extends Rectangle {
     }
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
-    public Enemy(String s, int k, int x, int y, Color color){
+    public Enemy(String s, int k, Color color){
         //Level1.insertAtEnd(Lv1A[0]);
         //Level2.insertAtEnd(Lv2A[0]);
         //Level3.insertAtEnd(Lv3A[0]);
@@ -72,6 +73,14 @@ public class Enemy extends Rectangle {
         //path();
         
     }
+    public void setBounds(){
+        switch(this.species){
+            case 1->{
+                
+            }
+                
+        }
+    }
     
     //To paint the temp sprite
     public void draw(Graphics g){
@@ -79,6 +88,21 @@ public class Enemy extends Rectangle {
         g.fillRect(this.boX, this.boY, this.BoW, this.BoH);
         
     }
+    public int getCount(){
+        return count;
+    }
+    public void nextPosit(){
+        if(count ==0||count==10){
+            forward= !(forward);
+        }
+        if(forward){
+            count++;
+        }else{
+            count--;
+        }
+        
+    }
+    
     public String getName(){
         return IDName;
     }
@@ -110,7 +134,7 @@ public class Enemy extends Rectangle {
         int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
         for(int i=0; i<Lv3A.length;i++){
             Level3.insertAtEnd(Lv3A[i]);
-        }*/
+        }
         
         
         
@@ -133,7 +157,7 @@ public class Enemy extends Rectangle {
             case -1->{
                 break;
             }
-        }
+        }*/
     }
     public void setColor(Color color){
         this.color=color;
