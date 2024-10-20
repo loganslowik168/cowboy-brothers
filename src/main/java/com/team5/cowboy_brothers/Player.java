@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Player implements Serializable{
     private static final int NUM_OF_LEVELS = 5;
+    double[] position = {3.5, 7.2};
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
@@ -29,6 +30,10 @@ public class Player implements Serializable{
     }
 
     // Getters
+    public double[] getPosition()
+    {
+        return position;
+    }
     public int getCurrentHealth() {
         return currentHealth;
     }
@@ -50,6 +55,19 @@ public class Player implements Serializable{
     }
 
     // Setters
+    public void setPosition(double x, double y)
+    {
+        position[0]=x;
+        position[1]=y;
+    }
+    public void setX(double x)
+    {
+        position[0]=x;
+    }
+    public void setY(double y)
+    {
+        position[1]=y;
+    }
     public void setCurrentHealth(int currentHealth) {
         if (currentHealth >= 0 && currentHealth <= MAX_HEALTH) {
             this.currentHealth = currentHealth;
