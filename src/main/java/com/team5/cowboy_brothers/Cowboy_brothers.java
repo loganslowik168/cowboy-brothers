@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //Our Window Class
 public class Cowboy_brothers extends JFrame implements KeyListener {
@@ -27,21 +29,27 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         addKeyListener(this); //WATCH leaking this
         setVisible(true);
         
-       // timer.start();
+         
         //Enemy obj and obstacle instantiation
-        en1=new Enemy("Jerry",2,50,50, Color.blue);
-        Ob1=new Enemy("Obstacle",1,150,50, Color.BLACK);
+        en1=new Enemy("Jerry",2, Color.blue);
+        Ob1=new Enemy("Obstacle",1, Color.BLACK);
        // en1.setBoH(100);
         
-        floor =new Enemy("Floor", 1,10,250,Color.orange);
+        floor =new Enemy("Floor", 1,Color.orange);
         floor.setBoH(50);
         floor.setBoW(500);
+        floor.setboX(25);
+        floor.setboY(250);
                
     }
 
     public static void main(String[] args) {
         System.out.println("-- Begin program execution --");
         new Cowboy_brothers();
+        //Timer timer=new Timer();
+        //TimerTask task = new Helper();
+        
+        //timer.schedule(task,1000,10000);
         
     }
 
