@@ -50,6 +50,20 @@ public class Cowboy_brothers extends JFrame implements KeyListener {
         //TimerTask task = new Helper();
         
         //timer.schedule(task,1000,10000);
+         // Create an instance of Lvl1
+        Lvl1 level1 = new Lvl1();
+        
+        // Instantiate the player with hardcoded stats
+        int[] highScores = {0, 0, 0, 0, 0}; // Example high scores
+        Player player = new Player(3, 6, 0, 0, highScores);
+        
+        // Set the player starting position
+        double[] startingPos = level1.getStartingPosition();
+        player.setPosition(startingPos[0], startingPos[1]);
+        
+        // Display player's current position and health
+        System.out.println("Player started at position: " + player.getPosition()[0] + ", " + player.getPosition()[1]);
+        System.out.println("Player health: " + player.getCurrentHealth());
         
     }
 
