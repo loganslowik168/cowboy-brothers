@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import java.util.*;
-import java.util.Timer;
+import javax.swing.Timer;
 
 public class Cowboy_bros_Menu extends JFrame {
 
@@ -13,15 +13,22 @@ public class Cowboy_bros_Menu extends JFrame {
     public enum GameState {
         MAIN_MENU,
         LEVEL_SELECT,
-        GAMEPLAY
+        GAMEPLAY,
+        PAUSE_MENU
     }
-    
-    private Timer t1=new Timer();
+    //ActionListener listener  = event -> timerLabel.setText(Instant.now().toString());
+    final int DELAY = 1000;
+    int v=10;
+    // Milliseconds between timer ticks
+    Timer t = new Timer(DELAY, null);
+
+    //private Timer t1=new Timer();
             
     private GameState currentState = GameState.MAIN_MENU; // Initial state
     private JPanel mainMenuPanel;
     private JPanel levelSelectPanel;
     private JPanel gameplayPanel;
+    private JPanel pauseMenuPanel;
 
     public Cowboy_bros_Menu() {
         setTitle("Cowboy Brothers");
@@ -29,11 +36,13 @@ public class Cowboy_bros_Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new CardLayout());
+        //this.t1=t1;
 
         // Create the panels for different states
         createMainMenuPanel();
         createLevelSelectPanel();
         createGameplayPanel();
+        createPauseMenu();
 
         // Display the main menu on start
         switchState(GameState.MAIN_MENU);
@@ -119,7 +128,63 @@ public class Cowboy_bros_Menu extends JFrame {
         
         add(levelSelectPanel, BorderLayout.CENTER);
     }
-
+    
+    //create a pause menu
+    private void createPauseMenu(){
+        pauseMenuPanel = new JPanel();
+        pauseMenuPanel.setLayout(new BorderLayout());
+        
+        JButton retyButton = new JButton("Rety");
+        retyButton.setFont(new Font("Arial", Font.BOLD, 24));
+        
+        JButton continueButton = new JButton("Continue");
+        continueButton.setFont(new Font("Arial", Font.BOLD, 24));
+        
+        JButton levelSel =  new JButton("Continue");
+        levelSel.setFont(new Font("Arial", Font.BOLD, 24));
+        
+        pauseMenuPanel.add(retyButton, BorderLayout.EAST);
+        pauseMenuPanel.add(continueButton, BorderLayout.CENTER);
+        pauseMenuPanel.add(levelSel, BorderLayout.WEST);
+        
+        
+        
+        
+        retyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //reset all progress and restart the level
+                switchState(GameState.GAMEPLAY);
+            }
+        });
+        
+        continueButton.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){
+               //continue from the pause menu
+               switchState(GameState.GAMEPLAY);
+               
+           } 
+        });
+        
+        
+        levelSel.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e){
+               //return to level select
+               switchState(GameState.LEVEL_SELECT);
+           } 
+        });
+        
+        
+        
+        
+        add(pauseMenuPanel, BorderLayout.CENTER);
+    }
+    
+    
+    
+    
+    
+    JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
         gameplayPanel = new JPanel();
@@ -134,7 +199,7 @@ public class Cowboy_bros_Menu extends JFrame {
         gameplayPanel.add(backButton, BorderLayout.SOUTH);
         
         //Add a timer as a label at top of screen
-        JLabel timerLabel = new JLabel("",SwingConstants.CENTER);
+         timerLabel = new JLabel("",SwingConstants.CENTER);
         timerLabel.setFont(new Font("Arial", Font.PLAIN,15));
         timerLabel.setText("Timer");
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
@@ -143,15 +208,38 @@ public class Cowboy_bros_Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switchState(GameState.LEVEL_SELECT);  // Return to level select
+                t.stop();
+                v=10;
+                timerLabel.setText("Timer");
             }
         });
-
+        
+        //Timer Action will change the label to show time and switch the game state back to level select at 0
+        t.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(v==0){
+                    t.stop();
+                    timerLabel.setText("Timer: 0");
+                    //label.setText("GameOver");
+                    v=10;
+                    switchState(GameState.PAUSE_MENU);
+                }else{
+                    timerLabel.setText("Timer: "+v);
+                    v--;
+                }
+            }
+        });
         add(gameplayPanel, BorderLayout.CENTER);
     }
     
+    
+    
+    
+    
     //Could be the Action Listener
     private void createTimerDisplay(){
-        
+        timerLabel.setText("l");
         
     }
 
@@ -163,6 +251,15 @@ public class Cowboy_bros_Menu extends JFrame {
         mainMenuPanel.setVisible(currentState == GameState.MAIN_MENU);
         levelSelectPanel.setVisible(currentState == GameState.LEVEL_SELECT);
         gameplayPanel.setVisible(currentState == GameState.GAMEPLAY);
+        pauseMenuPanel.setVisible(currentState == GameState.PAUSE_MENU);
+        //Add a notifier to a timer if gameplay starts
+        
+        if(currentState==GameState.GAMEPLAY){
+        //call Timer Start and have it update the label in reference  to current time
+        //t1.schedule(new Helper(), 200);
+        t.start();
+        }
+      
     }
 
     public void EndProgram(int exitCode) {
