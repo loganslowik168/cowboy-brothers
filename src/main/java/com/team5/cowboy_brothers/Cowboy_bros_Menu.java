@@ -4,16 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//import java.util.*;
+import java.util.Timer;
 
 public class Cowboy_bros_Menu extends JFrame {
 
     // Define the different game states
-    private enum GameState {
+    public enum GameState {
         MAIN_MENU,
         LEVEL_SELECT,
         GAMEPLAY
     }
-
+    
+    private Timer t1=new Timer();
+            
     private GameState currentState = GameState.MAIN_MENU; // Initial state
     private JPanel mainMenuPanel;
     private JPanel levelSelectPanel;
@@ -112,7 +116,7 @@ public class Cowboy_bros_Menu extends JFrame {
                 switchState(GameState.MAIN_MENU); // Return to the Main Menu
             }
         });
-
+        
         add(levelSelectPanel, BorderLayout.CENTER);
     }
 
@@ -128,6 +132,12 @@ public class Cowboy_bros_Menu extends JFrame {
         JButton backButton = new JButton("BACK TO LEVEL SELECT");
         backButton.setFont(new Font("Arial", Font.BOLD, 24));
         gameplayPanel.add(backButton, BorderLayout.SOUTH);
+        
+        //Add a timer as a label at top of screen
+        JLabel timerLabel = new JLabel("",SwingConstants.CENTER);
+        timerLabel.setFont(new Font("Arial", Font.PLAIN,15));
+        timerLabel.setText("Timer");
+        gameplayPanel.add(timerLabel, BorderLayout.NORTH);
 
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -137,6 +147,12 @@ public class Cowboy_bros_Menu extends JFrame {
         });
 
         add(gameplayPanel, BorderLayout.CENTER);
+    }
+    
+    //Could be the Action Listener
+    private void createTimerDisplay(){
+        
+        
     }
 
     // Function to switch between game states
@@ -153,12 +169,18 @@ public class Cowboy_bros_Menu extends JFrame {
         System.out.println("-- End program execution --");
         System.exit(exitCode);
     }
+    //Way to return GameState
+    public GameState getGameState(){
+        return currentState;
+    }
 
     private void resetProgress() {
         System.out.println("Progress has been reset.");
     }
 
+   /* Remove Main from this class to put into MasterClass
     public static void main(String[] args) {
         new Cowboy_bros_Menu();
     }
+    */
 }
