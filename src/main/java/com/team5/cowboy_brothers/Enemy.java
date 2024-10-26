@@ -18,6 +18,12 @@ public class Enemy extends Rectangle {
     private String IDName;
     private boolean alive, forward=true;
     private int species;
+    private int MAX_SPEED = 5;
+    //current position
+    int pos_x = 0;
+    int pos_y = 0;
+    
+    
     int count=0;
     
     
@@ -33,6 +39,11 @@ public class Enemy extends Rectangle {
     int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
     int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
     int[] YPosit= {240,240,240,240,240,240,240,240,240,240};
+    
+    //UPDATE THE FOLLOWING VALUES FOR THE DESTINATION
+    int destinationX = 0;
+    int destinationY = 0;
+    
     /*public void ListSettup(){
         int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
         for(int i=0; i<lv1A.length;i++){
@@ -102,24 +113,53 @@ public class Enemy extends Rectangle {
         }
         
     }
-    
+        // Method to update the position of the enemy
+    public void updatePosition() {
+        // Calculate the direction vector
+        double dirX = destinationX - pos_x;
+        double dirY = destinationY - pos_y;
+        double distance = Math.sqrt(dirX * dirX + dirY * dirY);
+
+        // If the enemy is already at the destination
+        if (distance < 1e-5) {
+            return; // No movement needed
+        }
+
+        // Normalize the direction vector
+        double normDirX = dirX / distance;
+        double normDirY = dirY / distance;
+
+        // Calculate the movement based on max speed
+        double moveX = normDirX * MAX_SPEED;
+        double moveY = normDirY * MAX_SPEED;
+
+        // Update the position
+        pos_x += moveX;
+        pos_y += moveY;
+
+        // Check if the enemy has reached the destination
+        if (Math.sqrt((pos_x - destinationX) * (pos_x - destinationX) + (pos_y - destinationY) * (pos_y - destinationY)) < MAX_SPEED) {
+            pos_x = destinationX; // Snap to destination
+            pos_y = destinationY;
+        }
+    }
     public String getName(){
         return IDName;
     }
     public boolean getAl(){
         return alive;
     }
-    public void setboX(int x){
-        boX+=x;
+    public void setboX(int bx){
+        boX+=bx;
     }
-    public void setboY(int y){
-        boY+=y;
+    public void setboY(int by){
+        boY+=by;
     }
-    public void setBoW(int w){
-        BoW=w;
+    public void setBoW(int bw){
+        BoW=bw;
     }
-    public void setBoH(int h){
-        BoH=h;
+    public void setBoH(int bh){
+        BoH=bh;
     }
     //The predefined path will be set here
     public void path(){
