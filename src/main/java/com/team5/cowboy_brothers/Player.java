@@ -104,6 +104,10 @@ public class Player implements Serializable{
             e.printStackTrace();
         }
     }
+    
+     public int getMoveSpeed() {
+        return MOVE_SPEED;
+    }
 
     // Deserialize the Player object
     public static Player deserialize(String filename) {
