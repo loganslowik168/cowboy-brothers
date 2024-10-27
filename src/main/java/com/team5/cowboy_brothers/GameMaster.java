@@ -23,9 +23,9 @@ public class GameMaster {
        Cowboy_bros_Menu n1 =  new Cowboy_bros_Menu();
     }
     
-    public static void main(String[] args) throws InterruptedException {
-        //Cowboy_bros_Menu ka = new Cowboy_bros_Menu();
-        //Timer t1=new Timer();
+    public static void main(String[] args) {
+        
+        
         olly = new GameMaster();
         
         
@@ -38,20 +38,7 @@ public class GameMaster {
         });
         tL1.start();
         
-        synchronized(olly)
-        {
-            //make the main thread wait
-            olly.wait();
-             
-            //once timer has scheduled the task 4 times, 
-            //main thread resumes
-            //and terminates the timer
-            //t1.cancel();
-             
-            //purge is used to remove all cancelled 
-            //tasks from the timer'stack queue
-            //System.out.println(t1.purge());
-        }
+        
         
     }
     
@@ -60,8 +47,6 @@ public class GameMaster {
     }
     //time
     public void time(){
-       //while(n1.getGameState()==GameState.GAMEPLAY){
-           
-       
+     
     }
 }
