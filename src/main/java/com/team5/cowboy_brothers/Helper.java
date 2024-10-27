@@ -21,8 +21,8 @@ public class Helper extends TimerTask {
 	public static int i = 0;
 	public void run()
 	{
-		
-		
+            System.out.println("Timer ran " + ++i);
+        
 	}
         public void run(Enemy s, Enemy f){
             s.nextPosit();
