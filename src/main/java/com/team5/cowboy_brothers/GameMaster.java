@@ -20,7 +20,7 @@ public class GameMaster {
     
     
     public GameMaster(){
-       Cowboy_brothers n1 =  new Cowboy_brothers();
+       Cowboy_brothers_menu n1 =  new Cowboy_brothers_menu();
     }
     
     public static void main(String[] args) {
