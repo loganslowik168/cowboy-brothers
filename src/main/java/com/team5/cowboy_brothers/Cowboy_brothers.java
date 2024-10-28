@@ -1,6 +1,7 @@
 package com.team5.cowboy_brothers;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +12,18 @@ public class Cowboy_brothers extends JFrame {
     private enum GameState {
         MAIN_MENU,
         LEVEL_SELECT,
-        GAMEPLAY
+        GAMEPLAY,
+        PAUSE_MENU
     }
+    final int Del=1000;
+    int v=100;
+    Timer t = new Timer(Del,null);
 
     private GameState currentState = GameState.MAIN_MENU; // Initial state
     private JPanel mainMenuPanel;
     private JPanel levelSelectPanel;
     private JPanel gameplayPanel;
+    private JPanel pauseMenuPanel;
 
     public Cowboy_brothers() {
         setTitle("Cowboy Brothers");
@@ -30,6 +36,7 @@ public class Cowboy_brothers extends JFrame {
         createMainMenuPanel();
         createLevelSelectPanel();
         createGameplayPanel();
+        createPauseMenu();
 
         // Display the main menu on start
         switchState(GameState.MAIN_MENU);
@@ -81,13 +88,15 @@ public class Cowboy_brothers extends JFrame {
             }
         });
     }
+    
+    
+    
+    //Main
     public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
-        new Cowboy_brothers();
-        //Timer timer=new Timer();
-        //TimerTask task = new Helper();
+        new Old_Cowboy_bros_Menu();
         
-        //timer.schedule(task,1000,10000);
+        
          // Create an instance of Lvl1
         Lvl1 level1 = new Lvl1();
         
@@ -105,6 +114,9 @@ public class Cowboy_brothers extends JFrame {
         
 
     }
+    
+    
+    
 
     // Create the Level Select panel with level buttons
     private void createLevelSelectPanel() {
@@ -140,7 +152,10 @@ public class Cowboy_brothers extends JFrame {
 
         add(levelSelectPanel, BorderLayout.CENTER);
     }
-
+    
+    
+    
+    JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
         gameplayPanel = new JPanel();
@@ -153,6 +168,12 @@ public class Cowboy_brothers extends JFrame {
         JButton backButton = new JButton("BACK TO LEVEL SELECT");
         backButton.setFont(new Font("Arial", Font.BOLD, 24));
         gameplayPanel.add(backButton, BorderLayout.SOUTH);
+        
+        //Add a timer as a label at top of screen
+        timerLabel = new JLabel("",SwingConstants.CENTER);
+        timerLabel.setFont(new Font("Arial", Font.PLAIN,15));
+        timerLabel.setText("Timer");
+        gameplayPanel.add(timerLabel, BorderLayout.NORTH);
 
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -160,9 +181,82 @@ public class Cowboy_brothers extends JFrame {
                 switchState(GameState.LEVEL_SELECT);  // Return to level select
             }
         });
+        
+        //Timer Action will change the label to show time and switch the game state back to level select at 0
+        t.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(v==0){
+                    t.stop();
+                    timerLabel.setText("Timer: 0");
+                    //label.setText("GameOver");
+                    v=100;
+                    
+                    switchState(GameState.PAUSE_MENU);
+                }else{
+                    timerLabel.setText("Timer: "+v);
+                    v--;
+                }
+            }
+        });
 
         add(gameplayPanel, BorderLayout.CENTER);
     }
+    
+    private void createPauseMenu(){
+        pauseMenuPanel = new JPanel();
+        pauseMenuPanel.setLayout(new GridLayout(1, 3, 10,10));
+        
+        JButton retyButton = new JButton("Rety");
+        retyButton.setFont(new Font("Arial", Font.BOLD, 24));
+        
+        JButton continueButton = new JButton("Continue");
+        continueButton.setFont(new Font("Arial", Font.BOLD, 24));
+        
+        JButton levelSel =  new JButton("Level Select");
+        levelSel.setFont(new Font("Arial", Font.BOLD, 24));
+        
+        pauseMenuPanel.add(retyButton);
+        pauseMenuPanel.add(continueButton);
+        pauseMenuPanel.add(levelSel);
+        
+        
+        
+        
+        retyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //reset all progress and restart the level
+                switchState(GameState.GAMEPLAY);
+            }
+        });
+        
+        continueButton.addActionListener(new ActionListener(){
+           @Override
+           public void actionPerformed(ActionEvent e){
+               //continue from the pause menu
+               switchState(GameState.GAMEPLAY);
+               
+           } 
+        });
+        
+        
+        levelSel.addActionListener(new ActionListener(){
+           @Override
+           public void actionPerformed(ActionEvent e){
+               //return to level select
+               switchState(GameState.LEVEL_SELECT);
+           } 
+        });
+        
+        
+        
+        
+        add(pauseMenuPanel, BorderLayout.CENTER);
+    }
+    
+    
+    
 
     // Function to switch between game states
     private void switchState(GameState newState) {
@@ -172,6 +266,15 @@ public class Cowboy_brothers extends JFrame {
         mainMenuPanel.setVisible(currentState == GameState.MAIN_MENU);
         levelSelectPanel.setVisible(currentState == GameState.LEVEL_SELECT);
         gameplayPanel.setVisible(currentState == GameState.GAMEPLAY);
+        pauseMenuPanel.setVisible(currentState == GameState.PAUSE_MENU);
+        //Add a notifier to a timer if gameplay starts
+        
+        if(currentState==GameState.GAMEPLAY){
+        //call Timer Start and have it update the label in reference  to current time
+        t.start();
+        
+        //Create a new class object to show the Player()
+        }
     }
 
     public void EndProgram(int exitCode) {
