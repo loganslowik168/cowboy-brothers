@@ -20,7 +20,7 @@ public class GameMaster {
     
     
     public GameMaster(){
-       Cowboy_bros_Menu n1 =  new Cowboy_bros_Menu();
+       Cowboy_brothers n1 =  new Cowboy_brothers();
     }
     
     public static void main(String[] args) {
@@ -32,6 +32,7 @@ public class GameMaster {
         final int del=1000;
         Timer tL1=new Timer(del, null);
         tL1.addActionListener(new ActionListener(){
+        @Override
         public void actionPerformed(ActionEvent evt){
             if(olly.c==10){tL1.stop();}else{olly.increm(); System.out.println("C is "+olly.c);}
         }
