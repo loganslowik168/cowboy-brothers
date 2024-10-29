@@ -178,7 +178,11 @@ public class Cowboy_brothers_menu extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switchState(GameState.LEVEL_SELECT);  // Return to level select
+                switchState(GameState.PAUSE_MENU);  // Send to Pause menu
+                t.stop();
+                
+                
+                timerLabel.setText("Timer");  // Return to level select
             }
         });
         
@@ -227,6 +231,7 @@ public class Cowboy_brothers_menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //reset all progress and restart the level
+                v=100;
                 switchState(GameState.GAMEPLAY);
             }
         });
@@ -245,6 +250,7 @@ public class Cowboy_brothers_menu extends JFrame {
            @Override
            public void actionPerformed(ActionEvent e){
                //return to level select
+               v=100;
                switchState(GameState.LEVEL_SELECT);
            } 
         });
