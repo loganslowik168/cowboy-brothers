@@ -28,7 +28,7 @@ public class GameMaster {
         
         olly = new GameMaster();
         
-        
+                
         final int del=1000;
         Timer tL1=new Timer(del, null);
         tL1.addActionListener(new ActionListener(){
