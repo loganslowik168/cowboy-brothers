@@ -18,6 +18,11 @@ public class Cowboy_brothers_menu extends JFrame {
     final int Del=1000;
     int v=100;
     Timer t = new Timer(Del,null);
+    
+     
+        Player player1;
+        PauseButtonValue pauseInstance;
+        
 
     private GameState currentState = GameState.MAIN_MENU; // Initial state
     private JPanel mainMenuPanel;
@@ -31,7 +36,9 @@ public class Cowboy_brothers_menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new CardLayout());
-
+        
+        //create beginning player with full stats and lvl 1 unlocked
+        player1=new Player(3,6,1,0,null);
         // Create the panels for different states
         createMainMenuPanel();
         createLevelSelectPanel();
@@ -116,7 +123,7 @@ public class Cowboy_brothers_menu extends JFrame {
     }
     
     
-    
+    int levelNumberGlobal;
 
     // Create the Level Select panel with level buttons
     private void createLevelSelectPanel() {
@@ -134,7 +141,10 @@ public class Cowboy_brothers_menu extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You selected Level " + levelNumber);
+                    levelNumberGlobal=levelNumber;
+                    if(levelNumber<=player1.getMaxUnlockedLevel()){
                     switchState(GameState.GAMEPLAY);  // Switch to gameplay
+                    }
                 }
             });
         }
@@ -165,7 +175,7 @@ public class Cowboy_brothers_menu extends JFrame {
         gameplayPanel.add(label, BorderLayout.CENTER);
 
         // Add a back button to return to the level select screen
-        JButton backButton = new JButton("BACK TO LEVEL SELECT");
+        JButton backButton = new JButton("Pause");
         backButton.setFont(new Font("Arial", Font.BOLD, 24));
         gameplayPanel.add(backButton, BorderLayout.SOUTH);
         
@@ -181,6 +191,7 @@ public class Cowboy_brothers_menu extends JFrame {
                 switchState(GameState.PAUSE_MENU);  // Send to Pause menu
                 t.stop();
                 
+                pauseInstance = new PauseButtonValue(); //take info from this exact instance of the game and store it in 
                 
                 timerLabel.setText("Timer");  // Return to level select
             }
@@ -211,7 +222,7 @@ public class Cowboy_brothers_menu extends JFrame {
         pauseMenuPanel = new JPanel();
         pauseMenuPanel.setLayout(new GridLayout(1, 3, 10,10));
         
-        JButton retyButton = new JButton("Rety");
+        JButton retyButton = new JButton("Retry");
         retyButton.setFont(new Font("Arial", Font.BOLD, 24));
         
         JButton continueButton = new JButton("Continue");
@@ -251,6 +262,7 @@ public class Cowboy_brothers_menu extends JFrame {
            public void actionPerformed(ActionEvent e){
                //return to level select
                v=100;
+               player1.setMaxUnlockedLevel(player1.getMaxUnlockedLevel()+1);
                switchState(GameState.LEVEL_SELECT);
            } 
         });
@@ -289,6 +301,7 @@ public class Cowboy_brothers_menu extends JFrame {
     }
 
     private void resetProgress() {
+        player1= new Player(3,6,1,0,null);
         System.out.println("Progress has been reset.");
     }
 
