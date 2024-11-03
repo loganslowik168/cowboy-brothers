@@ -5,6 +5,8 @@
 package com.team5.cowboy_brothers;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *make an enemy class that follows a predefined path. instantiate several of these 
@@ -22,7 +24,11 @@ public class Enemy extends Rectangle {
     //current position
     int pos_x = 0;
     int pos_y = 0;
-    
+    private ArrayList<EnemyBullet> bullets = new ArrayList<>();
+    private int x, y;     // Enemy position
+    private int bulletSpeed = 5; // Bullet speed (slower than player bullets)
+    private int screenWidth = 800;
+    private int screenHeight = 600;
     
     int count=0;
     
@@ -70,7 +76,7 @@ public class Enemy extends Rectangle {
     }
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
-    public Enemy(String s, int k, Color color){
+    public Enemy(String s, int k, Color color, int startX,int startY){
         //Level1.insertAtEnd(Lv1A[0]);
         //Level2.insertAtEnd(Lv2A[0]);
         //Level3.insertAtEnd(Lv3A[0]);
@@ -80,7 +86,8 @@ public class Enemy extends Rectangle {
         boX=x;
         boY=y;
         this.color=color;
-        
+        this.x = startX;
+        this.y = startY;
         //path();
         
     }
@@ -91,6 +98,26 @@ public class Enemy extends Rectangle {
             }
                 
         }
+    }
+
+    public void fireBullet(int playerX, int playerY) {
+        // Create new bullet aimed at player's position
+        EnemyBullet bullet = new EnemyBullet(x, y, playerX, playerY, bulletSpeed);
+        bullets.add(bullet);
+    }
+    public void updateBullets() {
+        // Update and remove off-screen bullets
+        for (int i = bullets.size() - 1; i >= 0; i--) {
+            EnemyBullet bullet = bullets.get(i);
+            bullet.update();
+
+            if (bullet.isOffScreen(screenWidth, screenHeight)) {
+                bullets.remove(i);
+            }
+        }
+    }
+    public List<EnemyBullet> getBullets() {
+        return bullets;
     }
     
     //To paint the temp sprite

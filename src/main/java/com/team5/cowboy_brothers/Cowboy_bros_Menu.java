@@ -281,9 +281,5 @@ public class Cowboy_bros_Menu extends JFrame {
         System.out.println("Progress has been reset.");
     }
 
-   /* Remove Main from this class to put into MasterClass
-    public static void main(String[] args) {
-        new Cowboy_bros_Menu();
-    }
-    */
+   
 }

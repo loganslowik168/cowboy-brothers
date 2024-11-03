@@ -1,9 +1,12 @@
 package com.team5.cowboy_brothers;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Serializable{
     private static final int NUM_OF_LEVELS = 5;
     double[] position = {3.5, 7.2};
+    private int x, y; // Player's position
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
@@ -14,15 +17,22 @@ public class Player implements Serializable{
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
     private static final int MAX_HEALTH = 3;
+    private List<PlayerBullet> bullets = new ArrayList<>();
+    private int direction; // Player's direction
+    private int bulletSpeed = 10; // Speed of the bullets
+    private int screenWidth = 800; // Example screen width
+    private int screenHeight = 600; // Example screen height
 
     // Constructor
-    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores) {
+    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores,int startX,int startY) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
         this.maxUnlockedLevel = maxUnlockedLevel;
         this.currentScore = currentScore;
         this.highScores = new int[NUM_OF_LEVELS];
-        
+        this.x = startX;
+        this.y = startY;
+
         // Initialize high scores
         if (highScores != null && highScores.length == NUM_OF_LEVELS) {
             System.arraycopy(highScores, 0, this.highScores, 0, NUM_OF_LEVELS);
@@ -118,6 +128,24 @@ public class Player implements Serializable{
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void fireBullet() {
+        PlayerBullet bullet = new PlayerBullet( x, y, direction, bulletSpeed);
+        bullets.add(bullet);
+    }
+
+    public void updateBullets() {
+        // Update each bullet
+        for (int i = bullets.size() - 1; i >= 0; i--) {
+            PlayerBullet bullet = bullets.get(i);
+            bullet.update();
+
+            // Check if the bullet is off-screen
+            if (bullet.isOffScreen(screenWidth, screenHeight)) {
+                bullets.remove(i); // Remove bullet if it is off-screen
+            }
         }
     }
 }
