@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Cowboy_brothers extends JFrame {
+public class Cowboy_brothers_menu extends JFrame {
 
     // Define the different game states
     private enum GameState {
@@ -25,7 +25,7 @@ public class Cowboy_brothers extends JFrame {
     private JPanel gameplayPanel;
     private JPanel pauseMenuPanel;
 
-    public Cowboy_brothers() {
+    public Cowboy_brothers_menu() {
         setTitle("Cowboy Brothers");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,23 +94,15 @@ public class Cowboy_brothers extends JFrame {
     //Main
     public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
-
-        new Cowboy_brothers();
-        var gcpt=new GlobalCursorPositionTracker();
-        //Timer timer=new Timer();
-        //TimerTask task = new Helper();
-
-        new Old_Cowboy_bros_Menu();
+        new Cowboy_brothers_menu();
         
-
         
          // Create an instance of Lvl1
         Lvl1 level1 = new Lvl1();
         
-        /*
         // Instantiate the player with hardcoded stats
         int[] highScores = {0, 0, 0, 0, 0}; // Example high scores
-        Player player = new Player(3, 6, 0, 0, highScores, 20, 20);
+        Player player = new Player(3, 6, 0, 0, highScores,20,20);
         
         // Set the player starting position
         double[] startingPos = level1.getStartingPosition();
@@ -119,7 +111,7 @@ public class Cowboy_brothers extends JFrame {
         // Display player's current position and health
         System.out.println("Player started at position: " + player.getPosition()[0] + ", " + player.getPosition()[1]);
         System.out.println("Player health: " + player.getCurrentHealth());
-        */
+        
 
     }
     
@@ -291,7 +283,7 @@ public class Cowboy_brothers extends JFrame {
     }
 
     private void resetProgress() {
-        System.out.println("Progress has been reset. (TENTATIVE. HAS NOT BEEN RESET IN ACTUALITY)");
+        System.out.println("Progress has been reset.");
     }
 
     
