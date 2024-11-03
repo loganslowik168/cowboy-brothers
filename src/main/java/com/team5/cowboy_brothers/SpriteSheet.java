@@ -24,10 +24,11 @@ public class SpriteSheet {
             Logger.getLogger(SpriteSheet.class.getName()).log(Level.SEVERE, null, ex);
         }
   // In case the image stays null after the above code is ran
- private void If(image = null) {
+ /*private void If(image = null) {
         return;
-    }
+    }*/
     
     
     }
+}
 

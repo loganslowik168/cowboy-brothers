@@ -84,6 +84,7 @@ public class Cowboy_brothers extends JFrame {
     public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
         new Cowboy_brothers();
+        var gcpt=new GlobalCursorPositionTracker();
         //Timer timer=new Timer();
         //TimerTask task = new Helper();
         
@@ -91,6 +92,7 @@ public class Cowboy_brothers extends JFrame {
          // Create an instance of Lvl1
         Lvl1 level1 = new Lvl1();
         
+        /*
         // Instantiate the player with hardcoded stats
         int[] highScores = {0, 0, 0, 0, 0}; // Example high scores
         Player player = new Player(3, 6, 0, 0, highScores, 20, 20);
@@ -102,7 +104,7 @@ public class Cowboy_brothers extends JFrame {
         // Display player's current position and health
         System.out.println("Player started at position: " + player.getPosition()[0] + ", " + player.getPosition()[1]);
         System.out.println("Player health: " + player.getCurrentHealth());
-        
+        */
 
     }
 
@@ -180,7 +182,7 @@ public class Cowboy_brothers extends JFrame {
     }
 
     private void resetProgress() {
-        System.out.println("Progress has been reset.");
+        System.out.println("Progress has been reset. (TENTATIVE. HAS NOT BEEN RESET IN ACTUALITY)");
     }
 
     
