@@ -13,14 +13,30 @@ import java.awt.event.ActionListener;
  *
  * @author matth
  */
-public class PlayerBullet extends Bullet {
-    
-    public void travel(){
-        super.travel();
+public class PlayerBullet {
+    private int x, y; // Position of the bullet
+    private int speed; // Speed of the bullet
+    private int direction; // Direction in degrees (0 = right, 90 = down, etc.)
+
+    public PlayerBullet(int startX, int startY, int direction, int speed) {
+        this.x = startX;
+        this.y = startY;
+        this.direction = direction;
+        this.speed = speed;
     }
-    public void collision(){
-        //override to check for ground or enemies
+
+    public void update() {
+        // Update the bullet's position based on its speed and direction
+        x += speed * Math.cos(Math.toRadians(direction));
+        y += speed * Math.sin(Math.toRadians(direction));
     }
-    
-    
+
+    public boolean isOffScreen(int screenWidth, int screenHeight) {
+        // Check if the bullet is off the screen
+        return (x < 0 || x > screenWidth || y < 0 || y > screenHeight);
+    }
+
+    // Getters for position
+    public int getX() { return x; }
+    public int getY() { return y; }
 }

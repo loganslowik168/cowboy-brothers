@@ -109,7 +109,7 @@ public class Cowboy_brothers_menu extends JFrame {
         
         // Instantiate the player with hardcoded stats
         int[] highScores = {0, 0, 0, 0, 0}; // Example high scores
-        Player player = new Player(3, 6, 0, 0, highScores);
+        Player player = new Player(3, 6, 0, 0, highScores,20,20);
         
         // Set the player starting position
         double[] startingPos = level1.getStartingPosition();

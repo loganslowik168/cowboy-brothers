@@ -206,10 +206,20 @@ public class Cowboy_bros_Menu extends JFrame {
         timerLabel.setFont(new Font("Arial", Font.PLAIN,15));
         timerLabel.setText("Timer");
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
-
+        gameplayPanel.requestFocusInWindow();
+        
+        /*
+        int[] zeros = new int[5];
+        Player p = new Player(1,6,1,0,zeros);
+        p.setPosition(40,40);
+        GameWorld GW = new GameWorld();
+        KeyHandler KH = new KeyHandler(p, GW);
+        gameplayPanel.addKeyListener(new KeyHandler(p, GW));
+*/
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("RECEIVED BACK BUTTON INPUT");
                 switchState(GameState.PAUSE_MENU);  // Send to Pause menu
                 t.stop();
                 v=100;
@@ -281,9 +291,5 @@ public class Cowboy_bros_Menu extends JFrame {
         System.out.println("Progress has been reset.");
     }
 
-   /* Remove Main from this class to put into MasterClass
-    public static void main(String[] args) {
-        new Cowboy_bros_Menu();
-    }
-    */
+   
 }

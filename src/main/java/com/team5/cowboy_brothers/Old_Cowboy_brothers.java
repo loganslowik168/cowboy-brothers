@@ -31,11 +31,11 @@ public class Old_Cowboy_brothers extends JFrame implements KeyListener {
         
          
         //Enemy obj and obstacle instantiation
-        en1=new Enemy("Jerry",2, Color.blue);
-        Ob1=new Enemy("Obstacle",1, Color.BLACK);
+        en1=new Enemy("Jerry",2, Color.blue,20,20);
+        Ob1=new Enemy("Obstacle",1, Color.BLACK,20,20);
        // en1.setBoH(100);
         
-        floor =new Enemy("Floor", 1,Color.orange);
+        floor =new Enemy("Floor", 1,Color.orange,20,20);
         floor.setBoH(50);
         floor.setBoW(500);
         floor.setboX(25);
