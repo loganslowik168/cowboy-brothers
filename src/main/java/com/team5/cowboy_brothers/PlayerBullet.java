@@ -14,11 +14,11 @@ import java.awt.event.ActionListener;
  * @author matth
  */
 public class PlayerBullet {
-    private int x, y; // Position of the bullet
+    private double x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; // Direction in degrees (0 = right, 90 = down, etc.)
 
-    public PlayerBullet(int startX, int startY, int direction, int speed) {
+    public PlayerBullet(double startX, double startY, int direction, int speed) {
         this.x = startX;
         this.y = startY;
         this.direction = direction;
@@ -37,6 +37,6 @@ public class PlayerBullet {
     }
 
     // Getters for position
-    public int getX() { return x; }
-    public int getY() { return y; }
+    public double getX() { return x; }
+    public double getY() { return y; }
 }

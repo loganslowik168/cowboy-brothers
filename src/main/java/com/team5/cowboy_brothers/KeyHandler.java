@@ -13,7 +13,7 @@ public class KeyHandler extends KeyAdapter {
     public KeyHandler(Player player, GameWorld gameWorld) {
         this.player = player;
         this.gameWorld = gameWorld;
-        startHelloTimer(); // Start the timer when the KeyHandler is created
+        startHelloTimer(); 
     }
 
     // Method to start a timer that prints "hello" every second

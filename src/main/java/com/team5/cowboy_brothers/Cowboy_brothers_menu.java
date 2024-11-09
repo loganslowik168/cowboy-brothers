@@ -201,6 +201,11 @@ public class Cowboy_brothers_menu extends JFrame {
         });
 
         add(gameplayPanel, BorderLayout.CENTER);
+        
+        int[] highScores = {0, 0, 0, 0, 0};
+        Player p = new Player(1, 6, 1, 0, highScores,600,400);
+        var gw = new GameWorld();
+        GlobalCursorPositionTracker gcpt = new GlobalCursorPositionTracker();
     }
     
     private void createPauseMenu(){

@@ -3,15 +3,16 @@ package com.team5.cowboy_brothers;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
-    double[] position = {3.5, 7.2};
-    private int x, y; // Player's position
+    private double x, y; // Player's position
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
@@ -30,16 +31,14 @@ public class Player implements Serializable {
     private Timer positionTimer; // Timer for sending position messages
 
     // Constructor
-    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores,int startX,int startY) {
+    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
         this.maxUnlockedLevel = maxUnlockedLevel;
         this.currentScore = currentScore;
         this.highScores = new int[NUM_OF_LEVELS];
-
         this.x = startX;
         this.y = startY;
-
 
         // Initialize high scores
         if (highScores != null && highScores.length == NUM_OF_LEVELS) {
@@ -48,7 +47,7 @@ public class Player implements Serializable {
 
         // Load the sprite
         System.out.println("LOADING SPRITE");
-        loadSprite("sprites/player.png");
+        loadSprite("sprites/black.png");
 
         // Start the timer to send position messages
         startPositionTimer();
@@ -77,108 +76,30 @@ public class Player implements Serializable {
 
     // Helper method to get the player's position as a string
     private String getPositionString() {
-        return "(" + position[0] + ", " + position[1] + ")";
+        return "(" + x + ", " + y + ")";
     }
 
-    // Getters
+    // Getters and Setters
     public double[] getPosition() {
-        return position;
+        return new double[]{x, y};
     }
 
     public int getCurrentHealth() {
-        return currentHealth;
-    }
-
-    public int getCurrentAmmo() {
-        return currentAmmo;
-    }
-
-    public int getMaxUnlockedLevel() {
-        return maxUnlockedLevel;
-    }
-
-    public int getCurrentScore() {
-        return currentScore;
-    }
-
-    public int[] getHighScores() {
-        return highScores.clone(); // Return a copy to protect encapsulation
+        return currentHealth;  // Return current health
     }
 
     public BufferedImage getSprite() {
         return sprite; // Getter for the sprite
     }
 
-    // Setters
-    public void setPosition(double x, double y) {
-        position[0] = x;
-        position[1] = y;
+    public void setPosition(double newX, double newY) {
+        x = newX;
+        y = newY;
     }
 
-    public void setX(double x) {
-        position[0] = x;
-    }
-
-    public void setY(double y) {
-        position[1] = y;
-    }
-
-    public void setCurrentHealth(int currentHealth) {
-        if (currentHealth >= 0 && currentHealth <= MAX_HEALTH) {
-            this.currentHealth = currentHealth;
-        }
-    }
-
-    public void setCurrentAmmo(int currentAmmo) {
-        if (currentAmmo >= 0 && currentAmmo <= MAX_AMMO) {
-            this.currentAmmo = currentAmmo;
-        }
-    }
-
-    public void setMaxUnlockedLevel(int maxUnlockedLevel) {
-        if (maxUnlockedLevel >= 0 && maxUnlockedLevel <= NUM_OF_LEVELS) {
-            this.maxUnlockedLevel = maxUnlockedLevel;
-        }
-    }
-
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
-    }
-
-    public void setHighScores(int[] highScores) {
-        if (highScores != null && highScores.length == NUM_OF_LEVELS) {
-            System.arraycopy(highScores, 0, this.highScores, 0, NUM_OF_LEVELS);
-        }
-    }
-
-    // Serialize the Player object
-    public void serialize(String filename) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
-            out.writeObject(this);
-            System.out.println("Player serialized successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public int getMoveSpeed() {
-        return MOVE_SPEED;
-    }
-
-    // Deserialize the Player object
-    public static Player deserialize(String filename) {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
-            Player player = (Player) in.readObject();
-            System.out.println("Player deserialized successfully.");
-            return player;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
+    // Update bullets
     public void fireBullet() {
-        PlayerBullet bullet = new PlayerBullet( x, y, direction, bulletSpeed);
+        PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
         bullets.add(bullet);
     }
 
@@ -193,5 +114,62 @@ public class Player implements Serializable {
                 bullets.remove(i); // Remove bullet if it is off-screen
             }
         }
+    }
+
+    // Serialize and deserialize
+    public void serialize(String filename) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(this);
+            System.out.println("Player serialized successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Player deserialize(String filename) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            Player player = (Player) in.readObject();
+            System.out.println("Player deserialized successfully.");
+            return player;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Custom JPanel for rendering the player sprite
+    public static class PlayerPanel extends JPanel {
+        private Player player;
+        private Timer repaintTimer; // Timer to trigger repainting at regular intervals
+
+        public PlayerPanel(Player player) {
+            this.player = player;
+            // Set up a timer to repaint the panel every 1000/60 ms (~60 FPS)
+            repaintTimer = new Timer();
+            repaintTimer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    repaint(); // Repaint the panel regularly
+                }
+            }, 0, 1000 / 60); // ~60 FPS
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // If the sprite is loaded, draw it at the player's current position
+            if (player.getSprite() != null) {
+                g.drawImage(player.getSprite(), (int) player.x, (int) player.y, this);
+            } else {
+                g.setColor(Color.RED);
+                g.drawString("Sprite failed to load", 60, 60);
+            }
+        }
+    }
+
+    // Retaining the getMoveSpeed function
+    public int getMoveSpeed() {
+        return MOVE_SPEED;
     }
 }

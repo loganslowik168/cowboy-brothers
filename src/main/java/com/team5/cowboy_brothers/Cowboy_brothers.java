@@ -95,17 +95,15 @@ public class Cowboy_brothers extends JFrame {
     public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
 
-        new Cowboy_brothers();
-        var gcpt=new GlobalCursorPositionTracker();
+        //new Cowboy_brothers();
+        //var gcpt=new GlobalCursorPositionTracker();
         //Timer timer=new Timer();
         //TimerTask task = new Helper();
 
-        new Old_Cowboy_bros_Menu();
-        
+        //new Old_Cowboy_bros_Menu();
 
-        
          // Create an instance of Lvl1
-        Lvl1 level1 = new Lvl1();
+        //Lvl1 level1 = new Lvl1();
         
         /*
         // Instantiate the player with hardcoded stats
@@ -166,6 +164,7 @@ public class Cowboy_brothers extends JFrame {
     JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
+        System.out.println("CREATING GAMEPLAY 6PANEL");
         gameplayPanel = new JPanel();
         gameplayPanel.setLayout(new BorderLayout());
         JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);

@@ -28,7 +28,21 @@ public class GameMaster {
         
         olly = new GameMaster();
         
-        
+        System.out.println("Creating test drawer");
+                // Get all open frames (Frame instances)
+        Frame[] frames = JFrame.getFrames();
+
+        // Loop through the frames array and check for the first instance of JFrame
+        for (Frame frame : frames) {
+            if (frame instanceof JFrame) {  // Check if the frame is actually a JFrame
+                JFrame activeFrame = (JFrame) frame; // Safely cast it to JFrame
+                System.out.println("Active JFrame found: " + activeFrame.getTitle());
+                
+                // Pass the active JFrame to TestSpriteDrawer
+                var tsd = new TestSpriteDrawer(activeFrame); // Pass the active frame to the TestSpriteDrawer
+            }
+        }
+
         final int del=1000;
         Timer tL1=new Timer(del, null);
         tL1.addActionListener(new ActionListener(){
