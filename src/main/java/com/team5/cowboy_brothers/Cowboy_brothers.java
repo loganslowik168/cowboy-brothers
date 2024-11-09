@@ -91,37 +91,7 @@ public class Cowboy_brothers extends JFrame {
     
     
     
-    //Main
-    public static void main(String[] args) { // main function
-        System.out.println("-- Begin program execution --");
-
-        new Cowboy_brothers();
-        var gcpt=new GlobalCursorPositionTracker();
-        //Timer timer=new Timer();
-        //TimerTask task = new Helper();
-
-        new Old_Cowboy_bros_Menu();
-        
-
-        
-         // Create an instance of Lvl1
-        Lvl1 level1 = new Lvl1();
-        
-        /*
-        // Instantiate the player with hardcoded stats
-        int[] highScores = {0, 0, 0, 0, 0}; // Example high scores
-        Player player = new Player(3, 6, 0, 0, highScores, 20, 20);
-        
-        // Set the player starting position
-        double[] startingPos = level1.getStartingPosition();
-        player.setPosition(startingPos[0], startingPos[1]);
-        
-        // Display player's current position and health
-        System.out.println("Player started at position: " + player.getPosition()[0] + ", " + player.getPosition()[1]);
-        System.out.println("Player health: " + player.getCurrentHealth());
-        */
-
-    }
+    
     
     
     
