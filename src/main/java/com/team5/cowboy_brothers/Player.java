@@ -178,7 +178,7 @@ public class Player implements Serializable {
     }
 
     public void fireBullet() {
-        PlayerBullet bullet = new PlayerBullet( x, y, direction, bulletSpeed);
+        PlayerBullet bullet = new PlayerBullet(x, y, 1, bulletSpeed); // 1 for right
         bullets.add(bullet);
     }
 
