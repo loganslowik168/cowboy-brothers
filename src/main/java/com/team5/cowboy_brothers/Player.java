@@ -98,8 +98,9 @@ public class Player implements Serializable {
     }
 
     // Update bullets
-    public void fireBullet() {
+    public void fireBullet() throws IOException {
         PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
+
         bullets.add(bullet);
     }
 

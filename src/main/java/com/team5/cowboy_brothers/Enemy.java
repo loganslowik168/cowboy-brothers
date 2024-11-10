@@ -96,11 +96,11 @@ public class Enemy extends Rectangle {
         }
     }
 
-    public void fireBullet(int playerX, int playerY) {
-        // Create new bullet aimed at player's position
-        EnemyBullet bullet = new EnemyBullet(x, y, playerX, playerY, bulletSpeed);
+    public void fireBullet() {
+        EnemyBullet bullet = new EnemyBullet(x, y, -1, bulletSpeed, 1); // -1 for left
         bullets.add(bullet);
     }
+    
     public void updateBullets() {
         // Update and remove off-screen bullets
         for (int i = bullets.size() - 1; i >= 0; i--) {

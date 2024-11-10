@@ -8,6 +8,10 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -16,28 +20,41 @@ import java.awt.event.ActionListener;
 public class EnemyBullet {
     private int x, y;           // Position of the bullet
     private int speed;          // Speed of the bullet
-    private int direction;      // Direction in degrees
+    private int direction;      // Direction 
     private int targetX, targetY; // Player's position (target)
+    private BufferedImage sprite;
 
     public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed) {
         this.x = startX;
         this.y = startY;
         this.speed = speed;
-        
+        loadSprite("sprites/EnemyBullet.png");
         // Calculate direction towards player
-        calculateDirection(playerX, playerY);
+        //calculateDirection(playerX, playerY);
     }
 
-    private void calculateDirection(int playerX, int playerY) {
+   /* private void calculateDirection(int playerX, int playerY) {
         // Calculate angle between enemy and player
         double angle = Math.atan2(playerY - y, playerX - x);
         this.direction = (int) Math.toDegrees(angle);
+    }*/
+
+    private void loadSprite(String filePath) {
+        try {
+            sprite = ImageIO.read(new File(filePath));
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
+    }
+    public void draw(Graphics g) {
+        g.drawImage(sprite, x, y, null); // Draw the enemy bullet sprite
     }
 
+
     public void update() {
-        // Update bullet position based on direction and speed
-        x += speed * Math.cos(Math.toRadians(direction));
-        y += speed * Math.sin(Math.toRadians(direction));
+        // Update the bullet's position based on its speed and direction
+        x += speed * direction; // Move left or right
     }
 
     public boolean isOffScreen(int screenWidth, int screenHeight) {

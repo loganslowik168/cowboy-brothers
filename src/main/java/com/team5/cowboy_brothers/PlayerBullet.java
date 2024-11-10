@@ -8,6 +8,10 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -17,13 +21,26 @@ public class PlayerBullet {
     private double x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; // Direction in degrees (0 = right, 90 = down, etc.)
+    private BufferedImage sprite;
 
-    public PlayerBullet(double startX, double startY, int direction, int speed) {
+
+    public PlayerBullet(double startX, double startY, int direction, int speed) throws IOException {
+
         this.x = startX;
         this.y = startY;
         this.direction = direction;
         this.speed = speed;
+        loadSprite("sprites/PlayerBullet.png");
     }
+
+    private void loadSprite(String filePath) throws IOException {
+        sprite = ImageIO.read(new File(filePath));
+        System.out.println("Sprite loaded successfully.");
+    }
+    public void draw(Graphics g) { //come back to this, doesnt make sense
+        g.drawImage(sprite, Math.round((float) x), (int) Math.round(y), null); // Draw the enemy bullet sprite
+    }
+
 
     public void update() {
         // Update the bullet's position based on its speed and direction
