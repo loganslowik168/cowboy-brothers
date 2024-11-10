@@ -36,7 +36,7 @@ public class Enemy extends Rectangle {
     private int boX, boY, BoW=20,BoH=20;
     private final int MOVE_SPEED = 50; // Movement speed of the box
     
-    DblLinkList Level1, Level2, Level3, PersonalList;
+    
     int[] Lv1A={50,55,60,65,70,75,80,85,90,95,100};
     int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
     int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
