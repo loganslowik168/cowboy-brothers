@@ -138,6 +138,14 @@ public class Player implements Serializable {
         }
     }
 
+    int getMaxUnlockedLevel() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void setMaxUnlockedLevel(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     // Custom JPanel for rendering the player sprite
     public static class PlayerPanel extends JPanel {
         private Player player;

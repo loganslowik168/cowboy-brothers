@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Cowboy_brothers extends JFrame {
+public class Old2_Cowboy_brothers_menu extends JFrame {
 
     // Define the different game states
     private enum GameState {
@@ -25,7 +25,7 @@ public class Cowboy_brothers extends JFrame {
     private JPanel gameplayPanel;
     private JPanel pauseMenuPanel;
 
-    public Cowboy_brothers() {
+    public Old2_Cowboy_brothers_menu() {
         setTitle("Cowboy Brothers");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,14 +91,30 @@ public class Cowboy_brothers extends JFrame {
     
     
     
-
     //Main
     public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
+        new Old2_Cowboy_brothers_menu();
+        
+        
+         // Create an instance of Lvl1
+        Lvl1 level1 = new Lvl1();
+        
+        // Instantiate the player with hardcoded stats
+        int[] highScores = {0, 0, 0, 0, 0}; // Example high scores
+        Player player = new Player(3, 6, 0, 0, highScores,20,20);
+        
+        // Set the player starting position
+        double[] startingPos = level1.getStartingPosition();
+        player.setPosition(startingPos[0], startingPos[1]);
+        
+        // Display player's current position and health
+        System.out.println("Player started at position: " + player.getPosition()[0] + ", " + player.getPosition()[1]);
+        System.out.println("Player health: " + player.getCurrentHealth());
+        
 
-       
     }
-
+    
     
     
 
@@ -142,7 +158,6 @@ public class Cowboy_brothers extends JFrame {
     JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
-        System.out.println("CREATING GAMEPLAY 6PANEL");
         gameplayPanel = new JPanel();
         gameplayPanel.setLayout(new BorderLayout());
         JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);
@@ -150,7 +165,7 @@ public class Cowboy_brothers extends JFrame {
         gameplayPanel.add(label, BorderLayout.CENTER);
 
         // Add a back button to return to the level select screen
-        JButton backButton = new JButton("BACK TO LEVEL SELECT");
+        JButton backButton = new JButton("PAUSE");
         backButton.setFont(new Font("Arial", Font.BOLD, 24));
         gameplayPanel.add(backButton, BorderLayout.SOUTH);
         
@@ -268,7 +283,7 @@ public class Cowboy_brothers extends JFrame {
     }
 
     private void resetProgress() {
-        System.out.println("Progress has been reset. (TENTATIVE. HAS NOT BEEN RESET IN ACTUALITY)");
+        System.out.println("Progress has been reset.");
     }
 
     

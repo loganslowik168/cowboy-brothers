@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Cowboy_brothers extends JFrame {
+public class Old2_Cowboy_brothers extends JFrame {
 
     // Define the different game states
     private enum GameState {
@@ -25,7 +25,7 @@ public class Cowboy_brothers extends JFrame {
     private JPanel gameplayPanel;
     private JPanel pauseMenuPanel;
 
-    public Cowboy_brothers() {
+    public Old2_Cowboy_brothers() {
         setTitle("Cowboy Brothers");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,14 +91,8 @@ public class Cowboy_brothers extends JFrame {
     
     
     
-
-    //Main
-    public static void main(String[] args) { // main function
-        System.out.println("-- Begin program execution --");
-
-       
-    }
-
+    
+    
     
     
 
@@ -142,7 +136,6 @@ public class Cowboy_brothers extends JFrame {
     JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
-        System.out.println("CREATING GAMEPLAY 6PANEL");
         gameplayPanel = new JPanel();
         gameplayPanel.setLayout(new BorderLayout());
         JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);
@@ -150,7 +143,7 @@ public class Cowboy_brothers extends JFrame {
         gameplayPanel.add(label, BorderLayout.CENTER);
 
         // Add a back button to return to the level select screen
-        JButton backButton = new JButton("BACK TO LEVEL SELECT");
+        JButton backButton = new JButton("PAUSE");
         backButton.setFont(new Font("Arial", Font.BOLD, 24));
         gameplayPanel.add(backButton, BorderLayout.SOUTH);
         
