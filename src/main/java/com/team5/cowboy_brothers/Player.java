@@ -47,7 +47,7 @@ public class Player implements Serializable {
 
         // Load the sprite
         System.out.println("LOADING SPRITE");
-        loadSprite("sprites/black.png");
+        loadSprite("sprites/player.png");
 
         // Start the timer to send position messages
         startPositionTimer();
@@ -139,11 +139,11 @@ public class Player implements Serializable {
     }
 
     int getMaxUnlockedLevel() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return maxUnlockedLevel;
     }
 
     void setMaxUnlockedLevel(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        maxUnlockedLevel=i;
     }
 
     // Custom JPanel for rendering the player sprite

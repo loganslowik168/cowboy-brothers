@@ -1,6 +1,6 @@
 package com.team5.cowboy_brothers;
 
-public class GameObject {
+public abstract class GameObject {
     private float x; // X position
     private float y; // Y position
     private float width; // Width of the object
@@ -42,6 +42,6 @@ public class GameObject {
     }
 
     public void render() {
-        // Logic to draw the object, if using graphics
+        // Logic to draw the object, if using graphics//
     }
 }

@@ -1,13 +1,13 @@
 package com.team5.cowboy_brothers;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
 //import java.util.*;
 import javax.swing.Timer;
+//import com.team5.cowboy_brothers.GameMaster;
 
 public class Cowboy_bros_Menu extends JFrame {
 
@@ -24,7 +24,6 @@ public class Cowboy_bros_Menu extends JFrame {
     // Milliseconds between timer ticks
     Timer t = new Timer(DELAY, null);
     PauseButtonValue tempPauseValue;
-    Player p1;
 
     
     //private Timer t1=new Timer();
@@ -49,8 +48,6 @@ public class Cowboy_bros_Menu extends JFrame {
         createGameplayPanel();
         createPauseMenu();
         
-        //Player Instantiation
-        p1 = new Player(3,6,1,0,null,0,0);
 
         // Display the main menu on start
         switchState(GameState.MAIN_MENU);
@@ -97,7 +94,7 @@ public class Cowboy_bros_Menu extends JFrame {
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetProgress(); // Reset progress
+                GameMaster.olly.ResetPlayerProgress(); // Reset progress
             }
         });
     }
@@ -118,8 +115,10 @@ public class Cowboy_bros_Menu extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You selected Level " + levelNumber);
-                    if(levelNumber<=p1.getMaxUnlockedLevel()){
-                    switchState(GameState.GAMEPLAY);  // Switch to gameplay
+                    if(GameMaster.olly.CheckLevelUnlocked(levelNumber))
+                    {
+                        switchState(GameState.GAMEPLAY);  // Switch to gameplay
+                        GameMaster.olly.LoadLevel(levelNumber);
                     }
                 }
             });
@@ -161,14 +160,11 @@ public class Cowboy_bros_Menu extends JFrame {
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
         gameplayPanel.requestFocusInWindow();
         
-        /*
-        int[] zeros = new int[5];
-        Player p = new Player(1,6,1,0,zeros);
-        p.setPosition(40,40);
-        GameWorld GW = new GameWorld();
-        KeyHandler KH = new KeyHandler(p, GW);
-        gameplayPanel.addKeyListener(new KeyHandler(p, GW));
-*/
+        //Add key listener
+        var KH = new KeyHandler();
+        gameplayPanel.addKeyListener(KH);
+        
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -206,8 +202,8 @@ public class Cowboy_bros_Menu extends JFrame {
         pauseMenuPanel = new JPanel();
         pauseMenuPanel.setLayout(new GridLayout(1, 3, 10,10));
         
-        JButton retyButton = new JButton("Rety");
-        retyButton.setFont(new Font("Arial", Font.BOLD, 24));
+        JButton retryButton = new JButton("Retry");
+        retryButton.setFont(new Font("Arial", Font.BOLD, 24));
         
         JButton continueButton = new JButton("Continue");
         continueButton.setFont(new Font("Arial", Font.BOLD, 24));
@@ -215,14 +211,10 @@ public class Cowboy_bros_Menu extends JFrame {
         JButton levelSel =  new JButton("Level Select");
         levelSel.setFont(new Font("Arial", Font.BOLD, 24));
         
-        pauseMenuPanel.add(retyButton);
+        pauseMenuPanel.add(retryButton);
         pauseMenuPanel.add(continueButton);
         pauseMenuPanel.add(levelSel);
-        
-        
-        
-        
-        retyButton.addActionListener(new ActionListener() {
+        retryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //reset all progress and restart the level
@@ -240,28 +232,16 @@ public class Cowboy_bros_Menu extends JFrame {
                
            } 
         });
-        
-        
         levelSel.addActionListener(new ActionListener(){
            @Override
            public void actionPerformed(ActionEvent e){
                //return to level select
-               p1.setMaxUnlockedLevel(p1.getMaxUnlockedLevel()+1);               
+               GameMaster.olly.IncrementMaxLevelUnlocked();
                switchState(GameState.LEVEL_SELECT);
            } 
         });
-        
-        
-        
-        
         add(pauseMenuPanel, BorderLayout.CENTER);
     }
-    
-    
-    
-    
-    
-
     // Function to switch between game states
     private void switchState(GameState newState) {
         currentState = newState;
@@ -274,12 +254,10 @@ public class Cowboy_bros_Menu extends JFrame {
         //Add a notifier to a timer if gameplay starts
         
         if(currentState==GameState.GAMEPLAY){
-        //call Timer Start and have it update the label in reference  to current time
-        t.start();
-        
-        //Create a new class object to show the Player()
+            //call Timer Start and have it update the label in reference  to current time
+            t.start();
+            gameplayPanel.requestFocus();
         }
-      
     }
 
     public void EndProgram(int exitCode) {
@@ -291,10 +269,4 @@ public class Cowboy_bros_Menu extends JFrame {
         return currentState;
     }
 
-    private void resetProgress() {
-        p1=new Player(3,6,1,0,null,0,0);
-        System.out.println("Progress has been reset.");
-    }
-
-   
 }
