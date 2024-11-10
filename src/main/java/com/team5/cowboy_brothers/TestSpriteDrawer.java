@@ -61,20 +61,4 @@ public class TestSpriteDrawer {
         }
     }
 
-    public static void main(String[] args) {
-        // Print a message to indicate that the main function was entered
-        System.out.println("Entered the main function");
-
-        // Create an existing JFrame (for example, let's assume it's already created)
-        JFrame existingFrame = new JFrame("Existing JFrame");
-
-        // Set basic frame settings
-        existingFrame.setSize(1200, 800); // Adjust the size as needed
-        existingFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        existingFrame.setLocationRelativeTo(null); // Center the window on the screen
-        existingFrame.setVisible(true); // Make sure the frame is visible
-
-        // Create an instance of TestSpriteDrawer and pass the existing JFrame
-        new TestSpriteDrawer(existingFrame);
-    }
 }

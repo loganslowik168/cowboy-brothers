@@ -3,31 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.team5.cowboy_brothers;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 /**
  *
  * @author matth
  */
 public class GameMaster {
     
-    protected static GameMaster olly;
-    int c=0;
+    public static GameMaster olly;
+    int[] hs = {0,0,0,0,0};
+    protected Player player = new Player(3,6,1,0,hs,0,0);
     
     
     
     public GameMaster(){
-       Cowboy_bros_Menu n1 =  new Cowboy_bros_Menu();
+       Cowboy_bros_Menu VisibleMenu =  new Cowboy_bros_Menu();
     }
     
-    public static void main(String[] args) {
-        
-        
+    public static void main(String[] args) { 
         olly = new GameMaster();
-        
+        /*
         System.out.println("Creating test drawer");
                 // Get all open frames (Frame instances)
         Frame[] frames = JFrame.getFrames();
@@ -39,29 +33,25 @@ public class GameMaster {
                 System.out.println("Active JFrame found: " + activeFrame.getTitle());
                 
                 // Pass the active JFrame to TestSpriteDrawer
-                var tsd = new TestSpriteDrawer(activeFrame); // Pass the active frame to the TestSpriteDrawer
+                //var tsd = new TestSpriteDrawer(activeFrame); // Pass the active frame to the TestSpriteDrawer
             }
         }
-
-        final int del=1000;
-        Timer tL1=new Timer(del, null);
-        tL1.addActionListener(new ActionListener(){
-        @Override
-        public void actionPerformed(ActionEvent evt){
-            if(olly.c==10){tL1.stop();}else{olly.increm(); System.out.println("C is "+olly.c);}
-        }
-        });
-        tL1.start();
-        
-        
-        
+*/
     }
     
-    public void increm(){
-        c++;
+    public void LoadLevel(int lvl)
+    {
+        switch(lvl)
+        {
+            case 1 -> System.out.println("Load level 1. --olly");
+            case 2 -> System.out.println("Load level 2. --olly");
+            case 3 -> System.out.println("Load level 3. --olly");
+            case 4 -> System.out.println("Load level 4. --olly");
+            case 5 -> System.out.println("Load level 5. --olly");
+            default -> System.out.println("ERROR. Please select a level between 1 and 5 inclusive! --olly");
+        }
     }
-    //time
-    public void time(){
-     
-    }
+    public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
+    public void IncrementMaxLevelUnlocked() {player.setMaxUnlockedLevel(player.getMaxUnlockedLevel()+1);}
+    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0);System.out.println("PROGRESS HAS BEEN RESET");}
 }
