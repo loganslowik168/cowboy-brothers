@@ -1,6 +1,6 @@
 package com.team5.cowboy_brothers;
 
-public class GameObject {
+abstract public class GameObject {
     private float x; // X position
     private float y; // Y position
     private float width; // Width of the object

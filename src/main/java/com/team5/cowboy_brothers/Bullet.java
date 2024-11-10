@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  *
  * @author matth
  */
-public class Bullet {
+public abstract class Bullet {
     private int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; // Direction in degrees (0 = right, 90 = down, etc.)
