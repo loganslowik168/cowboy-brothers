@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  *
  * @author matth
  */
-public class Bullet {
+public class Bullet{
     private int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
@@ -43,4 +43,7 @@ public class Bullet {
     // Getters for position
     public int getX() { return x; }
     public int getY() { return y; }
+    //Setters
+    public void setSprite(BufferedImage x){sprite=x;}
+    public void setDirection(int i){direction=i;}
 }
