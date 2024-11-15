@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 public class Player implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
-    private double x, y; // Player's position
+    private int x, y; // Player's position
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
@@ -23,7 +23,7 @@ public class Player implements Serializable {
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
     private static final int MAX_HEALTH = 3;
-    private List<PlayerBullet> bullets = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
@@ -92,22 +92,29 @@ public class Player implements Serializable {
         return sprite; // Getter for the sprite
     }
 
-    public void setPosition(double newX, double newY) {
+    public void setPosition(int newX, int newY) {
         x = newX;
         y = newY;
     }
 
     // Update bullets
-    public void fireBullet() throws IOException {
-        PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
-
-        bullets.add(bullet);
+    public void fireBullet()  {
+        if(currentAmmo>0){
+            //need to find direction the player is facing
+            direction=getDirection();
+            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
+            //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
+            bullets.add(bullet);
+            currentAmmo--;
+        }else{
+            System.out.println("Out of Ammo");
+        }
     }
 
     public void updateBullets() {
         // Update each bullet
         for (int i = bullets.size() - 1; i >= 0; i--) {
-            PlayerBullet bullet = bullets.get(i);
+            Bullet bullet = bullets.get(i);
             bullet.update();
 
             // Check if the bullet is off-screen
@@ -144,6 +151,11 @@ public class Player implements Serializable {
 
     void setMaxUnlockedLevel(int i) {
         maxUnlockedLevel=i;
+    }  
+    
+    public int getDirection(){
+        //get direction
+        return 0;
     }
 
     // Custom JPanel for rendering the player sprite
