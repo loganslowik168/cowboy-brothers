@@ -29,6 +29,10 @@ public class KeyHandler extends KeyAdapter {
                 //gameWorld.moveObjects(-player.getMoveSpeed(), 0); // Move objects left
                 //System.out.println("D");
             }
+            case KeyEvent.VK_SPACE->{
+                //Call playerBullet creation
+                GameMaster.olly.player.fireBullet();
+            }
         }
     }
 }
