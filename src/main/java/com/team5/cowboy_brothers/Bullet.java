@@ -23,6 +23,7 @@ public class Bullet{
         this.y = startY;
         this.direction = direction;
         this.speed = speed;
+        travelBullet();
         
     }
 
