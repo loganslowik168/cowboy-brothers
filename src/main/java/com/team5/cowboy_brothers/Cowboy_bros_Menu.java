@@ -297,8 +297,8 @@ public class Cowboy_bros_Menu extends JFrame {
         add(pauseMenuPanel, BorderLayout.CENTER);
     }
     // Function to switch between game states
-    private void switchState(GameState newState) {
-        currentState = newState;
+    public void switchState(GameState winMenu) {
+        currentState = winMenu;
 
         // Show/hide panels based on current state
         mainMenuPanel.setVisible(currentState == GameState.MAIN_MENU);

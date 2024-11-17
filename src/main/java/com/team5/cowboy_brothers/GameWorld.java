@@ -7,11 +7,21 @@ import com.team5.cowboy_brothers.Cowboy_bros_Menu.GameState;
 
 public class GameWorld {
     private List<GameObject> objects; // List to hold game objects
-
+    private Player player;
+    private Flag flag;
+    int[] hs = {0,0,0,0,0};
+    private Cowboy_bros_Menu.GameState currentState;
+    private Cowboy_bros_Menu menu;
     // Constructor
-    public GameWorld() {
+    public GameWorld(Cowboy_bros_Menu menu) {
+        this.menu = menu;
         objects = new ArrayList<>();
         initializeGround();
+        // Initialize player and flag
+        player = new Player(3,6,1,0,hs,0,0); // Example position and size
+        flag = new Flag(200, 100, 30, 30); // Example position and size
+        currentState = Cowboy_bros_Menu.GameState.GAMEPLAY; // Start in playing state
+
     }
 
     // Method to initialize ground objects
@@ -37,16 +47,20 @@ public class GameWorld {
     }
 
     public void checkCollisions() {
-        for (GameObject obj : objects) {
-    
+        if (player.collidesWithFlag(flag)) {
+            System.out.println("Collision detected with flag!");
+            menu.switchState(Cowboy_bros_Menu.GameState.WIN_MENU); // Switch to win menu if collided with flag
         }
     }
-
-    // Optional: Update all game objects
-    public void update() {
-        for (GameObject obj : objects) {
-            obj.update(); // Call the update method for each object
+    // Method to check health
+    private void checkHealth() {
+        if (player.getCurrentHealth() <= 0) {
+            menu.switchState(GameState.LOSE_MENU); // Call the menu's switchState method
         }
+    }
+    public void update() {
+        checkCollisions(); // Check for collisions in each update
+        checkHealth(); // Check health for lose condition
     }
 
     // Optional: Render all game objects
