@@ -30,7 +30,7 @@ public class PlayerBullet extends Bullet {
     private void loadSprite(String filePath) {
         try {
             sprite = ImageIO.read(new File(filePath));
-            super.setSprite(sprite);
+            //super.setSprite(sprite);
             System.out.println("Sprite loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
