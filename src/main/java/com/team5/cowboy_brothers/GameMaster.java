@@ -12,11 +12,12 @@ public class GameMaster {
     public static GameMaster olly;
     int[] hs = {0,0,0,0,0};
     protected Player player = new Player(3,6,1,0,hs,0,0);
-    
+    private GameWorld gameWorld;
     
     
     public GameMaster(){
        Cowboy_bros_Menu VisibleMenu =  new Cowboy_bros_Menu();
+       gameWorld = new GameWorld(VisibleMenu); // Pass the menu to GameWorld
     }
     
     public static void main(String[] args) { 
