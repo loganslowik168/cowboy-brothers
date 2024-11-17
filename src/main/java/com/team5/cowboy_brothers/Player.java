@@ -10,7 +10,7 @@ import java.util.TimerTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Serializable {
+public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
     private int x, y; // Player's position
     private int currentHealth;
@@ -184,5 +184,14 @@ public class Player implements Serializable {
             System.err.println("Sprite is not loaded.");
         }
     }
-
+    // Method to check collision with another object
+            public boolean collidesWith(Rectangle other) {
+                return this.intersects(other);
+            }
+            public boolean collidesWithFlag(Flag flag) {
+                return this.intersects(flag);
+            }
+    public int getCurrentHealth() {
+                return currentHealth;  // Return current health
+            }
 }
