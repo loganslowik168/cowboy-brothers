@@ -104,6 +104,7 @@ public class Player implements Serializable {
             direction=getDirection();
             Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
             //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
+            
             bullets.add(bullet);
             currentAmmo--;
         }else{
@@ -152,6 +153,10 @@ public class Player implements Serializable {
     void setMaxUnlockedLevel(int i) {
         maxUnlockedLevel=i;
     }  
+    
+    public void setBulletCountToFull(){
+        currentAmmo=6;
+    }
     
     public int getDirection(){
         //get direction
