@@ -31,7 +31,7 @@ public class Cowboy_bros_Menu extends JFrame {
     private GameState currentState = GameState.MAIN_MENU; // Initial state
     private JPanel mainMenuPanel;
     private JPanel levelSelectPanel;
-    private JPanel gameplayPanel;
+    public GamePanel gameplayPanel;
     private JPanel pauseMenuPanel;
 
     public Cowboy_bros_Menu() {
@@ -47,6 +47,7 @@ public class Cowboy_bros_Menu extends JFrame {
         createLevelSelectPanel();
         createGameplayPanel();
         createPauseMenu();
+        // Initialize the singleton GameMaster.olly (if not already initialized)
         
 
         // Display the main menu on start
@@ -94,7 +95,7 @@ public class Cowboy_bros_Menu extends JFrame {
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameMaster.olly.ResetPlayerProgress(); // Reset progress
+                Cowboy_brothers.olly.ResetPlayerProgress(); // Reset progress
             }
         });
     }
@@ -115,10 +116,10 @@ public class Cowboy_bros_Menu extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You selected Level " + levelNumber);
-                    if(GameMaster.olly.CheckLevelUnlocked(levelNumber))
+                    if(Cowboy_brothers.olly.CheckLevelUnlocked(levelNumber))
                     {
                         switchState(GameState.GAMEPLAY);  // Switch to gameplay
-                        GameMaster.olly.LoadLevel(levelNumber);
+                        Cowboy_brothers.olly.LoadLevel(levelNumber);
                     }
                 }
             });
@@ -142,12 +143,12 @@ public class Cowboy_bros_Menu extends JFrame {
     JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
-        gameplayPanel = new JPanel();
+        gameplayPanel = new GamePanel();
         gameplayPanel.setLayout(new BorderLayout());
         JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 32));
         gameplayPanel.add(label, BorderLayout.CENTER);
-
+        
         // Add a back button to return to the level select screen
         JButton backButton = new JButton("PAUSE");
         backButton.setFont(new Font("Arial", Font.BOLD, 24));
@@ -163,6 +164,9 @@ public class Cowboy_bros_Menu extends JFrame {
         //Add key listener
         var KH = new KeyHandler();
         gameplayPanel.addKeyListener(KH);
+        
+        
+        
         
 
         backButton.addActionListener(new ActionListener() {
@@ -236,7 +240,7 @@ public class Cowboy_bros_Menu extends JFrame {
            @Override
            public void actionPerformed(ActionEvent e){
                //return to level select
-               GameMaster.olly.IncrementMaxLevelUnlocked();
+               Cowboy_brothers.olly.IncrementMaxLevelUnlocked();
                switchState(GameState.LEVEL_SELECT);
            } 
         });
@@ -268,5 +272,5 @@ public class Cowboy_bros_Menu extends JFrame {
     public GameState getGameState(){
         return currentState;
     }
-
+        
 }

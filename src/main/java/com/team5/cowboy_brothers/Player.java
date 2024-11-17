@@ -1,14 +1,14 @@
 package com.team5.cowboy_brothers;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
@@ -29,9 +29,10 @@ public class Player implements Serializable {
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
     private Timer positionTimer; // Timer for sending position messages
+    private JPanel targetPanel; // Panel to draw the player on
 
-    // Constructor
-    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY) {
+    // Constructor: Takes targetPanel as a parameter
+    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, JPanel targetPanel) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
         this.maxUnlockedLevel = maxUnlockedLevel;
@@ -39,6 +40,7 @@ public class Player implements Serializable {
         this.highScores = new int[NUM_OF_LEVELS];
         this.x = startX;
         this.y = startY;
+        this.targetPanel = targetPanel;
 
         // Initialize high scores
         if (highScores != null && highScores.length == NUM_OF_LEVELS) {
@@ -51,6 +53,9 @@ public class Player implements Serializable {
 
         // Start the timer to send position messages
         startPositionTimer();
+
+        // Set up a timer to repaint the panel regularly
+        setupRepaintTimer();
     }
 
     // Method to load the sprite
@@ -79,106 +84,51 @@ public class Player implements Serializable {
         return "(" + x + ", " + y + ")";
     }
 
-    // Getters and Setters
-    public double[] getPosition() {
-        return new double[]{x, y};
-    }
-
-    public int getCurrentHealth() {
-        return currentHealth;  // Return current health
-    }
-
+    // Getter for the sprite
     public BufferedImage getSprite() {
-        return sprite; // Getter for the sprite
+        return sprite;
     }
 
+    // Setter to update player's position
     public void setPosition(double newX, double newY) {
-        x = newX;
-        y = newY;
+        this.x = newX;
+        this.y = newY;
+        System.out.println("Player position updated to: (" + x + ", " + y + ")");
     }
 
-    // Update bullets
-    public void fireBullet() throws IOException {
-        PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
-
-        bullets.add(bullet);
-    }
-
-    public void updateBullets() {
-        // Update each bullet
-        for (int i = bullets.size() - 1; i >= 0; i--) {
-            PlayerBullet bullet = bullets.get(i);
-            bullet.update();
-
-            // Check if the bullet is off-screen
-            if (bullet.isOffScreen(screenWidth, screenHeight)) {
-                bullets.remove(i); // Remove bullet if it is off-screen
-            }
-        }
-    }
-
-    // Serialize and deserialize
-    public void serialize(String filename) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
-            out.writeObject(this);
-            System.out.println("Player serialized successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Player deserialize(String filename) {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
-            Player player = (Player) in.readObject();
-            System.out.println("Player deserialized successfully.");
-            return player;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    int getMaxUnlockedLevel() {
+    // Getter for maxUnlockedLevel
+    public int getMaxUnlockedLevel() {
         return maxUnlockedLevel;
     }
 
-    void setMaxUnlockedLevel(int i) {
-        maxUnlockedLevel=i;
+    // Setter for maxUnlockedLevel (if you need to modify it)
+    public void setMaxUnlockedLevel(int newMaxLevel) {
+        this.maxUnlockedLevel = newMaxLevel;
+        System.out.println("Max Unlocked Level updated to: " + maxUnlockedLevel);
     }
 
-    // Custom JPanel for rendering the player sprite
-    public static class PlayerPanel extends JPanel {
-        private Player player;
-        private Timer repaintTimer; // Timer to trigger repainting at regular intervals
-
-        public PlayerPanel(Player player) {
-            this.player = player;
-            // Set up a timer to repaint the panel every 1000/60 ms (~60 FPS)
-            repaintTimer = new Timer();
-            repaintTimer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    repaint(); // Repaint the panel regularly
-                }
-            }, 0, 1000 / 60); // ~60 FPS
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-
-            // If the sprite is loaded, draw it at the player's current position
-            if (player.getSprite() != null) {
-                g.drawImage(player.getSprite(), (int) player.x, (int) player.y, this);
-            } else {
-                g.setColor(Color.RED);
-                g.drawString("Sprite failed to load", 60, 60);
+    // Setup a timer to trigger repaint of the targetPanel at ~60 FPS
+    private void setupRepaintTimer() {
+        Timer repaintTimer = new Timer();
+        repaintTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                targetPanel.repaint(); // Repaint the panel regularly
+                //System.out.println("CALLING REPAINT");
+                
+                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
             }
+        }, 0, 1000 / 60); // ~60 FPS
+    }
+
+    // Method to handle the rendering of the player on the panel
+    public void draw(Graphics2D g2) {
+        if (sprite != null) {
+            g2.drawImage(sprite, (int) x, (int) y, targetPanel);
+            System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+        } else {
+            System.err.println("Sprite is not loaded.");
         }
     }
 
-    // Retaining the getMoveSpeed function
-    public int getMoveSpeed() {
-        return MOVE_SPEED;
-    }
 }

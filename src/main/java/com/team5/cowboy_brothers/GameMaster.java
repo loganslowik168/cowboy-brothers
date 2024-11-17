@@ -3,24 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.team5.cowboy_brothers;
+
+import java.awt.Frame;
+import javax.swing.JFrame;
+
 /**
  *
  * @author matth
  */
 public class GameMaster {
     
-    public static GameMaster olly;
+    //public static GameMaster olly;
     int[] hs = {0,0,0,0,0};
-    protected Player player = new Player(3,6,1,0,hs,0,0);
+    public Cowboy_bros_Menu VisibleMenu;
+    public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
     
-    
-    
-    public GameMaster(){
-       Cowboy_bros_Menu VisibleMenu =  new Cowboy_bros_Menu();
+    public GameMaster()
+    {
+        VisibleMenu = new Cowboy_bros_Menu();
+        player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
+        VisibleMenu.gameplayPanel.setPlayer(player);
+        
     }
     
+    
+    public JFrame GetActiveJFrame()
+    {
+        Frame[] frames = JFrame.getFrames();
+
+        // Loop through the frames array and check for the first instance of JFrame
+        for (Frame frame : frames) {
+            if (frame instanceof JFrame) {  // Check if the frame is actually a JFrame
+                JFrame activeFrame = (JFrame) frame; // Safely cast it to JFrame
+                return activeFrame;
+                
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) { 
-        olly = new GameMaster();
+        System.out.println("MAIN");
         /*
         System.out.println("Creating test drawer");
                 // Get all open frames (Frame instances)
@@ -53,5 +75,5 @@ public class GameMaster {
     }
     public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
     public void IncrementMaxLevelUnlocked() {player.setMaxUnlockedLevel(player.getMaxUnlockedLevel()+1);}
-    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0);System.out.println("PROGRESS HAS BEEN RESET");}
+    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
 }
