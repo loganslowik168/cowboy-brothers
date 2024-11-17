@@ -50,8 +50,9 @@ public class Cowboy_bros_Menu extends JFrame {
         createLevelSelectPanel();
         createGameplayPanel();
         createPauseMenu();
+        createWinMenu();
+        createLoseMenu();
         
-
         // Display the main menu on start
         switchState(GameState.MAIN_MENU);
 
@@ -297,8 +298,8 @@ public class Cowboy_bros_Menu extends JFrame {
         add(pauseMenuPanel, BorderLayout.CENTER);
     }
     // Function to switch between game states
-    public void switchState(GameState winMenu) {
-        currentState = winMenu;
+    public void switchState(GameState Menu) {
+        currentState = Menu;
 
         // Show/hide panels based on current state
         mainMenuPanel.setVisible(currentState == GameState.MAIN_MENU);
