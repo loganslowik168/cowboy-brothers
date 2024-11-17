@@ -21,8 +21,8 @@ public class PlayerBullet extends Bullet {
     
     private BufferedImage sprite;
 
-    public PlayerBullet(int startX, int startY, int direction, int speed)  {
-        super(startX,startY,direction,speed);        
+    public PlayerBullet(int startX, int startY, int direction, int speed, GamePanel TPB)  {
+        super(startX,startY,direction,speed, TPB);        
         loadSprite("sprites/PlayerBullet.png");
     }
     
@@ -30,7 +30,7 @@ public class PlayerBullet extends Bullet {
     private void loadSprite(String filePath) {
         try {
             sprite = ImageIO.read(new File(filePath));
-            //super.setSprite(sprite);
+            super.setSprite(sprite);
             System.out.println("Sprite loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());

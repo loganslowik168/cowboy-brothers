@@ -29,10 +29,10 @@ public class Player implements Serializable {
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
     private Timer positionTimer; // Timer for sending position messages
-    private JPanel targetPanel; // Panel to draw the player on
+    private GamePanel targetPanel; // Panel to draw the player on
 
     // Constructor: Takes targetPanel as a parameter
-    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, JPanel targetPanel) {
+    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
         this.maxUnlockedLevel = maxUnlockedLevel;
@@ -41,6 +41,7 @@ public class Player implements Serializable {
         this.x = startX;
         this.y = startY;
         this.targetPanel = targetPanel;
+        direction=1;
 
         // Initialize high scores
         if (highScores != null && highScores.length == NUM_OF_LEVELS) {
@@ -100,7 +101,8 @@ public class Player implements Serializable {
         if(currentAmmo>0){
             //need to find direction the player is facing
             direction=getDirection();
-            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
+            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            targetPanel.setBullet(bullet);
             //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
             
             bullets.add(bullet);
@@ -158,7 +160,7 @@ public class Player implements Serializable {
     
     public int getDirection(){
         //get direction
-        return 0;
+        return direction;
     }
 
     // Setup a timer to trigger repaint of the targetPanel at ~60 FPS

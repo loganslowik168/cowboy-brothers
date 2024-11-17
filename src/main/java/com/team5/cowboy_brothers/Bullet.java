@@ -8,22 +8,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+
 /**
  *
  * @author matth
  */
-public class Bullet{
+public abstract class Bullet{
     private int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
     private BufferedImage sprite;
+    private GamePanel targetPanelBullet;
+    Timer repaintTimer;
+    Timer updateTimer=new Timer(1000/60,null);
+    
 
-    public Bullet(int startX, int startY, int direction, int speed) {
+    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) {
         this.x = startX;
         this.y = startY;
         this.direction = direction;
         this.speed = speed;
-        travelBullet();
+        //travelBullet();
+        targetPanelBullet = TPB;
+        setupRepaintTimer();
+        repaintTimer.start();
+        updateTimer.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                update();
+            }
+        });
+        updateTimer.start();
         
     }
 
@@ -34,6 +49,31 @@ public class Bullet{
 
     public void draw(Graphics g) {
         g.drawImage(sprite, x, y, null); // Draw the bullet sprite
+        System.out.println("Drawing BUllet");
+    }
+    
+    public void draw(Graphics2D g2) {
+        System.out.println("Drawing Bullet");
+        if (sprite != null) {
+            g2.drawImage(sprite, (int) x, (int) y, targetPanelBullet);
+            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+        } else {
+            System.err.println("Sprite is not loaded.");
+        }
+    }
+    
+    private void setupRepaintTimer() {
+        repaintTimer = new Timer(1000/60,null);
+        repaintTimer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                targetPanelBullet.repaint(); // Repaint the panel regularly
+                //System.out.println("CALLING REPAINT");
+                
+                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
+            }
+        }); // ~60 FPS
+        
     }
 
     public boolean isOffScreen(int screenWidth, int screenHeight) {

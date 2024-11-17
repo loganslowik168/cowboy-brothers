@@ -22,8 +22,8 @@ public class EnemyBullet extends Bullet {
     private int targetX, targetY; // Player's position (target)
     private BufferedImage sprite;
 
-    public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed) {
-        super(startX,startY,0,speed);
+    public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed, GamePanel TPB) {
+        super(startX,startY,0,speed, TPB);
         loadSprite("sprites/EnemyBullet.png");
         // Calculate direction towards player
         //calculateDirection(playerX, playerY);

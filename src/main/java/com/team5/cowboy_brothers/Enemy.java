@@ -88,8 +88,8 @@ public class Enemy extends Rectangle {
     }
 
     public void fireBullet() {
-        EnemyBullet bullet = new EnemyBullet(x, y, -1, bulletSpeed, 1); // -1 for left
-        bullets.add(bullet);
+        //EnemyBullet bullet = new EnemyBullet(x, y, -1, bulletSpeed, 1); // -1 for left
+        //bullets.add(bullet);
     }
     
     public void updateBullets() {
