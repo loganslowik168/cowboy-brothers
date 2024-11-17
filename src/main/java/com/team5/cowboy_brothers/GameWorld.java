@@ -3,6 +3,8 @@ package com.team5.cowboy_brothers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team5.cowboy_brothers.Cowboy_bros_Menu.GameState;
+
 public class GameWorld {
     private List<GameObject> objects; // List to hold game objects
 
@@ -31,6 +33,12 @@ public class GameWorld {
             System.out.println("MOVING OBJECTS");
             obj.setX(obj.getPosition()[0] + dx);
             obj.setY(obj.getPosition()[1] + dy);
+        }
+    }
+
+    public void checkCollisions() {
+        for (GameObject obj : objects) {
+    
         }
     }
 
