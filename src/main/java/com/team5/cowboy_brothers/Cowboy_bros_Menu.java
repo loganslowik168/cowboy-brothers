@@ -1,13 +1,12 @@
 package com.team5.cowboy_brothers;
 
 
+//import java.util.*;
+//import com.team5.cowboy_brothers.GameMaster;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.util.*;
-import javax.swing.Timer;
-//import com.team5.cowboy_brothers.GameMaster;
 
 public class Cowboy_bros_Menu extends JFrame {
 
@@ -16,7 +15,9 @@ public class Cowboy_bros_Menu extends JFrame {
         MAIN_MENU,
         LEVEL_SELECT,
         GAMEPLAY,
-        PAUSE_MENU
+        PAUSE_MENU, 
+        WIN_MENU,
+        LOSE_MENU
     }
     //ActionListener listener  = event -> timerLabel.setText(Instant.now().toString());
     final int DELAY = 1000;
@@ -33,6 +34,8 @@ public class Cowboy_bros_Menu extends JFrame {
     private JPanel levelSelectPanel;
     private JPanel gameplayPanel;
     private JPanel pauseMenuPanel;
+    private JPanel winMenuPanel;
+    private JPanel loseMenuPanel;
 
     public Cowboy_bros_Menu() {
         setTitle("Cowboy Brothers");
@@ -196,7 +199,58 @@ public class Cowboy_bros_Menu extends JFrame {
         });
         add(gameplayPanel, BorderLayout.CENTER);
     }
+
+    private void createWinMenu() {
+    winMenuPanel = new JPanel();
+    winMenuPanel.setLayout(new GridLayout(2, 1, 10, 10));
     
+    JLabel winLabel = new JLabel("You Win!", SwingConstants.CENTER);
+    winLabel.setFont(new Font("Arial", Font.BOLD, 32));
+    JButton nextLevelButton = new JButton("Next Level");
+    JButton mainMenuButton = new JButton("Main Menu");
+    
+    winMenuPanel.add(winLabel);
+    winMenuPanel.add(nextLevelButton);
+    winMenuPanel.add(mainMenuButton);
+    
+    add(winMenuPanel, BorderLayout.CENTER);
+    
+    nextLevelButton.addActionListener(e -> {
+        // Logic to load the next level
+        switchState(GameState.LEVEL_SELECT);
+    });
+    
+    mainMenuButton.addActionListener(e -> {
+        switchState(GameState.MAIN_MENU);
+    });
+    }
+
+    private void createLoseMenu() {
+    loseMenuPanel = new JPanel();
+    loseMenuPanel.setLayout(new GridLayout(2, 1, 10, 10));
+    
+    JLabel loseLabel = new JLabel("You Lose!", SwingConstants.CENTER);
+    loseLabel.setFont(new Font("Arial", Font.BOLD, 32));
+    JButton retryButton = new JButton("Retry");
+    JButton mainMenuButton = new JButton("Main Menu");
+    
+    loseMenuPanel.add(loseLabel);
+    loseMenuPanel.add(retryButton);
+    loseMenuPanel.add(mainMenuButton);
+    
+    add(loseMenuPanel, BorderLayout.CENTER);
+    
+    retryButton.addActionListener(e -> {
+        // Logic to retry the level
+        switchState(GameState.GAMEPLAY);
+         // Reset player state for the retry
+         
+    });
+    
+    mainMenuButton.addActionListener(e -> {
+        switchState(GameState.MAIN_MENU);
+    });
+    }
     //create a pause menu
     private void createPauseMenu(){
         pauseMenuPanel = new JPanel();
@@ -251,6 +305,8 @@ public class Cowboy_bros_Menu extends JFrame {
         levelSelectPanel.setVisible(currentState == GameState.LEVEL_SELECT);
         gameplayPanel.setVisible(currentState == GameState.GAMEPLAY);
         pauseMenuPanel.setVisible(currentState == GameState.PAUSE_MENU);
+        winMenuPanel.setVisible(currentState == GameState.WIN_MENU);
+        loseMenuPanel.setVisible(currentState == GameState.LOSE_MENU);
         //Add a notifier to a timer if gameplay starts
         
         if(currentState==GameState.GAMEPLAY){
