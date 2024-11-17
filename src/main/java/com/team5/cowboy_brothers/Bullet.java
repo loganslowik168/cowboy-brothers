@@ -39,6 +39,10 @@ public class Bullet{
         // Check if the bullet is off the screen
         return (x < 0 || x > screenWidth || y < 0 || y > screenHeight);
     }
+    
+    public void travelBullet(){
+        //make timer then call update and then call draw
+    }
 
     // Getters for position
     public int getX() { return x; }
