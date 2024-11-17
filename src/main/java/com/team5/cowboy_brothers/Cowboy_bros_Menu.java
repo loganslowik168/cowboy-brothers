@@ -22,7 +22,7 @@ public class Cowboy_bros_Menu extends JFrame {
     final int DELAY = 1000;
     int v=100;
     // Milliseconds between timer ticks
-    Timer t = new Timer(DELAY, null);
+    Timer gamePlayTimer = new Timer(DELAY, null);
     PauseButtonValue tempPauseValue;
 
     
@@ -47,7 +47,7 @@ public class Cowboy_bros_Menu extends JFrame {
         createLevelSelectPanel();
         createGameplayPanel();
         createPauseMenu();
-        // Initialize the singleton GameMaster.olly (if not already initialized)
+        // Initialize the singleton Cowboy_brothers.olly (if not already initialized)
         
 
         // Display the main menu on start
@@ -174,7 +174,7 @@ public class Cowboy_bros_Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("RECEIVED BACK BUTTON INPUT");
                 switchState(GameState.PAUSE_MENU);  // Send to Pause menu
-                t.stop();
+                gamePlayTimer.stop();
                 //v=100;
                 
                 timerLabel.setText("Timer");
@@ -182,11 +182,11 @@ public class Cowboy_bros_Menu extends JFrame {
         });
         
         //Timer Action will change the label to show time and switch the game state back to level select at 0
-        t.addActionListener(new ActionListener() {
+        gamePlayTimer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(v==0){
-                    t.stop();
+                    gamePlayTimer.stop();
                     timerLabel.setText("Timer: 0");
                     //label.setText("GameOver");
                     v=100;
@@ -222,6 +222,7 @@ public class Cowboy_bros_Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //reset all progress and restart the level
+                Cowboy_brothers.olly.player.setBulletCountToFull();
                 v=100;
                 switchState(GameState.GAMEPLAY);
             }
@@ -259,9 +260,16 @@ public class Cowboy_bros_Menu extends JFrame {
         
         if(currentState==GameState.GAMEPLAY){
             //call Timer Start and have it update the label in reference  to current time
-            t.start();
+            gamePlayTimer.start();
             gameplayPanel.requestFocus();
         }
+    }
+    
+    @Override
+    public void paintComponents(Graphics g){
+        super.paintComponents(g);
+        
+        
     }
 
     public void EndProgram(int exitCode) {

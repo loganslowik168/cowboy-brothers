@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Player implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
-    private double x, y; // Player's position
+    private int x, y; // Player's position
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
@@ -23,7 +23,7 @@ public class Player implements Serializable {
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
     private static final int MAX_HEALTH = 3;
-    private List<PlayerBullet> bullets = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
@@ -89,22 +89,76 @@ public class Player implements Serializable {
         return sprite;
     }
 
-    // Setter to update player's position
-    public void setPosition(double newX, double newY) {
-        this.x = newX;
-        this.y = newY;
-        System.out.println("Player position updated to: (" + x + ", " + y + ")");
+
+    public void setPosition(int newX, int newY) {
+        x = newX;
+        y = newY;
     }
 
-    // Getter for maxUnlockedLevel
-    public int getMaxUnlockedLevel() {
+    // Update bullets
+    public void fireBullet()  {
+        if(currentAmmo>0){
+            //need to find direction the player is facing
+            direction=getDirection();
+            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
+            //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
+            
+            bullets.add(bullet);
+            currentAmmo--;
+        }else{
+            System.out.println("Out of Ammo");
+        }
+    }
+
+    public void updateBullets() {
+        // Update each bullet
+        for (int i = bullets.size() - 1; i >= 0; i--) {
+            Bullet bullet = bullets.get(i);
+            bullet.update();
+
+            // Check if the bullet is off-screen
+            if (bullet.isOffScreen(screenWidth, screenHeight)) {
+                bullets.remove(i); // Remove bullet if it is off-screen
+            }
+        }
+    }
+
+    // Serialize and deserialize
+    public void serialize(String filename) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(this);
+            System.out.println("Player serialized successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Player deserialize(String filename) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            Player player = (Player) in.readObject();
+            System.out.println("Player deserialized successfully.");
+            return player;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    int getMaxUnlockedLevel() {
         return maxUnlockedLevel;
     }
 
-    // Setter for maxUnlockedLevel (if you need to modify it)
-    public void setMaxUnlockedLevel(int newMaxLevel) {
-        this.maxUnlockedLevel = newMaxLevel;
-        System.out.println("Max Unlocked Level updated to: " + maxUnlockedLevel);
+    void setMaxUnlockedLevel(int i) {
+        maxUnlockedLevel=i;
+    }  
+    
+    public void setBulletCountToFull(){
+        currentAmmo=6;
+    }
+    
+    public int getDirection(){
+        //get direction
+        return 0;
     }
 
     // Setup a timer to trigger repaint of the targetPanel at ~60 FPS
@@ -125,7 +179,7 @@ public class Player implements Serializable {
     public void draw(Graphics2D g2) {
         if (sprite != null) {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
-            System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
         } else {
             System.err.println("Sprite is not loaded.");
         }

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  *
  * @author matth
  */
-public class Bullet {
+public class Bullet{
     private int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
@@ -23,6 +23,7 @@ public class Bullet {
         this.y = startY;
         this.direction = direction;
         this.speed = speed;
+        travelBullet();
         
     }
 
@@ -39,8 +40,15 @@ public class Bullet {
         // Check if the bullet is off the screen
         return (x < 0 || x > screenWidth || y < 0 || y > screenHeight);
     }
+    
+    public void travelBullet(){
+        //make timer then call update and then call draw
+    }
 
     // Getters for position
     public int getX() { return x; }
     public int getY() { return y; }
+    //Setters
+    public void setSprite(BufferedImage x){sprite=x;}
+    public void setDirection(int i){direction=i;}
 }

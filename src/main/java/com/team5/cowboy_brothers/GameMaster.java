@@ -43,6 +43,7 @@ public class GameMaster {
     }
     public static void main(String[] args) { 
         System.out.println("MAIN");
+
         /*
         System.out.println("Creating test drawer");
                 // Get all open frames (Frame instances)

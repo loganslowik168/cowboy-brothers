@@ -32,6 +32,10 @@ public class KeyHandler extends KeyAdapter {
                 //gameWorld.moveObjects(-player.getMoveSpeed(), 0); // Move objects left
                 //System.out.println("D");
             }
+            case KeyEvent.VK_SPACE->{
+                //Call playerBullet creation
+                Cowboy_brothers.olly.player.fireBullet();
+            }
         }
     }
 }
