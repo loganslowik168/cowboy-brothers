@@ -99,13 +99,9 @@ public class Player extends Rectangle implements Serializable {
     // Update bullets
     public void fireBullet()  {
         if(currentAmmo>0){
-            //need to find direction the player is facing
             direction=getDirection();
-            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
             targetPanel.setBullet(bullet);
-            //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
-            
-            bullets.add(bullet);
             currentAmmo--;
         }else{
             System.out.println("Out of Ammo");
