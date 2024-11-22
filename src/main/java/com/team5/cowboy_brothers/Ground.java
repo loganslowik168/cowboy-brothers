@@ -1,21 +1,46 @@
 
 package com.team5.cowboy_brothers;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import javax.swing.Timer;
+
 public class Ground extends GameObject {
     // Additional properties specific to the ground, if needed
-    private String texture; // For example, a texture or image path
-
+    private int x; // X position
+    private int y; // Y position
+    private int width; // Width of the object
+    private int height; // Height of the object
+    private BufferedImage sprite;
+    private GamePanel targetPanel;
+    Timer repaintTimer;
     // Constructor
-    public Ground(float x, float y, float width, float height, String texture) {
-        super(x, y, width, height); // Call the constructor of GameObject
-        this.texture = texture;
+    public Ground(int x, int y, int width, int height, String spriteFilePath, GamePanel targetPanel) {
+        super(x, y, width, height, spriteFilePath, targetPanel);
+        System.out.println("Ground created");
     }
 
-    // Getters
-    public String getTexture() {
-        return texture;
-    }
 
+    @Override
+    public void draw(Graphics g){super.draw(g);}
+    
+    @Override
+    public void draw(Graphics2D g2){super.draw(g2);}
+    
+    private void setupRepaintTimer() {
+        repaintTimer = new Timer(1000/60,null);
+        repaintTimer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                targetPanel.repaint(); // Repaint the panel regularly
+                //System.out.println("CALLING REPAINT");
+                
+                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
+            }
+        }); // ~60 FPS
     // Optional: Override the update method if needed
 //    @Override
 //    public void update() {
@@ -29,4 +54,5 @@ public class Ground extends GameObject {
 //        // For example, you might use a graphics context to draw the texture at the ground's position
 //    }
 
+}
 }

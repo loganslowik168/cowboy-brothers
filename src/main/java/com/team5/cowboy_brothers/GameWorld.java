@@ -6,7 +6,7 @@ import java.util.List;
 import com.team5.cowboy_brothers.Cowboy_bros_Menu.GameState;
 
 public class GameWorld {
-    private List<GameObject> objects; // List to hold game objects
+    public List<GameObject> objects; // List to hold game objects
     private Player player;
     private Flag flag;
     int[] hs = {0,0,0,0,0};
@@ -16,7 +16,7 @@ public class GameWorld {
     public GameWorld(Cowboy_bros_Menu menu) {
         this.menu = menu;
         objects = new ArrayList<>();
-        initializeGround();
+        
         // Initialize player and flag
        // player = new Player(3,6,1,0,hs,0,0,Cowboy_brothers.olly.VisibleMenu.gameplayPanel); // Example position and size
         flag = new Flag(200, 100, 30, 30); // Example position and size
@@ -25,20 +25,10 @@ public class GameWorld {
     }
 
     // Method to initialize ground objects
-    private void initializeGround() {
-        // example lvl 1
-        Ground ground1 = new Ground(0, 400, 800, 50, "sprites/DesertGroundTile");
-        Ground ground2 = new Ground(0, 300, 800, 50, "sprites/DesertGroundTile");
-        Ground ground3 = new Ground(0, 200, 800, 50, "sprites/DesertGroundTile");
-        
-        // Add them to the objects list
-        objects.add(ground1);
-        objects.add(ground2);
-        objects.add(ground3);
-    }
+    
 
     // Method to move all objects in the world
-    public void moveObjects(float dx, float dy) {
+    public void moveObjects(int dx, int dy) {
         for (GameObject obj : objects) {
             System.out.println("MOVING OBJECTS");
             obj.setX(obj.getPosition()[0] + dx);

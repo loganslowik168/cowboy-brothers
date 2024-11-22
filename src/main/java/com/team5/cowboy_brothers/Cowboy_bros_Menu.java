@@ -38,6 +38,7 @@ public class Cowboy_bros_Menu extends JFrame {
     private JPanel loseMenuPanel;
 
     public Cowboy_bros_Menu() {
+        this.gameplayPanel = new GamePanel();
         setTitle("Cowboy Brothers");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,7 +150,7 @@ public class Cowboy_bros_Menu extends JFrame {
     JLabel timerLabel;
     // Create a simple Gameplay panel (can be extended later)
     private void createGameplayPanel() {
-        gameplayPanel = new GamePanel();
+        
         gameplayPanel.setLayout(new BorderLayout());
         JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 32));

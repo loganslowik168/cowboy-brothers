@@ -49,11 +49,11 @@ public abstract class Bullet{
 
     public void draw(Graphics g) {
         g.drawImage(sprite, x, y, null); // Draw the bullet sprite
-        System.out.println("Drawing BUllet");
+        //System.out.println("Drawing BUllet");
     }
     
     public void draw(Graphics2D g2) {
-        System.out.println("Drawing Bullet");
+        //System.out.println("Drawing Bullet");
         if (sprite != null) {
             g2.drawImage(sprite, (int) x, (int) y, targetPanelBullet);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
