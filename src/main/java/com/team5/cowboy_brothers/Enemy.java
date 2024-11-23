@@ -25,7 +25,8 @@ public class Enemy extends Rectangle {
     private int bulletSpeed = 5; // Bullet speed (slower than player bullets)
     private int screenWidth = 800;
     private int screenHeight = 600;
-    
+    private int[][] path; // Array to define the path with coordinates
+    private int pathIndex; // Current index in the path
     int count=0;
     
     
@@ -83,7 +84,51 @@ public class Enemy extends Rectangle {
         this.color=color;
         this.x = startX;
         this.y = startY;
-        //path();
+        
+        path = new int[][] {
+            {100, 100},
+            {200, 200},
+            {300, 100},
+            {400, 200},
+            {500, 100}
+        };
+        pathIndex = 0; // Start at the first point in the path
+        this.x = startX;
+        this.y = startY;
+    }
+
+    // Update the position of the enemy
+    public void updatePosition() {
+        if (pathIndex < path.length) {
+            destinationX = path[pathIndex][0];
+            destinationY = path[pathIndex][1];
+
+            // Calculate the direction vector
+            double dirX = destinationX - pos_x;
+            double dirY = destinationY - pos_y;
+            double distance = Math.sqrt(dirX * dirX + dirY * dirY);
+
+            // If the enemy is already at the destination
+            if (distance < 1e-5) {
+                pathIndex++; // Move to the next point in the path
+                System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
+            } else {
+                // Normalize the direction vector
+                double normDirX = dirX / distance;
+                double normDirY = dirY / distance;
+
+                // Calculate the movement based on max speed
+                double moveX = normDirX * MAX_SPEED;
+                double moveY = normDirY * MAX_SPEED;
+
+                // Update the position
+                pos_x += moveX;
+                pos_y += moveY;
+
+                // Print current position
+                System.out.println("Current Position: (" + pos_x + ", " + pos_y + ")");
+            }
+        }
         
     }
 
@@ -126,36 +171,6 @@ public class Enemy extends Rectangle {
             count--;
         }
         
-    }
-        // Method to update the position of the enemy
-    public void updatePosition() {
-        // Calculate the direction vector
-        double dirX = destinationX - pos_x;
-        double dirY = destinationY - pos_y;
-        double distance = Math.sqrt(dirX * dirX + dirY * dirY);
-
-        // If the enemy is already at the destination
-        if (distance < 1e-5) {
-            return; // No movement needed
-        }
-
-        // Normalize the direction vector
-        double normDirX = dirX / distance;
-        double normDirY = dirY / distance;
-
-        // Calculate the movement based on max speed
-        double moveX = normDirX * MAX_SPEED;
-        double moveY = normDirY * MAX_SPEED;
-
-        // Update the position
-        pos_x += moveX;
-        pos_y += moveY;
-
-        // Check if the enemy has reached the destination
-        if (Math.sqrt((pos_x - destinationX) * (pos_x - destinationX) + (pos_y - destinationY) * (pos_y - destinationY)) < MAX_SPEED) {
-            pos_x = destinationX; // Snap to destination
-            pos_y = destinationY;
-        }
     }
     public String getName(){
         return IDName;
