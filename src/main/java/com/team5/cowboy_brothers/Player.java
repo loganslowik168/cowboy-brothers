@@ -95,6 +95,18 @@ public class Player extends Rectangle implements Serializable {
         x = newX;
         y = newY;
     }
+    public void changeDirection(int direction) {
+        this.direction = direction; // 1 for right, -1 for left
+        this.width = Math.abs(this.width) * direction; // Change width to negative for left direction
+    }
+
+    // Example method to reset player position
+    public void resetPosition(int startX, int startY) {
+        this.x = startX;
+        this.y = startY;
+        this.currentHealth = MAX_HEALTH; // Reset health
+        this.currentAmmo = MAX_AMMO; // Reset ammo
+    }
 
     // Update bullets
     public void fireBullet()  {
