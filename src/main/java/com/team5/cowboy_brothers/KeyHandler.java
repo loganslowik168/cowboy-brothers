@@ -27,10 +27,12 @@ public class KeyHandler extends KeyAdapter {
             case KeyEvent.VK_A -> {
                 //gameWorld.moveObjects(player.getMoveSpeed(), 0); // Move objects right
                 //System.out.println("A");
+                Cowboy_brothers.olly.gameWorld.MoveObjects(-Cowboy_brothers.olly.player.GetMoveSpeed());
             }
             case KeyEvent.VK_D -> {
                 //gameWorld.moveObjects(-player.getMoveSpeed(), 0); // Move objects left
                 //System.out.println("D");
+                Cowboy_brothers.olly.gameWorld.MoveObjects(Cowboy_brothers.olly.player.GetMoveSpeed());
             }
             case KeyEvent.VK_SPACE->{
                 //Call playerBullet creation

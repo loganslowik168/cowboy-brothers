@@ -10,9 +10,11 @@ public class Lvl1 extends Map {
     }
 private void initializeGround() {
         // example lvl 1{if (olly == null) olly = new GameMaster();}
-        Ground ground1 = new Ground(0, 400, 800, 50, "sprites/DesertGroundTile.png", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        Ground ground2 = new Ground(0, 300, 800, 50, "sprites/DesertGroundTile.png", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        Ground ground3 = new Ground(0, 200, 800, 50, "sprites/DesertGroundTile.png", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
+        String s = "sprites/DesertGroundTile.png";
+        new Ground(0, 400, s, t);
+        new Ground(33, 400, s, t);
+        new Ground(66, 400, s, t);
         
     }
     @Override

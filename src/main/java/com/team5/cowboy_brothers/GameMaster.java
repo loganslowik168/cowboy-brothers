@@ -18,14 +18,14 @@ public class GameMaster {
 
     public Cowboy_bros_Menu VisibleMenu;
     public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
-    GameWorld gameWorld = new GameWorld(VisibleMenu); // Pass the menu to GameWorld
+    public GameWorld gameWorld; // Pass the menu to GameWorld
     
     public GameMaster()
     {
-        this.VisibleMenu = new Cowboy_bros_Menu();
+        VisibleMenu = new Cowboy_bros_Menu();
         player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
         VisibleMenu.gameplayPanel.setPlayer(player);
-
+        gameWorld = new GameWorld(VisibleMenu);
     }
     
     

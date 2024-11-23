@@ -13,18 +13,14 @@ import javax.swing.Timer;
 public abstract class GameObject {
     private int x; // X position
     private int y; // Y position
-    private int width; // Width of the object
-    private int height; // Height of the object
     private BufferedImage sprite;
     private GamePanel targetPanel;
     Timer repaintTimer;
 
     // Constructor
-    public GameObject(int x, int y, int width, int height, String spriteFilePath, GamePanel targetPanel) {
+    public GameObject(int x, int y, String spriteFilePath, GamePanel targetPanel) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
         loadSprite(spriteFilePath);
         this.targetPanel = targetPanel;
         setupRepaintTimer();
@@ -42,14 +38,14 @@ public abstract class GameObject {
 
     public void draw(Graphics g) {
         g.drawImage(sprite, x, y, null); // Draw the bullet sprite
-        //System.out.println("Drawing Ground");
+        //System.out.println("Drawing GameObject");
     }
     
     public void draw(Graphics2D g2) {
         //System.out.println("Drawing Ground");
         if (sprite != null) {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
-            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+            //System.out.println("Drawing Gameobject sprite");
         } else {
             System.err.println("Sprite is not loaded.");
         }
@@ -73,13 +69,6 @@ public abstract class GameObject {
         return new int[]{x, y};
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
 
     // Setters
     public void setX(int x) {
@@ -97,5 +86,9 @@ public abstract class GameObject {
 
     public void render() {
         // Logic to draw the object, if using graphics//
+    }
+    public void ShiftPosition(int shift) //sidescrolling element
+    {
+        x=x+shift;
     }
 }

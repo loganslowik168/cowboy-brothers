@@ -19,16 +19,18 @@ public class Player extends Rectangle implements Serializable {
     private int currentScore;
     private int[] highScores;
     private BufferedImage sprite; // BufferedImage for sprite
-    private static final int MOVE_SPEED = 1;
+    private static final int MOVE_SPEED = 50;
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
     private static final int MAX_HEALTH = 3;
+    private static final int GRAVITY = 2;
+    public boolean ShouldGravitate = true; //see Cowboy_brothers.java
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
-    private Timer positionTimer; // Timer for sending position messages
+    private Timer gravityTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
 
     // Constructor: Takes targetPanel as a parameter
@@ -53,7 +55,7 @@ public class Player extends Rectangle implements Serializable {
         loadSprite("sprites/player.png");
 
         // Start the timer to send position messages
-        startPositionTimer();
+        SetupGravityTimer();
 
         // Set up a timer to repaint the panel regularly
         setupRepaintTimer();
@@ -70,14 +72,14 @@ public class Player extends Rectangle implements Serializable {
     }
 
     // Method to start a timer that sends position messages every second
-    private void startPositionTimer() {
-        positionTimer = new Timer();
-        positionTimer.scheduleAtFixedRate(new TimerTask() {
+    private void SetupGravityTimer() {
+        gravityTimer = new Timer();
+        gravityTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Player @ pos " + getPositionString());
+                if (ShouldGravitate) ApplyGravity();
             }
-        }, 0, 1000); // Initial delay of 0 ms, repeat every 1000 ms (1 second)
+        }, 0, 1000 / 60); // ~60 FPS
     }
 
     // Helper method to get the player's position as a string
@@ -102,9 +104,9 @@ public class Player extends Rectangle implements Serializable {
             //need to find direction the player is facing
             direction=getDirection();
             Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-            targetPanel.setBullet(bullet);
+            targetPanel.addBullet(bullet);
             //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
-            
+            Cowboy_brothers.olly.gameWorld.moveableObjects.add(bullet);
             bullets.add(bullet);
             currentAmmo--;
         }else{
@@ -196,4 +198,9 @@ public class Player extends Rectangle implements Serializable {
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
             }
+    public int GetMoveSpeed() {return MOVE_SPEED;}
+    private void ApplyGravity()
+    {
+        y+=GRAVITY;
+    }
 }

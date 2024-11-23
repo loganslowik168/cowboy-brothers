@@ -18,14 +18,16 @@ public class Ground extends GameObject {
     private GamePanel targetPanel;
     Timer repaintTimer;
     // Constructor
-    public Ground(int x, int y, int width, int height, String spriteFilePath, GamePanel targetPanel) {
-        super(x, y, width, height, spriteFilePath, targetPanel);
-        System.out.println("Ground created");
+    public Ground(int x, int y, String spriteFilePath, GamePanel targetPanel) {
+        super(x, y, spriteFilePath, targetPanel);
+        //System.out.println("Ground created");
+        targetPanel.addGround(this);
+        Cowboy_brothers.olly.gameWorld.objects.add(this);
     }
 
 
     @Override
-    public void draw(Graphics g){super.draw(g);}
+    public void draw(Graphics g){super.draw(g);} //System.out.println("Drawing in ground");}
     
     @Override
     public void draw(Graphics2D g2){super.draw(g2);}
@@ -55,4 +57,5 @@ public class Ground extends GameObject {
 //    }
 
 }
+
 }

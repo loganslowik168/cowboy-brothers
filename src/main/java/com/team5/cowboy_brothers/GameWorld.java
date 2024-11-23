@@ -7,6 +7,7 @@ import com.team5.cowboy_brothers.Cowboy_bros_Menu.GameState;
 
 public class GameWorld {
     public List<GameObject> objects; // List to hold game objects
+    public List<MoveableGameObject> moveableObjects;
     private Player player;
     private Flag flag;
     int[] hs = {0,0,0,0,0};
@@ -15,7 +16,8 @@ public class GameWorld {
     // Constructor
     public GameWorld(Cowboy_bros_Menu menu) {
         this.menu = menu;
-        objects = new ArrayList<>();
+        objects = new ArrayList<GameObject>();
+        moveableObjects = new ArrayList<MoveableGameObject>();
         
         // Initialize player and flag
        // player = new Player(3,6,1,0,hs,0,0,Cowboy_brothers.olly.VisibleMenu.gameplayPanel); // Example position and size
@@ -28,29 +30,32 @@ public class GameWorld {
     
 
     // Method to move all objects in the world
-    public void moveObjects(int dx, int dy) {
+    public void MoveObjects(int dx) {
+        //System.out.println("MOVING OBJECTS");
         for (GameObject obj : objects) {
-            System.out.println("MOVING OBJECTS");
-            obj.setX(obj.getPosition()[0] + dx);
-            obj.setY(obj.getPosition()[1] + dy);
+            obj.ShiftPosition(dx);
+        }
+        for (MoveableGameObject obj : moveableObjects){
+            System.out.println("Moving a moveable object");
+            obj.ShiftPosition(dx);
         }
     }
 
-    public void checkCollisions() {
+    public void CheckCollisions() {
         if (player.collidesWithFlag(flag)) {
             System.out.println("Collision detected with flag!");
             menu.switchState(Cowboy_bros_Menu.GameState.WIN_MENU); // Switch to win menu if collided with flag
         }
     }
     // Method to check health
-    private void checkHealth() {
+    private void CheckHealth() {
         if (player.getCurrentHealth() <= 0) {
             menu.switchState(GameState.LOSE_MENU); // Call the menu's switchState method
         }
     }
     public void update() {
-        checkCollisions(); // Check for collisions in each update
-        checkHealth(); // Check health for lose condition
+        CheckCollisions(); // Check for collisions in each update
+        CheckHealth(); // Check health for lose condition
     }
 
     // Optional: Render all game objects

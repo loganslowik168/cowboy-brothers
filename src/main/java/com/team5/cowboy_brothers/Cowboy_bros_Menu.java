@@ -152,9 +152,9 @@ public class Cowboy_bros_Menu extends JFrame {
     private void createGameplayPanel() {
         
         gameplayPanel.setLayout(new BorderLayout());
-        JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 32));
-        gameplayPanel.add(label, BorderLayout.CENTER);
+        //JLabel label = new JLabel("Gameplay is happening here!", SwingConstants.CENTER);
+        //label.setFont(new Font("Arial", Font.BOLD, 32));
+        //gameplayPanel.add(label, BorderLayout.CENTER);
         
         // Add a back button to return to the level select screen
         JButton backButton = new JButton("PAUSE");

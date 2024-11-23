@@ -13,17 +13,18 @@ import java.awt.image.BufferedImage;
  *
  * @author matth
  */
-public abstract class Bullet{
+public abstract class Bullet extends MoveableGameObject{
     private int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
     private BufferedImage sprite;
-    private GamePanel targetPanelBullet;
+    private final GamePanel targetPanelBullet;
     Timer repaintTimer;
     Timer updateTimer=new Timer(1000/60,null);
     
 
     public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) {
+        super(startX, startY, speed, TPB);
         this.x = startX;
         this.y = startY;
         this.direction = direction;
@@ -44,7 +45,8 @@ public abstract class Bullet{
 
     public void update() {
        // Update the bullet's position based on its speed and direction
-       x += speed * direction; // Move left or right
+       int travelOffset = speed * direction; // Move left or right
+       x += travelOffset;
     }
 
     public void draw(Graphics g) {

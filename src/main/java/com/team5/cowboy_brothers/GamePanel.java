@@ -13,19 +13,24 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
     private Player player;
     private ArrayList<Bullet> bullets;
+    private ArrayList<Ground> grounds;
 
     // Constructor without the Player parameter
     public GamePanel() {
         setPreferredSize(new Dimension(800, 600)); // Set the panel size
         bullets = new ArrayList<Bullet>();
+        grounds = new ArrayList<Ground>();
     }
 
     // Setter method to assign the player later
     public void setPlayer(Player player) {
         this.player = player;
     }
-    public void setBullet(Bullet bullet){
+    public void addBullet(Bullet bullet){
         bullets.add(bullet);
+    }
+    public void addGround(Ground ground){
+        grounds.add(ground);
     }
 
     @Override
@@ -40,7 +45,12 @@ public class GamePanel extends JPanel {
             Graphics2D g21 = (Graphics2D) g;
             bull.draw(g21);
         }
-            
+        if(grounds!=null){
+            for (Ground gnd : grounds){
+                Graphics2D g22 = (Graphics2D) g;
+                gnd.draw(g22);
+            }
+        }
         }
     }
     protected void paintBullet(Graphics g){

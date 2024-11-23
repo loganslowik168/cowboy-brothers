@@ -11,5 +11,6 @@ public class Cowboy_brothers extends JFrame {
     public static void main(String[] args) { // main function
         System.out.println("-- Begin program execution --");
         if (olly == null) olly = new GameMaster();
+        olly.player.ShouldGravitate = false; //change this later in order to reapply gravity
     }
 }

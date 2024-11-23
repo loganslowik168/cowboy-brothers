@@ -16,11 +16,9 @@ public class MoveableGameObject {
     private int speed;
 
     // Constructor
-    public MoveableGameObject(int x, int y, float width, float height, int speed) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public MoveableGameObject(int startX, int startY, int speed,GamePanel TPB) {
+        this.x = startX;
+        this.y = startY;
         this.speed = speed;
     }
 
@@ -53,5 +51,9 @@ public class MoveableGameObject {
 
     public void render() {
         // Logic to draw the object, if using graphics//
+    }
+    public void ShiftPosition(int shift) //sidescrolling element
+    {
+        x=x+shift;
     }
 }
