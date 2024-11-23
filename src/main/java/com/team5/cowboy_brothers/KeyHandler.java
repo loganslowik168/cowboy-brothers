@@ -25,10 +25,12 @@ public class KeyHandler extends KeyAdapter {
                 //System.out.println("S");
             }
             case KeyEvent.VK_A -> {
+                Cowboy_brothers.olly.player.changeDirection(-1); // Face left
                 //gameWorld.moveObjects(player.getMoveSpeed(), 0); // Move objects right
                 //System.out.println("A");
             }
             case KeyEvent.VK_D -> {
+                Cowboy_brothers.olly.player.changeDirection(1); // Face right
                 //gameWorld.moveObjects(-player.getMoveSpeed(), 0); // Move objects left
                 //System.out.println("D");
             }
