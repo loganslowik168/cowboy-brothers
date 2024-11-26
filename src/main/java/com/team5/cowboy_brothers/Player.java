@@ -174,7 +174,7 @@ public class Player extends Rectangle implements Serializable {
                 
                 Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
             }
-        }, 0, 1000 / 60); // ~60 FPS
+        }, 100, 1000 / 60); // ~60 FPS
     }
 
     // Method to handle the rendering of the player on the panel

@@ -18,6 +18,4 @@ public abstract class Map {
         this.player = player;
     }
 
-    // Method to get the player's starting position (can be overridden in subclasses)
-    public abstract double[] getStartingPosition();
 }
