@@ -37,8 +37,9 @@ public class PlayerBullet extends Bullet {
         }
     }
     
-    public void collision(){
+    public boolean collision(){
      //check for collision with enemy and ground   
+     return false;
     }
     
 
