@@ -9,22 +9,23 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import java.awt.Component;
 
 public class GamePanel extends JPanel {
     private Player player;
-    private ArrayList<Bullet> bullets;
+    private ArrayList<PlayerBullet> bullets;
 
     // Constructor without the Player parameter
     public GamePanel() {
         setPreferredSize(new Dimension(800, 600)); // Set the panel size
-        bullets = new ArrayList<Bullet>();
+        bullets = new ArrayList<PlayerBullet>();
     }
 
     // Setter method to assign the player later
     public void setPlayer(Player player) {
         this.player = player;
     }
-    public void setBullet(Bullet bullet){
+    public void setBullet(PlayerBullet bullet){
         bullets.add(bullet);
     }
 
@@ -43,12 +44,17 @@ public class GamePanel extends JPanel {
             
         }
     }
-    protected void paintBullet(Graphics g){
-        System.out.println("Paint Bullet");
-        super.paintComponent(g);
-        if(bullets!=null){
-        Graphics2D g21 = (Graphics2D) g;
-        //bullets.draw(g21);
-        }
+    //check if bullets are on screen or off and remove if they are off
+    public void alterList(){
+        for(int i=0; i<bullets.size();i++){
+            if(bullets.get(i).checkDeleteBullet()) 
+            {
+                bullets.remove(i); 
+                bullets.get(i).pauseTimers();
+                i--;
+            }
+            
+            
+        }  
     }
 }
