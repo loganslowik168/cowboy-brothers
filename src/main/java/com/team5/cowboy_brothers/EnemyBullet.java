@@ -44,9 +44,9 @@ public class EnemyBullet extends Bullet {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
-    public void collision(){
+    public boolean collision(){
         //check collision with the ground and the player
-        
+        return true;
     }
 
 
