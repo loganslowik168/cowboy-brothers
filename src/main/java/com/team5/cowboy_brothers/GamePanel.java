@@ -14,6 +14,7 @@ public class GamePanel extends JPanel {
     private Player player;
     private ArrayList<Bullet> bullets;
     private ArrayList<Ground> grounds;
+    private Flag flag;
 
     // Constructor without the Player parameter
     public GamePanel() {
@@ -32,24 +33,32 @@ public class GamePanel extends JPanel {
     public void addGround(Ground ground){
         grounds.add(ground);
     }
+    public void setFlag(Flag f){
+        flag = f;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (player != null) {
-            Graphics2D g2 = (Graphics2D) g;
-            player.draw(g2);
+            Graphics2D playerG2 = (Graphics2D) g;
+            player.draw(playerG2);
         }
         if(bullets!=null){
         for (Bullet bull : bullets) {
-            Graphics2D g21 = (Graphics2D) g;
-            bull.draw(g21);
+            Graphics2D bulletG2 = (Graphics2D) g;
+            bull.draw(bulletG2);
         }
         if(grounds!=null){
             for (Ground gnd : grounds){
-                Graphics2D g22 = (Graphics2D) g;
-                gnd.draw(g22);
+                Graphics2D groundG2 = (Graphics2D) g;
+                gnd.draw(groundG2);
             }
+        }
+        if (flag!=null)
+        {
+            Graphics2D flagG2 = (Graphics2D) g;
+            flag.draw(flagG2);
         }
         }
     }

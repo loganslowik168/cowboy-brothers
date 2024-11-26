@@ -18,8 +18,8 @@ public class Ground extends GameObject {
     private GamePanel targetPanel;
     Timer repaintTimer;
     // Constructor
-    public Ground(int x, int y, String spriteFilePath, GamePanel targetPanel) {
-        super(x, y, spriteFilePath, targetPanel);
+    public Ground(int x, int y, GamePanel targetPanel) {
+        super(x, y, "sprites/DesertGroundTile.png", targetPanel);
         //System.out.println("Ground created");
         targetPanel.addGround(this);
         Cowboy_brothers.olly.gameWorld.objects.add(this);
@@ -32,17 +32,7 @@ public class Ground extends GameObject {
     @Override
     public void draw(Graphics2D g2){super.draw(g2);}
     
-    private void setupRepaintTimer() {
-        repaintTimer = new Timer(1000/60,null);
-        repaintTimer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                targetPanel.repaint(); // Repaint the panel regularly
-                //System.out.println("CALLING REPAINT");
-                
-                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
-            }
-        }); // ~60 FPS
+    
     // Optional: Override the update method if needed
 //    @Override
 //    public void update() {
@@ -58,4 +48,3 @@ public class Ground extends GameObject {
 
 }
 
-}

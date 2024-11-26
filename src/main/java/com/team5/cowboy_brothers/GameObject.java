@@ -2,6 +2,7 @@ package com.team5.cowboy_brothers;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
-public abstract class GameObject {
+public abstract class GameObject extends Rectangle{
     private int x; // X position
     private int y; // Y position
     private BufferedImage sprite;

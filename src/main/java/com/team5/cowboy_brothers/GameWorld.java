@@ -8,9 +8,6 @@ import com.team5.cowboy_brothers.Cowboy_bros_Menu.GameState;
 public class GameWorld {
     public List<GameObject> objects; // List to hold game objects
     public List<MoveableGameObject> moveableObjects;
-    private Player player;
-    private Flag flag;
-    int[] hs = {0,0,0,0,0};
     private Cowboy_bros_Menu.GameState currentState;
     private Cowboy_bros_Menu menu;
     // Constructor
@@ -20,8 +17,8 @@ public class GameWorld {
         moveableObjects = new ArrayList<MoveableGameObject>();
         
         // Initialize player and flag
-       // player = new Player(3,6,1,0,hs,0,0,Cowboy_brothers.olly.VisibleMenu.gameplayPanel); // Example position and size
-        flag = new Flag(200, 100, 30, 30); // Example position and size
+        // player = new Player(3,6,1,0,hs,0,0,Cowboy_brothers.olly.VisibleMenu.gameplayPanel); // Example position and size
+        //flag = new Flag(200, 100, 30, 30); // Example position and size
         currentState = Cowboy_bros_Menu.GameState.GAMEPLAY; // Start in playing state
 
     }
@@ -40,9 +37,9 @@ public class GameWorld {
             obj.ShiftPosition(dx);
         }
     }
-
-    public void CheckCollisions() {
-        if (player.collidesWithFlag(flag)) {
+    //this entire group of functions needs to be moved
+    /*public void CheckCollisions() {
+        if (Cowboy_brothers.olly.player.collidesWithFlag(flag)) {
             System.out.println("Collision detected with flag!");
             menu.switchState(Cowboy_bros_Menu.GameState.WIN_MENU); // Switch to win menu if collided with flag
         }
@@ -64,7 +61,7 @@ public class GameWorld {
             obj.render(); // Call the render method for each object
         }
     }
-
+*/
     // Method to get the list of objects (if needed)
     public List<GameObject> getObjects() {
         return objects;

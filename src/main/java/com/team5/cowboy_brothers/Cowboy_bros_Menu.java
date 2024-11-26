@@ -36,6 +36,8 @@ public class Cowboy_bros_Menu extends JFrame {
     private JPanel pauseMenuPanel;
     private JPanel winMenuPanel;
     private JPanel loseMenuPanel;
+    
+    KeyHandler KH;
 
     public Cowboy_bros_Menu() {
         this.gameplayPanel = new GamePanel();
@@ -61,6 +63,9 @@ public class Cowboy_bros_Menu extends JFrame {
         switchState(GameState.MAIN_MENU);
 
         setVisible(true);
+        //Add key listener
+        KH = new KeyHandler();
+        gameplayPanel.addKeyListener(KH);
     }
 
     // Create the Main Menu panel with buttons
@@ -168,9 +173,7 @@ public class Cowboy_bros_Menu extends JFrame {
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
         gameplayPanel.requestFocusInWindow();
         
-        //Add key listener
-        var KH = new KeyHandler();
-        gameplayPanel.addKeyListener(KH);
+        
         
         
         

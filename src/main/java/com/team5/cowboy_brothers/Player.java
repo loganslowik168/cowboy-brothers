@@ -19,11 +19,11 @@ public class Player extends Rectangle implements Serializable {
     private int currentScore;
     private int[] highScores;
     private BufferedImage sprite; // BufferedImage for sprite
-    private static final int MOVE_SPEED = 50;
-    private static final int JUMP_HEIGHT = 2;
-    private static final int MAX_AMMO = 6;
-    private static final int MAX_HEALTH = 3;
-    private static final int GRAVITY = 2;
+    private final int MOVE_SPEED = 50;
+    public final int JUMP_HEIGHT = 20;
+    private final int MAX_AMMO = 6;
+    private final int MAX_HEALTH = 3;
+    private final int GRAVITY = 2;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
@@ -82,10 +82,8 @@ public class Player extends Rectangle implements Serializable {
         }, 0, 1000 / 60); // ~60 FPS
     }
 
-    // Helper method to get the player's position as a string
-    private String getPositionString() {
-        return "(" + x + ", " + y + ")";
-    }
+    
+    public void ChangeY(int dy) {y+=dy;}
 
     // Getter for the sprite
     public BufferedImage getSprite() {
