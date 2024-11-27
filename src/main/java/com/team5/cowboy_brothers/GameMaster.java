@@ -68,7 +68,7 @@ public class GameMaster {
     {
         switch(lvl)
         {
-            case 1 -> System.out.println("Load level 1. --olly");
+            case 1 -> {System.out.println("Load level 1. --olly"); Lvl1 lv1obj=new Lvl1();}
             case 2 -> System.out.println("Load level 2. --olly");
             case 3 -> System.out.println("Load level 3. --olly");
             case 4 -> System.out.println("Load level 4. --olly");

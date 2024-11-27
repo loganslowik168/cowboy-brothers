@@ -83,7 +83,7 @@ public abstract class Bullet{
 
     public boolean isOffScreen(int screenWidth, int screenHeight) {
         // Check if the bullet is off the screen
-        System.out.println("check Onscreen");
+        //System.out.println("check Onscreen");
         return (x < 0 || x > screenWidth || y < 0 || y > screenHeight);
         
     }

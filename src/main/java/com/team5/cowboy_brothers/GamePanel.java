@@ -16,12 +16,14 @@ public class GamePanel extends JPanel {
     private ArrayList<PlayerBullet> bullets;
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
+    private ArrayList<Enemy> listOfEnemys;
 
     // Constructor without the Player parameter
     public GamePanel() {
         setPreferredSize(new Dimension(800, 600)); // Set the panel size
         bullets = new ArrayList<>();
         Enbullets = new ArrayList<>();
+        listOfEnemys = new ArrayList<>();
     }
 
     // Setter method to assign the player later
@@ -36,6 +38,9 @@ public class GamePanel extends JPanel {
     }
     public void setBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
+    }
+    public void setEnemyList(){
+        //add the level number's list of enemies
     }
     
 
@@ -86,5 +91,27 @@ public class GamePanel extends JPanel {
             
             
         }  
+    }
+    public void pauseTimers(){
+        for (EnemyBullet Enbullet : Enbullets) {
+            Enbullet.pauseTimers();
+        }
+        for(PlayerBullet bullet:bullets){
+            bullet.pauseTimers();
+        }
+        for(Enemy enemys:listOfEnemys){
+            enemys.pauseTimers();
+        }
+    }
+    public void unpauseTimers(){
+        for (EnemyBullet Enbullet : Enbullets) {
+            Enbullet.unPauseTimers();
+        }
+        for(PlayerBullet bullet:bullets){
+            bullet.unPauseTimers();
+        }
+        for(Enemy enemys:listOfEnemys){
+            enemys.unPauseTimers();
+        }
     }
 }

@@ -4,8 +4,12 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.imageio.ImageIO;
 import java.io.*;
+import javax.swing.Timer;
+
 
 /**
  *make an enemy class that follows a predefined path. instantiate several of these 
@@ -34,7 +38,7 @@ public class Enemy extends Rectangle {
     BufferedImage sprite;
     
     GamePanel targetPanel;
-    
+    Timer updateTimer,repaintTimer,bulletFireTimer;
     
     
     Color color;
@@ -52,20 +56,14 @@ public class Enemy extends Rectangle {
     
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
-    public Enemy(String s, int k, Color color, int startX,int startY,GamePanel targetPanel){
-        //Level1.insertAtEnd(Lv1A[0]);
-        //Level2.insertAtEnd(Lv2A[0]);
-        //Level3.insertAtEnd(Lv3A[0]);
+    public Enemy(String s, int k, Color color,GamePanel targetPanel){
         IDName =s;
         alive=true;
         species=k;
         boX=x;
         boY=y;
         this.color=color;
-        this.x = startX;
-        this.y = startY;
         this.targetPanel=targetPanel;
-        
         path = new int[][] {
             {100, 100},
             {200, 200},
@@ -74,10 +72,10 @@ public class Enemy extends Rectangle {
             {500, 100}
         };
         pathIndex = 0; // Start at the first point in the path
-        this.x = startX;
-        this.y = startY;
-        
+        this.x = path[0][0];
+        this.y = path[0][1];
         loadSprite("sprites/Rough_OutlawEnemy.png");
+        settupTimerEnemy();
     }
     
     private void loadSprite(String filePath) {
@@ -157,6 +155,49 @@ public class Enemy extends Rectangle {
         }
         
     }
+    
+    //Need a timer for traveling on their paths
+    public void settupTimerEnemy(){
+        updateTimer = new Timer(1000,null);
+        repaintTimer = new Timer(1000,null);
+        bulletFireTimer = new Timer(3000,null);
+        updateTimer.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            updatePosition();
+            targetPanel.revalidate();
+        }
+        });
+        repaintTimer.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            targetPanel.repaint();
+        }
+        });
+        bulletFireTimer.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            fireBullet();
+        }
+        });
+        updateTimer.start();
+        repaintTimer.start();
+        bulletFireTimer.start();
+    }
+    public void pauseTimers(){
+        updateTimer.stop();
+        repaintTimer.stop();
+        bulletFireTimer.stop();
+    }
+    public void unPauseTimers(){
+        updateTimer.start();
+        repaintTimer.start();
+        bulletFireTimer.start();
+    }
+    
+    
+    
+    
     public String getName(){
         return IDName;
     }

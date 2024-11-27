@@ -45,18 +45,8 @@ public class PlayerBullet extends Bullet {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
-    
-    
     public boolean collision(){
      //check for collision with enemy and ground   
      return false;
     }
-    
-
-
-    
-
-    
-
-    
 }
