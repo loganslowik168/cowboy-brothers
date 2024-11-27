@@ -1,6 +1,7 @@
 package com.team5.cowboy_brothers;
 
 public class Lvl1 extends Map {
+    Enemy enemy1;
     
     public Lvl1() {
         super(800, 600); // Example dimensions
