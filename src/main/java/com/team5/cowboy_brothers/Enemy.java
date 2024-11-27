@@ -38,7 +38,7 @@ public class Enemy extends Rectangle {
     BufferedImage sprite;
     
     GamePanel targetPanel;
-    Timer updateTimer,repaintTimer,bulletFireTimer;
+    Timer updateTimer,bulletFireTimer;
     
     
     Color color;
@@ -159,7 +159,6 @@ public class Enemy extends Rectangle {
     //Need a timer for traveling on their paths
     public void settupTimerEnemy(){
         updateTimer = new Timer(1000,null);
-        repaintTimer = new Timer(1000,null);
         bulletFireTimer = new Timer(3000,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
@@ -168,12 +167,7 @@ public class Enemy extends Rectangle {
             targetPanel.revalidate();
         }
         });
-        repaintTimer.addActionListener(new ActionListener(){
-        @Override
-        public void actionPerformed(ActionEvent e){
-            targetPanel.repaint();
-        }
-        });
+        
         bulletFireTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -181,17 +175,14 @@ public class Enemy extends Rectangle {
         }
         });
         updateTimer.start();
-        repaintTimer.start();
         bulletFireTimer.start();
     }
     public void pauseTimers(){
         updateTimer.stop();
-        repaintTimer.stop();
         bulletFireTimer.stop();
     }
     public void unPauseTimers(){
         updateTimer.start();
-        repaintTimer.start();
         bulletFireTimer.start();
     }
     

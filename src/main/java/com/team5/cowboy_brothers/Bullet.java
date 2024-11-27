@@ -19,7 +19,6 @@ public abstract class Bullet extends MoveableGameObject{
     private int direction; 
     private BufferedImage sprite;
     private final GamePanel targetPanelBullet;
-    Timer repaintTimer;
     Timer updateTimer=new Timer(1000/60,null);
     
 
@@ -31,8 +30,7 @@ public abstract class Bullet extends MoveableGameObject{
         this.speed = speed;
         //travelBullet();
         targetPanelBullet = TPB;
-        setupRepaintTimer();
-        repaintTimer.start();
+        
         setupUpdateTimer();
         updateTimer.start();
         
@@ -69,19 +67,7 @@ public abstract class Bullet extends MoveableGameObject{
             }
         });
     }
-    
-    private void setupRepaintTimer() {
-        repaintTimer = new Timer(1000/60,null);
-        repaintTimer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                targetPanelBullet.revalidate();
-                targetPanelBullet.repaint(); // Repaint the panel regularly
-                //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
-            }
-        }); // ~60 FPS
-        
-    }
+
 
     public boolean isOffScreen(int screenWidth, int screenHeight) {
         // Check if the bullet is off the screen
@@ -101,12 +87,10 @@ public abstract class Bullet extends MoveableGameObject{
     
     
     public void pauseTimers(){
-        repaintTimer.stop();
         updateTimer.stop();
     }
     
     public void unPauseTimers(){
-        repaintTimer.start();
         updateTimer.start();
     }
     // Getters for position
