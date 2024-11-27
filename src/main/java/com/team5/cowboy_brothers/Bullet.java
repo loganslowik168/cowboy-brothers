@@ -20,7 +20,7 @@ public abstract class Bullet{
     private BufferedImage sprite;
     private GamePanel targetPanelBullet;
     Timer repaintTimer;
-    Timer updateTimer=new Timer(1000/30,null);
+    Timer updateTimer=new Timer(1000/60,null);
     
 
     public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) {
@@ -63,7 +63,7 @@ public abstract class Bullet{
                 update();
                 if(isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight()))
                     targetPanelBullet.alterList();
-                System.out.println(x+", "+y);
+                //System.out.println(x+", "+y);
             }
         });
     }

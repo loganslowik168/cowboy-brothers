@@ -24,7 +24,7 @@ public class GamePanel extends JPanel {
         bullets = new ArrayList<>();
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
-        setHUD(Cowboy_brothers.olly.Selectedlvl);
+        //setHUD(Cowboy_brothers.olly.Selectedlvl);
     }
 
     // Setter method to assign the player later
