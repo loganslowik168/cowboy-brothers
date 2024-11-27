@@ -27,8 +27,21 @@ public class SpriteSheet {
  /*private void If(image = null) {
         return;
     }*/
+ //Setting Class Variables  
+ this.path = path;
+ this.width = image.getWidth();
+ this.height = image.getHeight();
+ // Color Data
+ //pixels == image.getRGB(0, 0, width, height, null, 0, width);
+ 
+ //for (int i=0;i<pixels.length; i++){
+ //pixels[i]=(pixels[i]& 0xff);
+ } 
+ }
+ 
+ 
+ 
     
     
-    }
 }
 
