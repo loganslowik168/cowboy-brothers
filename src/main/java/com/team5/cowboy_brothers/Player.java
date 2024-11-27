@@ -1,37 +1,38 @@
 package com.team5.cowboy_brothers;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Player implements Serializable {
+public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
-    private double x, y; // Player's position
+    private int x, y; // Player's position
     private int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
     private int currentScore;
     private int[] highScores;
     private BufferedImage sprite; // BufferedImage for sprite
-    private static final int MOVE_SPEED = 1;
+    private static final int MOVE_SPEED = 5;
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
     private static final int MAX_HEALTH = 3;
-    private List<PlayerBullet> bullets = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
     private Timer positionTimer; // Timer for sending position messages
+    private GamePanel targetPanel; // Panel to draw the player on
 
-    // Constructor
-    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY) {
+    // Constructor: Takes targetPanel as a parameter
+    public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
         this.maxUnlockedLevel = maxUnlockedLevel;
@@ -39,6 +40,8 @@ public class Player implements Serializable {
         this.highScores = new int[NUM_OF_LEVELS];
         this.x = startX;
         this.y = startY;
+        this.targetPanel = targetPanel;
+        direction=1;
 
         // Initialize high scores
         if (highScores != null && highScores.length == NUM_OF_LEVELS) {
@@ -51,6 +54,9 @@ public class Player implements Serializable {
 
         // Start the timer to send position messages
         startPositionTimer();
+
+        // Set up a timer to repaint the panel regularly
+        setupRepaintTimer();
     }
 
     // Method to load the sprite
@@ -79,35 +85,48 @@ public class Player implements Serializable {
         return "(" + x + ", " + y + ")";
     }
 
-    // Getters and Setters
-    public double[] getPosition() {
-        return new double[]{x, y};
-    }
-
-    public int getCurrentHealth() {
-        return currentHealth;  // Return current health
-    }
-
+    // Getter for the sprite
     public BufferedImage getSprite() {
-        return sprite; // Getter for the sprite
+        return sprite;
     }
 
-    public void setPosition(double newX, double newY) {
+
+    public void setPosition(int newX, int newY) {
         x = newX;
         y = newY;
     }
+    public void update(){
+        x += MOVE_SPEED*direction;
+    }
+    public void changeDirection(int direction) {
+        this.direction = direction; // 1 for right, -1 for left
+        this.width = Math.abs(this.width) * direction; // Change width to negative for left direction
+        targetPanel.repaint();
+    }
+
+    // Example method to reset player position
+    public void resetPosition(int startX, int startY) {
+        this.x = startX;
+        this.y = startY;
+        this.currentHealth = MAX_HEALTH; // Reset health
+        this.currentAmmo = MAX_AMMO; // Reset ammo
+    }
 
     // Update bullets
-    public void fireBullet() throws IOException {
-        PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed);
-
-        bullets.add(bullet);
+    public void fireBullet()  {
+        if(currentAmmo>0){
+            PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            targetPanel.setBullet(bullet);
+            currentAmmo--;
+        }else{
+            System.out.println("Out of Ammo");
+        }
     }
 
     public void updateBullets() {
         // Update each bullet
         for (int i = bullets.size() - 1; i >= 0; i--) {
-            PlayerBullet bullet = bullets.get(i);
+            Bullet bullet = bullets.get(i);
             bullet.update();
 
             // Check if the bullet is off-screen
@@ -144,41 +163,51 @@ public class Player implements Serializable {
 
     void setMaxUnlockedLevel(int i) {
         maxUnlockedLevel=i;
+    }  
+    
+    public void setBulletCountToFull(){
+        currentAmmo=6;
+    }
+    
+    public int getDirection(){
+        //get direction
+        return direction;
     }
 
-    // Custom JPanel for rendering the player sprite
-    public static class PlayerPanel extends JPanel {
-        private Player player;
-        private Timer repaintTimer; // Timer to trigger repainting at regular intervals
-
-        public PlayerPanel(Player player) {
-            this.player = player;
-            // Set up a timer to repaint the panel every 1000/60 ms (~60 FPS)
-            repaintTimer = new Timer();
-            repaintTimer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    repaint(); // Repaint the panel regularly
-                }
-            }, 0, 1000 / 60); // ~60 FPS
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-
-            // If the sprite is loaded, draw it at the player's current position
-            if (player.getSprite() != null) {
-                g.drawImage(player.getSprite(), (int) player.x, (int) player.y, this);
-            } else {
-                g.setColor(Color.RED);
-                g.drawString("Sprite failed to load", 60, 60);
+    // Setup a timer to trigger repaint of the targetPanel at ~60 FPS
+    private void setupRepaintTimer() {
+        Timer repaintTimer = new Timer();
+        repaintTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                targetPanel.repaint(); // Repaint the panel regularly
+                //System.out.println("CALLING REPAINT");
+                
+                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
             }
-        }
+        }, 0, 1000 / 60); // ~60 FPS
     }
 
-    // Retaining the getMoveSpeed function
-    public int getMoveSpeed() {
-        return MOVE_SPEED;
+    // Method to handle the rendering of the player on the panel
+    public void draw(Graphics2D g2) {
+        if (sprite != null) {
+            g2.drawImage(sprite, (int) x, (int) y, targetPanel);
+            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+        } else {
+            System.err.println("Sprite is not loaded.");
+        }
+    }
+    // Method to check collision with another object
+            public boolean collidesWith(Rectangle other) {
+                return this.intersects(other);
+            }
+            public boolean collidesWithFlag(Flag flag) {
+                return this.intersects(flag);
+            }
+    public int getCurrentHealth() {
+        return currentHealth;  // Return current health
+    }
+    public int getCurrentAmmo() {
+        return currentAmmo;
     }
 }

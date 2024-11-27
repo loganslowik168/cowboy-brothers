@@ -17,43 +17,36 @@ import javax.imageio.ImageIO;
  *
  * @author matth
  */
-public class PlayerBullet {
-    private double x, y; // Position of the bullet
-    private int speed; // Speed of the bullet
-    private int direction; // Direction in degrees (0 = right, 90 = down, etc.)
+public class PlayerBullet extends Bullet {
+    
     private BufferedImage sprite;
 
-
-    public PlayerBullet(double startX, double startY, int direction, int speed) throws IOException {
-
-        this.x = startX;
-        this.y = startY;
-        this.direction = direction;
-        this.speed = speed;
+    public PlayerBullet(int startX, int startY, int direction, int speed, GamePanel TPB)  {
+        super(startX,startY,direction,speed, TPB);        
         loadSprite("sprites/PlayerBullet.png");
     }
-
-    private void loadSprite(String filePath) throws IOException {
-        sprite = ImageIO.read(new File(filePath));
-        System.out.println("Sprite loaded successfully.");
+    
+    
+    private void loadSprite(String filePath) {
+        try {
+            sprite = ImageIO.read(new File(filePath));
+            super.setSprite(sprite);
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
     }
-    public void draw(Graphics g) { //come back to this, doesnt make sense
-        g.drawImage(sprite, Math.round((float) x), (int) Math.round(y), null); // Draw the enemy bullet sprite
+    public void clearSprite(){
+        try {
+            sprite = ImageIO.read(new File("sprites/black.png"));
+            super.setSprite(sprite);
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
     }
-
-
-    public void update() {
-        // Update the bullet's position based on its speed and direction
-        x += speed * Math.cos(Math.toRadians(direction));
-        y += speed * Math.sin(Math.toRadians(direction));
+    public boolean collision(){
+     //check for collision with enemy and ground   
+     return false;
     }
-
-    public boolean isOffScreen(int screenWidth, int screenHeight) {
-        // Check if the bullet is off the screen
-        return (x < 0 || x > screenWidth || y < 0 || y > screenHeight);
-    }
-
-    // Getters for position
-    public double getX() { return x; }
-    public double getY() { return y; }
 }
