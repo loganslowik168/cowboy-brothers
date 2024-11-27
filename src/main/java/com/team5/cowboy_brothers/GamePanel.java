@@ -20,8 +20,8 @@ public class GamePanel extends JPanel {
     // Constructor without the Player parameter
     public GamePanel() {
         setPreferredSize(new Dimension(800, 600)); // Set the panel size
-        bullets = new ArrayList<PlayerBullet>();
-        Enbullets = new ArrayList<EnemyBullet>();
+        bullets = new ArrayList<>();
+        Enbullets = new ArrayList<>();
     }
 
     // Setter method to assign the player later
