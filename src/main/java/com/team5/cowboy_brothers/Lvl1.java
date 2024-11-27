@@ -1,6 +1,10 @@
 package com.team5.cowboy_brothers;
-
+import javax.swing.*;
+import java.util.*;
+import java.awt.*;
+       
 public class Lvl1 extends Map {
+    Enemy enemy1;
     
     public Lvl1() {
         super(800, 600); // Example dimensions
@@ -16,7 +20,10 @@ private void InitializeTerrain() {
         new Ground(GROUND_TILE_SIZE*1, GROUND_TILE_SIZE*10, t);
         new Ground(GROUND_TILE_SIZE*2, GROUND_TILE_SIZE*10, t);
         new Flag(100,100, t);
-        
+
+        enemy1 = new Enemy("Kyle",1,Color.black, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
+
     }
     @Override
     public void loadMapStats() {

@@ -10,21 +10,26 @@ public class GameWorld {
     public List<MoveableGameObject> moveableObjects;
     private Cowboy_bros_Menu.GameState currentState;
     private Cowboy_bros_Menu menu;
+    
+    private int levelNumber;
     // Constructor
     public GameWorld(Cowboy_bros_Menu menu) {
         this.menu = menu;
         objects = new ArrayList<GameObject>();
         moveableObjects = new ArrayList<MoveableGameObject>();
+
+        levelNumber = 1; // Set level number
+
         
         // Initialize player and flag
         // player = new Player(3,6,1,0,hs,0,0,Cowboy_brothers.olly.VisibleMenu.gameplayPanel); // Example position and size
         //flag = new Flag(200, 100, 30, 30); // Example position and size
         currentState = Cowboy_bros_Menu.GameState.GAMEPLAY; // Start in playing state
-
+        
     }
 
     // Method to initialize ground objects
-    
+
 
     // Method to move all objects in the world
     public void MoveObjects(int dx) {

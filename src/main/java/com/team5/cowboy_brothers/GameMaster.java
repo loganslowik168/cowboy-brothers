@@ -11,17 +11,22 @@ public class GameMaster {
     
     //public static GameMaster olly;
     int[] hs = {0,0,0,0,0};
-
+    public int Selectedlvl;
     public Cowboy_bros_Menu VisibleMenu;
     public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
-    public GameWorld gameWorld; // Pass the menu to GameWorld
+
+    GameWorld gameWorld; 
+
     
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
         player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);
         VisibleMenu.gameplayPanel.setPlayer(player);
+
         gameWorld = new GameWorld(VisibleMenu);
+        Selectedlvl = 0;
+
     }
     
     
@@ -68,6 +73,7 @@ public class GameMaster {
             {
                 System.out.println("Load level 1. --olly");
                 Lvl1 lvl1 = new Lvl1();
+                Selectedlvl = lvl;
             }
             case 2 -> System.out.println("Load level 2. --olly");
             case 3 -> System.out.println("Load level 3. --olly");

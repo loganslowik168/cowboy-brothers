@@ -25,6 +25,7 @@ public class Player extends Rectangle implements Serializable {
     private final int MAX_HEALTH = 3;
     private final int GRAVITY = 2;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
+
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 10; // Speed of the bullets
@@ -95,17 +96,30 @@ public class Player extends Rectangle implements Serializable {
         x = newX;
         y = newY;
     }
+    public void update(){
+        x += MOVE_SPEED*direction;
+    }
+    public void changeDirection(int direction) {
+        this.direction = direction; // 1 for right, -1 for left
+        this.width = Math.abs(this.width) * direction; // Change width to negative for left direction
+        targetPanel.repaint();
+    }
+
+    // Example method to reset player position
+    public void resetPosition(int startX, int startY) {
+        this.x = startX;
+        this.y = startY;
+        this.currentHealth = MAX_HEALTH; // Reset health
+        this.currentAmmo = MAX_AMMO; // Reset ammo
+    }
 
     // Update bullets
     public void fireBullet()  {
         if(currentAmmo>0){
-            //need to find direction the player is facing
-            direction=getDirection();
-            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-            targetPanel.addBullet(bullet);
-            //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
-            Cowboy_brothers.olly.gameWorld.moveableObjects.add(bullet);
-            bullets.add(bullet);
+
+            PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            targetPanel.AddPlayerBullet(bullet);
+
             currentAmmo--;
         }else{
             System.out.println("Out of Ammo");
@@ -200,5 +214,9 @@ public class Player extends Rectangle implements Serializable {
     private void ApplyGravity()
     {
         y+=GRAVITY;
+
+    }
+    public int getCurrentAmmo() {
+        return currentAmmo;
     }
 }
