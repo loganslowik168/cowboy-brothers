@@ -206,6 +206,9 @@ public class Player extends Rectangle implements Serializable {
                 return this.intersects(flag);
             }
     public int getCurrentHealth() {
-                return currentHealth;  // Return current health
-            }
+        return currentHealth;  // Return current health
+    }
+    public int getCurrentAmmo() {
+        return currentAmmo;
+    }
 }

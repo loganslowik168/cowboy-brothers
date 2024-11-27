@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.team5.cowboy_brothers;
 
 import java.awt.Dimension;
@@ -13,7 +9,7 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
     private Player player;
     private ArrayList<Bullet> bullets;
-
+    private HUD hud; // Reference to the HUD
     // Constructor without the Player parameter
     public GamePanel() {
         setPreferredSize(new Dimension(800, 600)); // Set the panel size
@@ -27,6 +23,9 @@ public class GamePanel extends JPanel {
     public void setBullet(Bullet bullet){
         bullets.add(bullet);
     }
+    public void setHUD(HUD hud) {
+        this.hud = hud;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -39,6 +38,10 @@ public class GamePanel extends JPanel {
         for (Bullet bull : bullets) {
             Graphics2D g21 = (Graphics2D) g;
             bull.draw(g21);
+        }
+        // Draw the HUD
+        if (hud != null) {
+            hud.draw(g);
         }
             
         }

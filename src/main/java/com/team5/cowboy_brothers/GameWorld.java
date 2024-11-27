@@ -12,11 +12,16 @@ public class GameWorld {
     int[] hs = {0,0,0,0,0};
     private Cowboy_bros_Menu.GameState currentState;
     private Cowboy_bros_Menu menu;
+    private HUD hud;
+    private int levelNumber;
     // Constructor
     public GameWorld(Cowboy_bros_Menu menu) {
         this.menu = menu;
         objects = new ArrayList<>();
         initializeGround();
+        levelNumber = 1; // Set level number
+        hud = new HUD(player, levelNumber); // Initialize HUD
+        menu.gameplayPanel.setHUD(hud); // Set HUD in the GamePanel
         // Initialize player and flag
        // player = new Player(3,6,1,0,hs,0,0,Cowboy_brothers.olly.VisibleMenu.gameplayPanel); // Example position and size
         flag = new Flag(200, 100, 30, 30); // Example position and size
