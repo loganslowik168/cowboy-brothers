@@ -19,7 +19,7 @@ public class Player extends Rectangle implements Serializable {
     private int currentScore;
     private int[] highScores;
     private BufferedImage sprite; // BufferedImage for sprite
-    private static final int MOVE_SPEED = 1;
+    private static final int MOVE_SPEED = 5;
     private static final int JUMP_HEIGHT = 2;
     private static final int MAX_AMMO = 6;
     private static final int MAX_HEALTH = 3;
@@ -95,9 +95,13 @@ public class Player extends Rectangle implements Serializable {
         x = newX;
         y = newY;
     }
+    public void update(){
+        x += MOVE_SPEED*direction;
+    }
     public void changeDirection(int direction) {
         this.direction = direction; // 1 for right, -1 for left
         this.width = Math.abs(this.width) * direction; // Change width to negative for left direction
+        targetPanel.repaint();
     }
 
     // Example method to reset player position
@@ -111,13 +115,8 @@ public class Player extends Rectangle implements Serializable {
     // Update bullets
     public void fireBullet()  {
         if(currentAmmo>0){
-            //need to find direction the player is facing
-            direction=getDirection();
-            Bullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
             targetPanel.setBullet(bullet);
-            //Need to call a method that sets a timer to repeatedly update and repaint the bullet until collision
-            
-            bullets.add(bullet);
             currentAmmo--;
         }else{
             System.out.println("Out of Ammo");

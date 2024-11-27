@@ -21,7 +21,7 @@ public class Cowboy_bros_Menu extends JFrame {
     }
     //ActionListener listener  = event -> timerLabel.setText(Instant.now().toString());
     final int DELAY = 1000;
-    int v=100;
+    int v=99;
     // Milliseconds between timer ticks
     Timer gamePlayTimer = new Timer(DELAY, null);
     PauseButtonValue tempPauseValue;
@@ -163,7 +163,7 @@ public class Cowboy_bros_Menu extends JFrame {
         //Add a timer as a label at top of screen
         timerLabel = new JLabel("",SwingConstants.CENTER);
         timerLabel.setFont(new Font("Arial", Font.PLAIN,15));
-        timerLabel.setText("Timer");
+        timerLabel.setText("Timer: 100");
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
         gameplayPanel.requestFocusInWindow();
         
@@ -181,9 +181,6 @@ public class Cowboy_bros_Menu extends JFrame {
                 System.out.println("RECEIVED BACK BUTTON INPUT");
                 switchState(GameState.PAUSE_MENU);  // Send to Pause menu
                 gamePlayTimer.stop();
-                //v=100;
-                
-                timerLabel.setText("Timer");
             }
         });
         
@@ -193,11 +190,9 @@ public class Cowboy_bros_Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(v==0){
                     gamePlayTimer.stop();
-                    timerLabel.setText("Timer: 0");
-                    //label.setText("GameOver");
-                    v=100;
+                    v=99;
                     
-                    switchState(GameState.PAUSE_MENU);
+                    switchState(GameState.LOSE_MENU);
                 }else{
                     timerLabel.setText("Timer: "+v);
                     v--;
@@ -280,7 +275,8 @@ public class Cowboy_bros_Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //reset all progress and restart the level
                 Cowboy_brothers.olly.player.setBulletCountToFull();
-                v=100;
+                v=99;
+                timerLabel.setText("Timer: 100");
                 switchState(GameState.GAMEPLAY);
             }
         });

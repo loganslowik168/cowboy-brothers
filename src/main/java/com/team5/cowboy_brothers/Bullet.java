@@ -20,7 +20,7 @@ public abstract class Bullet{
     private BufferedImage sprite;
     private GamePanel targetPanelBullet;
     Timer repaintTimer;
-    Timer updateTimer=new Timer(1000/60,null);
+    Timer updateTimer=new Timer(1000/30,null);
     
 
     public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) {
@@ -32,12 +32,7 @@ public abstract class Bullet{
         targetPanelBullet = TPB;
         setupRepaintTimer();
         repaintTimer.start();
-        updateTimer.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                update();
-            }
-        });
+        setupUpdateTimer();
         updateTimer.start();
         
     }
@@ -53,7 +48,6 @@ public abstract class Bullet{
     }
     
     public void draw(Graphics2D g2) {
-        System.out.println("Drawing Bullet");
         if (sprite != null) {
             g2.drawImage(sprite, (int) x, (int) y, targetPanelBullet);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
@@ -62,15 +56,26 @@ public abstract class Bullet{
         }
     }
     
+    private void setupUpdateTimer(){
+        updateTimer.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                update();
+                if(isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight()))
+                    targetPanelBullet.alterList();
+                System.out.println(x+", "+y);
+            }
+        });
+    }
+    
     private void setupRepaintTimer() {
         repaintTimer = new Timer(1000/60,null);
         repaintTimer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                targetPanelBullet.revalidate();
                 targetPanelBullet.repaint(); // Repaint the panel regularly
-                //System.out.println("CALLING REPAINT");
-                
-                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
+                //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
             }
         }); // ~60 FPS
         
@@ -78,13 +83,30 @@ public abstract class Bullet{
 
     public boolean isOffScreen(int screenWidth, int screenHeight) {
         // Check if the bullet is off the screen
+        //System.out.println("check Onscreen");
         return (x < 0 || x > screenWidth || y < 0 || y > screenHeight);
+        
     }
     
-    public void travelBullet(){
-        //make timer then call update and then call draw
+    public boolean checkDeleteBullet(){
+        //Check if it is onscreen or colliding with anything
+        return (isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight())|| collision());
+        
     }
-
+    public boolean collision(){
+        return false;
+    }
+    
+    
+    public void pauseTimers(){
+        repaintTimer.stop();
+        updateTimer.stop();
+    }
+    
+    public void unPauseTimers(){
+        repaintTimer.start();
+        updateTimer.start();
+    }
     // Getters for position
     public int getX() { return x; }
     public int getY() { return y; }

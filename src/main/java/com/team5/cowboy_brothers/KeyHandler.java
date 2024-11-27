@@ -17,22 +17,20 @@ public class KeyHandler extends KeyAdapter {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W -> {
                 //gameWorld.moveObjects(0, player.getMoveSpeed()); // Move objects down
-                //System.out.println("W");
                 Cowboy_brothers.olly.player.setPosition(40,40);
             }
             case KeyEvent.VK_S -> {
                 //gameWorld.moveObjects(0, -player.getMoveSpeed()); // Move objects up
-                //System.out.println("S");
             }
             case KeyEvent.VK_A -> {
                 Cowboy_brothers.olly.player.changeDirection(-1); // Face left
+                Cowboy_brothers.olly.player.update(); // want to move player
                 //gameWorld.moveObjects(player.getMoveSpeed(), 0); // Move objects right
-                //System.out.println("A");
             }
             case KeyEvent.VK_D -> {
                 Cowboy_brothers.olly.player.changeDirection(1); // Face right
+                Cowboy_brothers.olly.player.update(); // want to move player
                 //gameWorld.moveObjects(-player.getMoveSpeed(), 0); // Move objects left
-                //System.out.println("D");
             }
             case KeyEvent.VK_SPACE->{
                 //Call playerBullet creation
