@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.*;
 
 /**
  *make an enemy class that follows a predefined path. instantiate several of these 
@@ -20,7 +23,7 @@ public class Enemy extends Rectangle {
     //current position
     int pos_x = 0;
     int pos_y = 0;
-    private ArrayList<EnemyBullet> bullets = new ArrayList<>();
+    
     private int x, y;     // Enemy position
     private int bulletSpeed = 5; // Bullet speed (slower than player bullets)
     private int screenWidth = 800;
@@ -28,8 +31,9 @@ public class Enemy extends Rectangle {
     private int[][] path; // Array to define the path with coordinates
     private int pathIndex; // Current index in the path
     int count=0;
+    BufferedImage sprite;
     
-    
+    GamePanel targetPanel;
     
     
     
@@ -46,33 +50,9 @@ public class Enemy extends Rectangle {
     int destinationX = 0;
     int destinationY = 0;
     
-    /*public void ListSettup(){
-        int[] lv1A={50,55,60,65,70,75,80,85,90,95,100};
-        for(int i=0; i<lv1A.length;i++){
-            Level1.insertAtEnd(lv1A[i]);
-        }
-        int[] Lv2A={300,305,310,315,320,325,330,335,340,345,350};
-        for(int i=0; i<Lv2A.length;i++){
-            Level2.insertAtEnd(lv1A[i]);
-        }
-        int[] Lv3A={500,505,510,515,520,525,530,535,540,545,550};
-        for(int i=0; i<Lv3A.length;i++){
-            Level3.insertAtEnd(lv1A[i]);
-        }
-    }
-    */
-    
-    
-    
-    public Enemy(){
-        IDName=null;
-        alive=false;
-        species=-1;
-        
-    }
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
-    public Enemy(String s, int k, Color color, int startX,int startY){
+    public Enemy(String s, int k, Color color, int startX,int startY,GamePanel targetPanel){
         //Level1.insertAtEnd(Lv1A[0]);
         //Level2.insertAtEnd(Lv2A[0]);
         //Level3.insertAtEnd(Lv3A[0]);
@@ -84,6 +64,7 @@ public class Enemy extends Rectangle {
         this.color=color;
         this.x = startX;
         this.y = startY;
+        this.targetPanel=targetPanel;
         
         path = new int[][] {
             {100, 100},
@@ -95,6 +76,25 @@ public class Enemy extends Rectangle {
         pathIndex = 0; // Start at the first point in the path
         this.x = startX;
         this.y = startY;
+        
+        loadSprite("sprites/Rough_OutlawEnemy.png");
+    }
+    
+    private void loadSprite(String filePath) {
+        try {
+            sprite = ImageIO.read(new File(filePath));
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
+    }
+    public void draw(Graphics2D g2) {
+        if (sprite != null) {
+            g2.drawImage(sprite, (int) x, (int) y, targetPanel);
+            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+        } else {
+            System.err.println("Sprite is not loaded.");
+        }
     }
 
     // Update the position of the enemy
@@ -133,23 +133,8 @@ public class Enemy extends Rectangle {
     }
 
     public void fireBullet() {
-        //EnemyBullet bullet = new EnemyBullet(x, y, -1, bulletSpeed, 1); // -1 for left
-        //bullets.add(bullet);
-    }
-    
-    public void updateBullets() {
-        // Update and remove off-screen bullets
-        for (int i = bullets.size() - 1; i >= 0; i--) {
-            EnemyBullet bullet = bullets.get(i);
-            bullet.update();
-
-            if (bullet.isOffScreen(screenWidth, screenHeight)) {
-                bullets.remove(i);
-            }
-        }
-    }
-    public List<EnemyBullet> getBullets() {
-        return bullets;
+        EnemyBullet bullet = new EnemyBullet(x, y, -1, bulletSpeed, 1, targetPanel); // -1 for left
+        targetPanel.setBullet(bullet);
     }
     
     //To paint the temp sprite

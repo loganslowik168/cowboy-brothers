@@ -197,7 +197,7 @@ public class Cowboy_bros_Menu extends JFrame {
                     //label.setText("GameOver");
                     v=100;
                     
-                    switchState(GameState.PAUSE_MENU);
+                    switchState(GameState.LOSE_MENU);
                 }else{
                     timerLabel.setText("Timer: "+v);
                     v--;

@@ -44,6 +44,17 @@ public class EnemyBullet extends Bullet {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
+    
+    public void clearSprite(){
+        try {
+            sprite = ImageIO.read(new File("sprites/black.png"));
+            super.setSprite(sprite);
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
+    }
+    
     public boolean collision(){
         //check collision with the ground and the player
         return true;

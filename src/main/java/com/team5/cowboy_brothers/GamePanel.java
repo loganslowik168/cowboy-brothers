@@ -14,20 +14,30 @@ import java.awt.Component;
 public class GamePanel extends JPanel {
     private Player player;
     private ArrayList<PlayerBullet> bullets;
+    private ArrayList<EnemyBullet> Enbullets; 
+    private Enemy enemy;
 
     // Constructor without the Player parameter
     public GamePanel() {
         setPreferredSize(new Dimension(800, 600)); // Set the panel size
         bullets = new ArrayList<PlayerBullet>();
+        Enbullets = new ArrayList<EnemyBullet>();
     }
 
     // Setter method to assign the player later
     public void setPlayer(Player player) {
         this.player = player;
     }
+    public void setEnemy(Enemy enemy){
+        this.enemy=enemy;
+    }
     public void setBullet(PlayerBullet bullet){
         bullets.add(bullet);
     }
+    public void setBullet(EnemyBullet bullet){
+        Enbullets.add(bullet);
+    }
+    
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -35,6 +45,10 @@ public class GamePanel extends JPanel {
         if (player != null) {
             Graphics2D g2 = (Graphics2D) g;
             player.draw(g2);
+        }
+        if (enemy != null) {
+            Graphics2D g2 = (Graphics2D) g;
+            enemy.draw(g2);
         }
         if(bullets!=null){
         for (Bullet bull : bullets) {
@@ -49,8 +63,24 @@ public class GamePanel extends JPanel {
         for(int i=0; i<bullets.size();i++){
             if(bullets.get(i).checkDeleteBullet()) 
             {
-                bullets.remove(i); 
+                bullets.get(i).clearSprite();
+                repaint();
                 bullets.get(i).pauseTimers();
+                bullets.remove(i); 
+                i--;
+            }
+            
+            
+        }  
+    }
+    public void EnemyalterList(){
+        for(int i=0; i<Enbullets.size();i++){
+            if(Enbullets.get(i).checkDeleteBullet()) 
+            {
+                Enbullets.get(i).clearSprite();
+                repaint();
+                Enbullets.get(i).pauseTimers();
+                Enbullets.remove(i); 
                 i--;
             }
             

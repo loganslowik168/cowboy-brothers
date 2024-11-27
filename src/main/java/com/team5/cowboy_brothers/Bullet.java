@@ -105,7 +105,7 @@ public abstract class Bullet{
     
     public void unPauseTimers(){
         repaintTimer.start();
-        updateTimer.stop();
+        updateTimer.start();
     }
     // Getters for position
     public int getX() { return x; }
