@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.team5.cowboy_brothers;
 
 import java.awt.Frame;
@@ -23,7 +19,7 @@ public class GameMaster {
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
-        player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
+        player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);
         VisibleMenu.gameplayPanel.setPlayer(player);
         gameWorld = new GameWorld(VisibleMenu);
     }
