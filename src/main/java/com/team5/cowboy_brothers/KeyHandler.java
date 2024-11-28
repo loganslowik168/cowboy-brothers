@@ -2,46 +2,75 @@ package com.team5.cowboy_brothers;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-//import com.team5.cowboy_brothers.GameMaster;
+import javax.swing.Timer;
 
 public class KeyHandler extends KeyAdapter {
     Player p;
     GameWorld gw;
-    public KeyHandler() {
-    }
+    private boolean movingLeft = false;
+    private boolean movingRight = false;
+    
+    // Timer to control the update interval
+    private Timer updateTimer;
 
+    // Timer interval (e.g., 16 ms ~ 60 FPS)
+    private static final int UPDATE_INTERVAL = 16;
+
+    public KeyHandler() {
+        // Initialize the timer that calls the update method at regular intervals
+        updateTimer = new Timer(UPDATE_INTERVAL, e -> update());
+        updateTimer.start(); // Start the timer
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //System.out.println("Key pressed: " + e.getKeyChar());
-        
-        //this isnt the best place for this but putting it in the constructor accesses it too early
-        //so this was a quick fix.  feel free to change later if a better solution arises
         p = Cowboy_brothers.olly.player;
         gw = Cowboy_brothers.olly.gameWorld;
-        
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W -> {
-                p.ChangeY(-p.JUMP_HEIGHT);
+                p.ChangeY(-p.JUMP_HEIGHT); // Handle jump
             }
             case KeyEvent.VK_S -> {
-                p.ChangeY(p.JUMP_HEIGHT);
+                p.ChangeY(p.JUMP_HEIGHT); // Handle crouch
             }
             case KeyEvent.VK_A -> {
-                Cowboy_brothers.olly.player.changeDirection(-1); // Face left
-                gw.MoveObjects(-Cowboy_brothers.olly.player.GetMoveSpeed());
-
+                if (!movingLeft) {
+                    movingLeft = true; // Start moving left
+                    Cowboy_brothers.olly.player.changeDirection(-1);
+                }
             }
             case KeyEvent.VK_D -> {
-                Cowboy_brothers.olly.player.changeDirection(1); // Face right
-                gw.MoveObjects(Cowboy_brothers.olly.player.GetMoveSpeed());
-
+                if (!movingRight) {
+                    movingRight = true; // Start moving right
+                    Cowboy_brothers.olly.player.changeDirection(1);
+                }
             }
-            case KeyEvent.VK_SPACE->{
-                //Call playerBullet creation
-                p.fireBullet();
+            case KeyEvent.VK_SPACE -> {
+                p.fireBullet(); // Fire bullet
             }
         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_A -> {
+                movingLeft = false; // Stop moving left when key is released
+            }
+            case KeyEvent.VK_D -> {
+                movingRight = false; // Stop moving right when key is released
+            }
+        }
+    }
+
+    public void update() {
+        // Smoothly move the player based on whether keys are being held down
+        if (movingLeft) {
+            gw.MoveObjects(Cowboy_brothers.olly.player.GetMoveSpeed()); // Move left continuously
+        } else if (movingRight) {
+            gw.MoveObjects(-Cowboy_brothers.olly.player.GetMoveSpeed()); // Move right continuously
+        }
+
     }
 }

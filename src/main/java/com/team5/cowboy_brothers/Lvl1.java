@@ -17,15 +17,26 @@ private void InitializeTerrain() {
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
         final int GROUND_TILE_SIZE = 33;
         // draws from first to last
+        for (int i = 0; i < 100; i++)
+        {
+            new Ground((GROUND_TILE_SIZE*i), (GROUND_TILE_SIZE*14), t);
+        }
+        
+        new Ground(GROUND_TILE_SIZE*0, GROUND_TILE_SIZE*10, t);
+        // draws from first to last
         new Ground((GROUND_TILE_SIZE*0), (GROUND_TILE_SIZE*10), t);
         new Ground((GROUND_TILE_SIZE*0), (int)(GROUND_TILE_SIZE*9.5), t);
         new Ground(GROUND_TILE_SIZE*1, GROUND_TILE_SIZE*10, t);
         new Ground(GROUND_TILE_SIZE*2, GROUND_TILE_SIZE*10, t);
+        new Flag(100,100, t);
         new Ground((int)(GROUND_TILE_SIZE*3.1), GROUND_TILE_SIZE*10, t);
         new Flag(1000,100, t);
 
-        enemy1 = new Enemy("Kyle",1,Color.black, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
+        
+        new Flag(1000,100, t);
+
+        //enemy1 = new Enemy("Kyle",1,Color.black, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
 
     }
     @Override
