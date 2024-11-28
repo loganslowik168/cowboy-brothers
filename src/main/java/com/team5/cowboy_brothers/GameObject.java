@@ -28,7 +28,7 @@ public abstract class GameObject extends Rectangle{
         repaintTimer.start();
         
     }
-    private void loadSprite(String filePath) {
+    protected void loadSprite(String filePath) {
         try {
             sprite = ImageIO.read(new File(filePath));
             System.out.println("Sprite loaded successfully.");
