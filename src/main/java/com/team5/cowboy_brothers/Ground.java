@@ -18,8 +18,27 @@ public class Ground extends GameObject {
     private GamePanel targetPanel;
     Timer repaintTimer;
     // Constructor
-    public Ground(int x, int y, GamePanel targetPanel) {
+    public Ground(int x, int y, int tilesize, GamePanel targetPanel) {
+        
         super(x, y, "sprites/DesertGroundTile.png", targetPanel);
+        String path = "";
+        switch(tilesize){
+            case 1:
+                path = "sprites/DesertGroundTile.png";
+                break;
+            case 3:
+                path = "sprites/Ground3x1.png";
+                break;
+            case 5:
+                path = "sprites/Ground5x1.png";
+                break;
+            case 10:
+                path = "sprites/Ground10x1.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid tilesize value: " + tilesize);
+        }
+        this.loadSprite(path);
         //System.out.println("Ground created");
         targetPanel.addGround(this);
         Cowboy_brothers.olly.gameWorld.objects.add(this);
