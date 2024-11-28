@@ -31,7 +31,7 @@ public abstract class GameObject extends Rectangle{
     protected void loadSprite(String filePath) {
         try {
             sprite = ImageIO.read(new File(filePath));
-            System.out.println("Sprite loaded successfully.");
+            //System.out.println("Sprite loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }

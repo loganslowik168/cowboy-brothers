@@ -17,23 +17,33 @@ private void InitializeTerrain() {
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
         final int GROUND_TILE_SIZE = 33;
         // draws from first to last
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 20; i++)
         {
+            //holes
+            if (i == 2 || i == 8 || i == 15 || i == 16 || i == 17) {continue;}
+            
+            //build the base for the map
             new Ground((GROUND_TILE_SIZE*i*10), (GROUND_TILE_SIZE*14),10, t);
         }
+        //fill in the holes so they are jumpable
+        new Ground(GROUND_TILE_SIZE*20, (GROUND_TILE_SIZE*14),5, t);
+        new Ground(GROUND_TILE_SIZE*25, (GROUND_TILE_SIZE*14),3, t);
         
-        new Ground(GROUND_TILE_SIZE*0, GROUND_TILE_SIZE*10,1, t);
-        // draws from first to last
-        new Ground((GROUND_TILE_SIZE*0), (GROUND_TILE_SIZE*10),1, t);
-        new Ground((GROUND_TILE_SIZE*0), (int)(GROUND_TILE_SIZE*9.5),1, t);
-        new Ground(GROUND_TILE_SIZE*1, GROUND_TILE_SIZE*10,1, t);
-        new Ground(GROUND_TILE_SIZE*2, GROUND_TILE_SIZE*10,1, t);
-        new Flag(100,100, t);
-        new Ground((int)(GROUND_TILE_SIZE*3.1), GROUND_TILE_SIZE*10,1, t);
-        new Flag(1000,100, t);
+        new Ground((GROUND_TILE_SIZE*80), (GROUND_TILE_SIZE*14),5, t);
+        new Ground((GROUND_TILE_SIZE*86), (GROUND_TILE_SIZE*13),3, t);
+        new Ground((GROUND_TILE_SIZE*87), (int)(GROUND_TILE_SIZE*12.4),1, t);
+        
+        new Ground((GROUND_TILE_SIZE*149), (int)(GROUND_TILE_SIZE*13.4),5, t);
+        new Ground((GROUND_TILE_SIZE*153), (int)(GROUND_TILE_SIZE*12.8),5, t);
+        new Ground((GROUND_TILE_SIZE*157), (int)(GROUND_TILE_SIZE*12.2),5, t);
+        new Ground((GROUND_TILE_SIZE*164), (int)(GROUND_TILE_SIZE*12.2),3, t);
+        new Ground((GROUND_TILE_SIZE*168), (int)(GROUND_TILE_SIZE*12.2),1, t);
+        new Ground((GROUND_TILE_SIZE*171), (int)(GROUND_TILE_SIZE*12.2),1, t);
+        new Ground((GROUND_TILE_SIZE*174), (int)(GROUND_TILE_SIZE*12.2),5, t);
+        new Ground((GROUND_TILE_SIZE*178), (int)(GROUND_TILE_SIZE*11.6),1, t);
 
         
-        new Flag(1000,100, t);
+        new Flag((GROUND_TILE_SIZE*(20*10-1)),(GROUND_TILE_SIZE*14-148), t);
 
         //enemy1 = new Enemy("Kyle",1,Color.black, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
         //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
