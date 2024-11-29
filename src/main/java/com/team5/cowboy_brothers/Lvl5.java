@@ -1,5 +1,7 @@
 package com.team5.cowboy_brothers;
 
+import java.awt.Point;
+
 /**
  *
  * @author heyin
@@ -22,9 +24,9 @@ private void InitializeTerrain() {
             //build the base for the map
             new Ground((GROUND_TILE_SIZE*i*10), (GROUND_TILE_SIZE*14),10, t);
         }
+        Boss B = new Boss((GROUND_TILE_SIZE*3*10+(578/2)-(44/2)),(GROUND_TILE_SIZE*14-261-74),t);
+        new BossSaloon((GROUND_TILE_SIZE*3*10),(GROUND_TILE_SIZE*14)-261,t, B);
         
-        new BossSaloon((GROUND_TILE_SIZE*3*10),(GROUND_TILE_SIZE*14)-261,t);
-        new Boss((GROUND_TILE_SIZE*3*10+(578/2)-(44/2)),(GROUND_TILE_SIZE*14-261-74),t);
         
     }
 

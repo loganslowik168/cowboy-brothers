@@ -17,6 +17,8 @@ public class GamePanel extends JPanel {
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
     private ArrayList<Enemy> listOfEnemys;
+    
+    private ArrayList<Bomb> bombs;
     private BossSaloon Sal;
     private Boss boss;
 
@@ -28,6 +30,7 @@ public class GamePanel extends JPanel {
         bullets = new ArrayList<>();
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
+        bombs = new ArrayList<>();
         //setHUD(Cowboy_brothers.olly.Selectedlvl);
     }
 
@@ -68,6 +71,10 @@ public class GamePanel extends JPanel {
     {
         boss = b;
     }
+    public void AddBomb(Bomb b)
+    {
+        bombs.add(b);
+    }
     
     public void clearLevel(){
         for(int i = grounds.size()-1;i>=0;i--){
@@ -83,6 +90,7 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (Sal != null) {Sal.draw(g);}
         if (player != null) {
             Graphics2D playerG2 = (Graphics2D) g;
             player.draw(playerG2);
@@ -114,8 +122,15 @@ public class GamePanel extends JPanel {
         }
             
         }
-        if (Sal != null) {Sal.draw(g);}
+        
         if (boss != null) {boss.draw(g);}
+        if (bombs!=null)
+        {
+            for (Bomb b : bombs){
+                Graphics2D bombG2 = (Graphics2D) g;
+                b.draw(bombG2);
+            }
+        }
     }
     //check if bullets are on screen or off and remove if they are off
     public void alterList(){

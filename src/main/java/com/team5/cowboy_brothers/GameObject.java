@@ -14,7 +14,7 @@ import javax.swing.Timer;
 public abstract class GameObject extends Rectangle{
     private int x; // X position
     private int y; // Y position
-    private BufferedImage sprite;
+    protected BufferedImage sprite;
     private GamePanel targetPanel;
     public Timer repaintTimer;
 
@@ -48,7 +48,7 @@ public abstract class GameObject extends Rectangle{
         //System.out.println("Drawing Ground");
         if (sprite != null) {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
-            //System.out.println("Drawing Gameobject sprite");
+            //System.out.println("Drawing Gameobject " + sprite.toString() + " @ " + x + ", " + y);
         } else {
             System.err.println("Sprite is not loaded.");
         }
@@ -101,5 +101,9 @@ public abstract class GameObject extends Rectangle{
         repaintTimer = null;
         targetPanel = null;
         sprite = null;
+    }
+    protected void UpdateSprite(BufferedImage newSprite)
+    {
+        sprite = newSprite;
     }
 }

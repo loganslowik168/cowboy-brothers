@@ -91,6 +91,7 @@ public class Player extends Rectangle implements Serializable {
     }
 
     public int GetX() {return x;}
+    public int GetY() {return y;}
     public void ChangeY(int dy) {y+=dy;}
 
     // Getter for the sprite

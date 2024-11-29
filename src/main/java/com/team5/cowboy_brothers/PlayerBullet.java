@@ -23,7 +23,7 @@ public class PlayerBullet extends Bullet {
 
     public PlayerBullet(int startX, int startY, int direction, int speed, GamePanel TPB)  {
         super(startX,startY,direction,speed, TPB,"sprites/PlayerBulletLeft.png","sprites/PlayerBulletRight.png");        
-        loadSprite("sprites/PlayerBullet.png");
+        //loadSprite("sprites/PlayerBullet.png");
     }
     
     
