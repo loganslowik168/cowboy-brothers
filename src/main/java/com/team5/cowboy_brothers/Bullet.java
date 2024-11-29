@@ -18,7 +18,7 @@ public abstract class Bullet extends MoveableGameObject{
     private int speed; // Speed of the bullet
     private int direction; 
     private BufferedImage sprite;
-    private final GamePanel targetPanelBullet;
+    private GamePanel targetPanelBullet;
     Timer updateTimer=new Timer(1000/60,null);
     
 
@@ -98,4 +98,13 @@ public abstract class Bullet extends MoveableGameObject{
     //Setters
     public void setSprite(BufferedImage x){sprite=x;}
     public void setDirection(int i){direction=i;}
+    
+    public void Dispose()
+    {
+        updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
+        updateTimer.stop();
+        updateTimer = null;
+        targetPanelBullet = null;
+        sprite = null;
+    }
 }

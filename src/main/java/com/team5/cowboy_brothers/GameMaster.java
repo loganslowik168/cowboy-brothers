@@ -11,7 +11,6 @@ public class GameMaster {
     
     //public static GameMaster olly;
     int[] hs = {0,0,0,0,0};
-    public int Selectedlvl;
     public Cowboy_bros_Menu VisibleMenu;
     public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
 
@@ -26,7 +25,6 @@ public class GameMaster {
         VisibleMenu.gameplayPanel.setPlayer(player);
 
         gameWorld = new GameWorld(VisibleMenu);
-        Selectedlvl = 0;
 
     }
     
@@ -54,13 +52,11 @@ public class GameMaster {
             {
                 System.out.println("Load level 1. --olly");
                 LoadedLevel = new Lvl1();
-                Selectedlvl = lvl;
             }
             case 2 -> 
             {
-                System.out.println("Load level 1. --olly");
-                Lvl2 lvl2 = new Lvl2();
-                Selectedlvl = lvl;
+                System.out.println("Load level 2. --olly");
+                LoadedLevel = new Lvl2();
             }
             case 3 -> System.out.println("Load level 3. --olly");
             case 4 -> System.out.println("Load level 4. --olly");

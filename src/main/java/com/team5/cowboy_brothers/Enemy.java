@@ -218,7 +218,18 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer.start();
     }
     
-    
+    public void Dispose()
+    {
+        updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
+        updateTimer.stop();
+        updateTimer = null;
+        bulletFireTimer.removeActionListener(bulletFireTimer.getActionListeners()[0]);
+        bulletFireTimer.stop();
+        bulletFireTimer = null;
+
+        targetPanel = null;
+        sprite = null;
+    }
     
     
     public String getName(){
