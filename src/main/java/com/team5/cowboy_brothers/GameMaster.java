@@ -15,7 +15,8 @@ public class GameMaster {
     public Cowboy_bros_Menu VisibleMenu;
     public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
 
-    GameWorld gameWorld; 
+    public GameWorld gameWorld; 
+    public Map LoadedLevel;
 
     
     public GameMaster()
@@ -72,7 +73,7 @@ public class GameMaster {
             case 1 -> 
             {
                 System.out.println("Load level 1. --olly");
-                Lvl1 lvl1 = new Lvl1();
+                LoadedLevel = new Lvl1();
                 Selectedlvl = lvl;
             }
             case 2 -> System.out.println("Load level 2. --olly");

@@ -2,6 +2,7 @@ package com.team5.cowboy_brothers;
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
+import java.lang.ref.WeakReference;
        
 public class Lvl1 extends Map {
     Enemy enemy1;

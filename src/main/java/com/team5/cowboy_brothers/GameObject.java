@@ -16,7 +16,7 @@ public abstract class GameObject extends Rectangle{
     private int y; // Y position
     private BufferedImage sprite;
     private GamePanel targetPanel;
-    Timer repaintTimer;
+    public Timer repaintTimer;
 
     // Constructor
     public GameObject(int x, int y, String spriteFilePath, GamePanel targetPanel) {
@@ -60,7 +60,7 @@ public abstract class GameObject extends Rectangle{
                 targetPanel.repaint(); // Repaint the panel regularly
                 //System.out.println("CALLING REPAINT");
                 
-                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
+                //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
             }
         }); // ~60 FPS
         
@@ -91,5 +91,13 @@ public abstract class GameObject extends Rectangle{
     public void ShiftPosition(int shift) //sidescrolling element
     {
         x=x+shift;
+    }
+    public void Dispose()
+    {
+        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
+        repaintTimer.stop();
+        repaintTimer = null;
+        targetPanel = null;
+        sprite = null;
     }
 }
