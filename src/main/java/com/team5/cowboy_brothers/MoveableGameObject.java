@@ -50,4 +50,8 @@ public abstract class MoveableGameObject {
     {
         x=x+shift;
     }
+    public void Dispose()
+    {
+        //do nothing.. for now
+    }
 }

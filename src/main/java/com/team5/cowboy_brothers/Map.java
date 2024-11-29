@@ -17,5 +17,31 @@ public abstract class Map {
     public void setPlayer(Player player) {
         this.player = player;
     }
+    public void DisposeObjects()
+    {
+        System.out.println("Nullifying gameobjects");
+        
+        for (int i = 0; i < Cowboy_brothers.olly.gameWorld.objects.size(); i++) {
+            GameObject obj = Cowboy_brothers.olly.gameWorld.objects.get(i);
+            obj.Dispose();  // Clean up resources
+
+            // Remove the object from the list
+            Cowboy_brothers.olly.gameWorld.objects.remove(i);
+            i--; // Adjust the index since the list size decreases after removal
+        }
+        for (int i = 0; i < Cowboy_brothers.olly.gameWorld.moveableObjects.size(); i++) {
+            MoveableGameObject obj = Cowboy_brothers.olly.gameWorld.moveableObjects.get(i);
+
+            obj.Dispose();  // Clean up resources
+
+            // Remove the object from the list
+            Cowboy_brothers.olly.gameWorld.moveableObjects.remove(i);
+            i--; // Adjust the index since the list size decreases after removal
+        }
+
+        Cowboy_brothers.olly.gameWorld.objects.clear();
+        Cowboy_brothers.olly.gameWorld.moveableObjects.clear();
+        System.gc();
+    }
 
 }

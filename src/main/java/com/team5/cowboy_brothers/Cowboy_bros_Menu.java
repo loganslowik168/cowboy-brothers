@@ -118,8 +118,15 @@ public class Cowboy_bros_Menu extends JFrame {
         levelSelectPanel.setLayout(new GridLayout(3, 2, 10, 10));
 
         // Create level buttons
+        String[] levelDescriptors = {
+        "Logan's Level", 
+        "Matt's Level", 
+        "Ace's Level", 
+        "Josh's Level", 
+        "Boss Level"
+    };
         for (int i = 1; i <= 5; i++) {
-            JButton levelButton = new JButton("Level " + i);
+            JButton levelButton = new JButton("Level " + i + " -- " + levelDescriptors[i-1]);
             levelButton.setFont(new Font("Arial", Font.BOLD, 24));
             levelSelectPanel.add(levelButton);
 
@@ -306,6 +313,11 @@ public class Cowboy_bros_Menu extends JFrame {
     }
     // Function to switch between game states
     public void switchState(GameState Menu) {
+        if ((currentState == GameState.GAMEPLAY || currentState == GameState.PAUSE_MENU || currentState == GameState.WIN_MENU || currentState == GameState.LOSE_MENU) && (Menu == GameState.LEVEL_SELECT || Menu == GameState.MAIN_MENU))
+        {
+            //dispose of objects if leaving gameplay screen
+            Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
+        }
         currentState = Menu;
 
         // Show/hide panels based on current state
