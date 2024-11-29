@@ -46,10 +46,13 @@ private void InitializeTerrain() {
         
         new Flag((GROUND_TILE_SIZE*(20*10-1)),(GROUND_TILE_SIZE*14-148), t);
 
-        //enemy1 = new Enemy("Kyle",1,Color.black, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
+        enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        int[][] path1={{100,100},{200,200}};
+        enemy1.setPath(path1);
+        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
 
     }
+
     @Override
     public void loadMapStats() {
         // Load level 1 map statistics here

@@ -52,11 +52,20 @@ public class GamePanel extends JPanel {
     }
     
 
-    public void AddEnemyBullet(EnemyBullet bullet){
+    public void AddBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
     }
-    public void setEnemyList(){
-        //add the level number's list of enemies
+    public void setEnemyList(Enemy enemy){
+        listOfEnemys.add(enemy);
+    }
+    
+    public void clearLevel(){
+        for(int i = grounds.size()-1;i>=0;i--){
+            grounds.remove(i);
+        }
+        for(int z = listOfEnemys.size()-1;z>=0;z--){
+            listOfEnemys.remove(z);
+        }
     }
     
 
@@ -101,17 +110,20 @@ public class GamePanel extends JPanel {
         for(int i=0; i<bullets.size();i++){
             if(bullets.get(i).checkDeleteBullet()) 
             {
-                bullets.get(i).clearSprite();
-                repaint();
                 bullets.get(i).pauseTimers();
                 bullets.remove(i); 
                 i--;
             }
-            
-            
-        }  
+        }
+        for(int x=0;x<Enbullets.size();x++){
+            if(Enbullets.get(x).checkDeleteBullet()){
+                Enbullets.get(x).pauseTimers();
+                Enbullets.remove(x);
+                x--;
+            }
+        }
     }
-    public void EnemyalterList(){
+    public void alterEnemyList(){
         for(int i=0; i<Enbullets.size();i++){
             if(Enbullets.get(i).checkDeleteBullet()) 
             {

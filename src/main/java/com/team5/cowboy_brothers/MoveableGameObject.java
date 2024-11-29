@@ -8,19 +8,13 @@ package com.team5.cowboy_brothers;
  *
  * @author matth
  */
-public class MoveableGameObject {
+public abstract class MoveableGameObject {
     private int x; // X position
     private int y; // Y position
     private float width; // Width of the object
     private float height; // Height of the object
     private int speed;
 
-    // Constructor
-    public MoveableGameObject(int startX, int startY, int speed,GamePanel TPB) {
-        this.x = startX;
-        this.y = startY;
-        this.speed = speed;
-    }
 
     // Getters
     public float[] getPosition() {
