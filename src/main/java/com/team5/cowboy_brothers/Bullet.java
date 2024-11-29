@@ -12,10 +12,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-/**
- *
- * @author matth
- */
 public abstract class Bullet extends MoveableGameObject{
     protected int x, y; // Position of the bullet
     private int speed; // Speed of the bullet

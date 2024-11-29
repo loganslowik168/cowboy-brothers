@@ -186,4 +186,8 @@ public class GamePanel extends JPanel {
             enemys.unPauseTimers();
         }
     }
+    public BossSaloon GetSaloon()
+    {
+        return Sal;
+    }
 }

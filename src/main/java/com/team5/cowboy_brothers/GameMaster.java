@@ -17,6 +17,7 @@ public class GameMaster {
     public GameWorld gameWorld; 
     public Map LoadedLevel;
     
+    public boolean IsThereASaloon = false;
     
     public GameMaster()
     {

@@ -237,4 +237,14 @@ public class Player extends Rectangle implements Serializable {
     {
         bullets.clear();
     }
+    public void Hurt(int h)
+    {
+        //System.out.println("Player took " + h + " damage!");
+        currentHealth-=h;
+        if (currentHealth <= 0) {Die();}
+    }
+    private void Die()
+    {
+        
+    }
 }

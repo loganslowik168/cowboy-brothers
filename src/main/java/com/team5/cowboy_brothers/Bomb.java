@@ -23,8 +23,9 @@ public class Bomb extends MoveableGameObject{
     private BufferedImage sprite;
     private double progress;
     private static final double ARC_HEIGHT = 100; // Height of the arc (can be adjusted)
+    private final int EXPLOSION_RADIUS = 100;
     GamePanel targetPanel;
-    
+    private boolean isExploded = false;
     private float SPEED;
     
     private Timer updateTimer;
@@ -36,7 +37,7 @@ public class Bomb extends MoveableGameObject{
         this.progress = 0.0; // Bomb hasn't moved yet
         this.targetPanel = targetPanel;
         this.SPEED = speed;
-        System.out.println("Throwing bomb from point " + startPosition.x + ", " + startPosition.y);
+        //System.out.println("Throwing bomb from point " + startPosition.x + ", " + startPosition.y);
         // Load the sprite image from file
         try {
             this.sprite = ImageIO.read(new File("sprites/Dynamite.png"));
@@ -81,8 +82,8 @@ public class Bomb extends MoveableGameObject{
         // Update the bomb's current position
         currentPosition.setLocation(x, y);
         
-        if (hasReachedTarget()) {Explode();}
-        System.out.println(currentPosition.x + "vs" + GetXOffset());
+        if (hasReachedTarget() && !isExploded) {Explode();}
+        //System.out.println(currentPosition.x + "vs" + GetXOffset());
     }
 
     // Render the bomb at its current position
@@ -122,6 +123,10 @@ public class Bomb extends MoveableGameObject{
     }
     private void Explode()
     {
+        isExploded = true;
+        
+        CheckForDamage();
+        
         try {
             this.sprite = ImageIO.read(new File("sprites/Boom.png"));
         } catch (IOException e) {
@@ -141,4 +146,35 @@ public class Bomb extends MoveableGameObject{
         scheduler.shutdown();
     }
     
+    private void CheckForDamage()
+    {
+        Point p = new Point(Cowboy_brothers.olly.player.GetX(),Cowboy_brothers.olly.player.GetY());
+        if (currentPosition.distance(p)<=EXPLOSION_RADIUS)
+        {
+            Cowboy_brothers.olly.player.Hurt(1);
+        }
+        if (Cowboy_brothers.olly.IsThereASaloon)
+        {
+            BossSaloon saloon = targetPanel.GetSaloon();
+            int lX = saloon.GetXOffset();
+            int rX = lX+578;
+            int tY = saloon.GetY();
+            int bY = tY+261;
+
+            Point saloonPosition = new Point(saloon.GetX()+saloon.GetXOffset(),201);
+            boolean withinX = ((currentPosition.x>saloonPosition.x) && (currentPosition.x<saloonPosition.x+578));
+            boolean withinY = ((currentPosition.y>saloonPosition.y) && (currentPosition.y<saloonPosition.y+261));
+            if (withinX && withinY)
+            {
+                //System.out.println("EGGASPLOSSSSION!!!");
+                saloon.ExplodeSaloon();
+                saloon = null;
+            }
+            //System.out.println("val"+lX+" "+rX+" / "+tY+" "+bY);
+            //System.out.println("("+currentPosition.x+","+currentPosition.y+") vs ("+saloonPosition.x+","+saloonPosition.y+")");
+
+        }
+        
+        
+    }
 }

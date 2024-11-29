@@ -21,7 +21,6 @@ public class Boss{
     private BufferedImage sprite, spriteL, spriteR;
     private GamePanel targetPanel;
     Timer updateTimer, bombTimer, fallTimer;
-    
     public Boss(int x, int y, GamePanel t)
     {
         this.x = x;
@@ -31,7 +30,6 @@ public class Boss{
         sprite=spriteL;
         targetPanel.SetBoss(this);
         Cowboy_brothers.olly.gameWorld.boss = this;
-        
         //timers
         updateTimer = new Timer(1000/60,null);
         updateTimer.addActionListener(new ActionListener(){
@@ -119,7 +117,7 @@ public class Boss{
         //System.out.println("Boss position = " + t);
         Point source = new Point(x,y);
         Point target = new Point(Cowboy_brothers.olly.player.GetX()+5, Cowboy_brothers.olly.player.GetY()+37);
-        new Bomb(source, target, targetPanel, 0.01f);
+        new Bomb(source, target, targetPanel, 0.02f);
     }
     public void BeginFalling()
     {

@@ -107,4 +107,5 @@ public abstract class GameObject extends Rectangle{
     {
         sprite = newSprite;
     }
+    protected int GetXOffset() {return x;}
 }

@@ -23,19 +23,8 @@ public class BossSaloon extends GameObject{
         this.B = B;
         targetPanel.SetSaloon(this);
         System.out.println("Creating saloon");
+        Cowboy_brothers.olly.IsThereASaloon = true;
         
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        
-        // Schedule the Dispose() method to be called after 0.25 seconds (250 milliseconds)
-        scheduler.schedule(new Runnable() {
-            @Override
-            public void run() {
-                ExplodeSaloon();
-            }
-        }, 3000, TimeUnit.MILLISECONDS);
-        
-        // You can also shut down the scheduler if no further tasks are needed
-        scheduler.shutdown();
     }
     
     @Override
@@ -46,6 +35,7 @@ public class BossSaloon extends GameObject{
     
     public void ExplodeSaloon()
     {
+        Cowboy_brothers.olly.IsThereASaloon = false;
         loadSprite("sprites/saloonBoom.png");
         
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
@@ -62,5 +52,6 @@ public class BossSaloon extends GameObject{
         // You can also shut down the scheduler if no further tasks are needed
         scheduler.shutdown();
     }
-    
+    public int GetX() {return x;}
+    public int GetY() {return y;}
 }
