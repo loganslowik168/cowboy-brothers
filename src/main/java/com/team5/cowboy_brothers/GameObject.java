@@ -27,11 +27,13 @@ public abstract class GameObject extends Rectangle{
         setupRepaintTimer();
         repaintTimer.start();
         
+        Cowboy_brothers.olly.gameWorld.objects.add(this);
+        
     }
     protected void loadSprite(String filePath) {
         try {
             sprite = ImageIO.read(new File(filePath));
-            //System.out.println("Sprite loaded successfully.");
+            //System.out.println("Sprite " + filePath + " loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }

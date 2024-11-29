@@ -90,7 +90,7 @@ public class Player extends Rectangle implements Serializable {
         }, 0, 1000 / 60); // ~60 FPS
     }
 
-    
+    public int GetX() {return x;}
     public void ChangeY(int dy) {y+=dy;}
 
     // Getter for the sprite

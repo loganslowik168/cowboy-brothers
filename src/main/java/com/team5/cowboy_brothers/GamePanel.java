@@ -17,6 +17,8 @@ public class GamePanel extends JPanel {
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
     private ArrayList<Enemy> listOfEnemys;
+    private BossSaloon Sal;
+    private Boss boss;
 
 
     // Constructor without the Player parameter
@@ -57,6 +59,14 @@ public class GamePanel extends JPanel {
     }
     public void setEnemyList(Enemy enemy){
         listOfEnemys.add(enemy);
+    }
+    public void SetSaloon(BossSaloon saloon)
+    {
+        Sal = saloon;
+    }
+    public void SetBoss(Boss b)
+    {
+        boss = b;
     }
     
     public void clearLevel(){
@@ -104,6 +114,8 @@ public class GamePanel extends JPanel {
         }
             
         }
+        if (Sal != null) {Sal.draw(g);}
+        if (boss != null) {boss.draw(g);}
     }
     //check if bullets are on screen or off and remove if they are off
     public void alterList(){

@@ -10,7 +10,7 @@ public class GameWorld {
     public List<MoveableGameObject> moveableObjects;
     private Cowboy_bros_Menu.GameState currentState;
     private Cowboy_bros_Menu menu;
-    
+    public int totalOffset = 0;
     private int levelNumber;
     // Constructor
     public GameWorld(Cowboy_bros_Menu menu) {
@@ -33,9 +33,11 @@ public class GameWorld {
 
     // Method to move all objects in the world
     public void MoveObjects(int dx) {
+        totalOffset -= dx;
         //System.out.println("MOVING OBJECTS");
         for (GameObject obj : objects) {
             obj.ShiftPosition(dx);
+            
         }
         for (MoveableGameObject obj : moveableObjects){
             System.out.println("Moving a moveable object");

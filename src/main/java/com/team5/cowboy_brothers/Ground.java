@@ -41,7 +41,6 @@ public class Ground extends GameObject {
         this.loadSprite(path);
         //System.out.println("Ground created");
         targetPanel.addGround(this);
-        Cowboy_brothers.olly.gameWorld.objects.add(this);
     }
 
 

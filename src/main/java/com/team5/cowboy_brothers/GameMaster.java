@@ -16,12 +16,12 @@ public class GameMaster {
 
     public GameWorld gameWorld; 
     public Map LoadedLevel;
-
+    
     
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
-        player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);
+        player = new Player(3,6,5,0,hs,400,40,VisibleMenu.gameplayPanel); //change max unlocked level (3rd param) back to 1
         VisibleMenu.gameplayPanel.setPlayer(player);
 
         gameWorld = new GameWorld(VisibleMenu);
@@ -60,7 +60,11 @@ public class GameMaster {
             }
             case 3 -> System.out.println("Load level 3. --olly");
             case 4 -> System.out.println("Load level 4. --olly");
-            case 5 -> System.out.println("Load level 5. --olly");
+            case 5 -> 
+            {
+                System.out.println("Load level 5. --olly");
+                LoadedLevel = new Lvl5();
+            }
             default -> System.out.println("ERROR. Please select a level between 1 and 5 inclusive! --olly");
         }
     }
