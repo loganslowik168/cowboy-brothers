@@ -316,6 +316,10 @@ public class Cowboy_bros_Menu extends JFrame {
         winMenuPanel.setVisible(currentState == GameState.WIN_MENU);
         loseMenuPanel.setVisible(currentState == GameState.LOSE_MENU);
         //Add a notifier to a timer if gameplay starts
+        if(currentState==GameState.LEVEL_SELECT){
+            gameplayPanel.clearLevel();
+            v=99;
+        }
         
         if(currentState==GameState.GAMEPLAY){
             //call Timer Start and have it update the label in reference  to current time

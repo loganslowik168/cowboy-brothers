@@ -44,26 +44,6 @@ public class GameMaster {
         }
         return null;
     }
-    public static void main(String[] args) { 
-        System.out.println("MAIN");
-
-        /*
-        System.out.println("Creating test drawer");
-                // Get all open frames (Frame instances)
-        Frame[] frames = JFrame.getFrames();
-
-        // Loop through the frames array and check for the first instance of JFrame
-        for (Frame frame : frames) {
-            if (frame instanceof JFrame) {  // Check if the frame is actually a JFrame
-                JFrame activeFrame = (JFrame) frame; // Safely cast it to JFrame
-                System.out.println("Active JFrame found: " + activeFrame.getTitle());
-                
-                // Pass the active JFrame to TestSpriteDrawer
-                //var tsd = new TestSpriteDrawer(activeFrame); // Pass the active frame to the TestSpriteDrawer
-            }
-        }
-*/
-    }
     
     public void LoadLevel(int lvl)
     {
@@ -75,7 +55,12 @@ public class GameMaster {
                 Lvl1 lvl1 = new Lvl1();
                 Selectedlvl = lvl;
             }
-            case 2 -> System.out.println("Load level 2. --olly");
+            case 2 -> 
+            {
+                System.out.println("Load level 1. --olly");
+                Lvl2 lvl2 = new Lvl2();
+                Selectedlvl = lvl;
+            }
             case 3 -> System.out.println("Load level 3. --olly");
             case 4 -> System.out.println("Load level 4. --olly");
             case 5 -> System.out.println("Load level 5. --olly");

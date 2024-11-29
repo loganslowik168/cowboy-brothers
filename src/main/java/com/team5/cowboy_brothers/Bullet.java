@@ -22,8 +22,7 @@ public abstract class Bullet extends MoveableGameObject{
     Timer updateTimer=new Timer(1000/60,null);
     
 
-    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) {
-        super(startX, startY, speed, TPB);
+    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) { 
         this.x = startX;
         this.y = startY;
         this.direction = direction;

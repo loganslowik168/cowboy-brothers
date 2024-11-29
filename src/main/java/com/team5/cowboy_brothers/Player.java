@@ -38,7 +38,7 @@ public class Player extends Rectangle implements Serializable {
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
-        this.maxUnlockedLevel = maxUnlockedLevel;
+        this.maxUnlockedLevel = maxUnlockedLevel; 
         this.currentScore = currentScore;
         this.highScores = new int[NUM_OF_LEVELS];
         this.x = startX;
