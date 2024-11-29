@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -17,12 +20,12 @@ public abstract class Bullet extends MoveableGameObject{
     private int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
-    private BufferedImage sprite;
+    private BufferedImage sprite, spriteR, spriteL;
     private GamePanel targetPanelBullet;
     Timer updateTimer=new Timer(1000/60,null);
     
 
-    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB) { 
+    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB, String spritePathL, String spritePathR) { 
         this.x = startX;
         this.y = startY;
         this.direction = direction;
@@ -32,9 +35,29 @@ public abstract class Bullet extends MoveableGameObject{
         
         setupUpdateTimer();
         updateTimer.start();
+        loadSprites(spritePathL, spritePathR);
+        switch (direction) {
+            case 1 -> sprite=spriteR;
+            case -1 -> sprite=spriteL;
+            default -> throw new IllegalArgumentException("Bullet irection must be 1 or -1");
+        }
         
     }
-
+    // Method to load the sprite
+    private void loadSprites(String filePathL, String filePathR) {
+        try {
+            spriteL = ImageIO.read(new File(filePathL));
+            System.out.println("Left sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading left sprite: " + e.getMessage());
+        }
+        try {
+            spriteR = ImageIO.read(new File(filePathR));
+            System.out.println("Right sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading right sprite: " + e.getMessage());
+        }
+    }
     public void update() {
        // Update the bullet's position based on its speed and direction
        int travelOffset = speed * direction; // Move left or right
