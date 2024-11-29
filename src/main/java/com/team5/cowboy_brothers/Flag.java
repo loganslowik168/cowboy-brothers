@@ -14,11 +14,6 @@ public class Flag extends GameObject {
         targetPanel.setFlag(this);
         Cowboy_brothers.olly.gameWorld.objects.add(this);
     }
-    @Override
-        public void draw(Graphics g){super.draw(g);} //System.out.println("Drawing in ground");}
-
-        @Override
-        public void draw(Graphics2D g2){super.draw(g2);}
 
         
 }

@@ -18,7 +18,7 @@ public class GameMaster {
     public Map LoadedLevel;
     
     public boolean IsThereASaloon = false;
-    
+    public int Selectedlvl;
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
@@ -53,18 +53,29 @@ public class GameMaster {
             {
                 System.out.println("Load level 1. --olly");
                 LoadedLevel = new Lvl1();
+                new HUD(player,1,VisibleMenu.gameplayPanel);
             }
             case 2 -> 
             {
                 System.out.println("Load level 2. --olly");
                 LoadedLevel = new Lvl2();
+                new HUD(player,2,VisibleMenu.gameplayPanel);
             }
-            case 3 -> System.out.println("Load level 3. --olly");
-            case 4 -> System.out.println("Load level 4. --olly");
+            case 3 -> 
+            {
+                System.out.println("Load level 3. --olly");
+                new HUD(player,3,VisibleMenu.gameplayPanel);
+            }
+            case 4 -> 
+            {
+                System.out.println("Load level 4. --olly");
+                new HUD(player,4,VisibleMenu.gameplayPanel);
+            }
             case 5 -> 
             {
                 System.out.println("Load level 5. --olly");
                 LoadedLevel = new Lvl5();
+                new HUD(player,5,VisibleMenu.gameplayPanel);
             }
             default -> System.out.println("ERROR. Please select a level between 1 and 5 inclusive! --olly");
         }

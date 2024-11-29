@@ -84,7 +84,7 @@ public class Enemy extends MoveableGameObject {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
         } else {
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
 

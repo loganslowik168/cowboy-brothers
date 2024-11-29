@@ -44,25 +44,6 @@ public class Ground extends GameObject {
     }
 
 
-    @Override
-    public void draw(Graphics g){super.draw(g);} //System.out.println("Drawing in ground");}
-    
-    @Override
-    public void draw(Graphics2D g2){super.draw(g2);}
-    
-    
-    // Optional: Override the update method if needed
-//    @Override
-//    public void update() {
-//        // Logic to update ground state, if applicable
-//    }
-
-    // Optional: Override the render method for drawing the ground
-//    @Override
-//    public void render() {
-//        // Logic to draw the ground using its texture
-//        // For example, you might use a graphics context to draw the texture at the ground's position
-//    }
-
+ 
 }
 

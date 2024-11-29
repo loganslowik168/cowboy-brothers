@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class Cowboy_brothers extends JFrame {
     static GameMaster olly;
+    
     public Cowboy_brothers() {
         olly = new GameMaster();
     }

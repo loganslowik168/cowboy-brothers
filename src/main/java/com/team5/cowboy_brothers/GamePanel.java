@@ -31,7 +31,6 @@ public class GamePanel extends JPanel {
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
         bombs = new ArrayList<>();
-        //setHUD(Cowboy_brothers.olly.Selectedlvl);
     }
 
     // Setter method to assign the player later
@@ -52,8 +51,8 @@ public class GamePanel extends JPanel {
         flag = f;
     }
 
-    public void setHUD(int levelNumber) {
-        this.hud = new HUD(player, levelNumber); // Initialize HUD;
+    public void setHUD(HUD h) {
+        this.hud = h;
     }
     
 

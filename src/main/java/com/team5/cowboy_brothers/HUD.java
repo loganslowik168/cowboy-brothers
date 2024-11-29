@@ -10,9 +10,11 @@ public class HUD {
     //private int timer; // Timer in seconds
 
     // Constructor
-    public HUD(Player player, int levelNumber) {
+    public HUD(Player player, int levelNumber, GamePanel targetPanel) {
         this.player = player;
         this.levelNumber = levelNumber;
+        targetPanel.setHUD(this);
+        
        // this.timer = 0; // Initialize timer
     }
 

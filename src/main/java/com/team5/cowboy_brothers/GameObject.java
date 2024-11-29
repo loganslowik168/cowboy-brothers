@@ -51,7 +51,7 @@ public abstract class GameObject extends Rectangle{
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
             //System.out.println("Drawing Gameobject " + sprite.toString() + " @ " + x + ", " + y);
         } else {
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
     
@@ -74,14 +74,6 @@ public abstract class GameObject extends Rectangle{
     }
 
 
-    // Setters
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
     // Optional: Additional methods for behavior
     public void update() {
