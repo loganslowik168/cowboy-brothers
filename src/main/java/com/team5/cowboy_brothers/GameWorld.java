@@ -29,7 +29,6 @@ public class GameWorld {
             
         }
         for (MoveableGameObject obj : moveableObjects){
-            System.out.println("Moving a moveable object");
             obj.ShiftPosition(dx);
         }
         if (boss != null)

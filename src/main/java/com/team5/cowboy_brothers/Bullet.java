@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  * @author matth
  */
 public abstract class Bullet extends MoveableGameObject{
-    private int x, y; // Position of the bullet
+    protected int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
     private BufferedImage sprite, spriteR, spriteL;
@@ -41,7 +41,7 @@ public abstract class Bullet extends MoveableGameObject{
             case -1 -> sprite=spriteL;
             default -> throw new IllegalArgumentException("Bullet irection must be 1 or -1");
         }
-        
+        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
     // Method to load the sprite
     private void loadSprites(String filePathL, String filePathR) {
@@ -61,7 +61,7 @@ public abstract class Bullet extends MoveableGameObject{
     public void update() {
        // Update the bullet's position based on its speed and direction
        int travelOffset = speed * direction; // Move left or right
-       x += travelOffset;
+       x += travelOffset + GetXOffset();
     }
 
     public void draw(Graphics g) {

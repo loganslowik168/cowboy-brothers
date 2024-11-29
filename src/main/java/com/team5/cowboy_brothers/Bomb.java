@@ -44,7 +44,7 @@ public class Bomb extends MoveableGameObject{
             System.err.println("Error loading sprite image: " + e.getMessage());
         }
         
-        updateTimer = new Timer(1000/10,null);
+        updateTimer = new Timer(1000/60,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -54,9 +54,11 @@ public class Bomb extends MoveableGameObject{
         });
         updateTimer.start();
         targetPanel.AddBomb(this);
+        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
 
     // Update the bomb's position based on the progress
+    @Override
     public void update() {
         // Calculate the distance between the start and target positions
         double distanceX = targetPosition.x - startPosition.x;
@@ -73,13 +75,14 @@ public class Bomb extends MoveableGameObject{
         // Interpolate the bomb's position with a parabolic arc
         double t = progress; // t is a value between 0 and 1
         double arcOffset = ARC_HEIGHT * Math.sin(Math.PI * t); // Simple sine curve for arc
-        int x = (int) (startPosition.x + t * distanceX);
+        int x = (int) (startPosition.x + t * distanceX + GetXOffset());
         int y = (int) (startPosition.y + t * distanceY - arcOffset);
 
         // Update the bomb's current position
         currentPosition.setLocation(x, y);
         
         if (hasReachedTarget()) {Explode();}
+        System.out.println(currentPosition.x + "vs" + GetXOffset());
     }
 
     // Render the bomb at its current position
@@ -137,4 +140,5 @@ public class Bomb extends MoveableGameObject{
         // You can also shut down the scheduler if no further tasks are needed
         scheduler.shutdown();
     }
+    
 }

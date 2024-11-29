@@ -17,6 +17,7 @@ public abstract class GameObject extends Rectangle{
     protected BufferedImage sprite;
     private GamePanel targetPanel;
     public Timer repaintTimer;
+    
 
     // Constructor
     public GameObject(int x, int y, String spriteFilePath, GamePanel targetPanel) {

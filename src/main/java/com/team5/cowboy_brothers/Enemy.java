@@ -238,4 +238,9 @@ public class Enemy extends MoveableGameObject {
     public boolean IsAlive(){
         return alive;
     }
+    @Override
+    public void update()
+    {
+        
+    }
 }

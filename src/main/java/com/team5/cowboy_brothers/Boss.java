@@ -64,15 +64,13 @@ public class Boss{
     private void UpdateFacing()
     {
         int oldDir = direction;
-        //System.out.println(Cowboy_brothers.olly.player.GetX()+Cowboy_brothers.olly.gameWorld.totalOffset + " vs " + x);
-        if (Cowboy_brothers.olly.player.GetX()+Cowboy_brothers.olly.gameWorld.totalOffset > x) {direction = 1;}
+        //int i1 = Cowboy_brothers.olly.player.GetX();//-Cowboy_brothers.olly.gameWorld.totalOffset;
+        //System.out.println(i1 + " vs " + x);
+        if (Cowboy_brothers.olly.player.GetX() > x) {direction = 1;}
         else {direction = -1;}
         CheckForDirectionChange(oldDir);
     }
     public void CheckForDirectionChange(int dir) {
-        //the boss is not correctly facing the right direction but at this point i just dont have time to fix it
-        //i know the issue lies with the supertype GameObject overwriting its sprite with the given one in the super constructor
-        
         //System.out.println(direction + " vs " + dir);
         if (direction != dir)
         {
@@ -80,11 +78,11 @@ public class Boss{
             switch (direction) {
                 case -1 -> 
                 {
-                    sprite = spriteR;
+                    sprite = spriteL;
                 }
                 case 1 -> 
                 {
-                    sprite = spriteL;
+                    sprite = spriteR;
                 }
                 default -> throw new IllegalArgumentException("Dirction can only be 1 or -1");
             }
@@ -117,11 +115,11 @@ public class Boss{
     
     private void ThrowBomb()
     {
-        int t = x-Cowboy_brothers.olly.gameWorld.totalOffset;
+        //int t = x-Cowboy_brothers.olly.gameWorld.totalOffset;
         //System.out.println("Boss position = " + t);
         Point source = new Point(x,y);
         Point target = new Point(Cowboy_brothers.olly.player.GetX()+5, Cowboy_brothers.olly.player.GetY()+37);
-        new Bomb(source, target, targetPanel, 0.05f);
+        new Bomb(source, target, targetPanel, 0.01f);
     }
     public void BeginFalling()
     {

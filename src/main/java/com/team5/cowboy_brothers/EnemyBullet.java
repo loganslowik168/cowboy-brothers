@@ -50,5 +50,4 @@ public class EnemyBullet extends Bullet {
         //check collision with the ground and the player
         return false;
     }
-    
 }
