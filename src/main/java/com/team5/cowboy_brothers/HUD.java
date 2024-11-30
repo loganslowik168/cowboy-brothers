@@ -25,7 +25,7 @@ public class HUD {
 
     // Method to draw the HUD
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.BLUE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
 
         // Display health
