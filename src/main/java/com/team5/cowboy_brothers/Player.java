@@ -16,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
     private int x, y; // Player's position
-    private int currentHealth;
+    int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
     private int currentScore;
@@ -25,7 +25,7 @@ public class Player extends Rectangle implements Serializable {
     private final int MOVE_SPEED = 15;
     public final int JUMP_HEIGHT = 20;
     private final int MAX_AMMO = 6;
-    private final int MAX_HEALTH = 3;
+    final int MAX_HEALTH = 3;
     private final int GRAVITY = 2;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
 
@@ -311,8 +311,12 @@ public class Player extends Rectangle implements Serializable {
         currentHealth-=h;
         if (currentHealth <= 0) {Die();}
     }
+    public int getMaxHealth() {
+        return MAX_HEALTH;
+    }
     private void Die()
     {
-        
+        // Transition to lose screen
+        Cowboy_brothers.olly.VisibleMenu.switchState(Cowboy_bros_Menu.GameState.LOSE_MENU);  
     }
 }
