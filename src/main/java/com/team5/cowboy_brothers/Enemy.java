@@ -68,10 +68,12 @@ public class Enemy extends MoveableGameObject {
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
-        
         path=parapath;
         this.x = path[0][0];
         this.y = path[0][1];
+    }
+    public void changePath(int dx){
+        
     }
     
     private void loadSprite(String filePath) {
