@@ -37,7 +37,7 @@ public abstract class Bullet extends MoveableGameObject{
             case -1 -> sprite=spriteL;
             default -> throw new IllegalArgumentException("Bullet irection must be 1 or -1");
         }
-        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
+        //Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
     // Method to load the sprite
     private void loadSprites(String filePathL, String filePathR) {
