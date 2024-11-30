@@ -24,10 +24,7 @@ public class EnemyBullet extends Bullet {
     Timer updateTimer,repaintTimer;
 
     public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed, GamePanel TPB) {
-        super(startX,startY,0,speed, TPB);
-        loadSprite("sprites/black.png");
-        super.setSprite(sprite);
-        setDirection(1);
+        super(startX,startY,1,speed, TPB,"sprites/EnemyBulletLeft.png","sprites/EnemyBulletRight.png");
         // Calculate direction towards player
         //calculateDirection(playerX, playerY);
         //Super setDirection()
@@ -38,15 +35,6 @@ public class EnemyBullet extends Bullet {
         double angle = Math.atan2(playerY - y, playerX - x);
         this.direction = (int) Math.toDegrees(angle);
     }*/
-    
-    private void loadSprite(String filePath) {
-        try {
-            sprite = ImageIO.read(new File(filePath));
-            System.out.println("Sprite loaded successfully.");
-        } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
-        }
-    }
     
     public void clearSprite(){
         try {
@@ -62,12 +50,4 @@ public class EnemyBullet extends Bullet {
         //check collision with the ground and the player
         return false;
     }
-
-
-    
-
-    
-
-    // Getters
-    
 }

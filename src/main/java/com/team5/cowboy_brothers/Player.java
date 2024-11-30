@@ -2,6 +2,7 @@ package com.team5.cowboy_brothers;
 
 import java.io.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class Player extends Rectangle implements Serializable {
     private int maxUnlockedLevel;
     private int currentScore;
     private int[] highScores;
-    private BufferedImage sprite; // BufferedImage for sprite
+    private BufferedImage sprite, spriteL, spriteR;
     private final int MOVE_SPEED = 20;
     public final int JUMP_HEIGHT = 20;
     private final int MAX_AMMO = 6;
@@ -28,7 +29,7 @@ public class Player extends Rectangle implements Serializable {
 
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
-    private int bulletSpeed = 10; // Speed of the bullets
+    private int bulletSpeed = 30; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
@@ -38,7 +39,7 @@ public class Player extends Rectangle implements Serializable {
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
-        this.maxUnlockedLevel = maxUnlockedLevel;
+        this.maxUnlockedLevel = maxUnlockedLevel; 
         this.currentScore = currentScore;
         this.highScores = new int[NUM_OF_LEVELS];
         this.x = startX;
@@ -53,8 +54,8 @@ public class Player extends Rectangle implements Serializable {
 
         // Load the sprite
         System.out.println("LOADING SPRITE");
-        loadSprite("sprites/player.png");
-
+        loadSprites("sprites/playerLeft.png", "sprites/playerRight.png");
+        sprite=spriteL;
         // Start the timer to send position messages
         SetupGravityTimer();
 
@@ -66,12 +67,18 @@ public class Player extends Rectangle implements Serializable {
     }
 
     // Method to load the sprite
-    private void loadSprite(String filePath) {
+    private void loadSprites(String filePathL, String filePathR) {
         try {
-            sprite = ImageIO.read(new File(filePath));
-            System.out.println("Sprite loaded successfully.");
+            spriteL = ImageIO.read(new File(filePathL));
+            System.out.println("Left sprite loaded successfully.");
         } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
+            System.err.println("Error loading left sprite: " + e.getMessage());
+        }
+        try {
+            spriteR = ImageIO.read(new File(filePathR));
+            System.out.println("Right sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading right sprite: " + e.getMessage());
         }
     }
 
@@ -86,7 +93,8 @@ public class Player extends Rectangle implements Serializable {
         }, 0, 1000 / 60); // ~60 FPS
     }
 
-    
+    public int GetX() {return x;}
+    public int GetY() {return y;}
     public void ChangeY(int dy) {y+=dy;}
 
     // Getter for the sprite
@@ -102,12 +110,18 @@ public class Player extends Rectangle implements Serializable {
     public void update(){
         x += MOVE_SPEED*direction;
     }
-    public void changeDirection(int direction) {
-        this.direction = direction; // 1 for right, -1 for left
-        this.width = Math.abs(this.width) * direction; // Change width to negative for left direction
+    public void CheckForDirectionChange(int dir) {
+        if (direction != dir)
+        {
+            direction = -direction;
+            switch (direction) {
+                case -1 -> sprite = spriteR;
+                case 1 -> sprite = spriteL;
+                default -> throw new IllegalArgumentException("Dirction can only be 1 or -1");
+            }
+        }
         targetPanel.repaint();
     }
-
     // Example method to reset player position
     public void resetPosition(int startX, int startY) {
         this.x = startX;
@@ -241,5 +255,19 @@ public class Player extends Rectangle implements Serializable {
     }
     public int getCurrentAmmo() {
         return currentAmmo;
+    }
+    public void ClearPlayerBullets()
+    {
+        bullets.clear();
+    }
+    public void Hurt(int h)
+    {
+        //System.out.println("Player took " + h + " damage!");
+        currentHealth-=h;
+        if (currentHealth <= 0) {Die();}
+    }
+    private void Die()
+    {
+        
     }
 }

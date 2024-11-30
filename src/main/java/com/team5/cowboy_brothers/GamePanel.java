@@ -9,7 +9,7 @@ import java.awt.Component;
 
 public class GamePanel extends JPanel {
     private Player player;
-    private ArrayList<Ground> grounds;
+    public ArrayList<Ground> grounds;
     private Flag flag;
     private HUD hud; // Reference to the HUD
 
@@ -17,6 +17,10 @@ public class GamePanel extends JPanel {
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
     private ArrayList<Enemy> listOfEnemys;
+    
+    private ArrayList<Bomb> bombs;
+    private BossSaloon Sal;
+    private Boss boss;
 
 
     // Constructor without the Player parameter
@@ -26,7 +30,7 @@ public class GamePanel extends JPanel {
         bullets = new ArrayList<>();
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
-        //setHUD(Cowboy_brothers.olly.Selectedlvl);
+        bombs = new ArrayList<>();
     }
 
     // Setter method to assign the player later
@@ -43,20 +47,45 @@ public class GamePanel extends JPanel {
     public void addGround(Ground ground){
         grounds.add(ground);
     }
+    
     public void setFlag(Flag f){
         flag = f;
     }
 
-    public void setHUD(int levelNumber) {
-        this.hud = new HUD(player, levelNumber); // Initialize HUD;
+    public void setHUD(HUD h) {
+        this.hud = h;
+    }
+    public ArrayList<Ground> getGrounds() {
+        return grounds;
     }
     
 
-    public void AddEnemyBullet(EnemyBullet bullet){
+    public void AddBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
     }
-    public void setEnemyList(){
-        //add the level number's list of enemies
+    public void setEnemyList(Enemy enemy){
+        listOfEnemys.add(enemy);
+    }
+    public void SetSaloon(BossSaloon saloon)
+    {
+        Sal = saloon;
+    }
+    public void SetBoss(Boss b)
+    {
+        boss = b;
+    }
+    public void AddBomb(Bomb b)
+    {
+        bombs.add(b);
+    }
+    
+    public void clearLevel(){
+        for(int i = grounds.size()-1;i>=0;i--){
+            grounds.remove(i);
+        }
+        for(int z = listOfEnemys.size()-1;z>=0;z--){
+            listOfEnemys.remove(z);
+        }
     }
     
 
@@ -64,6 +93,7 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (Sal != null) {Sal.draw(g);}
         if (player != null) {
             Graphics2D playerG2 = (Graphics2D) g;
             player.draw(playerG2);
@@ -95,23 +125,35 @@ public class GamePanel extends JPanel {
         }
             
         }
+        
+        if (boss != null) {boss.draw(g);}
+        if (bombs!=null)
+        {
+            for (Bomb b : bombs){
+                Graphics2D bombG2 = (Graphics2D) g;
+                b.draw(bombG2);
+            }
+        }
     }
     //check if bullets are on screen or off and remove if they are off
     public void alterList(){
         for(int i=0; i<bullets.size();i++){
             if(bullets.get(i).checkDeleteBullet()) 
             {
-                bullets.get(i).clearSprite();
-                repaint();
                 bullets.get(i).pauseTimers();
                 bullets.remove(i); 
                 i--;
             }
-            
-            
-        }  
+        }
+        for(int x=0;x<Enbullets.size();x++){
+            if(Enbullets.get(x).checkDeleteBullet()){
+                Enbullets.get(x).pauseTimers();
+                Enbullets.remove(x);
+                x--;
+            }
+        }
     }
-    public void EnemyalterList(){
+    public void alterEnemyList(){
         for(int i=0; i<Enbullets.size();i++){
             if(Enbullets.get(i).checkDeleteBullet()) 
             {
@@ -146,5 +188,19 @@ public class GamePanel extends JPanel {
         for(Enemy enemys:listOfEnemys){
             enemys.unPauseTimers();
         }
+    }
+    public BossSaloon GetSaloon()
+    {
+        return Sal;
+    }
+    public void clearGameObjects() {
+        // Clear bullets
+        bullets.clear();
+        
+        // Clear enemies
+        listOfEnemys.clear();
+        grounds.clear(); // Clear ground objects
+        // Clear other objects as necessary
+        repaint();
     }
 }

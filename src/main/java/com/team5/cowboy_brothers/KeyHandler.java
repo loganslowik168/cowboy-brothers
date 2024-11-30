@@ -37,17 +37,20 @@ public class KeyHandler extends KeyAdapter {
             case KeyEvent.VK_A -> {
                 if (!movingLeft) {
                     movingLeft = true; // Start moving left
-                    Cowboy_brothers.olly.player.changeDirection(-1);
+                    Cowboy_brothers.olly.player.CheckForDirectionChange(-1);
                 }
             }
             case KeyEvent.VK_D -> {
                 if (!movingRight) {
                     movingRight = true; // Start moving right
-                    Cowboy_brothers.olly.player.changeDirection(1);
+                    Cowboy_brothers.olly.player.CheckForDirectionChange(1);
                 }
             }
             case KeyEvent.VK_SPACE -> {
                 p.fireBullet(); // Fire bullet
+                /*for (GameObject obj : Cowboy_brothers.olly.gameWorld.objects) {
+                    System.out.println(obj);
+                }*/
             }
         }
     }

@@ -14,9 +14,10 @@ import javax.swing.Timer;
 public abstract class GameObject extends Rectangle{
     private int x; // X position
     private int y; // Y position
-    private BufferedImage sprite;
+    protected BufferedImage sprite;
     private GamePanel targetPanel;
-    Timer repaintTimer;
+    public Timer repaintTimer;
+    
 
     // Constructor
     public GameObject(int x, int y, String spriteFilePath, GamePanel targetPanel) {
@@ -27,11 +28,13 @@ public abstract class GameObject extends Rectangle{
         setupRepaintTimer();
         repaintTimer.start();
         
+        Cowboy_brothers.olly.gameWorld.objects.add(this);
+        
     }
     protected void loadSprite(String filePath) {
         try {
             sprite = ImageIO.read(new File(filePath));
-            System.out.println("Sprite loaded successfully.");
+            //System.out.println("Sprite " + filePath + " loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
@@ -46,9 +49,9 @@ public abstract class GameObject extends Rectangle{
         //System.out.println("Drawing Ground");
         if (sprite != null) {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
-            //System.out.println("Drawing Gameobject sprite");
+            //System.out.println("Drawing Gameobject " + sprite.toString() + " @ " + x + ", " + y);
         } else {
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
     
@@ -60,7 +63,7 @@ public abstract class GameObject extends Rectangle{
                 targetPanel.repaint(); // Repaint the panel regularly
                 //System.out.println("CALLING REPAINT");
                 
-                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
+                //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
             }
         }); // ~60 FPS
         
@@ -71,14 +74,6 @@ public abstract class GameObject extends Rectangle{
     }
 
 
-    // Setters
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
     // Optional: Additional methods for behavior
     public void update() {
@@ -92,4 +87,17 @@ public abstract class GameObject extends Rectangle{
     {
         x=x+shift;
     }
+    public void Dispose()
+    {
+        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
+        repaintTimer.stop();
+        repaintTimer = null;
+        targetPanel = null;
+        sprite = null;
+    }
+    protected void UpdateSprite(BufferedImage newSprite)
+    {
+        sprite = newSprite;
+    }
+    protected int GetXOffset() {return x;}
 }

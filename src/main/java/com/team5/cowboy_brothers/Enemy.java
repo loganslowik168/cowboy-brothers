@@ -19,14 +19,11 @@ import javax.swing.Timer;
  * collide with to demonstrate that it can collide with both players and terrain
  * @author matth
  */
-public class Enemy extends Rectangle {
+public class Enemy extends MoveableGameObject {
     private String IDName;
     private boolean alive, forward=true;
     private int species;
-    private int MAX_SPEED = 5;
-    //current position
-    int pos_x = 0;
-    int pos_y = 0;
+    private int MAX_SPEED = 2;
     
     private int x, y;     // Enemy position
     private int bulletSpeed = 5; // Bullet speed (slower than player bullets)
@@ -56,26 +53,25 @@ public class Enemy extends Rectangle {
     
     //Instantiator Has ID name for profiling, alive to know if to display them,
     //and species value for type of path to walk and type of sprite to use
-    public Enemy(String s, int k, Color color,GamePanel targetPanel){
+    public Enemy(String s, GamePanel targetPanel){
         IDName =s;
         alive=true;
-        species=k;
-        boX=x;
-        boY=y;
-        this.color=color;
         this.targetPanel=targetPanel;
-        path = new int[][] {
-            {100, 100},
-            {200, 200},
-            {300, 100},
-            {400, 200},
-            {500, 100}
-        };
+        
         pathIndex = 0; // Start at the first point in the path
+        
+        loadSprite("sprites/EnemySprite.png");
+        settupTimerEnemy();
+        
+        targetPanel.setEnemyList(this);
+        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
+    }
+    //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
+    public void setPath(int[][] parapath){
+        
+        path=parapath;
         this.x = path[0][0];
         this.y = path[0][1];
-        loadSprite("sprites/Rough_OutlawEnemy.png");
-        settupTimerEnemy();
     }
     
     private void loadSprite(String filePath) {
@@ -91,48 +87,87 @@ public class Enemy extends Rectangle {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
         } else {
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
 
     // Update the position of the enemy
+    boolean initDirect=true;
     public void updatePosition() {
-        if (pathIndex < path.length) {
-            destinationX = path[pathIndex][0];
-            destinationY = path[pathIndex][1];
+        if(initDirect){
+            if (pathIndex < path.length) {
+                destinationX = path[pathIndex][0];
+                destinationY = path[pathIndex][1];
 
-            // Calculate the direction vector
-            double dirX = destinationX - pos_x;
-            double dirY = destinationY - pos_y;
-            double distance = Math.sqrt(dirX * dirX + dirY * dirY);
+                // Calculate the direction vector
+                double dirX = destinationX - x;
+                double dirY = destinationY - y;
+                double distance = Math.sqrt(dirX * dirX + dirY * dirY);
 
-            // If the enemy is already at the destination
-            if (distance < 1e-5) {
-                pathIndex++; // Move to the next point in the path
-                System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
-            } else {
-                // Normalize the direction vector
-                double normDirX = dirX / distance;
-                double normDirY = dirY / distance;
+                // If the enemy is already at the destination
+                if (distance < 1e-5) {
+                    pathIndex++; // Move to the next point in the path
+                    System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
+                } else {
+                    // Normalize the direction vector
+                    double normDirX = dirX / distance;
+                    double normDirY = dirY / distance;
 
-                // Calculate the movement based on max speed
-                double moveX = normDirX * MAX_SPEED;
-                double moveY = normDirY * MAX_SPEED;
+                    // Calculate the movement based on max speed
+                    double moveX = normDirX * MAX_SPEED;
+                    double moveY = normDirY * MAX_SPEED;
 
-                // Update the position
-                pos_x += moveX;
-                pos_y += moveY;
+                    // Update the position
+                    x += moveX;
+                    y += moveY;
 
-                // Print current position
-                System.out.println("Current Position: (" + pos_x + ", " + pos_y + ")");
+                }
+            }else if(pathIndex==path.length){
+                initDirect=false;
+                pathIndex--;
+            }
+        }else{
+            if(pathIndex>=0){
+                destinationX = path[pathIndex][0];
+                destinationY = path[pathIndex][1];
+                
+                //Calculate the direction vector
+                double dirX = destinationX-x;
+                double dirY=destinationY - y;
+                double distance = Math.sqrt(dirY*dirY+dirX*dirX);
+                
+                //If enemy is at destination
+                if (distance < 1e-5) {
+                    pathIndex--; // Move to the previous point in the path
+                    System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
+                } else {
+                    // Normalize the direction vector
+                    double normDirX = dirX / distance;
+                    double normDirY = dirY / distance;
+
+                    // Calculate the movement based on max speed
+                    double moveX = normDirX * MAX_SPEED;
+                    double moveY = normDirY * MAX_SPEED;
+
+                    // Update the position
+                    x += moveX;
+                    y += moveY;
+
+                }
+            }
+            if(pathIndex==-1){
+                initDirect=true;
+                pathIndex=0;
+                updatePosition();
             }
         }
         
     }
 
     public void fireBullet() {
-        EnemyBullet bullet = new EnemyBullet(x, y, -1, bulletSpeed, 1, targetPanel); // -1 for left
-        targetPanel.AddEnemyBullet(bullet);
+        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel); // -1 for left
+        targetPanel.AddBullet(bullet);
+        
     }
     
     //To paint the temp sprite
@@ -158,8 +193,8 @@ public class Enemy extends Rectangle {
     
     //Need a timer for traveling on their paths
     public void settupTimerEnemy(){
-        updateTimer = new Timer(1000,null);
-        bulletFireTimer = new Timer(3000,null);
+        updateTimer = new Timer(1000/60,null);
+        bulletFireTimer = new Timer(1000,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -186,7 +221,18 @@ public class Enemy extends Rectangle {
         bulletFireTimer.start();
     }
     
-    
+    public void Dispose()
+    {
+        updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
+        updateTimer.stop();
+        updateTimer = null;
+        bulletFireTimer.removeActionListener(bulletFireTimer.getActionListeners()[0]);
+        bulletFireTimer.stop();
+        bulletFireTimer = null;
+
+        targetPanel = null;
+        sprite = null;
+    }
     
     
     public String getName(){
@@ -195,37 +241,9 @@ public class Enemy extends Rectangle {
     public boolean IsAlive(){
         return alive;
     }
-    public void setboX(int bx){
-        boX+=bx;
+    @Override
+    public void update()
+    {
+        
     }
-    public void setboY(int by){
-        boY+=by;
-    }
-    public void setBoW(int bw){
-        BoW=bw;
-    }
-    public void setBoH(int bh){
-        BoH=bh;
-    }
-    public void setColor(Color color){
-        this.color=color;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
