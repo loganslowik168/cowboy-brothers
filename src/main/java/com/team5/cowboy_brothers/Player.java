@@ -94,7 +94,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
             }
-        }, 100, 1000 / 6); // ~60 FPS
+        }, 100, 1000 / 60); // ~60 FPS
     }
 
     public int GetX() {return x;}
