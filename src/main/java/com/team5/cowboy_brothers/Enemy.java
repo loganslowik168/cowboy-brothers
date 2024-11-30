@@ -73,7 +73,11 @@ public class Enemy extends MoveableGameObject {
         this.y = path[0][1];
     }
     public void changePath(int dx){
-        
+        for(int tx=0;tx<1;tx++){
+            for(int ty=0; ty<1;ty++){
+                
+            }
+        }
     }
     
     private void loadSprite(String filePath) {
@@ -95,7 +99,8 @@ public class Enemy extends MoveableGameObject {
 
     // Update the position of the enemy
     boolean initDirect=true;
-    public void updatePosition() {
+    @Override
+    public void update() {
         if(initDirect){
             if (pathIndex < path.length) {
                 destinationX = path[pathIndex][0];
@@ -162,7 +167,7 @@ public class Enemy extends MoveableGameObject {
             if(pathIndex==-1){
                 initDirect=true;
                 pathIndex=0;
-                updatePosition();
+                update();
             }
         }
         
@@ -202,7 +207,7 @@ public class Enemy extends MoveableGameObject {
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
-            updatePosition();
+            update();
             targetPanel.revalidate();
         }
         });
@@ -245,9 +250,5 @@ public class Enemy extends MoveableGameObject {
     public boolean IsAlive(){
         return alive;
     }
-    @Override
-    public void update()
-    {
-        
-    }
+    
 }
