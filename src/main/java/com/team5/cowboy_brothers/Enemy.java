@@ -118,8 +118,10 @@ public class Enemy extends MoveableGameObject {
                     double moveY = normDirY * MAX_SPEED;
 
                     // Update the position
-                    x += moveX;
-                    y += moveY;
+                    
+                        x += moveX;
+                        y += moveY;
+                    
 
                 }
             }else if(pathIndex==path.length){

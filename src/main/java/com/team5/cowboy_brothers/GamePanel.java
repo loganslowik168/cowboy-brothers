@@ -102,6 +102,12 @@ public class GamePanel extends JPanel {
             Graphics2D g2 = (Graphics2D) g;
             enemy.draw(g2);
         }
+        if(listOfEnemys!=null){
+            for(Enemy enemy : listOfEnemys){
+                Graphics2D g2 = (Graphics2D) g;
+                enemy.draw(g2);
+            }
+        }
         if(bullets!=null){
         for (Bullet bull : bullets) {
             Graphics2D bulletG2 = (Graphics2D) g;
