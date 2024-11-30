@@ -28,7 +28,7 @@ public class Player extends Rectangle implements Serializable {
     final int MAX_HEALTH = 3;
     private final int GRAVITY = 2;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
-
+    private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 30; // Speed of the bullets
@@ -324,6 +324,10 @@ public class Player extends Rectangle implements Serializable {
         if (hasReachedWinCondition()) {
             Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
         }
+    }
+    public boolean isOffScreen() {
+        // Check if the player's Y-coordinate exceeds the death limit
+        return y > DEATH_LIMIT;
     }
     
     // Example method to check win condition (this would depend on your game's logic)
