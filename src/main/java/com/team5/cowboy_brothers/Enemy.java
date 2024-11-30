@@ -105,7 +105,7 @@ public class Enemy extends MoveableGameObject {
                 double distance = Math.sqrt(dirX * dirX + dirY * dirY);
 
                 // If the enemy is already at the destination
-                if (distance < 1e-5) {
+                if (distance < 5) {
                     pathIndex++; // Move to the next point in the path
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
@@ -139,7 +139,7 @@ public class Enemy extends MoveableGameObject {
                 double distance = Math.sqrt(dirY*dirY+dirX*dirX);
                 
                 //If enemy is at destination
-                if (distance < 1e-5) {
+                if (distance < 5) {
                     pathIndex--; // Move to the previous point in the path
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
