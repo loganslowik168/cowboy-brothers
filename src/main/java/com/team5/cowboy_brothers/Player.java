@@ -9,7 +9,9 @@ import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
@@ -34,6 +36,8 @@ public class Player extends Rectangle implements Serializable {
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
+    private final int height = 74;
+    private final int width = 44;
     
     // Constructor: Takes targetPanel as a parameter
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
@@ -90,7 +94,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
             }
-        }, 0, 1000 / 60); // ~60 FPS
+        }, 100, 1000 / 6); // ~60 FPS
     }
 
     public int GetX() {return x;}
@@ -107,9 +111,7 @@ public class Player extends Rectangle implements Serializable {
         x = newX;
         y = newY;
     }
-    public void update(){
-        x += MOVE_SPEED*direction;
-    }
+    
     public void CheckForDirectionChange(int dir) {
         if (direction != dir)
         {
@@ -238,19 +240,37 @@ public class Player extends Rectangle implements Serializable {
         }
     }
     // Method to check collision with another object
-            public boolean collidesWith(Rectangle other) {
-                return this.intersects(other);
+    
+    private boolean CheckGroundColission()
+    {
+        // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
+            int pX = x;// + Cowboy_brothers.olly.gameWorld.totalOffset;
+            /*Lvl1 l1 = (Lvl1) Cowboy_brothers.olly.LoadedLevel;
+            Ground g1 = l1.g;
+            System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);*/
+            int GND_WIDTH = 33*g.tilesize;
+            int GND_HEIGHT = 33;
+            //var bb = new BoundingBox(g.GetX(), g.GetY(), g.GetX()+GND_WIDTH, g.GetY(), g.GetX()+GND_WIDTH,
+            //                    g.GetY()+GND_HEIGHT,g.GetX(),g.GetY()+GND_HEIGHT, targetPanel);
+            //targetPanel.AddBoundingBox(bb);
+            if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
+                        this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
+                System.out.println("Ground colission!");
+                return true;
             }
-            public boolean collidesWithFlag(Flag flag) {
-                return this.intersects(flag);
-            }
+        }
+        
+        return false;
+    }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
             }
     public int GetMoveSpeed() {return MOVE_SPEED;}
     private void ApplyGravity()
     {
-        y+=GRAVITY;
+        if (!CheckGroundColission()) {y+=GRAVITY;}
+        
 
     }
     public int getCurrentAmmo() {

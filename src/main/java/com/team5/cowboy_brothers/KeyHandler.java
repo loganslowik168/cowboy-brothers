@@ -48,6 +48,7 @@ public class KeyHandler extends KeyAdapter {
             }
             case KeyEvent.VK_SPACE -> {
                 p.fireBullet(); // Fire bullet
+                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.bbs.clear();
                 /*for (GameObject obj : Cowboy_brothers.olly.gameWorld.objects) {
                     System.out.println(obj);
                 }*/

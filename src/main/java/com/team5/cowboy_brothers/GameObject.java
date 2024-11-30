@@ -89,8 +89,9 @@ public abstract class GameObject extends Rectangle{
     }
     public void Dispose()
     {
-        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
         repaintTimer.stop();
+        
+        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
         repaintTimer = null;
         targetPanel = null;
         sprite = null;
@@ -99,5 +100,6 @@ public abstract class GameObject extends Rectangle{
     {
         sprite = newSprite;
     }
-    protected int GetXOffset() {return x;}
+    public int GetX() {return x;} //yes i know these are the same
+    public int GetY() {return y;}
 }

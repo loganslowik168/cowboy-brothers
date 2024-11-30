@@ -18,6 +18,7 @@ private void InitializeTerrain() {
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
         final int GROUND_TILE_SIZE = 33;
         // draws from first to last
+        //var g = new Ground((GROUND_TILE_SIZE*1*10), (GROUND_TILE_SIZE*12),10, t);
         for (int i = 0; i < 20; i++)
         {
             //holes
@@ -42,15 +43,20 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*171), (int)(GROUND_TILE_SIZE*12.2),1, t);
         new Ground((GROUND_TILE_SIZE*174), (int)(GROUND_TILE_SIZE*12.2),5, t);
         new Ground((GROUND_TILE_SIZE*178), (int)(GROUND_TILE_SIZE*11.6),1, t);
-
-        System.out.println(GROUND_TILE_SIZE*(20*10-1));
+        
+        
         new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*12.4),1, t);
         new Flag((GROUND_TILE_SIZE*(20*10-1)),(GROUND_TILE_SIZE*14-148), t);
 
-        enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        /*enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
         int[][] path1={{100,100},{200,200}};
         enemy1.setPath(path1);
-        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
+        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);*/
+        /*int GND_HEIGHT = 33;
+        int GND_WIDTH = 33*g.tilesize;
+        var bb = new BoundingBox(g.GetX(), g.GetY(), g.GetX()+GND_WIDTH, g.GetY(), g.GetX()+GND_WIDTH,
+                                g.GetY()+GND_HEIGHT,g.GetX(),g.GetY()+GND_HEIGHT, t);
+        t.AddBoundingBox(bb);*/
 
     }
 
