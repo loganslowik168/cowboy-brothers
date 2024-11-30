@@ -89,8 +89,9 @@ public abstract class GameObject extends Rectangle{
     }
     public void Dispose()
     {
-        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
         repaintTimer.stop();
+        
+        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
         repaintTimer = null;
         targetPanel = null;
         sprite = null;
