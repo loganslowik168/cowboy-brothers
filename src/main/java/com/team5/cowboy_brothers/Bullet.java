@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.imageio.ImageIO;
 
 
@@ -18,14 +19,16 @@ public abstract class Bullet extends MoveableGameObject{
     private int direction; 
     private BufferedImage sprite, spriteR, spriteL;
     private GamePanel targetPanelBullet;
-    Timer updateTimer=new Timer(1000/60,null);
+    protected Timer updateTimer=new Timer(1000/60,null);;
     
 
-    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB, String spritePathL, String spritePathR) { 
+    public Bullet(int startX, int startY, int direction, int speed,GamePanel TPB, String spritePathL, String spritePathR, int width, int height) { 
         this.x = startX;
         this.y = startY;
         this.direction = direction;
         this.speed = speed;
+        this.width = width;
+        this.height = height;
         //travelBullet();
         targetPanelBullet = TPB;
         
@@ -37,6 +40,7 @@ public abstract class Bullet extends MoveableGameObject{
             case -1 -> sprite=spriteL;
             default -> throw new IllegalArgumentException("Bullet irection must be 1 or -1");
         }
+        System.out.println("Bullet size = " + this.width + "x" + this.height);
         //Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
     // Method to load the sprite
@@ -74,7 +78,7 @@ public abstract class Bullet extends MoveableGameObject{
         }
     }
     
-    private void setupUpdateTimer(){
+    protected void setupUpdateTimer(){
         updateTimer.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -126,4 +130,6 @@ public abstract class Bullet extends MoveableGameObject{
         targetPanelBullet = null;
         sprite = null;
     }
+    
+    protected abstract boolean CheckCollision();
 }

@@ -16,11 +16,11 @@ public class GamePanel extends JPanel {
     private ArrayList<PlayerBullet> bullets;
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
-    private ArrayList<Enemy> listOfEnemys;
+    protected ArrayList<Enemy> listOfEnemys;
     
     private ArrayList<Bomb> bombs;
     private BossSaloon Sal;
-    private Boss boss;
+    protected Boss boss;
     
     //public ArrayList<BoundingBox> bbs;
 
