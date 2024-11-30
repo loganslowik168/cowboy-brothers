@@ -65,6 +65,7 @@ public class GameMaster {
             {
                 System.out.println("Load level 3. --olly");
                 new HUD(player,3,VisibleMenu.gameplayPanel);
+                LoadedLevel = new Lvl3();
             }
             case 4 -> 
             {

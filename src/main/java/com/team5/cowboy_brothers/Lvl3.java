@@ -1,10 +1,11 @@
 package com.team5.cowboy_brothers;
 
 
-public class LvlAce {
+public class Lvl3 extends Map {
       Enemy enemy1;
     
-    public LvlAce {
+    public Lvl3() {
+        super(800,600);
         loadMapStats();
         InitializeTerrain();
         
