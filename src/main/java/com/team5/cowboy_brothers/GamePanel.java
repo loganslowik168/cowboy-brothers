@@ -9,7 +9,7 @@ import java.awt.Component;
 
 public class GamePanel extends JPanel {
     private Player player;
-    private ArrayList<Ground> grounds;
+    public ArrayList<Ground> grounds;
     private Flag flag;
     private HUD hud; // Reference to the HUD
 
@@ -47,12 +47,16 @@ public class GamePanel extends JPanel {
     public void addGround(Ground ground){
         grounds.add(ground);
     }
+    
     public void setFlag(Flag f){
         flag = f;
     }
 
     public void setHUD(HUD h) {
         this.hud = h;
+    }
+    public ArrayList<Ground> getGrounds() {
+        return grounds;
     }
     
 
@@ -188,5 +192,15 @@ public class GamePanel extends JPanel {
     public BossSaloon GetSaloon()
     {
         return Sal;
+    }
+    public void clearGameObjects() {
+        // Clear bullets
+        bullets.clear();
+        
+        // Clear enemies
+        listOfEnemys.clear();
+        grounds.clear(); // Clear ground objects
+        // Clear other objects as necessary
+        repaint();
     }
 }

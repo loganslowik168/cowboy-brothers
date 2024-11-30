@@ -1,17 +1,15 @@
 package com.team5.cowboy_brothers;
-
+import com.team5.cowboy_brothers.GamePanel;
 import java.awt.Frame;
 import javax.swing.JFrame;
 
-/**
- *
- * @author matth
- */
+
 public class GameMaster {
     
     //public static GameMaster olly;
     int[] hs = {0,0,0,0,0};
     public Cowboy_bros_Menu VisibleMenu;
+    public GamePanel gameplayPanel;
     public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
 
     public GameWorld gameWorld; 
@@ -24,7 +22,7 @@ public class GameMaster {
         VisibleMenu = new Cowboy_bros_Menu();
         player = new Player(3,6,5,0,hs,400,40,VisibleMenu.gameplayPanel); //change max unlocked level (3rd param) back to 1
         VisibleMenu.gameplayPanel.setPlayer(player);
-
+        gameplayPanel = VisibleMenu.gameplayPanel;
         gameWorld = new GameWorld(VisibleMenu);
 
     }
@@ -47,8 +45,10 @@ public class GameMaster {
     
     public void LoadLevel(int lvl)
     {
+        // Reset the current level state
+        resetCurrentLevel();
         switch(lvl)
-        {
+        { 
             case 1 -> 
             {
                 System.out.println("Load level 1. --olly");
@@ -70,6 +70,7 @@ public class GameMaster {
             {
                 System.out.println("Load level 4. --olly");
                 new HUD(player,4,VisibleMenu.gameplayPanel);
+                LoadedLevel = new Lvl4();
             }
             case 5 -> 
             {
@@ -79,6 +80,15 @@ public class GameMaster {
             }
             default -> System.out.println("ERROR. Please select a level between 1 and 5 inclusive! --olly");
         }
+    }
+    private void resetCurrentLevel() {
+        // Reset player state
+        player.resetPosition(400, 40); // Example starting position
+        //player.setMaxUnlockedLevel(0); // Reset max level if needed
+        player.setBulletCountToFull(); // Reset ammo
+    
+        // Clear game objects in the GamePanel
+        gameplayPanel.clearGameObjects(); // Implement this method in GamePanel
     }
     public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
     public void IncrementMaxLevelUnlocked() {player.setMaxUnlockedLevel(player.getMaxUnlockedLevel()+1);}
