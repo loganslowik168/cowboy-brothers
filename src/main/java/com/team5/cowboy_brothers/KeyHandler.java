@@ -29,7 +29,10 @@ public class KeyHandler extends KeyAdapter {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W -> {
-                p.ChangeY(-p.JUMP_HEIGHT); // Handle jump
+                //p.ChangeY(-p.JUMP_HEIGHT); // Handle jump
+                
+                    p.stopGravity();
+                
             }
             case KeyEvent.VK_S -> {
                 p.ChangeY(p.JUMP_HEIGHT); // Handle crouch

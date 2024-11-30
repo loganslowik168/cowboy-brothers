@@ -24,7 +24,7 @@ public class EnemyBullet extends Bullet {
     Timer updateTimer,repaintTimer;
 
     public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed, GamePanel TPB) {
-        super(startX,startY,1,speed, TPB,"sprites/EnemyBulletLeft.png","sprites/EnemyBulletRight.png");
+        super(startX,startY,1,speed, TPB,"sprites/EnemyBulleLeft.png","sprites/EnemyBulletRight.png");
         // Calculate direction towards player
         //calculateDirection(playerX, playerY);
         //Super setDirection()

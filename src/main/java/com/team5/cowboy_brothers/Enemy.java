@@ -196,7 +196,7 @@ public class Enemy extends MoveableGameObject {
     //Need a timer for traveling on their paths
     public void settupTimerEnemy(){
         updateTimer = new Timer(1000/60,null);
-        bulletFireTimer = new Timer(1000,null);
+        bulletFireTimer = new Timer(4000,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){

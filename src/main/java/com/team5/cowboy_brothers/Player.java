@@ -96,6 +96,31 @@ public class Player extends Rectangle implements Serializable {
             }
         }, 100, 1000 / 60); // ~60 FPS
     }
+    //stop gravity for set time and jump a certain distance
+    public void stopGravity(){
+        //setup a timer to do a jump motion then to restart gravity
+        if(ShouldGravitate){
+        jump();
+        ShouldGravitate=false;
+        }
+    }
+    int jumpDistanceTraveled=0;
+    public void jump(){
+        Timer jumpTimer = new Timer();
+        jumpTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                y-=1;
+                if(jumpDistanceTraveled==50){
+                    ShouldGravitate=true;
+                    jumpDistanceTraveled=0;
+                    jumpTimer.cancel();
+                }
+                jumpDistanceTraveled++;
+            }
+        }, 0, 1000/60);
+            
+    }
 
     public int GetX() {return x;}
     public int GetY() {return y;}
@@ -270,6 +295,7 @@ public class Player extends Rectangle implements Serializable {
         
 
     }
+    
     public int getCurrentAmmo() {
         return currentAmmo;
     }

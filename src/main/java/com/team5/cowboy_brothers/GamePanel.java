@@ -112,6 +112,13 @@ public class GamePanel extends JPanel {
         for (Bullet bull : bullets) {
             Graphics2D bulletG2 = (Graphics2D) g;
             bull.draw(bulletG2);
+            }
+        }
+        if(Enbullets!=null){
+        for (Bullet bull : Enbullets) {
+            Graphics2D EnbulletG2 = (Graphics2D) g;
+            bull.draw(EnbulletG2);
+            }
         }
         if(grounds!=null){
             for (Ground gnd : grounds){
@@ -130,7 +137,7 @@ public class GamePanel extends JPanel {
             hud.draw(g);
         }
             
-        }
+        
         
         if (boss != null) {boss.draw(g);}
         if (bombs!=null)
@@ -140,6 +147,7 @@ public class GamePanel extends JPanel {
                 b.draw(bombG2);
             }
         }
+        
     }
     //check if bullets are on screen or off and remove if they are off
     public void alterList(){
