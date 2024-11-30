@@ -83,6 +83,11 @@ public class GameMaster {
         }
     }
     public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
-    public void IncrementMaxLevelUnlocked() {player.setMaxUnlockedLevel(player.getMaxUnlockedLevel()+1);}
+    //public void IncrementMaxLevelUnlocked() {player.setMaxUnlockedLevel(player.getMaxUnlockedLevel()+1);}
+    public void IncrementMaxLevelUnlocked() {
+    if (player.getMaxUnlockedLevel() <= player.getMaxUnlockedLevel() + 1) {
+        player.setMaxUnlockedLevel(player.getMaxUnlockedLevel() + 1);
+    }
+}
     public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
 }

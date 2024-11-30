@@ -33,7 +33,7 @@ public class Player extends Rectangle implements Serializable {
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
-
+    
     // Constructor: Takes targetPanel as a parameter
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
@@ -60,6 +60,9 @@ public class Player extends Rectangle implements Serializable {
 
         // Set up a timer to repaint the panel regularly
         setupRepaintTimer();
+        
+        // Set up a timer to replebnish the player's ammo amount by 1 every 5 seconds
+        startAmmoTimer();
     }
 
     // Method to load the sprite
@@ -125,7 +128,27 @@ public class Player extends Rectangle implements Serializable {
             System.out.println("Out of Ammo");
         }
     }
+ 
 
+ // Replenishes 1 ammo every 5 seconds
+    private void startAmmoTimer() {
+        Timer Ammotimer = new Timer();
+        Ammotimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                replenishAmmo();
+            }
+        }, 0, 5000); // Run task every 5 seconds
+    }
+
+    // Function to Replenish ammo if below max ammo amount
+    private synchronized void replenishAmmo() {
+        if (currentAmmo < MAX_AMMO) {
+            currentAmmo++;
+            System.out.println("Ammo replenished: " + currentAmmo + "/" + MAX_AMMO);
+        }
+    }
+    
     public void updateBullets() {
         // Update each bullet
         for (int i = bullets.size() - 1; i >= 0; i--) {
