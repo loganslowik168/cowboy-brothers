@@ -16,12 +16,14 @@ public class Ground extends GameObject {
     private final int height = 33; // Height of the object
     private BufferedImage sprite;
     private GamePanel targetPanel;
+    public int tilesize;
     Timer repaintTimer;
     // Constructor
     public Ground(int x, int y, int tilesize, GamePanel targetPanel) {
         
         super(x, y, "sprites/DesertGroundTile.png", targetPanel);
         String path = "";
+        this.tilesize=tilesize;
         switch(tilesize){
             case 1:
                 path = "sprites/DesertGroundTile.png";

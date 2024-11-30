@@ -9,7 +9,9 @@ import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
@@ -92,7 +94,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
             }
-        }, 1000, 1000 / 60); // ~60 FPS
+        }, 100, 1000 / 60); // ~60 FPS
     }
 
     public int GetX() {return x;}
@@ -241,14 +243,18 @@ public class Player extends Rectangle implements Serializable {
     
     private boolean CheckGroundColission()
     {
-        for (Ground g : targetPanel.grounds)
-        {
-            System.out.println("gnd @ " + g.GetX() + ","+g.GetY()
-                                + "p @ " + x + "," + y);
-            if (false)
-            {
+        // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
+            int pX = x + Cowboy_brothers.olly.gameWorld.totalOffset;
+            
+            System.out.println("gnd @ " + g.GetX() + "," + g.GetY() + " p @ " + pX + "," + y);
+            int GND_WIDTH = 33*g.tilesize;
+            int GND_HEIGHT = 33;
+            
+            if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
+                        this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
                 System.out.println("Ground colission!");
-                y-=GRAVITY;
+                return true;
             }
         }
         
@@ -260,8 +266,7 @@ public class Player extends Rectangle implements Serializable {
     public int GetMoveSpeed() {return MOVE_SPEED;}
     private void ApplyGravity()
     {
-        CheckGroundColission();
-        y+=GRAVITY;
+        if (!CheckGroundColission()) {y+=GRAVITY;}
         
 
     }
