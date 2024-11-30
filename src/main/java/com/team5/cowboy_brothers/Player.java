@@ -34,6 +34,8 @@ public class Player extends Rectangle implements Serializable {
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
+    private final int height = 74;
+    private final int width = 44;
     
     // Constructor: Takes targetPanel as a parameter
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
@@ -90,7 +92,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
             }
-        }, 0, 1000 / 60); // ~60 FPS
+        }, 1000, 1000 / 60); // ~60 FPS
     }
 
     public int GetX() {return x;}
@@ -237,17 +239,20 @@ public class Player extends Rectangle implements Serializable {
     }
     // Method to check collision with another object
     
-    public boolean collidesWithGround(Ground ground)
+    private boolean CheckGroundColission()
     {
-        return this.intersects(ground);
-    }
-    public boolean collidesWithFlag(Flag flag)
-    {
-        return this.intersects(flag);
-    }
-    public boolean collidesWith(Rectangle other)
-    {
-        return this.intersects(other);
+        for (Ground g : targetPanel.grounds)
+        {
+            System.out.println("gnd @ " + g.GetX() + ","+g.GetY()
+                                + "p @ " + x + "," + y);
+            if (false)
+            {
+                System.out.println("Ground colission!");
+                y-=GRAVITY;
+            }
+        }
+        
+        return false;
     }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
@@ -255,7 +260,9 @@ public class Player extends Rectangle implements Serializable {
     public int GetMoveSpeed() {return MOVE_SPEED;}
     private void ApplyGravity()
     {
+        CheckGroundColission();
         y+=GRAVITY;
+        
 
     }
     public int getCurrentAmmo() {

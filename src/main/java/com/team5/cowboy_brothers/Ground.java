@@ -12,8 +12,8 @@ public class Ground extends GameObject {
     // Additional properties specific to the ground, if needed
     private int x; // X position
     private int y; // Y position
-    private int width; // Width of the object
-    private int height; // Height of the object
+    private final int width = 33; // Width of the object
+    private final int height = 33; // Height of the object
     private BufferedImage sprite;
     private GamePanel targetPanel;
     Timer repaintTimer;
@@ -42,7 +42,7 @@ public class Ground extends GameObject {
         //System.out.println("Ground created");
         targetPanel.addGround(this);
     }
-
+    
 
  
 }
