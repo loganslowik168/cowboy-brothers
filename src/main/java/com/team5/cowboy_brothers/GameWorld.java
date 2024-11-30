@@ -11,6 +11,7 @@ public class GameWorld {
     private Cowboy_bros_Menu.GameState currentState;
     private Cowboy_bros_Menu menu;
     public int totalOffset = 0;
+    public int Selectedlvl;
     // Constructor
     public GameWorld(Cowboy_bros_Menu menu) {
         this.menu = menu;

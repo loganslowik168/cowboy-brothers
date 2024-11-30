@@ -137,6 +137,7 @@ public class Cowboy_bros_Menu extends JFrame {
                     System.out.println("You selected Level " + levelNumber);
                     if(Cowboy_brothers.olly.CheckLevelUnlocked(levelNumber))
                     {
+                        Cowboy_brothers.olly.gameWorld.Selectedlvl = levelNumber; // Update the selected level
                         switchState(GameState.GAMEPLAY);  // Switch to gameplay
                         Cowboy_brothers.olly.LoadLevel(levelNumber);
                     }
@@ -285,10 +286,12 @@ public class Cowboy_bros_Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //reset all progress and restart the level
-                Cowboy_brothers.olly.player.setBulletCountToFull();
+                resetCurrentLevel();
                 v=99;
                 timerLabel.setText("Timer: 100");
-                switchState(GameState.GAMEPLAY);
+                // Set the player's direction to right
+                Cowboy_brothers.olly.player.CheckForDirectionChange(1);
+                switchState(GameState.GAMEPLAY);    
             }
         });
         
@@ -355,5 +358,16 @@ public class Cowboy_bros_Menu extends JFrame {
     public GameState getGameState(){
         return currentState;
     }
-        
+    private void resetCurrentLevel() {
+        // Reset player state
+        Cowboy_brothers.olly.player.resetPosition(40, 380); // Reset position to start
+        Cowboy_brothers.olly.player.setBulletCountToFull(); // Reset ammo
+    
+        // Clear game objects
+        gameplayPanel.clearGameObjects(); // Clear bullets, enemies, and grounds
+    
+        // Reload the current level
+        int currentLevel = Cowboy_brothers.olly.gameWorld.Selectedlvl; // Get the current level
+        Cowboy_brothers.olly.LoadLevel(currentLevel); // Reload the level
+    }
 }

@@ -3,7 +3,12 @@ package com.team5.cowboy_brothers;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Component;
 
@@ -12,7 +17,7 @@ public class GamePanel extends JPanel {
     public ArrayList<Ground> grounds;
     private Flag flag;
     private HUD hud; // Reference to the HUD
-
+    private BufferedImage backgroundImage;
     private ArrayList<PlayerBullet> bullets;
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
@@ -33,7 +38,8 @@ public class GamePanel extends JPanel {
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
         bombs = new ArrayList<>();
-        //bbs = new ArrayList<>();
+        loadBackgroundImage();
+
     }
 
     // Setter method to assign the player later
@@ -61,10 +67,13 @@ public class GamePanel extends JPanel {
     public ArrayList<Ground> getGrounds() {
         return grounds;
     }
-   /* public void AddBoundingBox(BoundingBox bb)
-    {
-        bbs.add(bb);
-    }*/
+    private void loadBackgroundImage() {
+        try {
+            backgroundImage = ImageIO.read(new File("sprites/DesertBackground.png")); // Adjust the path as needed
+        } catch (IOException e) {
+            System.err.println("Error loading background image: " + e.getMessage());
+        }
+    }
 
     public void AddBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
@@ -99,11 +108,15 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // Draw the background image
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // Draw the image to fill the panel
+        }
         if (Sal != null) {Sal.draw(g);}
         if (player != null) {
             Graphics2D playerG2 = (Graphics2D) g;
             player.draw(playerG2);
-        }
+        }       
         if (enemy != null) {
             Graphics2D g2 = (Graphics2D) g;
             enemy.draw(g2);
