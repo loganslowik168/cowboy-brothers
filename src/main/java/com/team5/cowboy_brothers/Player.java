@@ -104,9 +104,7 @@ public class Player extends Rectangle implements Serializable {
         x = newX;
         y = newY;
     }
-    public void update(){
-        x += MOVE_SPEED*direction;
-    }
+    
     public void CheckForDirectionChange(int dir) {
         if (direction != dir)
         {
@@ -215,12 +213,19 @@ public class Player extends Rectangle implements Serializable {
         }
     }
     // Method to check collision with another object
-            public boolean collidesWith(Rectangle other) {
-                return this.intersects(other);
-            }
-            public boolean collidesWithFlag(Flag flag) {
-                return this.intersects(flag);
-            }
+    
+    public boolean collidesWithGround(Ground ground)
+    {
+        return this.intersects(ground);
+    }
+    public boolean collidesWithFlag(Flag flag)
+    {
+        return this.intersects(flag);
+    }
+    public boolean collidesWith(Rectangle other)
+    {
+        return this.intersects(other);
+    }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
             }
