@@ -45,7 +45,7 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*178), (int)(GROUND_TILE_SIZE*11.6),1, t);
         
         
-        new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*12.4),1, t);
+        //new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*12.4),1, t);
         new Flag((GROUND_TILE_SIZE*(20*10-1)),(GROUND_TILE_SIZE*14-148), t);
 
         /*enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
