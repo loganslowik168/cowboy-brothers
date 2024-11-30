@@ -64,7 +64,11 @@ public class Enemy extends MoveableGameObject {
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
+        this.width = 84;
+        this.height = 84;
         Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
+        
+        System.out.println("Enemy size = " + width + "x" + height);
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
@@ -174,7 +178,7 @@ public class Enemy extends MoveableGameObject {
     }
 
     public void fireBullet() {
-        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel); // -1 for left
+        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel, 12, 8); // -1 for left
         targetPanel.AddBullet(bullet);
         
     }
