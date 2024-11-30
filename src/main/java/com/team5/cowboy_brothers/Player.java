@@ -20,7 +20,7 @@ public class Player extends Rectangle implements Serializable {
     private int currentScore;
     private int[] highScores;
     private BufferedImage sprite, spriteL, spriteR;
-    private final int MOVE_SPEED = 20;
+    private final int MOVE_SPEED = 15;
     public final int JUMP_HEIGHT = 20;
     private final int MAX_AMMO = 6;
     private final int MAX_HEALTH = 3;
