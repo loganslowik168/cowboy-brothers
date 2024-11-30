@@ -21,7 +21,7 @@ import javax.swing.Timer;
  */
 public class Enemy extends MoveableGameObject {
     private String IDName;
-    private boolean alive, forward=true;
+    private boolean alive, forward=true,facingLeft=true,facingRight=false;
     private int species;
     private int MAX_SPEED = 2;
     
@@ -32,7 +32,7 @@ public class Enemy extends MoveableGameObject {
     private int[][] path; // Array to define the path with coordinates
     private int pathIndex; // Current index in the path
     int count=0;
-    BufferedImage sprite;
+    BufferedImage LeftSprite,RightSprite;
     
     GamePanel targetPanel;
     Timer updateTimer,bulletFireTimer;
@@ -60,7 +60,8 @@ public class Enemy extends MoveableGameObject {
         
         pathIndex = 0; // Start at the first point in the path
         
-        loadSprite("sprites/EnemySprite.png");
+        loadLSprite("sprites/EnemySpriteLeft.png");
+        loadRSprite("sprite/EnemySprite.png");
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
@@ -75,6 +76,14 @@ public class Enemy extends MoveableGameObject {
         path=parapath;
         this.x = path[0][0];
         this.y = path[0][1];
+        //check the direction of the path for the enemy to draw
+        if(path[0][0]>path[1][0]){
+            facingLeft=true;
+            facingRight=false;
+        }else{
+            facingLeft=false;
+            facingRight=true;
+        }
     }
     public void changePath(int dx){
         for(int tx=0;tx<1;tx++){
@@ -84,19 +93,28 @@ public class Enemy extends MoveableGameObject {
         }
     }
     
-    private void loadSprite(String filePath) {
+    private void loadLSprite(String filePath) {
         try {
-            sprite = ImageIO.read(new File(filePath));
+            LeftSprite = ImageIO.read(new File(filePath));
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
+    }
+    private void loadRSprite(String filePath) {
+        try {
+            RightSprite = ImageIO.read(new File(filePath));
             System.out.println("Sprite loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
     public void draw(Graphics2D g2) {
-        if (sprite != null) {
-            g2.drawImage(sprite, (int) x, (int) y, targetPanel);
+        if (LeftSprite != null&&facingLeft) {
+            g2.drawImage(LeftSprite, (int) x, (int) y, targetPanel);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
-        } else {
+        } else if(RightSprite != null&&facingRight){
+            g2.drawImage(RightSprite, (int) x, (int) y, targetPanel);
             //System.err.println("Sprite is not loaded.");
         }
     }
@@ -244,7 +262,7 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer = null;
 
         targetPanel = null;
-        sprite = null;
+        LeftSprite = null;
     }
     
     
