@@ -156,12 +156,12 @@ public class Bomb extends MoveableGameObject{
         if (Cowboy_brothers.olly.IsThereASaloon)
         {
             BossSaloon saloon = targetPanel.GetSaloon();
-            int lX = saloon.GetXOffset();
+            int lX = saloon.GetX();
             int rX = lX+578;
             int tY = saloon.GetY();
             int bY = tY+261;
 
-            Point saloonPosition = new Point(saloon.GetX()+saloon.GetXOffset(),201);
+            Point saloonPosition = new Point(saloon.GetX()+saloon.GetX(),201);
             boolean withinX = ((currentPosition.x>saloonPosition.x) && (currentPosition.x<saloonPosition.x+578));
             boolean withinY = ((currentPosition.y>saloonPosition.y) && (currentPosition.y<saloonPosition.y+261));
             if (withinX && withinY)

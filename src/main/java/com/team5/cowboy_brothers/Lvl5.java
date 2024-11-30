@@ -33,7 +33,7 @@ private void InitializeTerrain() {
     @Override
     public void loadMapStats() {
         // Load level 1 map statistics here
-        System.out.println("Loading Level 1 map stats...");
+        System.out.println("Loading Level 5 map stats...");
         
     }
 }
