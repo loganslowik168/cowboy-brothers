@@ -21,6 +21,8 @@ public class GamePanel extends JPanel {
     private ArrayList<Bomb> bombs;
     private BossSaloon Sal;
     private Boss boss;
+    
+    public ArrayList<BoundingBox> bbs;
 
 
     // Constructor without the Player parameter
@@ -31,6 +33,7 @@ public class GamePanel extends JPanel {
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
         bombs = new ArrayList<>();
+        bbs = new ArrayList<>();
     }
 
     // Setter method to assign the player later
@@ -58,7 +61,10 @@ public class GamePanel extends JPanel {
     public ArrayList<Ground> getGrounds() {
         return grounds;
     }
-    
+    public void AddBoundingBox(BoundingBox bb)
+    {
+        bbs.add(bb);
+    }
 
     public void AddBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
@@ -132,6 +138,14 @@ public class GamePanel extends JPanel {
             for (Bomb b : bombs){
                 Graphics2D bombG2 = (Graphics2D) g;
                 b.draw(bombG2);
+            }
+        }
+        
+        if (bbs!=null)
+        {
+            for (BoundingBox bb : bbs){
+                Graphics2D bbG2 = (Graphics2D) g;
+                bb.draw(bbG2);
             }
         }
     }

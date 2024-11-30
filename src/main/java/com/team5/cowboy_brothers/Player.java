@@ -94,7 +94,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
             }
-        }, 100, 1000 / 60); // ~60 FPS
+        }, 100, 1000 / 6); // ~60 FPS
     }
 
     public int GetX() {return x;}
@@ -245,12 +245,15 @@ public class Player extends Rectangle implements Serializable {
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
-            int pX = x + Cowboy_brothers.olly.gameWorld.totalOffset;
-            
-            System.out.println("gnd @ " + g.GetX() + "," + g.GetY() + " p @ " + pX + "," + y);
+            int pX = x;// + Cowboy_brothers.olly.gameWorld.totalOffset;
+            /*Lvl1 l1 = (Lvl1) Cowboy_brothers.olly.LoadedLevel;
+            Ground g1 = l1.g;
+            System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);*/
             int GND_WIDTH = 33*g.tilesize;
             int GND_HEIGHT = 33;
-            
+            //var bb = new BoundingBox(g.GetX(), g.GetY(), g.GetX()+GND_WIDTH, g.GetY(), g.GetX()+GND_WIDTH,
+            //                    g.GetY()+GND_HEIGHT,g.GetX(),g.GetY()+GND_HEIGHT, targetPanel);
+            //targetPanel.AddBoundingBox(bb);
             if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
                         this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
                 System.out.println("Ground colission!");
