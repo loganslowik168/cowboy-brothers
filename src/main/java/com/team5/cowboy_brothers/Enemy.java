@@ -60,8 +60,11 @@ public class Enemy extends MoveableGameObject {
         
         pathIndex = 0; // Start at the first point in the path
         
-        loadSprite("sprites/Rough_OutlawEnemy.png");
+        loadSprite("sprites/EnemySprite.png");
         settupTimerEnemy();
+        
+        targetPanel.setEnemyList(this);
+        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
