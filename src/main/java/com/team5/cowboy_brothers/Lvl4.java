@@ -104,7 +104,9 @@ private void InitializeTerrain() {
         new Flag((GROUND_TILE_SIZE*(11*10-1)),(GROUND_TILE_SIZE*14-148), t);
         
         // Adding an enemy for level 4
-        //enemy1 = new Enemy("Ranger", 1, Color.red, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        enemy1 = new Enemy("Ranger", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        int[][] path1={{90,385},{100,385}};
+        enemy1.setPath(path1);
         Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
 
         
