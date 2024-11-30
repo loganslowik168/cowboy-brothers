@@ -11,18 +11,19 @@ package com.team5.cowboy_brothers;
 public abstract class MoveableGameObject {
     protected int x; // X position
     protected int y; // Y position
-    private float width; // Width of the object
-    private float height; // Height of the object
+    protected int width; // Width of the object
+    protected int height; // Height of the object
     private int speed;
 
 
     
-
-    public float getWidth() {
+    public int GetX() {return x;}
+    public int GetY() {return y;}
+    public int getWidth() {
         return width;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 

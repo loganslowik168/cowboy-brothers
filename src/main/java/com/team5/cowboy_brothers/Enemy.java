@@ -64,7 +64,11 @@ public class Enemy extends MoveableGameObject {
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
+        this.width = 84;
+        this.height = 84;
         Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
+        
+        System.out.println("Enemy size = " + width + "x" + height);
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
@@ -73,7 +77,11 @@ public class Enemy extends MoveableGameObject {
         this.y = path[0][1];
     }
     public void changePath(int dx){
-        
+        for(int tx=0;tx<1;tx++){
+            for(int ty=0; ty<1;ty++){
+                
+            }
+        }
     }
     
     private void loadSprite(String filePath) {
@@ -95,7 +103,8 @@ public class Enemy extends MoveableGameObject {
 
     // Update the position of the enemy
     boolean initDirect=true;
-    public void updatePosition() {
+    @Override
+    public void update() {
         if(initDirect){
             if (pathIndex < path.length) {
                 destinationX = path[pathIndex][0];
@@ -162,14 +171,14 @@ public class Enemy extends MoveableGameObject {
             if(pathIndex==-1){
                 initDirect=true;
                 pathIndex=0;
-                updatePosition();
+                update();
             }
         }
         
     }
 
     public void fireBullet() {
-        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel); // -1 for left
+        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel, 12, 8); // -1 for left
         targetPanel.AddBullet(bullet);
         
     }
@@ -202,7 +211,7 @@ public class Enemy extends MoveableGameObject {
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
-            updatePosition();
+            update();
             targetPanel.revalidate();
         }
         });
@@ -245,9 +254,5 @@ public class Enemy extends MoveableGameObject {
     public boolean IsAlive(){
         return alive;
     }
-    @Override
-    public void update()
-    {
-        
-    }
+    
 }

@@ -160,7 +160,7 @@ public class Player extends Rectangle implements Serializable {
     public void fireBullet()  {
         if(currentAmmo>0){
 
-            PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            PlayerBullet bullet = new PlayerBullet(x, y+10, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel, 12, 8);
             targetPanel.AddPlayerBullet(bullet);
 
             currentAmmo--;
@@ -280,7 +280,7 @@ public class Player extends Rectangle implements Serializable {
             //targetPanel.AddBoundingBox(bb);
             if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
                         this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
-                System.out.println("Ground colission!");
+                //System.out.println("Ground colission!");
                 return true;
             }
         }
