@@ -370,4 +370,8 @@ public class Cowboy_bros_Menu extends JFrame {
         int currentLevel = Cowboy_brothers.olly.gameWorld.Selectedlvl; // Get the current level
         Cowboy_brothers.olly.LoadLevel(currentLevel); // Reload the level
     }
+    public void transitionToWinScreen() {
+        switchState(GameState.WIN_MENU); // Change the state to WIN_MENU
+        // Additional logic can be added here if necessary, such as updating scores or displaying messages
+    }
 }

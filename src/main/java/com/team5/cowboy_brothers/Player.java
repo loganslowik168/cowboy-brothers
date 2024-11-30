@@ -319,4 +319,17 @@ public class Player extends Rectangle implements Serializable {
         // Transition to lose screen
         Cowboy_brothers.olly.VisibleMenu.switchState(Cowboy_bros_Menu.GameState.LOSE_MENU);  
     }
+    public void checkWinCondition() {
+        // Assuming you have a method to check if the player has reached the flag or completed the level
+        if (hasReachedWinCondition()) {
+            Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
+        }
+    }
+    
+    // Example method to check win condition (this would depend on your game's logic)
+    private boolean hasReachedWinCondition() {
+        // Implement your logic here to determine if the player has reached the win condition
+        // For example, checking if the player has touched a flag or reached a certain score
+        return false; // Replace with actual condition
+    }
 }
