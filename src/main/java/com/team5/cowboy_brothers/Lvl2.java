@@ -9,7 +9,8 @@ package com.team5.cowboy_brothers;
  * @author matth
  */
 public class Lvl2 extends Map {
-    Enemy enemy1;
+    Enemy enemy1,enemy2;
+    
     
     public Lvl2() {
         super(800, 600); // Example dimensions
@@ -33,14 +34,9 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*0), (int)(GROUND_TILE_SIZE*9.5),1, t);
         new Ground(GROUND_TILE_SIZE*1, GROUND_TILE_SIZE*10,1, t);
         new Ground(GROUND_TILE_SIZE*2, GROUND_TILE_SIZE*10,1, t);
-        new Flag(100,100, t);
-
         
-
-        //enemy1 = new Enemy("Kyle",1,Color.black, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
-
-    }
+        new Flag(1000,100, t);
+}
     public void InitializeEnemies(){
         //make the level's enemies
     }
