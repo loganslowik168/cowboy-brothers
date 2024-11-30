@@ -83,7 +83,7 @@ public class GameMaster {
     }
     private void resetCurrentLevel() {
         // Reset player state
-        player.resetPosition(400, 40); // Example starting position
+        player.resetPosition(40, 380); // Example starting position
         //player.setMaxUnlockedLevel(0); // Reset max level if needed
         player.setBulletCountToFull(); // Reset ammo
     
