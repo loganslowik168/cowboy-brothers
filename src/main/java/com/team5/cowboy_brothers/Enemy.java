@@ -68,10 +68,12 @@ public class Enemy extends MoveableGameObject {
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
-        
         path=parapath;
         this.x = path[0][0];
         this.y = path[0][1];
+    }
+    public void changePath(int dx){
+        
     }
     
     private void loadSprite(String filePath) {
@@ -105,7 +107,7 @@ public class Enemy extends MoveableGameObject {
                 double distance = Math.sqrt(dirX * dirX + dirY * dirY);
 
                 // If the enemy is already at the destination
-                if (distance < 1e-5) {
+                if (distance < 5) {
                     pathIndex++; // Move to the next point in the path
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
@@ -118,8 +120,10 @@ public class Enemy extends MoveableGameObject {
                     double moveY = normDirY * MAX_SPEED;
 
                     // Update the position
-                    x += moveX;
-                    y += moveY;
+                    
+                        x += moveX;
+                        y += moveY;
+                    
 
                 }
             }else if(pathIndex==path.length){
@@ -137,7 +141,7 @@ public class Enemy extends MoveableGameObject {
                 double distance = Math.sqrt(dirY*dirY+dirX*dirX);
                 
                 //If enemy is at destination
-                if (distance < 1e-5) {
+                if (distance < 5) {
                     pathIndex--; // Move to the previous point in the path
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
@@ -194,7 +198,7 @@ public class Enemy extends MoveableGameObject {
     //Need a timer for traveling on their paths
     public void settupTimerEnemy(){
         updateTimer = new Timer(1000/60,null);
-        bulletFireTimer = new Timer(1000,null);
+        bulletFireTimer = new Timer(4000,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){

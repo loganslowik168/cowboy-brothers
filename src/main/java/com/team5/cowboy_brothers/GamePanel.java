@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
     private BossSaloon Sal;
     private Boss boss;
     
-    public ArrayList<BoundingBox> bbs;
+    //public ArrayList<BoundingBox> bbs;
 
 
     // Constructor without the Player parameter
@@ -33,7 +33,7 @@ public class GamePanel extends JPanel {
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
         bombs = new ArrayList<>();
-        bbs = new ArrayList<>();
+        //bbs = new ArrayList<>();
     }
 
     // Setter method to assign the player later
@@ -61,10 +61,10 @@ public class GamePanel extends JPanel {
     public ArrayList<Ground> getGrounds() {
         return grounds;
     }
-    public void AddBoundingBox(BoundingBox bb)
+   /* public void AddBoundingBox(BoundingBox bb)
     {
         bbs.add(bb);
-    }
+    }*/
 
     public void AddBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
@@ -108,10 +108,23 @@ public class GamePanel extends JPanel {
             Graphics2D g2 = (Graphics2D) g;
             enemy.draw(g2);
         }
+        if(listOfEnemys!=null){
+            for(Enemy enemy : listOfEnemys){
+                Graphics2D g2 = (Graphics2D) g;
+                enemy.draw(g2);
+            }
+        }
         if(bullets!=null){
         for (Bullet bull : bullets) {
             Graphics2D bulletG2 = (Graphics2D) g;
             bull.draw(bulletG2);
+            }
+        }
+        if(Enbullets!=null){
+        for (Bullet bull : Enbullets) {
+            Graphics2D EnbulletG2 = (Graphics2D) g;
+            bull.draw(EnbulletG2);
+            }
         }
         if(grounds!=null){
             for (Ground gnd : grounds){
@@ -130,7 +143,7 @@ public class GamePanel extends JPanel {
             hud.draw(g);
         }
             
-        }
+        
         
         if (boss != null) {boss.draw(g);}
         if (bombs!=null)
@@ -141,13 +154,15 @@ public class GamePanel extends JPanel {
             }
         }
         
-        if (bbs!=null)
+
+       /* if (bbs!=null)
         {
             for (BoundingBox bb : bbs){
                 Graphics2D bbG2 = (Graphics2D) g;
                 bb.draw(bbG2);
             }
-        }
+        }*/
+
     }
     //check if bullets are on screen or off and remove if they are off
     public void alterList(){

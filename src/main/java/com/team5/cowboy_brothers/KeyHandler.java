@@ -29,7 +29,10 @@ public class KeyHandler extends KeyAdapter {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W -> {
-                p.ChangeY(-p.JUMP_HEIGHT); // Handle jump
+                //p.ChangeY(-p.JUMP_HEIGHT); // Handle jump
+                
+                    p.stopGravity();
+                
             }
             case KeyEvent.VK_S -> {
                 p.ChangeY(p.JUMP_HEIGHT); // Handle crouch
@@ -48,7 +51,7 @@ public class KeyHandler extends KeyAdapter {
             }
             case KeyEvent.VK_SPACE -> {
                 p.fireBullet(); // Fire bullet
-                Cowboy_brothers.olly.VisibleMenu.gameplayPanel.bbs.clear();
+                //Cowboy_brothers.olly.VisibleMenu.gameplayPanel.bbs.clear();
                 /*for (GameObject obj : Cowboy_brothers.olly.gameWorld.objects) {
                     System.out.println(obj);
                 }*/
