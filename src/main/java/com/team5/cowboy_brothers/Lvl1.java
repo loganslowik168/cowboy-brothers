@@ -18,7 +18,7 @@ private void InitializeTerrain() {
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
         final int GROUND_TILE_SIZE = 33;
         // draws from first to last
-        var g = new Ground((GROUND_TILE_SIZE*1*10), (GROUND_TILE_SIZE*12),10, t);
+        //var g = new Ground((GROUND_TILE_SIZE*1*10), (GROUND_TILE_SIZE*12),10, t);
         for (int i = 0; i < 20; i++)
         {
             //holes
