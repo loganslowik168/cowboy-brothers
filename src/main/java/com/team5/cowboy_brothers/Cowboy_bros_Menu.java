@@ -289,7 +289,9 @@ public class Cowboy_bros_Menu extends JFrame {
                 resetCurrentLevel();
                 v=99;
                 timerLabel.setText("Timer: 100");
-                switchState(GameState.GAMEPLAY);
+                // Set the player's direction to right
+                Cowboy_brothers.olly.player.CheckForDirectionChange(1);
+                switchState(GameState.GAMEPLAY);    
             }
         });
         
