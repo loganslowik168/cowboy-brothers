@@ -9,7 +9,9 @@ import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
@@ -34,7 +36,9 @@ public class Player extends Rectangle implements Serializable {
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
-
+    private final int height = 74;
+    private final int width = 44;
+    
     // Constructor: Takes targetPanel as a parameter
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
@@ -61,6 +65,9 @@ public class Player extends Rectangle implements Serializable {
 
         // Set up a timer to repaint the panel regularly
         setupRepaintTimer();
+        
+        // Set up a timer to replebnish the player's ammo amount by 1 every 5 seconds
+        startAmmoTimer();
     }
 
     // Method to load the sprite
@@ -87,7 +94,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
             }
-        }, 0, 1000 / 60); // ~60 FPS
+        }, 100, 1000 / 60); // ~60 FPS
     }
 
     public int GetX() {return x;}
@@ -104,9 +111,7 @@ public class Player extends Rectangle implements Serializable {
         x = newX;
         y = newY;
     }
-    public void update(){
-        x += MOVE_SPEED*direction;
-    }
+    
     public void CheckForDirectionChange(int dir) {
         if (direction != dir)
         {
@@ -139,7 +144,27 @@ public class Player extends Rectangle implements Serializable {
             System.out.println("Out of Ammo");
         }
     }
+ 
 
+ // Replenishes 1 ammo every 5 seconds
+    private void startAmmoTimer() {
+        Timer Ammotimer = new Timer();
+        Ammotimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                replenishAmmo();
+            }
+        }, 0, 5000); // Run task every 5 seconds
+    }
+
+    // Function to Replenish ammo if below max ammo amount
+    private synchronized void replenishAmmo() {
+        if (currentAmmo < MAX_AMMO) {
+            currentAmmo++;
+            System.out.println("Ammo replenished: " + currentAmmo + "/" + MAX_AMMO);
+        }
+    }
+    
     public void updateBullets() {
         // Update each bullet
         for (int i = bullets.size() - 1; i >= 0; i--) {
@@ -215,19 +240,34 @@ public class Player extends Rectangle implements Serializable {
         }
     }
     // Method to check collision with another object
-            public boolean collidesWith(Rectangle other) {
-                return this.intersects(other);
+    
+    private boolean CheckGroundColission()
+    {
+        // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
+            int pX = x + Cowboy_brothers.olly.gameWorld.totalOffset;
+            
+            System.out.println("gnd @ " + g.GetX() + "," + g.GetY() + " p @ " + pX + "," + y);
+            int GND_WIDTH = 33*g.tilesize;
+            int GND_HEIGHT = 33;
+            
+            if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
+                        this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
+                System.out.println("Ground colission!");
+                return true;
             }
-            public boolean collidesWithFlag(Flag flag) {
-                return this.intersects(flag);
-            }
+        }
+        
+        return false;
+    }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
             }
     public int GetMoveSpeed() {return MOVE_SPEED;}
     private void ApplyGravity()
     {
-        y+=GRAVITY;
+        if (!CheckGroundColission()) {y+=GRAVITY;}
+        
 
     }
     public int getCurrentAmmo() {

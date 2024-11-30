@@ -42,15 +42,15 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*171), (int)(GROUND_TILE_SIZE*12.2),1, t);
         new Ground((GROUND_TILE_SIZE*174), (int)(GROUND_TILE_SIZE*12.2),5, t);
         new Ground((GROUND_TILE_SIZE*178), (int)(GROUND_TILE_SIZE*11.6),1, t);
-
-        System.out.println(GROUND_TILE_SIZE*(20*10-1));
+        
+        
         new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*12.4),1, t);
         new Flag((GROUND_TILE_SIZE*(20*10-1)),(GROUND_TILE_SIZE*14-148), t);
 
-        enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+        /*enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
         int[][] path1={{100,100},{200,200}};
         enemy1.setPath(path1);
-        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);
+        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);*/
 
     }
 
