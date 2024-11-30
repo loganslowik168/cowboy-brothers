@@ -60,7 +60,7 @@ public class Enemy extends MoveableGameObject {
         
         pathIndex = 0; // Start at the first point in the path
         
-        loadSprite("sprites/Rough_OutlawEnemy.png");
+        loadSprite("sprites/EnemySprite.png");
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
