@@ -24,7 +24,7 @@ public class GameWorld {
     
     // Method to move all objects in the world
     public void MoveObjects(int dx) {
-        if (!Cowboy_brothers.olly.player.CheckUnderGround(-2, dx))
+        if (!Cowboy_brothers.olly.player.CheckUnderGround(-10, dx))
         {
             totalOffset -= dx;
             //System.out.println("MOVING OBJECTS");
