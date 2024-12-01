@@ -119,8 +119,8 @@ public class Player extends Rectangle implements Serializable {
                 jumpDistanceTraveled++;
             }
         }, 0, 1000/60);
-    }
 
+    }
     public int GetX() {return x;}
     public int GetY() {return y;}
     public void ChangeY(int dy) {y+=dy;}
