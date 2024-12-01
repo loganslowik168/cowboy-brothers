@@ -33,11 +33,11 @@ private void InitializeTerrain() {
 
         // Create specific ground tiles for level 4
         //beginning wall
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 13.4), 1, t);
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 12.8), 1, t);
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 12.2), 1, t);
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 11.6), 1, t);
-        new Ground(GROUND_TILE_SIZE * 0, GROUND_TILE_SIZE * 11, 1, t);
+//        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 13.4), 1, t);
+//        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 12.8), 1, t);
+//        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 12.2), 1, t);
+//        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 11.6), 1, t);
+//        new Ground(GROUND_TILE_SIZE * 0, GROUND_TILE_SIZE * 11, 1, t);
         //hill
         new Ground(GROUND_TILE_SIZE * 10, (int)(GROUND_TILE_SIZE * 13.4), 5, t);
         new Ground(GROUND_TILE_SIZE * 11, (int)(GROUND_TILE_SIZE * 12.8), 3, t);
