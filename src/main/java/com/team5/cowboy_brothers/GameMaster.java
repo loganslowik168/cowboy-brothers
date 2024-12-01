@@ -20,7 +20,7 @@ public class GameMaster {
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
-        player = new Player(3,6,5,0,hs,400,40,VisibleMenu.gameplayPanel); //change max unlocked level (3rd param) back to 1
+        player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel); //change max unlocked level (3rd param) back to 1
         VisibleMenu.gameplayPanel.setPlayer(player);
         gameplayPanel = VisibleMenu.gameplayPanel;
         gameWorld = new GameWorld(VisibleMenu);
