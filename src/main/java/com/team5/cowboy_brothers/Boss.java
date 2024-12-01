@@ -26,6 +26,8 @@ public class Boss{
     {
         this.x = x;
         this.y = y;
+        width = 44;
+        height = 74;
         targetPanel = t;
         loadSprites("sprites/bossLeft.png", "sprites/bossRight.png");
         sprite=spriteL;
