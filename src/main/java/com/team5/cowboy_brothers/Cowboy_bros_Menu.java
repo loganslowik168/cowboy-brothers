@@ -46,6 +46,7 @@ public class Cowboy_bros_Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new CardLayout());
+        setResizable(false);
         //this.t1=t1;
 
         // Create the panels for different states
