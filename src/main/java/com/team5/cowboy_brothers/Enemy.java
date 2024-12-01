@@ -21,17 +21,18 @@ import javax.swing.Timer;
  */
 public class Enemy extends MoveableGameObject {
     private String IDName;
-    private boolean alive, forward=true;
-    private int species;
+    private boolean alive, forward=true,facingLeft=true,facingRight=true;
+    private int direction;
     private int MAX_SPEED = 2;
     
+
     private int bulletSpeed = 5; // Bullet speed (slower than player bullets)
     private int screenWidth = 800;
     private int screenHeight = 600;
     private int[][] path; // Array to define the path with coordinates
     private int pathIndex; // Current index in the path
     int count=0;
-    BufferedImage sprite;
+    BufferedImage LeftSprite,RightSprite;
     
     GamePanel targetPanel;
     Timer updateTimer,bulletFireTimer;
@@ -59,7 +60,8 @@ public class Enemy extends MoveableGameObject {
         
         pathIndex = 0; // Start at the first point in the path
         
-        loadSprite("sprites/EnemySprite.png");
+        loadLSprite("sprites/EnemySpriteLeft.png");
+        loadRSprite("sprites/EnemySprite.png");
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
@@ -74,6 +76,19 @@ public class Enemy extends MoveableGameObject {
         path=parapath;
         this.x = path[0][0];
         this.y = path[0][1];
+        //check the direction of the path for the enemy to draw
+        setSpriteDirection(0,1);
+    }
+    public void setSpriteDirection(int currentIndexToCheck,int nextIndex){
+        if(path[currentIndexToCheck][0]>path[nextIndex][0]){
+            facingLeft=true;
+            facingRight=false;
+            direction=-1;
+        }else if(path[currentIndexToCheck][0]<path[nextIndex][0]){
+            facingLeft=false;
+            facingRight=true;
+            direction=1;
+        }
     }
     public void changePath(int dx){
         for(int tx=0;tx<1;tx++){
@@ -83,20 +98,31 @@ public class Enemy extends MoveableGameObject {
         }
     }
     
-    private void loadSprite(String filePath) {
+    private void loadLSprite(String filePath) {
         try {
-            sprite = ImageIO.read(new File(filePath));
+            LeftSprite = ImageIO.read(new File(filePath));
+            System.out.println("Sprite loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Error loading sprite: " + e.getMessage());
+        }
+    }
+    private void loadRSprite(String filePath) {
+        try {
+            RightSprite = ImageIO.read(new File(filePath));
             System.out.println("Sprite loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
     public void draw(Graphics2D g2) {
-        if (sprite != null) {
-            g2.drawImage(sprite, (int) x, (int) y, targetPanel);
+        if (LeftSprite != null&&facingLeft&&alive) {
+            g2.drawImage(LeftSprite, (int) x, (int) y, targetPanel);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
-        } else {
-            //System.err.println("Sprite is not loaded.");
+        } else if(RightSprite != null&&facingRight&&alive){
+            g2.drawImage(RightSprite, (int) x, (int) y, targetPanel);
+            
+        }else{
+            System.err.println("Sprite is not loaded.");
         }
     }
 
@@ -117,6 +143,9 @@ public class Enemy extends MoveableGameObject {
                 // If the enemy is already at the destination
                 if (distance < 5) {
                     pathIndex++; // Move to the next point in the path
+                    if(pathIndex!=path.length){
+                        setSpriteDirection(pathIndex-1,pathIndex);
+                    }
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
                     // Normalize the direction vector
@@ -151,6 +180,9 @@ public class Enemy extends MoveableGameObject {
                 //If enemy is at destination
                 if (distance < 5) {
                     pathIndex--; // Move to the previous point in the path
+                    if(pathIndex!=-1){
+                        setSpriteDirection(pathIndex+1,pathIndex);
+                    }
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
                     // Normalize the direction vector
@@ -175,10 +207,23 @@ public class Enemy extends MoveableGameObject {
         }
         
     }
+    @Override
+    public void ShiftPosition(int shift){
+        x+= shift;
+        for(int m=0;m<path.length;m++){
+            path[m][0]+=shift;
+        }
+    }
 
     public void fireBullet() {
-        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel, 12, 8); // -1 for left
+        if(facingLeft){
+        EnemyBullet bullet = new EnemyBullet(x, y+37, direction, 100, 100, bulletSpeed, targetPanel, 12, 8); // -1 for left
         targetPanel.AddBullet(bullet);
+        }else{
+        EnemyBullet bullet = new EnemyBullet(x+70, y+37, direction, 100, 100, bulletSpeed, targetPanel, 12, 8); // -1 for left
+        targetPanel.AddBullet(bullet);
+        }
+        
         
     }
     
@@ -232,7 +277,7 @@ public class Enemy extends MoveableGameObject {
         updateTimer.start();
         bulletFireTimer.start();
     }
-    
+    @Override
     public void Dispose()
     {
         updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
@@ -243,7 +288,7 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer = null;
 
         targetPanel = null;
-        sprite = null;
+        LeftSprite = null;
     }
     
     

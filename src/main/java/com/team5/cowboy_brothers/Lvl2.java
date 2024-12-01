@@ -70,8 +70,8 @@ private void InitializeTerrain() {
     public void InitializeEnemies(){
         //make the level's enemies
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
-        int[][] path = {{100,(300)},{200,350},{300,300}};
-        int[][] path2 = {{100,100},{200,200},{100,200}};
+        int[][] path = {{3960,(347)},{5610,347}};
+        int[][] path2 = {{100,347},{200,347},{100,200}};
         enemy1=new Enemy("Kyle",t);
         enemy2=new Enemy("Sam",t);
         enemy1.setPath(path);
