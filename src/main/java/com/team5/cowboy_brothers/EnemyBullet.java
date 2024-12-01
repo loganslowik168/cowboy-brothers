@@ -27,7 +27,7 @@ public class EnemyBullet extends Bullet {
     public EnemyBullet(int startX, int startY, int direction, int playerX, int playerY, int speed, GamePanel TPB, int width, int height) {
         super(startX,startY,direction,speed, TPB,"sprites/EnemyBulleLeft.png","sprites/EnemyBulletRight.png", width, height);
         targetPanel = TPB;
-        
+        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
         // Calculate direction towards player
         //calculateDirection(playerX, playerY);
         //Super setDirection()

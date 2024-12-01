@@ -41,7 +41,7 @@ public abstract class Bullet extends MoveableGameObject{
             default -> throw new IllegalArgumentException("Bullet irection must be 1 or -1");
         }
         System.out.println("Bullet size = " + this.width + "x" + this.height);
-        Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
+        
         //Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
     // Method to load the sprite

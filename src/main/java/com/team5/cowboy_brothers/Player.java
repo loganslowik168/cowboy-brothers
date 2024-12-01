@@ -29,7 +29,7 @@ public class Player extends Rectangle implements Serializable {
     private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
-    private int bulletSpeed = 30; // Speed of the bullets
+    private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
