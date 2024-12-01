@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 public class EnemyBullet extends Bullet {
     
     private BufferedImage sprite;
-    protected Timer updateTimer;
+    //protected Timer updateTimer;
     GamePanel targetPanel;
 
     public EnemyBullet(int startX, int startY, int direction, int playerX, int playerY, int speed, GamePanel TPB, int width, int height) {

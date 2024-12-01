@@ -125,12 +125,14 @@ public abstract class Bullet extends MoveableGameObject{
     
     public void Dispose()
     {
+        if(sprite!=null)sprite = null;
+        if(targetPanelBullet!=null)targetPanelBullet = null;
         if(updateTimer!=null){
         updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
         updateTimer.stop();
         updateTimer = null;}
-        if(targetPanelBullet!=null)targetPanelBullet = null;
-        if(sprite!=null)sprite = null;
+        
+        
     }
     
     protected abstract boolean CheckCollision();

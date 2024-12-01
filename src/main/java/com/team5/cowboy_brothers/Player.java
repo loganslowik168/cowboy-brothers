@@ -294,10 +294,14 @@ public class Player extends Rectangle implements Serializable {
         
         return false;
     }
+    private boolean checkFlagCollision(){
+        return false;
+    }
     
     private void bubbleCollision(){
         do {this.y-=1;System.out.println("x: "+x+", y: "+y);}
         while(CheckGroundCollision());
+        
     }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health

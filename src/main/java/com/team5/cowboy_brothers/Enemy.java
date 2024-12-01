@@ -280,6 +280,8 @@ public class Enemy extends MoveableGameObject {
     @Override
     public void Dispose()
     {
+        if(LeftSprite!=null )LeftSprite= null;
+        if(RightSprite!=null)RightSprite=null;
         if(updateTimer!=null){
         updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
         updateTimer.stop();
@@ -289,9 +291,10 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer.stop();
         bulletFireTimer = null;
         System.out.print("HelloWorld!");}
+        targetPanel.bulletDispose();
 
         if(targetPanel != null) targetPanel=null;
-        if(LeftSprite!=null )LeftSprite= null;
+        
     }
     
     
