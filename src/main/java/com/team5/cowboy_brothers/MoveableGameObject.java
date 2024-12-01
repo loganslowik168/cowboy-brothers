@@ -39,9 +39,9 @@ public abstract class MoveableGameObject {
     // Optional: Additional methods for behavior
     public abstract void update();
 
-    public void render() {
+    /*public void render() {
         // Logic to draw the object, if using graphics//
-    }
+    }*/
     public void ShiftPosition(int shift) //sidescrolling element
     {
         x+=shift;

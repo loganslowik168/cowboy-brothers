@@ -110,6 +110,29 @@ public class Boss{
         }
         //targetPanel.repaint();
     }
+    public void Dispose() {
+        // Stop any timers related to the boss
+        if (updateTimer != null) {
+            updateTimer.stop();
+            updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
+            updateTimer = null;
+        }
+        if (bombTimer != null) {
+            bombTimer.stop();
+            bombTimer.removeActionListener(bombTimer.getActionListeners()[0]);
+            bombTimer = null;
+        }
+        if (fallTimer != null) {
+            fallTimer.stop();
+            fallTimer.removeActionListener(fallTimer.getActionListeners()[0]);
+            fallTimer = null;
+        }
+        
+        // Clear sprite or any other resources if needed
+        sprite = null;
+        spriteL = null;
+        spriteR = null;
+    }
     
     
     // Method to load the sprite
