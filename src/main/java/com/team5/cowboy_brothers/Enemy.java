@@ -291,9 +291,9 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer.stop();
         bulletFireTimer = null;
         System.out.print("HelloWorld!");}
-        targetPanel.bulletDispose();
+        if(targetPanel!=null){targetPanel.bulletDispose();}
 
-        if(targetPanel != null) targetPanel=null;
+        if(targetPanel != null) {targetPanel=null;}
         
     }
     
