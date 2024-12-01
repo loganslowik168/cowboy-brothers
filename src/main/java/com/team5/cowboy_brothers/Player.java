@@ -157,8 +157,9 @@ public class Player extends Rectangle implements Serializable {
     // Update bullets
     public void fireBullet()  {
         if(currentAmmo>0){
-
-            PlayerBullet bullet = new PlayerBullet(x, y+10, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel, 12, 8);
+            int bOffset = 0;
+            if (direction == 1) {bOffset = this.width;}
+            PlayerBullet bullet = new PlayerBullet(x+bOffset, y+10, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel, 12, 8);
             targetPanel.AddPlayerBullet(bullet);
 
             currentAmmo--;
