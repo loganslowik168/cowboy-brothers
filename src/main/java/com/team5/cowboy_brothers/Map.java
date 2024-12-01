@@ -64,7 +64,6 @@ public abstract class Map {
         Cowboy_brothers.olly.gameWorld.objects.clear();
         Cowboy_brothers.olly.gameWorld.moveableObjects.clear();
         Cowboy_brothers.olly.player.ClearPlayerBullets();
-        System.gc();
     }
 
 }

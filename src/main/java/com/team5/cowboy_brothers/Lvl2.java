@@ -32,7 +32,7 @@ private void InitializeTerrain() {
         {
             new Ground((GROUND_TILE_SIZE*i*10), (GROUND_TILE_SIZE*15),10, t);
         }
-        for (int i = 12; i < 16; i++)
+        for (int i = 14; i < 16; i++)
         {
             new Ground((GROUND_TILE_SIZE*i*10), (GROUND_TILE_SIZE*10),10, t);
         }
@@ -52,7 +52,7 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*73), (int)(GROUND_TILE_SIZE*13.8),5, t);
         new Ground((GROUND_TILE_SIZE*77), (int)(GROUND_TILE_SIZE*13.8),5, t);
         new Ground((GROUND_TILE_SIZE*73), (int)(GROUND_TILE_SIZE*13.2),5, t);
-        //
+        //Steps
         new Ground((GROUND_TILE_SIZE*86), (int)(GROUND_TILE_SIZE*15),5, t);
         new Ground((GROUND_TILE_SIZE*91), (int)(GROUND_TILE_SIZE*15),1, t);
         new Ground((GROUND_TILE_SIZE*92), (int)(GROUND_TILE_SIZE*15),1, t);
@@ -61,7 +61,10 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*95), (int)(GROUND_TILE_SIZE*13.8),1, t);
         new Ground((GROUND_TILE_SIZE*96), (int)(GROUND_TILE_SIZE*13.8),1, t);
         new Ground((GROUND_TILE_SIZE*97), (int)(GROUND_TILE_SIZE*13.2),1, t);
-        
+        //jump
+        new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*13.2),5, t);
+        //Jump
+        new Ground((GROUND_TILE_SIZE*109), (int)(GROUND_TILE_SIZE*13),5, t);
         
        
         
@@ -69,9 +72,10 @@ private void InitializeTerrain() {
 }
     public void InitializeEnemies(){
         //make the level's enemies
+        int TileSize=33;
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
-        int[][] path = {{3960,(347)},{5610,347}};
-        int[][] path2 = {{100,347},{200,347},{100,200}};
+        int[][] path = {{3960,TileSize*15-84},{5610,TileSize*15-84}};
+        int[][] path2 = {{300,TileSize*15-84},{400,TileSize*15-84}};
         enemy1=new Enemy("Kyle",t);
         enemy2=new Enemy("Sam",t);
         enemy1.setPath(path);

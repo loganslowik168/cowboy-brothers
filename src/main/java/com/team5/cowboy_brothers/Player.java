@@ -99,7 +99,7 @@ public class Player extends Rectangle implements Serializable {
     //stop gravity for set time and jump a certain distance
     public void stopGravity(){
         //setup a timer to do a jump motion then to restart gravity
-        if(ShouldGravitate){
+        if(ShouldGravitate&&!isFalling){
         jump();
         ShouldGravitate=false;
         }
@@ -265,8 +265,8 @@ public class Player extends Rectangle implements Serializable {
         }
     }
     // Method to check collision with another object
-    
-    private boolean CheckGroundColission()
+    private boolean isFalling;
+    private boolean CheckGroundCollision()
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
@@ -274,10 +274,11 @@ public class Player extends Rectangle implements Serializable {
             //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
             int GND_WIDTH = 33*g.tilesize;
             int GND_HEIGHT = 33;
-            if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
+            if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH && 
                         this.y + this.height > g.GetY() && this.y +(((this.height*0.9))) < g.GetY() + GND_HEIGHT) {
                 
                 if (CheckUnderGround(0,0)) {y-=INVERSE_GRAVITY;}
+                isFalling = false;
                 return true;
             }
         }
@@ -296,12 +297,23 @@ public class Player extends Rectangle implements Serializable {
             final int GND_HEIGHT = 33;
             if (pX + this.width+trueOffset+xOffset > g.GetX() && pX-trueOffset+xOffset < g.GetX() + GND_WIDTH &&
                         this.y + this.height+trueOffset > g.GetY() && this.y-trueOffset < g.GetY() + GND_HEIGHT) {
-                //System.out.println("Mini collides! (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;
+
                 return true;
+            }else{
+                isFalling = true;
             }
         }
         
         return false;
+    }
+    private boolean checkFlagCollision(){
+        return false;
+    }
+    
+    private void bubbleCollision(){
+        do {this.y-=1;System.out.println("x: "+x+", y: "+y);}
+        while(CheckGroundCollision());
+        
     }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
@@ -309,8 +321,9 @@ public class Player extends Rectangle implements Serializable {
     public int GetMoveSpeed() {return MOVE_SPEED;}
     private void ApplyGravity()
     {
-        if (!CheckGroundColission()) {y+=GRAVITY;}
+        if (!CheckGroundCollision()) {y+=GRAVITY;}
         //else {System.out.println("Ground collision (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;}
+
         
 
     }
@@ -321,6 +334,9 @@ public class Player extends Rectangle implements Serializable {
     public void ClearPlayerBullets()
     {
         bullets.clear();
+    }
+    public void setHealthToFull(){
+        currentHealth=3;
     }
     public void Hurt(int h)
     {
@@ -333,11 +349,13 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-        
-        // Transition to lose screen
-        Cowboy_brothers.olly.VisibleMenu.switchState(Cowboy_bros_Menu.GameState.LOSE_MENU);
-        Dispose();
 
+        
+
+        //change screen to lose screen
+        Cowboy_brothers.olly.gameWorld.boss.Die();
+        Cowboy_brothers.olly.VisibleMenu.loseMenu();
+        Dispose();
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level

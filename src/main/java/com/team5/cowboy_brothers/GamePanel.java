@@ -195,6 +195,11 @@ public class GamePanel extends JPanel {
             }
         }
     }
+    public void bulletDispose(){
+        for(EnemyBullet enb:Enbullets){
+            enb.Dispose();
+        }
+    }
     public void alterEnemyList(){
         for(int i=0; i<Enbullets.size();i++){
             if(Enbullets.get(i).checkDeleteBullet()) 
