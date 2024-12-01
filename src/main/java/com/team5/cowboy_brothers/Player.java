@@ -325,7 +325,7 @@ public class Player extends Rectangle implements Serializable {
             Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
         }
     }
-    public boolean isOffScreen() {
+    public boolean PLayerisOffScreen() {
         // Check if the player's Y-coordinate exceeds the death limit
         return y > DEATH_LIMIT;
     }
