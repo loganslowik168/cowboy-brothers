@@ -89,12 +89,15 @@ public abstract class GameObject extends Rectangle{
     }
     public void Dispose()
     {
-        repaintTimer.stop();
+        if (repaintTimer != null)
+        {
+            repaintTimer.stop();
+            repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
+            repaintTimer = null;
+        }
         
-        repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
-        repaintTimer = null;
-        targetPanel = null;
-        sprite = null;
+        if (targetPanel != null) {targetPanel = null;}
+        if (sprite != null) {sprite = null;}
     }
     protected void UpdateSprite(BufferedImage newSprite)
     {

@@ -2,14 +2,11 @@ package com.team5.cowboy_brothers;
 
 import java.io.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -316,8 +313,11 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
+        
         // Transition to lose screen
-        Cowboy_brothers.olly.VisibleMenu.switchState(Cowboy_bros_Menu.GameState.LOSE_MENU);  
+        Cowboy_brothers.olly.VisibleMenu.switchState(Cowboy_bros_Menu.GameState.LOSE_MENU);
+        Dispose();
+
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level
@@ -336,4 +336,12 @@ public class Player extends Rectangle implements Serializable {
         // For example, checking if the player has touched a flag or reached a certain score
         return false; // Replace with actual condition
     }
+    
+    private void Dispose()
+    {
+        gravityTimer = null;
+        targetPanel = null;
+        sprite = null;
+    }
+    
 }

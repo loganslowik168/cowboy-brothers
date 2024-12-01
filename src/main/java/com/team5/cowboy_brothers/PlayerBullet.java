@@ -67,6 +67,9 @@ public class PlayerBullet extends Bullet {
         {
             final int ENEMY_WIDTH = e.getWidth();
             final int ENEMY_HEIGHT = e.getHeight();
+            System.out.println("CHECKING " + this.x + "+"+this.width+">"+e.GetX()+"&"+x+"<"+e.GetX()+"+"+ENEMY_WIDTH
+            +"&"+y+"+"+height+">"+e.GetY()+"&"+y+"<"+e.GetY()+"+"+ENEMY_HEIGHT);
+            
             if (this.x + this.width > e.GetX() && this.x < e.GetX() + ENEMY_WIDTH &&
                         this.y + this.height > e.GetY() && this.y < e.GetY() + ENEMY_HEIGHT) {
                 System.out.println("bullet hit enemy");

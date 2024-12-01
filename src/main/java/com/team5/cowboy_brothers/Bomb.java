@@ -115,11 +115,15 @@ public class Bomb extends MoveableGameObject{
     @Override
     public void Dispose()
     {
-        updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
+        if (updateTimer != null)
+        {
+            updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
         updateTimer.stop();
         updateTimer = null;
-        targetPanel = null;
-        sprite = null;
+        }
+        
+        if (targetPanel != null) {targetPanel = null;}
+        if (sprite != null) {sprite = null;}
     }
     private void Explode()
     {
