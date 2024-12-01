@@ -7,10 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import java.awt.Component;
 
 public class GamePanel extends JPanel {
     private Player player;
@@ -20,7 +18,6 @@ public class GamePanel extends JPanel {
     private BufferedImage backgroundImage;
     private ArrayList<PlayerBullet> bullets;
     private ArrayList<EnemyBullet> Enbullets; 
-    private Enemy enemy;
     protected ArrayList<Enemy> listOfEnemys;
     
     private ArrayList<Bomb> bombs;
@@ -47,9 +44,7 @@ public class GamePanel extends JPanel {
         this.player = player;
     }
 
-    public void setEnemy(Enemy enemy){
-        this.enemy=enemy;
-    }
+    
     public void AddPlayerBullet(PlayerBullet bullet){
         bullets.add(bullet);
     }
@@ -116,10 +111,6 @@ public class GamePanel extends JPanel {
         if (player != null) {
             Graphics2D playerG2 = (Graphics2D) g;
             player.draw(playerG2);
-        }       
-        if (enemy != null) {
-            Graphics2D g2 = (Graphics2D) g;
-            enemy.draw(g2);
         }
         if(listOfEnemys!=null){
             for(Enemy enemy : listOfEnemys){

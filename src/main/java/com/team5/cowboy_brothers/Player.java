@@ -29,7 +29,7 @@ public class Player extends Rectangle implements Serializable {
     private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
-    private int bulletSpeed = 30; // Speed of the bullets
+    private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
     private Timer gravityTimer; // Timer for sending position messages
@@ -350,19 +350,11 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-<<<<<<< HEAD
-=======
-        System.out.println("PLAYER DIED **********************************************");
->>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
         //change screen to lose screen
         System.out.print("Hello Olly");
         if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.Die();}
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
-<<<<<<< HEAD
-        
-=======
-        //Dispose();
->>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
+
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level
