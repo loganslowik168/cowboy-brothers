@@ -67,7 +67,7 @@ public class GameMaster {
             case 3 -> 
             {
                 System.out.println("Load level 3. --olly");
-                resetCurrentLevel(200, 380);
+                resetCurrentLevel(105, 95);
                 new HUD(player,3,VisibleMenu.gameplayPanel);
                 LoadedLevel = new Lvl3();
             }

@@ -17,23 +17,10 @@ private void InitializeTerrain() {
        //Creates Finish Flag
         new Flag(3800,170, t);
         
-      //beginning cliff
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 14.8), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 14.2), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 13.6), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 13), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 12.4), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 11.8), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 11.2), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 10.6), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 10), 5, t);
-	new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 9.4), 5, t);
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 8.8), 5, t);
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 8.2), 5, t);
-        new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 7.6), 5, t);
+      //beginning platform
         new Ground(GROUND_TILE_SIZE * 0, (int)(GROUND_TILE_SIZE * 7.0), 5, t);
         
-        //platforms
+        // down platforms
         new Ground(GROUND_TILE_SIZE * 8, (int)(GROUND_TILE_SIZE * 10), 5, t);
         new Ground(GROUND_TILE_SIZE * 15, (int)(GROUND_TILE_SIZE * 13), 5, t);
         
@@ -93,16 +80,8 @@ private void InitializeTerrain() {
         // path to flag
         new Ground(GROUND_TILE_SIZE * 109, (int)(GROUND_TILE_SIZE * 11.1), 1, t);
         new Ground(GROUND_TILE_SIZE * 111, (int)(GROUND_TILE_SIZE * 10.1), 1, t);
-         new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 14.8), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 14.2), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 13.6), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 13), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 12.4), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 11.8), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 11.2), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 10.6), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 10), 5, t);
-	new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 9.4), 5, t);
+    
+        // Flag Platform
         new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 9.4), 5, t);
         
            /* enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
