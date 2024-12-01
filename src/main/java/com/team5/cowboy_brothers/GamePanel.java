@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
     private Player player;
     public ArrayList<Ground> grounds;
-    private Flag flag;
+    public Flag flag;
     private HUD hud; // Reference to the HUD
     private BufferedImage backgroundImage;
     private ArrayList<PlayerBullet> bullets;

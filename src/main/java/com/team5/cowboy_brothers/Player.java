@@ -32,7 +32,7 @@ public class Player extends Rectangle implements Serializable {
     private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
-    private Timer gravityTimer; // Timer for sending position messages
+    private Timer gravityAndCollisionTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
     private final int height = 74;
     private final int width = 44;
@@ -88,11 +88,12 @@ public class Player extends Rectangle implements Serializable {
 
     // Method to start a timer that sends position messages every second
     private void SetupGravityTimer() {
-        gravityTimer = new Timer();
-        gravityTimer.scheduleAtFixedRate(new TimerTask() {
+        gravityAndCollisionTimer = new Timer();
+        gravityAndCollisionTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
+                CheckFlagCollision();
             }
         }, 100, 1000 / 60); // ~60 FPS
     }
@@ -376,9 +377,24 @@ public class Player extends Rectangle implements Serializable {
     
     private void Dispose()
     {
-        if(gravityTimer!=null){gravityTimer = null;}
+        if(gravityAndCollisionTimer!=null){gravityAndCollisionTimer = null;}
         if(targetPanel!=null){targetPanel = null;}
         //sprite = null;
     }
     
+    
+    private boolean CheckFlagCollision()
+    {
+        // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        if(targetPanel.flag != null){
+        Flag f = targetPanel.flag;
+            if (x + this.width > f.GetXOffset() && x < f.GetXOffset() + f.width && 
+                        this.y + this.height > f.GetY() && this.y +(((this.height*0.9))) < f.GetY() + f.height) {
+                Cowboy_brothers.olly.VisibleMenu.winMenu();
+                
+                return true;
+            }
+        }
+        return false;
+    }
 }
