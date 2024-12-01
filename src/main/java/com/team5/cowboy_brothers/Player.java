@@ -2,14 +2,11 @@ package com.team5.cowboy_brothers;
 
 import java.io.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -313,6 +310,14 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-        
+        Dispose();
     }
+    
+    private void Dispose()
+    {
+        gravityTimer = null;
+        targetPanel = null;
+        sprite = null;
+    }
+    
 }
