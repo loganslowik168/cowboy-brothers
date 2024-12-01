@@ -58,6 +58,7 @@ public abstract class Bullet extends MoveableGameObject{
             System.err.println("Error loading right sprite: " + e.getMessage());
         }
     }
+    @Override
     public void update() {
        // Update the bullet's position based on its speed and direction
        int travelOffset = speed * direction; // Move left or right
@@ -129,6 +130,7 @@ public abstract class Bullet extends MoveableGameObject{
     public void setSprite(BufferedImage x){sprite=x;}
     public void setDirection(int i){direction=i;}
     
+    @Override
     public void Dispose()
     {
         if(sprite!=null)sprite = null;
