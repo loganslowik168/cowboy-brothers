@@ -25,7 +25,6 @@ public class Enemy extends MoveableGameObject {
     private int species;
     private int MAX_SPEED = 2;
     
-    private int x, y;     // Enemy position
     private int bulletSpeed = 5; // Bullet speed (slower than player bullets)
     private int screenWidth = 800;
     private int screenHeight = 600;
