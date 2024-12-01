@@ -37,7 +37,7 @@ public class Player extends Rectangle implements Serializable {
     private final int height = 74;
     private final int width = 44;
     
-    private int DEBUGgroundCollisionCounter = 0;
+    //private int DEBUGgroundCollisionCounter = 0;
     
     // Constructor: Takes targetPanel as a parameter
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
@@ -296,7 +296,7 @@ public class Player extends Rectangle implements Serializable {
             final int GND_HEIGHT = 33;
             if (pX + this.width+trueOffset+xOffset > g.GetX() && pX-trueOffset+xOffset < g.GetX() + GND_WIDTH &&
                         this.y + this.height+trueOffset > g.GetY() && this.y-trueOffset < g.GetY() + GND_HEIGHT) {
-                System.out.println("Mini collides! (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;
+                //System.out.println("Mini collides! (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;
                 return true;
             }
         }
@@ -310,7 +310,7 @@ public class Player extends Rectangle implements Serializable {
     private void ApplyGravity()
     {
         if (!CheckGroundColission()) {y+=GRAVITY;}
-        else {System.out.println("Ground collision (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;}
+        //else {System.out.println("Ground collision (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;}
         
 
     }
