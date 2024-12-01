@@ -24,12 +24,10 @@ public class EnemyBullet extends Bullet {
     protected Timer updateTimer;
     GamePanel targetPanel;
 
-    public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed, GamePanel TPB, int width, int height) {
-        super(startX,startY,1,speed, TPB,"sprites/EnemyBulleLeft.png","sprites/EnemyBulletRight.png", width, height);
+    public EnemyBullet(int startX, int startY, int direction, int playerX, int playerY, int speed, GamePanel TPB, int width, int height) {
+        super(startX,startY,direction,speed, TPB,"sprites/EnemyBulleLeft.png","sprites/EnemyBulletRight.png", width, height);
         targetPanel = TPB;
-        updateTimer=new Timer(1000/60,null);
-        setupUpdateTimer();
-        updateTimer.start();
+        
         // Calculate direction towards player
         //calculateDirection(playerX, playerY);
         //Super setDirection()
@@ -66,16 +64,5 @@ public class EnemyBullet extends Bullet {
         
         return false;
     }
-    @Override
-    protected void setupUpdateTimer(){
-        updateTimer.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                update();
-                CheckCollision();
-                if(isOffScreen(targetPanel.getWidth(),targetPanel.getHeight()))
-                    targetPanel.alterList();
-            }
-        });
-    }
+    
 }
