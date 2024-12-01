@@ -251,7 +251,7 @@ public class Enemy extends MoveableGameObject {
     //Need a timer for traveling on their paths
     public void settupTimerEnemy(){
         updateTimer = new Timer(1000/60,null);
-        bulletFireTimer = new Timer(4000,null);
+        bulletFireTimer = new Timer(400,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -291,9 +291,9 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer.stop();
         bulletFireTimer = null;
         System.out.print("HelloWorld!");}
-        targetPanel.bulletDispose();
+        if(targetPanel!=null){targetPanel.bulletDispose();}
 
-        if(targetPanel != null) targetPanel=null;
+        if(targetPanel != null) {targetPanel=null;}
         
     }
     

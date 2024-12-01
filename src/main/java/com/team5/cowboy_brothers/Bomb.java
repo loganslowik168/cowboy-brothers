@@ -116,7 +116,7 @@ public class Bomb extends MoveableGameObject{
     public void Dispose()
     {
         if (sprite != null) {sprite = null;}
-        targetPanel.repaint();
+        if(targetPanel!=null){targetPanel.repaint();}
         if (targetPanel != null) {targetPanel = null;}
         if (updateTimer != null)
         {

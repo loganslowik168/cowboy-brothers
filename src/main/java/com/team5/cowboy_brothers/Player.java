@@ -146,7 +146,7 @@ public class Player extends Rectangle implements Serializable {
                 default -> throw new IllegalArgumentException("Dirction can only be 1 or -1");
             }
         }
-        targetPanel.repaint();
+        if(targetPanel!=null){targetPanel.repaint();}
     }
     // Example method to reset player position
     public void resetPosition(int startX, int startY) {
@@ -247,7 +247,7 @@ public class Player extends Rectangle implements Serializable {
         repaintTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                targetPanel.repaint(); // Repaint the panel regularly
+                if(targetPanel!=null){targetPanel.repaint();} // Repaint the panel regularly
                 //System.out.println("CALLING REPAINT");
                 
                 Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
@@ -261,7 +261,7 @@ public class Player extends Rectangle implements Serializable {
             g2.drawImage(sprite, (int) x, (int) y, targetPanel);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
         } else {
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
     // Method to check collision with another object
@@ -269,6 +269,7 @@ public class Player extends Rectangle implements Serializable {
     private boolean CheckGroundCollision()
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        if(targetPanel!=null){
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
             int pX = x;
             //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
@@ -282,7 +283,7 @@ public class Player extends Rectangle implements Serializable {
                 return true;
             }
         }
-        
+        }
         return false;
     }
     
@@ -349,13 +350,19 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-
-        
-
+<<<<<<< HEAD
+=======
+        System.out.println("PLAYER DIED **********************************************");
+>>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
         //change screen to lose screen
-        Cowboy_brothers.olly.gameWorld.boss.Die();
+        System.out.print("Hello Olly");
+        if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.Die();}
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
-        Dispose();
+<<<<<<< HEAD
+        
+=======
+        //Dispose();
+>>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level
@@ -363,7 +370,7 @@ public class Player extends Rectangle implements Serializable {
             Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
         }
     }
-    public boolean PLayerisOffScreen() {
+    public boolean PlayerOffScreen() {
         // Check if the player's Y-coordinate exceeds the death limit
         return y > DEATH_LIMIT;
     }
@@ -377,9 +384,9 @@ public class Player extends Rectangle implements Serializable {
     
     private void Dispose()
     {
-        gravityTimer = null;
-        targetPanel = null;
-        sprite = null;
+        if(gravityTimer!=null){gravityTimer = null;}
+        if(targetPanel!=null){targetPanel = null;}
+        //sprite = null;
     }
     
 }

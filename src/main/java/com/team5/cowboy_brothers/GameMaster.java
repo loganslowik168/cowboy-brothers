@@ -120,5 +120,5 @@ private void clearBossAndDynamite() {
     }
 }
 
-    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
+    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
 }
