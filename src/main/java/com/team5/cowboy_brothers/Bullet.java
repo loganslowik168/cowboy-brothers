@@ -84,8 +84,10 @@ public abstract class Bullet extends MoveableGameObject{
             public void actionPerformed(ActionEvent e){
                 update();
                 CheckCollision();
+                if(targetPanelBullet!=null){
                 if(isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight()))
                     targetPanelBullet.alterList();
+                }
                 //System.out.println(x+", "+y);
             }
         });
@@ -101,8 +103,10 @@ public abstract class Bullet extends MoveableGameObject{
     
     public boolean checkDeleteBullet(){
         //Check if it is onscreen or colliding with anything
+        if(targetPanelBullet!=null){
         return (isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight())|| CheckCollision());
-        
+        }
+        return true;
     }
     public boolean collision(){
         return false;
@@ -110,10 +114,12 @@ public abstract class Bullet extends MoveableGameObject{
     
     
     public void pauseTimers(){
+        if(updateTimer!=null)
         updateTimer.stop();
     }
     
     public void unPauseTimers(){
+        if(updateTimer!=null)
         updateTimer.start();
     }
     // Getters for position

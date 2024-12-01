@@ -146,7 +146,7 @@ public class Player extends Rectangle implements Serializable {
                 default -> throw new IllegalArgumentException("Dirction can only be 1 or -1");
             }
         }
-        targetPanel.repaint();
+        if(targetPanel!=null){targetPanel.repaint();}
     }
     // Example method to reset player position
     public void resetPosition(int startX, int startY) {
@@ -247,7 +247,7 @@ public class Player extends Rectangle implements Serializable {
         repaintTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                targetPanel.repaint(); // Repaint the panel regularly
+                if(targetPanel!=null){targetPanel.repaint();} // Repaint the panel regularly
                 //System.out.println("CALLING REPAINT");
                 
                 Cowboy_brothers.olly.VisibleMenu.gameplayPanel.repaint();
@@ -269,6 +269,7 @@ public class Player extends Rectangle implements Serializable {
     private boolean CheckGroundCollision()
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        if(targetPanel!=null){
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
             int pX = x;
             //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
@@ -282,7 +283,7 @@ public class Player extends Rectangle implements Serializable {
                 return true;
             }
         }
-        
+        }
         return false;
     }
     
@@ -349,13 +350,11 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-
-        
-
         //change screen to lose screen
-        Cowboy_brothers.olly.gameWorld.boss.Die();
+        System.out.print("Hello Olly");
+        if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.Die();}
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
-        Dispose();
+        
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level
