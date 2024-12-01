@@ -294,7 +294,7 @@ public class Cowboy_bros_Menu extends JFrame {
                 // Set the player's direction to right
                 Cowboy_brothers.olly.player.CheckForDirectionChange(1);
                 switchState(GameState.GAMEPLAY);   
-                Cowboy_brothers.olly.gameWorld.boss.setPaused(false);
+                if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.setPaused(false);}
             }
         });
         
@@ -304,7 +304,7 @@ public class Cowboy_bros_Menu extends JFrame {
                //continue from the pause menu
                tempPauseValue=new PauseButtonValue();
                switchState(GameState.GAMEPLAY);
-               Cowboy_brothers.olly.gameWorld.boss.setPaused(false);
+               if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.setPaused(false);}
            } 
         });
         levelSel.addActionListener(new ActionListener(){
@@ -327,7 +327,7 @@ public class Cowboy_bros_Menu extends JFrame {
         }
         if (currentState == GameState.PAUSE_MENU) 
         {
-           Cowboy_brothers.olly.gameWorld.boss.setPaused(true);
+           if(Cowboy_brothers.olly.gameWorld.boss!=null)Cowboy_brothers.olly.gameWorld.boss.setPaused(true);
            for (MoveableGameObject obj : Cowboy_brothers.olly.gameWorld.moveableObjects) 
            {
                 if (obj instanceof Bomb) 
