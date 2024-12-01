@@ -47,24 +47,27 @@ public class GameMaster {
     {
         // Reset the current level state
         clearBossAndDynamite();
-        resetCurrentLevel();
+        
         switch(lvl)
         { 
             case 1 -> 
             {
                 System.out.println("Load level 1. --olly");
+                resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl1();
                 new HUD(player,1,VisibleMenu.gameplayPanel);
             }
             case 2 -> 
             {
                 System.out.println("Load level 2. --olly");
+                resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl2();
                 new HUD(player,2,VisibleMenu.gameplayPanel);
             }
             case 3 -> 
             {
                 System.out.println("Load level 3. --olly");
+                resetCurrentLevel(200, 380);
                 new HUD(player,3,VisibleMenu.gameplayPanel);
                 LoadedLevel = new Lvl3();
             }
@@ -72,22 +75,23 @@ public class GameMaster {
             {
                 System.out.println("Load level 4. --olly");
                 new HUD(player,4,VisibleMenu.gameplayPanel);
+                resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl4();
             }
             case 5 -> 
             {
                 System.out.println("Load level 5. --olly");
+                resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl5();
                 new HUD(player,5,VisibleMenu.gameplayPanel);
             }
             default -> System.out.println("ERROR. Please select a level between 1 and 5 inclusive! --olly");
         }
     }
-    private void resetCurrentLevel() {
+    private void resetCurrentLevel(int startX, int startY) {
         // Reset player state
-        player.resetPosition(200, 380); // Example starting position
+        player.resetPosition(startX, startY); // Example starting position
         //player.setMaxUnlockedLevel(0); // Reset max level if needed
-        player.setMaxUnlockedLevel(0); // Reset max level if needed
         player.setBulletCountToFull(); // Reset ammo
         Cowboy_brothers.olly.player.currentHealth = Cowboy_brothers.olly.player.getMaxHealth(); // Reset health to maximum
 
