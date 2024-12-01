@@ -24,7 +24,7 @@ public class Player extends Rectangle implements Serializable {
     private final int MAX_AMMO = 6;
     final int MAX_HEALTH = 3;
     private final int GRAVITY = 2;
-    private final int INVERSE_GRAVITY = -5;
+    private final int INVERSE_GRAVITY = 5;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
     private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map
     private List<Bullet> bullets = new ArrayList<>();
@@ -36,6 +36,8 @@ public class Player extends Rectangle implements Serializable {
     private GamePanel targetPanel; // Panel to draw the player on
     private final int height = 74;
     private final int width = 44;
+    
+    private int DEBUGgroundCollisionCounter = 0;
     
     // Constructor: Takes targetPanel as a parameter
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
@@ -294,7 +296,7 @@ public class Player extends Rectangle implements Serializable {
             final int GND_HEIGHT = 33;
             if (pX + this.width+trueOffset+xOffset > g.GetX() && pX-trueOffset+xOffset < g.GetX() + GND_WIDTH &&
                         this.y + this.height+trueOffset > g.GetY() && this.y-trueOffset < g.GetY() + GND_HEIGHT) {
-                
+                System.out.println("Mini collides! (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;
                 return true;
             }
         }
@@ -308,6 +310,7 @@ public class Player extends Rectangle implements Serializable {
     private void ApplyGravity()
     {
         if (!CheckGroundColission()) {y+=GRAVITY;}
+        else {System.out.println("Ground collision (" + DEBUGgroundCollisionCounter + ")"); DEBUGgroundCollisionCounter++;}
         
 
     }
