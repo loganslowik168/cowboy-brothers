@@ -122,7 +122,7 @@ public class Enemy extends MoveableGameObject {
             g2.drawImage(RightSprite, (int) x, (int) y, targetPanel);
             
         }else{
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
 
@@ -280,15 +280,18 @@ public class Enemy extends MoveableGameObject {
     @Override
     public void Dispose()
     {
+        if(updateTimer!=null){
         updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
         updateTimer.stop();
-        updateTimer = null;
+        updateTimer = null;}
+        if(bulletFireTimer!=null){
         bulletFireTimer.removeActionListener(bulletFireTimer.getActionListeners()[0]);
         bulletFireTimer.stop();
         bulletFireTimer = null;
+        System.out.print("HelloWorld!");}
 
-        targetPanel = null;
-        LeftSprite = null;
+        if(targetPanel != null) targetPanel=null;
+        if(LeftSprite!=null )LeftSprite= null;
     }
     
     

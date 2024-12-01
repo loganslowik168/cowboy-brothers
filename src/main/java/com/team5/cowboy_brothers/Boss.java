@@ -78,9 +78,30 @@ public class Boss{
             Die();
         }
     }
-    private void Die()
+    public void Die()
     {
-        
+        //needs a dispose
+        dispose();
+        Cowboy_brothers.olly.VisibleMenu.winMenu();
+    }
+    private void dispose(){
+        if(targetPanel!=null)targetPanel=null;
+        if(sprite!=null)sprite=null;
+        if(updateTimer!=null){
+            updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
+            updateTimer.stop();
+            updateTimer=null;
+        }
+        if(bombTimer!=null){
+            bombTimer.removeActionListener(bombTimer.getActionListeners()[0]);
+            bombTimer.stop();
+            bombTimer=null;
+        }
+        if(fallTimer!=null){
+            fallTimer.removeActionListener(fallTimer.getActionListeners()[0]);
+            fallTimer.stop();
+            fallTimer=null;
+        }
     }
     private void UpdateFacing()
     {

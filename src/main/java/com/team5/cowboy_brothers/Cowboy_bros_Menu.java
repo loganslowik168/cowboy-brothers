@@ -256,6 +256,7 @@ public class Cowboy_bros_Menu extends JFrame {
     
     retryButton.addActionListener(e -> {
         // Logic to retry the level
+        resetCurrentLevel();
         switchState(GameState.GAMEPLAY);
          // Reset player state for the retry
          
@@ -342,6 +343,12 @@ public class Cowboy_bros_Menu extends JFrame {
             gameplayPanel.requestFocus();
         }
     }
+    public void loseMenu(){
+        switchState(GameState.LOSE_MENU);
+    }
+    public void winMenu(){
+        switchState(GameState.WIN_MENU);
+    }
     
     @Override
     public void paintComponents(Graphics g){
@@ -362,6 +369,7 @@ public class Cowboy_bros_Menu extends JFrame {
         // Reset player state
         Cowboy_brothers.olly.player.resetPosition(40, 380); // Reset position to start
         Cowboy_brothers.olly.player.setBulletCountToFull(); // Reset ammo
+        Cowboy_brothers.olly.player.setHealthToFull();
     
         // Clear game objects
         gameplayPanel.clearGameObjects(); // Clear bullets, enemies, and grounds

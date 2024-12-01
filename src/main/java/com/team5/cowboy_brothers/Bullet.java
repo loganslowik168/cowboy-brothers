@@ -74,7 +74,7 @@ public abstract class Bullet extends MoveableGameObject{
             g2.drawImage(sprite, (int) x, (int) y, targetPanelBullet);
             //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
         } else {
-            System.err.println("Sprite is not loaded.");
+            //System.err.println("Sprite is not loaded.");
         }
     }
     
@@ -83,6 +83,7 @@ public abstract class Bullet extends MoveableGameObject{
             @Override
             public void actionPerformed(ActionEvent e){
                 update();
+                CheckCollision();
                 if(isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight()))
                     targetPanelBullet.alterList();
                 //System.out.println(x+", "+y);
@@ -100,7 +101,7 @@ public abstract class Bullet extends MoveableGameObject{
     
     public boolean checkDeleteBullet(){
         //Check if it is onscreen or colliding with anything
-        return (isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight())|| collision());
+        return (isOffScreen(targetPanelBullet.getWidth(),targetPanelBullet.getHeight())|| CheckCollision());
         
     }
     public boolean collision(){
@@ -124,11 +125,12 @@ public abstract class Bullet extends MoveableGameObject{
     
     public void Dispose()
     {
+        if(updateTimer!=null){
         updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
         updateTimer.stop();
-        updateTimer = null;
-        targetPanelBullet = null;
-        sprite = null;
+        updateTimer = null;}
+        if(targetPanelBullet!=null)targetPanelBullet = null;
+        if(sprite!=null)sprite = null;
     }
     
     protected abstract boolean CheckCollision();

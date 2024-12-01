@@ -99,7 +99,7 @@ public class Player extends Rectangle implements Serializable {
     //stop gravity for set time and jump a certain distance
     public void stopGravity(){
         //setup a timer to do a jump motion then to restart gravity
-        if(ShouldGravitate){
+        if(ShouldGravitate&&!isFalling){
         jump();
         ShouldGravitate=false;
         }
@@ -264,8 +264,8 @@ public class Player extends Rectangle implements Serializable {
         }
     }
     // Method to check collision with another object
-    
-    private boolean CheckGroundColission()
+    private boolean isFalling;
+    private boolean CheckGroundCollision()
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
@@ -281,11 +281,23 @@ public class Player extends Rectangle implements Serializable {
             if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
                         this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
                 //System.out.println("Ground colission!");
+                //have a check to call the bubbleCollision
+                if(this.y + this.height>g.GetY()+2){
+                    bubbleCollision();
+                }
+                isFalling=false;
                 return true;
+            }else{
+                isFalling = true;
             }
         }
         
         return false;
+    }
+    
+    private void bubbleCollision(){
+        do {this.y-=1;System.out.println("x: "+x+", y: "+y);}
+        while(CheckGroundCollision());
     }
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
@@ -293,7 +305,7 @@ public class Player extends Rectangle implements Serializable {
     public int GetMoveSpeed() {return MOVE_SPEED;}
     private void ApplyGravity()
     {
-        if (!CheckGroundColission()) {y+=GRAVITY;}
+        if (!CheckGroundCollision()) {y+=GRAVITY;}
         
 
     }
@@ -305,6 +317,9 @@ public class Player extends Rectangle implements Serializable {
     {
         bullets.clear();
     }
+    public void setHealthToFull(){
+        currentHealth=3;
+    }
     public void Hurt(int h)
     {
         //System.out.println("Player took " + h + " damage!");
@@ -313,6 +328,8 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-        
+        //change screen to lose screen
+        Cowboy_brothers.olly.gameWorld.boss.Die();
+        Cowboy_brothers.olly.VisibleMenu.loseMenu();
     }
 }
