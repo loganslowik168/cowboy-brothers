@@ -21,6 +21,7 @@ public class Boss{
     private BufferedImage sprite, spriteL, spriteR;
     private GamePanel targetPanel;
     Timer updateTimer, bombTimer, fallTimer;
+    protected int height, width;
     public Boss(int x, int y, GamePanel t)
     {
         this.x = x;
@@ -57,6 +58,28 @@ public class Boss{
                 Fall();
             }
         });
+        
+    }
+    public int GetX() {return x;}
+    public int GetY() {return y;}
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    public void Hurt(int h)
+    {
+        currentHealth-=h;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
         
     }
     private void UpdateFacing()

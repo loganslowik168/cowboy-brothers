@@ -3,7 +3,12 @@ package com.team5.cowboy_brothers;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Component;
 
@@ -12,17 +17,17 @@ public class GamePanel extends JPanel {
     public ArrayList<Ground> grounds;
     private Flag flag;
     private HUD hud; // Reference to the HUD
-
+    private BufferedImage backgroundImage;
     private ArrayList<PlayerBullet> bullets;
     private ArrayList<EnemyBullet> Enbullets; 
     private Enemy enemy;
-    private ArrayList<Enemy> listOfEnemys;
+    protected ArrayList<Enemy> listOfEnemys;
     
     private ArrayList<Bomb> bombs;
     private BossSaloon Sal;
-    private Boss boss;
+    protected Boss boss;
     
-    public ArrayList<BoundingBox> bbs;
+    //public ArrayList<BoundingBox> bbs;
 
 
     // Constructor without the Player parameter
@@ -33,7 +38,8 @@ public class GamePanel extends JPanel {
         Enbullets = new ArrayList<>();
         listOfEnemys = new ArrayList<>();
         bombs = new ArrayList<>();
-        bbs = new ArrayList<>();
+        loadBackgroundImage();
+
     }
 
     // Setter method to assign the player later
@@ -61,9 +67,12 @@ public class GamePanel extends JPanel {
     public ArrayList<Ground> getGrounds() {
         return grounds;
     }
-    public void AddBoundingBox(BoundingBox bb)
-    {
-        bbs.add(bb);
+    private void loadBackgroundImage() {
+        try {
+            backgroundImage = ImageIO.read(new File("sprites/DesertBackground.png")); // Adjust the path as needed
+        } catch (IOException e) {
+            System.err.println("Error loading background image: " + e.getMessage());
+        }
     }
 
     public void AddBullet(EnemyBullet bullet){
@@ -99,19 +108,36 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // Draw the background image
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // Draw the image to fill the panel
+        }
         if (Sal != null) {Sal.draw(g);}
         if (player != null) {
             Graphics2D playerG2 = (Graphics2D) g;
             player.draw(playerG2);
-        }
+        }       
         if (enemy != null) {
             Graphics2D g2 = (Graphics2D) g;
             enemy.draw(g2);
+        }
+        if(listOfEnemys!=null){
+            for(Enemy enemy : listOfEnemys){
+                Graphics2D g2 = (Graphics2D) g;
+                enemy.draw(g2);
+            }
         }
         if(bullets!=null){
         for (Bullet bull : bullets) {
             Graphics2D bulletG2 = (Graphics2D) g;
             bull.draw(bulletG2);
+            }
+        }
+        if(Enbullets!=null){
+        for (Bullet bull : Enbullets) {
+            Graphics2D EnbulletG2 = (Graphics2D) g;
+            bull.draw(EnbulletG2);
+            }
         }
         if(grounds!=null){
             for (Ground gnd : grounds){
@@ -130,7 +156,7 @@ public class GamePanel extends JPanel {
             hud.draw(g);
         }
             
-        }
+        
         
         if (boss != null) {boss.draw(g);}
         if (bombs!=null)
@@ -141,13 +167,15 @@ public class GamePanel extends JPanel {
             }
         }
         
-        if (bbs!=null)
+
+       /* if (bbs!=null)
         {
             for (BoundingBox bb : bbs){
                 Graphics2D bbG2 = (Graphics2D) g;
                 bb.draw(bbG2);
             }
-        }
+        }*/
+
     }
     //check if bullets are on screen or off and remove if they are off
     public void alterList(){

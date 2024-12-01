@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -19,17 +20,20 @@ import javax.imageio.ImageIO;
  */
 public class EnemyBullet extends Bullet {
     
-    private int targetX, targetY; // Player's position (target)
     private BufferedImage sprite;
-    Timer updateTimer,repaintTimer;
+    protected Timer updateTimer;
+    GamePanel targetPanel;
 
-    public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed, GamePanel TPB) {
-        super(startX,startY,1,speed, TPB,"sprites/EnemyBulletLeft.png","sprites/EnemyBulletRight.png");
+    public EnemyBullet(int startX, int startY, int playerX, int playerY, int speed, GamePanel TPB, int width, int height) {
+        super(startX,startY,1,speed, TPB,"sprites/EnemyBulleLeft.png","sprites/EnemyBulletRight.png", width, height);
+        targetPanel = TPB;
+        updateTimer=new Timer(1000/60,null);
+        setupUpdateTimer();
+        updateTimer.start();
         // Calculate direction towards player
         //calculateDirection(playerX, playerY);
         //Super setDirection()
     }
-
    /* private void calculateDirection(int playerX, int playerY) {
         // Calculate angle between enemy and player
         double angle = Math.atan2(playerY - y, playerX - x);
@@ -45,9 +49,33 @@ public class EnemyBullet extends Bullet {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
-    
-    public boolean collision(){
-        //check collision with the ground and the player
+    @Override
+    protected boolean CheckCollision()
+    {
+        int pX = Cowboy_brothers.olly.player.GetX();
+        int pY = Cowboy_brothers.olly.player.GetY();
+        int P_WIDTH = 44;
+        int P_HEIGHT = 74;
+        if (this.x + this.width > pX && this.x < pX + P_WIDTH &&
+                    this.y + this.height > pY && this.y < pY + P_HEIGHT) {
+            System.out.println("Bullet hit player!");
+            Cowboy_brothers.olly.player.Hurt(1);
+            Dispose();
+            return true;
+        }
+        
         return false;
+    }
+    @Override
+    protected void setupUpdateTimer(){
+        updateTimer.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                update();
+                CheckCollision();
+                if(isOffScreen(targetPanel.getWidth(),targetPanel.getHeight()))
+                    targetPanel.alterList();
+            }
+        });
     }
 }

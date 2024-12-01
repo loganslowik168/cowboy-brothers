@@ -22,7 +22,7 @@ public class Player extends Rectangle implements Serializable {
     private int currentScore;
     private int[] highScores;
     private BufferedImage sprite, spriteL, spriteR;
-    private final int MOVE_SPEED = 20;
+    private final int MOVE_SPEED = 15;
     public final int JUMP_HEIGHT = 20;
     private final int MAX_AMMO = 6;
     private final int MAX_HEALTH = 3;
@@ -96,7 +96,31 @@ public class Player extends Rectangle implements Serializable {
             }
         }, 100, 1000 / 60); // ~60 FPS
     }
+    //stop gravity for set time and jump a certain distance
+    public void stopGravity(){
+        //setup a timer to do a jump motion then to restart gravity
+        if(ShouldGravitate){
+        jump();
+        ShouldGravitate=false;
+        }
+    }
+    int jumpDistanceTraveled=0;
+    public void jump(){
+        Timer jumpTimer = new Timer();
+        jumpTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                y-=1;
+                if(jumpDistanceTraveled==50){
+                    ShouldGravitate=true;
+                    jumpDistanceTraveled=0;
+                    jumpTimer.cancel();
+                }
+                jumpDistanceTraveled++;
+            }
+        }, 0, 1000/60);
 
+    }
     public int GetX() {return x;}
     public int GetY() {return y;}
     public void ChangeY(int dy) {y+=dy;}
@@ -136,7 +160,7 @@ public class Player extends Rectangle implements Serializable {
     public void fireBullet()  {
         if(currentAmmo>0){
 
-            PlayerBullet bullet = new PlayerBullet(x, y, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
+            PlayerBullet bullet = new PlayerBullet(x, y+10, direction, bulletSpeed, Cowboy_brothers.olly.VisibleMenu.gameplayPanel, 12, 8);
             targetPanel.AddPlayerBullet(bullet);
 
             currentAmmo--;
@@ -256,7 +280,7 @@ public class Player extends Rectangle implements Serializable {
             //targetPanel.AddBoundingBox(bb);
             if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
                         this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
-                System.out.println("Ground colission!");
+                //System.out.println("Ground colission!");
                 return true;
             }
         }
@@ -273,6 +297,7 @@ public class Player extends Rectangle implements Serializable {
         
 
     }
+    
     public int getCurrentAmmo() {
         return currentAmmo;
     }

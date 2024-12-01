@@ -64,14 +64,24 @@ public class Enemy extends MoveableGameObject {
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
+        this.width = 84;
+        this.height = 84;
         Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
+        
+        System.out.println("Enemy size = " + width + "x" + height);
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
-        
         path=parapath;
         this.x = path[0][0];
         this.y = path[0][1];
+    }
+    public void changePath(int dx){
+        for(int tx=0;tx<1;tx++){
+            for(int ty=0; ty<1;ty++){
+                
+            }
+        }
     }
     
     private void loadSprite(String filePath) {
@@ -93,7 +103,8 @@ public class Enemy extends MoveableGameObject {
 
     // Update the position of the enemy
     boolean initDirect=true;
-    public void updatePosition() {
+    @Override
+    public void update() {
         if(initDirect){
             if (pathIndex < path.length) {
                 destinationX = path[pathIndex][0];
@@ -105,7 +116,7 @@ public class Enemy extends MoveableGameObject {
                 double distance = Math.sqrt(dirX * dirX + dirY * dirY);
 
                 // If the enemy is already at the destination
-                if (distance < 1e-5) {
+                if (distance < 5) {
                     pathIndex++; // Move to the next point in the path
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
@@ -118,8 +129,10 @@ public class Enemy extends MoveableGameObject {
                     double moveY = normDirY * MAX_SPEED;
 
                     // Update the position
-                    x += moveX;
-                    y += moveY;
+                    
+                        x += moveX;
+                        y += moveY;
+                    
 
                 }
             }else if(pathIndex==path.length){
@@ -137,7 +150,7 @@ public class Enemy extends MoveableGameObject {
                 double distance = Math.sqrt(dirY*dirY+dirX*dirX);
                 
                 //If enemy is at destination
-                if (distance < 1e-5) {
+                if (distance < 5) {
                     pathIndex--; // Move to the previous point in the path
                     System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
                 } else {
@@ -158,14 +171,14 @@ public class Enemy extends MoveableGameObject {
             if(pathIndex==-1){
                 initDirect=true;
                 pathIndex=0;
-                updatePosition();
+                update();
             }
         }
         
     }
 
     public void fireBullet() {
-        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel); // -1 for left
+        EnemyBullet bullet = new EnemyBullet(x, y, 100, 100, bulletSpeed, targetPanel, 12, 8); // -1 for left
         targetPanel.AddBullet(bullet);
         
     }
@@ -194,11 +207,11 @@ public class Enemy extends MoveableGameObject {
     //Need a timer for traveling on their paths
     public void settupTimerEnemy(){
         updateTimer = new Timer(1000/60,null);
-        bulletFireTimer = new Timer(1000,null);
+        bulletFireTimer = new Timer(4000,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
-            updatePosition();
+            update();
             targetPanel.revalidate();
         }
         });
@@ -241,9 +254,5 @@ public class Enemy extends MoveableGameObject {
     public boolean IsAlive(){
         return alive;
     }
-    @Override
-    public void update()
-    {
-        
-    }
+    
 }
