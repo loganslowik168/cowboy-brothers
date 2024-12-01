@@ -84,6 +84,7 @@ public class PlayerBullet extends Bullet {
             Boss e=targetPanel.boss;
             final int ENEMY_WIDTH = e.getWidth();
             final int ENEMY_HEIGHT = e.getHeight();
+            System.out.println("bullet didn't hit boss!!");
             if (this.x + this.width > e.GetX() && this.x < e.GetX() + ENEMY_WIDTH &&
                         this.y + this.height > e.GetY() && this.y < e.GetY() + ENEMY_HEIGHT) {
                 System.out.println("bullet hit boss!!");

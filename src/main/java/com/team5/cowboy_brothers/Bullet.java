@@ -63,7 +63,7 @@ public abstract class Bullet extends MoveableGameObject{
     public void update() {
        // Update the bullet's position based on its speed and direction
        int travelOffset = speed * direction; // Move left or right
-       x += travelOffset ;
+       x += travelOffset;
     }
 
     public void draw(Graphics g) {
