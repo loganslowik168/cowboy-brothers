@@ -350,11 +350,19 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
+<<<<<<< HEAD
+=======
+        System.out.println("PLAYER DIED **********************************************");
+>>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
         //change screen to lose screen
         System.out.print("Hello Olly");
         if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.Die();}
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
+<<<<<<< HEAD
         
+=======
+        //Dispose();
+>>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level
@@ -362,7 +370,7 @@ public class Player extends Rectangle implements Serializable {
             Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
         }
     }
-    public boolean PLayerisOffScreen() {
+    public boolean PlayerOffScreen() {
         // Check if the player's Y-coordinate exceeds the death limit
         return y > DEATH_LIMIT;
     }
