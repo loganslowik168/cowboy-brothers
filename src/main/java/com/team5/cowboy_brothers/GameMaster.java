@@ -87,7 +87,7 @@ public class GameMaster {
         // Reset player state
         player.resetPosition(200, 380); // Example starting position
         //player.setMaxUnlockedLevel(0); // Reset max level if needed
-        player.setMaxUnlockedLevel(0); // Reset max level if needed
+        //player.setMaxUnlockedLevel(0); // Reset max level if needed
         player.setBulletCountToFull(); // Reset ammo
         Cowboy_brothers.olly.player.currentHealth = Cowboy_brothers.olly.player.getMaxHealth(); // Reset health to maximum
 
@@ -116,5 +116,5 @@ private void clearBossAndDynamite() {
     }
 }
 
-    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
+    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
 }

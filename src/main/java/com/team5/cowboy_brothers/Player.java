@@ -377,9 +377,9 @@ public class Player extends Rectangle implements Serializable {
     
     private void Dispose()
     {
-        gravityTimer = null;
-        targetPanel = null;
-        sprite = null;
+        if(gravityTimer!=null){gravityTimer = null;}
+        if(targetPanel!=null){targetPanel = null;}
+        //sprite = null;
     }
     
 }
