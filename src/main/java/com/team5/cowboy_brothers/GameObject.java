@@ -96,7 +96,7 @@ public abstract class GameObject extends Rectangle{
             repaintTimer.removeActionListener(repaintTimer.getActionListeners()[0]);
             repaintTimer = null;
         }
-        targetPanel.repaint();
+        if(targetPanel!=null) {targetPanel.repaint();}
         if (targetPanel != null) {targetPanel = null;}
         
 
