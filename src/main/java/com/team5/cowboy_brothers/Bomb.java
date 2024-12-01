@@ -45,6 +45,7 @@ public class Bomb extends MoveableGameObject{
             System.err.println("Error loading sprite image: " + e.getMessage());
         }
         
+        
         updateTimer = new Timer(1000/60,null);
         updateTimer.addActionListener(new ActionListener(){
         @Override
@@ -124,10 +125,17 @@ public class Bomb extends MoveableGameObject{
             updateTimer.stop();
             updateTimer = null;
         }
-        
-        
-
     }
+    public void pauseTimer() {
+    if (updateTimer != null) {
+        updateTimer.stop();
+    }
+}
+    public void resumeTimer() {
+    if (updateTimer != null) {
+        updateTimer.start();
+    }
+}
     private void Explode()
     {
         isExploded = true;

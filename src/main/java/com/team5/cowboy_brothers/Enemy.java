@@ -293,7 +293,8 @@ public class Enemy extends MoveableGameObject {
         System.out.print("HelloWorld!");}
         if(targetPanel!=null){targetPanel.bulletDispose();}
 
-        if(targetPanel != null) {targetPanel=null;}
+        if(targetPanel != null) {targetPanel=null;targetPanel.listOfEnemys.remove(this);}
+        
         
     }
     
