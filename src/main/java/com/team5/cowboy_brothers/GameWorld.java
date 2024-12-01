@@ -12,6 +12,7 @@ public class GameWorld {
     private Cowboy_bros_Menu menu;
     public int totalOffset = 0;
     public int Selectedlvl;
+    private int debugCount = 0;
     // Constructor
     public GameWorld(Cowboy_bros_Menu menu) {
         this.menu = menu;
@@ -20,22 +21,27 @@ public class GameWorld {
         currentState = Cowboy_bros_Menu.GameState.GAMEPLAY; // Start in playing state
         
     }
-
+    
     // Method to move all objects in the world
     public void MoveObjects(int dx) {
-        totalOffset -= dx;
-        //System.out.println("MOVING OBJECTS");
-        for (GameObject obj : objects) {
-            obj.ShiftPosition(dx);
-            
-        }
-        for (MoveableGameObject obj : moveableObjects){
-            obj.ShiftPosition(dx);
-        }
-        if (boss != null)
+        if (!Cowboy_brothers.olly.player.CheckUnderGround(-2, dx))
         {
-            boss.ShiftPosition(dx);
+            totalOffset -= dx;
+            //System.out.println("MOVING OBJECTS");
+            for (GameObject obj : objects) {
+                obj.ShiftPosition(dx);
+
+            }
+            for (MoveableGameObject obj : moveableObjects){
+                obj.ShiftPosition(dx);
+            }
+            if (boss != null)
+            {
+                boss.ShiftPosition(dx);
+            }
         }
+        else {System.out.println("REQUESTED MOVEMENT PROHIBITED (" + debugCount + ")"); debugCount++;}
+            
     }
     
 }

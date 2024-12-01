@@ -85,7 +85,7 @@ public class GameMaster {
     }
     private void resetCurrentLevel() {
         // Reset player state
-        player.resetPosition(40, 380); // Example starting position
+        player.resetPosition(200, 380); // Example starting position
         //player.setMaxUnlockedLevel(0); // Reset max level if needed
         player.setBulletCountToFull(); // Reset ammo
         Cowboy_brothers.olly.player.currentHealth = Cowboy_brothers.olly.player.getMaxHealth(); // Reset health to maximum

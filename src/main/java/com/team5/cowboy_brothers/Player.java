@@ -24,6 +24,7 @@ public class Player extends Rectangle implements Serializable {
     private final int MAX_AMMO = 6;
     final int MAX_HEALTH = 3;
     private final int GRAVITY = 2;
+    private final int INVERSE_GRAVITY = -5;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
     private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map
     private List<Bullet> bullets = new ArrayList<>();
@@ -266,18 +267,33 @@ public class Player extends Rectangle implements Serializable {
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
-            int pX = x;// + Cowboy_brothers.olly.gameWorld.totalOffset;
-            /*Lvl1 l1 = (Lvl1) Cowboy_brothers.olly.LoadedLevel;
-            Ground g1 = l1.g;
-            System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);*/
+            int pX = x;
+            //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
             int GND_WIDTH = 33*g.tilesize;
             int GND_HEIGHT = 33;
-            //var bb = new BoundingBox(g.GetX(), g.GetY(), g.GetX()+GND_WIDTH, g.GetY(), g.GetX()+GND_WIDTH,
-            //                    g.GetY()+GND_HEIGHT,g.GetX(),g.GetY()+GND_HEIGHT, targetPanel);
-            //targetPanel.AddBoundingBox(bb);
             if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH &&
-                        this.y + this.height > g.GetY() && this.y < g.GetY() + GND_HEIGHT) {
-                //System.out.println("Ground colission!");
+                        this.y + this.height > g.GetY() && this.y +(((this.height*0.9))) < g.GetY() + GND_HEIGHT) {
+                
+                if (CheckUnderGround(0,0)) {y-=INVERSE_GRAVITY;}
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean CheckUnderGround(int exOffset, int xOffset)
+    {
+        // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
+            int pX = x;
+            final int trueOffset = exOffset-3;
+            //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
+            final int GND_WIDTH = 33*g.tilesize;
+            final int GND_HEIGHT = 33;
+            if (pX + this.width+trueOffset+xOffset > g.GetX() && pX-trueOffset+xOffset < g.GetX() + GND_WIDTH &&
+                        this.y + this.height+trueOffset > g.GetY() && this.y-trueOffset < g.GetY() + GND_HEIGHT) {
+                
                 return true;
             }
         }

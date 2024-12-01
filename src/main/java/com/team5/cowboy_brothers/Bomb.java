@@ -118,8 +118,8 @@ public class Bomb extends MoveableGameObject{
         if (updateTimer != null)
         {
             updateTimer.removeActionListener(updateTimer.getActionListeners()[0]);
-        updateTimer.stop();
-        updateTimer = null;
+            updateTimer.stop();
+            updateTimer = null;
         }
         
         if (targetPanel != null) {targetPanel = null;}
