@@ -293,7 +293,8 @@ public class Cowboy_bros_Menu extends JFrame {
                 timerLabel.setText("Timer: 100");
                 // Set the player's direction to right
                 Cowboy_brothers.olly.player.CheckForDirectionChange(1);
-                switchState(GameState.GAMEPLAY);    
+                switchState(GameState.GAMEPLAY);   
+                Cowboy_brothers.olly.gameWorld.boss.setPaused(false);
             }
         });
         
@@ -303,7 +304,7 @@ public class Cowboy_bros_Menu extends JFrame {
                //continue from the pause menu
                tempPauseValue=new PauseButtonValue();
                switchState(GameState.GAMEPLAY);
-               
+               Cowboy_brothers.olly.gameWorld.boss.setPaused(false);
            } 
         });
         levelSel.addActionListener(new ActionListener(){
@@ -318,12 +319,17 @@ public class Cowboy_bros_Menu extends JFrame {
     }
     // Function to switch between game states
     public void switchState(GameState Menu) {
+        currentState = Menu;
         if ((currentState == GameState.GAMEPLAY || currentState == GameState.PAUSE_MENU || currentState == GameState.WIN_MENU || currentState == GameState.LOSE_MENU) && (Menu == GameState.LEVEL_SELECT || Menu == GameState.MAIN_MENU))
         {
             //dispose of objects if leaving gameplay screen
             Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         }
-        currentState = Menu;
+        if (currentState == GameState.PAUSE_MENU) 
+        {
+           Cowboy_brothers.olly.gameWorld.boss.setPaused(true);
+        }
+        
 
         // Show/hide panels based on current state
         mainMenuPanel.setVisible(currentState == GameState.MAIN_MENU);

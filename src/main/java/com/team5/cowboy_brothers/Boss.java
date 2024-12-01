@@ -22,7 +22,8 @@ public class Boss{
     private GamePanel targetPanel;
     Timer updateTimer, bombTimer, fallTimer;
     protected int height, width;
-    public Boss(int x, int y, GamePanel t)
+    private boolean isPaused = false;
+    public Boss(int x, int y, GamePanel t)     
     {
         this.x = x;
         this.y = y;
@@ -176,10 +177,13 @@ public class Boss{
         g.drawImage(sprite, x, y, null); // Draw the bullet sprite
         //System.out.println("Drawing GameObject");
     }
-    
+    public void setPaused(boolean paused) {
+        this.isPaused = paused;
+    }
     
     private void ThrowBomb()
     {
+        if (isPaused) return;
         //int t = x-Cowboy_brothers.olly.gameWorld.totalOffset;
         //System.out.println("Boss position = " + t);
         Point source = new Point(x,y);
