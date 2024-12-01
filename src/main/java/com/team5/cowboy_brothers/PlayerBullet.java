@@ -3,14 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.team5.cowboy_brothers;
-import javax.swing.*;
-import javax.swing.Timer;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.imageio.ImageIO;
 
@@ -63,22 +61,29 @@ public class PlayerBullet extends Bullet {
     @Override
     protected boolean CheckCollision()
     {
-        for (Enemy e : new CopyOnWriteArrayList<>(targetPanel.listOfEnemys)) 
-        {
+        Iterator<Enemy> iterator = targetPanel.listOfEnemys.iterator();
+        while (iterator.hasNext()) {
+            Enemy e = iterator.next();
             final int ENEMY_WIDTH = e.getWidth();
             final int ENEMY_HEIGHT = e.getHeight();
-            System.out.println("CHECKING " + this.x + "+"+this.width+">"+e.GetX()+"&"+x+"<"+e.GetX()+"+"+ENEMY_WIDTH
-            +"&"+y+"+"+height+">"+e.GetY()+"&"+y+"<"+e.GetY()+"+"+ENEMY_HEIGHT);
-            
+            System.out.println("CHECKING " + this.x + "+" + this.width + ">" + e.GetX() + "&" + x + "<" + e.GetX() + "+" + ENEMY_WIDTH
+                + "&" + y + "+" + height + ">" + e.GetY() + "&" + y + "<" + e.GetY() + "+" + ENEMY_HEIGHT);
+
             if (this.x + this.width > e.GetX() && this.x < e.GetX() + ENEMY_WIDTH &&
-                        this.y + this.height > e.GetY() && this.y < e.GetY() + ENEMY_HEIGHT) {
+                this.y + this.height > e.GetY() && this.y < e.GetY() + ENEMY_HEIGHT) {
                 System.out.println("bullet hit enemy");
-                e.Dispose();
-                Dispose();
-                return true;
+
+                // Dispose the enemy and remove it from the list
+                e.Dispose();  // Ensure this handles enemy cleanup
+                iterator.remove();  // Removes the current enemy from the original list
+
+                // Dispose the bullet
+                Dispose();  // Ensure this disposes of the bullet
+
+                return true;  // Indicate that a collision happened
             }
-            
         }
+
         if (targetPanel.boss != null)
         {
             Boss e=targetPanel.boss;
