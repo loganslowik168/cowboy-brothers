@@ -350,19 +350,10 @@ public class Player extends Rectangle implements Serializable {
     }
     private void Die()
     {
-<<<<<<< HEAD
-=======
-        System.out.println("PLAYER DIED **********************************************");
->>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
         //change screen to lose screen
         System.out.print("Hello Olly");
         if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.Die();}
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
-<<<<<<< HEAD
-        
-=======
-        //Dispose();
->>>>>>> e081ead379d4506a5ef4292b0953fd34a0249cfc
     }
     public void checkWinCondition() {
         // Assuming you have a method to check if the player has reached the flag or completed the level
