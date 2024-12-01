@@ -328,7 +328,23 @@ public class Cowboy_bros_Menu extends JFrame {
         if (currentState == GameState.PAUSE_MENU) 
         {
            Cowboy_brothers.olly.gameWorld.boss.setPaused(true);
+           for (MoveableGameObject obj : Cowboy_brothers.olly.gameWorld.moveableObjects) 
+           {
+                if (obj instanceof Bomb) 
+                {
+                    ((Bomb) obj).pauseTimer(); // Pause the bomb's timer
+                }
+           } 
         }
+        if (currentState == GameState.GAMEPLAY) 
+           {
+                for (MoveableGameObject obj : Cowboy_brothers.olly.gameWorld.moveableObjects) 
+                {
+                    if (obj instanceof Bomb) {
+                        ((Bomb) obj).resumeTimer(); // Resume the bomb's timer
+                    }
+                }
+           }
         
 
         // Show/hide panels based on current state
