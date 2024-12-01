@@ -46,6 +46,7 @@ public class GameMaster {
     public void LoadLevel(int lvl)
     {
         // Reset the current level state
+        clearBossAndDynamite();
         resetCurrentLevel();
         switch(lvl)
         { 
@@ -87,7 +88,8 @@ public class GameMaster {
         player.resetPosition(40, 380); // Example starting position
         //player.setMaxUnlockedLevel(0); // Reset max level if needed
         player.setBulletCountToFull(); // Reset ammo
-    
+        Cowboy_brothers.olly.player.currentHealth = Cowboy_brothers.olly.player.getMaxHealth(); // Reset health to maximum
+
         // Clear game objects in the GamePanel
         gameplayPanel.clearGameObjects(); // Implement this method in GamePanel
     }
@@ -96,6 +98,22 @@ public class GameMaster {
     public void IncrementMaxLevelUnlocked() {
     if (player.getMaxUnlockedLevel() <= player.getMaxUnlockedLevel() + 1) {
         player.setMaxUnlockedLevel(player.getMaxUnlockedLevel() + 1);
+    }
+}
+private void clearBossAndDynamite() {
+    // Clear the boss if it exists
+    if (gameWorld.boss != null) {
+        gameWorld.boss.Dispose(); // Dispose of the boss object
+        gameWorld.boss = null; // Set boss reference to null
+    }
+    
+    // Clear all dynamite objects (assuming you have a way to track them)
+    for (int i = gameWorld.moveableObjects.size() - 1; i >= 0; i--) {
+        MoveableGameObject obj = gameWorld.moveableObjects.get(i);
+        if (obj instanceof Bomb) { // Check if the object is a Bomb
+            obj.Dispose(); // Dispose of the bomb object
+            gameWorld.moveableObjects.remove(i); // Remove it from the list
+        }
     }
 }
     public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}

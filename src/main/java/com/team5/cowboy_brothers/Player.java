@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Player extends Rectangle implements Serializable {
     private static final int NUM_OF_LEVELS = 5;
     private int x, y; // Player's position
-    private int currentHealth;
+    int currentHealth;
     private int currentAmmo;
     private int maxUnlockedLevel;
     private int currentScore;
@@ -22,10 +22,10 @@ public class Player extends Rectangle implements Serializable {
     private final int MOVE_SPEED = 15;
     public final int JUMP_HEIGHT = 20;
     private final int MAX_AMMO = 6;
-    private final int MAX_HEALTH = 3;
+    final int MAX_HEALTH = 3;
     private final int GRAVITY = 2;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
-
+    private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map
     private List<Bullet> bullets = new ArrayList<>();
     private int direction; // Player's direction
     private int bulletSpeed = 30; // Speed of the bullets
@@ -308,9 +308,33 @@ public class Player extends Rectangle implements Serializable {
         currentHealth-=h;
         if (currentHealth <= 0) {Die();}
     }
+    public int getMaxHealth() {
+        return MAX_HEALTH;
+    }
     private void Die()
     {
+        
+        // Transition to lose screen
+        Cowboy_brothers.olly.VisibleMenu.switchState(Cowboy_bros_Menu.GameState.LOSE_MENU);
         Dispose();
+
+    }
+    public void checkWinCondition() {
+        // Assuming you have a method to check if the player has reached the flag or completed the level
+        if (hasReachedWinCondition()) {
+            Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
+        }
+    }
+    public boolean isOffScreen() {
+        // Check if the player's Y-coordinate exceeds the death limit
+        return y > DEATH_LIMIT;
+    }
+    
+    // Example method to check win condition (this would depend on your game's logic)
+    private boolean hasReachedWinCondition() {
+        // Implement your logic here to determine if the player has reached the win condition
+        // For example, checking if the player has touched a flag or reached a certain score
+        return false; // Replace with actual condition
     }
     
     private void Dispose()
