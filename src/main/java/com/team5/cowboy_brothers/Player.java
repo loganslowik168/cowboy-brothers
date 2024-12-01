@@ -274,7 +274,7 @@ public class Player extends Rectangle implements Serializable {
             //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
             int GND_WIDTH = 33*g.tilesize;
             int GND_HEIGHT = 33;
-            if (pX + this.width > g.GetX() && pX < g.GetX() + GND_WIDTH && 
+            if (pX + this.width > g.GetXOffset() && pX < g.GetXOffset() + GND_WIDTH && 
                         this.y + this.height > g.GetY() && this.y +(((this.height*0.9))) < g.GetY() + GND_HEIGHT) {
                 
                 if (CheckUnderGround(0,0)) {y-=INVERSE_GRAVITY;}
@@ -295,7 +295,7 @@ public class Player extends Rectangle implements Serializable {
             //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
             final int GND_WIDTH = 33*g.tilesize;
             final int GND_HEIGHT = 33;
-            if (pX + this.width+trueOffset+xOffset > g.GetX() && pX-trueOffset+xOffset < g.GetX() + GND_WIDTH &&
+            if (pX + this.width+trueOffset+xOffset > g.GetXOffset() && pX-trueOffset+xOffset < g.GetXOffset() + GND_WIDTH &&
                         this.y + this.height+trueOffset > g.GetY() && this.y-trueOffset < g.GetY() + GND_HEIGHT) {
 
                 return true;

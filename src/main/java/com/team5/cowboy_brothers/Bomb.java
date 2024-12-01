@@ -168,7 +168,7 @@ public class Bomb extends MoveableGameObject{
             int tY = saloon.GetY();
             int bY = tY+261;
 
-            Point saloonPosition = new Point(saloon.GetX()+saloon.GetX(),201);
+            Point saloonPosition = new Point(saloon.GetX()+saloon.GetXOffset(),201);
             boolean withinX = ((currentPosition.x>saloonPosition.x) && (currentPosition.x<saloonPosition.x+578));
             boolean withinY = ((currentPosition.y>saloonPosition.y) && (currentPosition.y<saloonPosition.y+261));
             if (withinX && withinY)

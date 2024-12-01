@@ -105,6 +105,6 @@ public abstract class GameObject extends Rectangle{
     {
         sprite = newSprite;
     }
-    public int GetX() {return x;} //yes i know these are the same
+    public int GetXOffset() {return x;} //yes i know these are the same
     public int GetY() {return y;}
 }
