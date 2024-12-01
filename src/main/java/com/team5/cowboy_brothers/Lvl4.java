@@ -8,11 +8,13 @@ import java.awt.*;
 public class Lvl4 extends Map {
     Enemy enemy1;
     Enemy enemy2;
+    Enemy enemy3;
+    Enemy enemy4;
     public Lvl4() {
         super(800, 600); // Example dimensions
         loadMapStats();
         InitializeTerrain();
-        
+        InitializeEnemies();
     }
 private void InitializeTerrain() {
         // example lvl 4{if (olly == null) olly = new GameMaster();}
@@ -109,12 +111,18 @@ public void InitializeEnemies(){
         //make the level's enemies
         int TileSize=33;
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
-        int[][] path = {{3960,TileSize*15-84},{5610,TileSize*15-84}};
-        int[][] path2 = {{300,TileSize*15-84},{400,TileSize*15-84}};
+        int[][] path = {{1100,TileSize*14-84},{1500,TileSize*14-84}};
+        int[][] path2 = {{3000,TileSize*14-84},{3500,TileSize*14-84}};
+        int[][] path3 = {{3000,TileSize*10-84},{3000,TileSize*10-84}};
+        int[][] path4 = {{1300,TileSize*10-84},{1500,TileSize*10-84}};
         enemy1=new Enemy("Kylie",t);
         enemy2=new Enemy("Sammy",t);
+        enemy3=new Enemy("Sammmy",t);
+        enemy4=new Enemy("Sammmmy",t);
         enemy1.setPath(path);
-        enemy2.setPath(path2);    
+        enemy2.setPath(path2);
+        enemy3.setPath(path3);
+        enemy4.setPath(path4);
     }
     @Override
     public void loadMapStats() {
