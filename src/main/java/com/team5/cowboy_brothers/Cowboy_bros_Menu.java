@@ -319,12 +319,13 @@ public class Cowboy_bros_Menu extends JFrame {
     }
     // Function to switch between game states
     public void switchState(GameState Menu) {
-        currentState = Menu;
+        
         if ((currentState == GameState.GAMEPLAY || currentState == GameState.PAUSE_MENU || currentState == GameState.WIN_MENU || currentState == GameState.LOSE_MENU) && (Menu == GameState.LEVEL_SELECT || Menu == GameState.MAIN_MENU))
         {
             //dispose of objects if leaving gameplay screen
             Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         }
+        currentState = Menu;
         if (currentState == GameState.PAUSE_MENU) 
         {
            if(Cowboy_brothers.olly.gameWorld.boss!=null)Cowboy_brothers.olly.gameWorld.boss.setPaused(true);
