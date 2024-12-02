@@ -244,6 +244,7 @@ public class GamePanel extends JPanel {
     public void releaseAllKeysUnfocused(KeyHandler kh){
         if(!(this.hasFocus())){
             kh.MenuRelease();
+            //Cowboy_brothers.olly.VisibleMenu.RecreateKeyHandler();
         }
     }
 }

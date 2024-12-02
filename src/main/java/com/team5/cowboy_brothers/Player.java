@@ -316,15 +316,8 @@ public class Player extends Rectangle implements Serializable {
         
         return false;
     }
-    private boolean checkFlagCollision(){
-        return false;
-    }
     
-    private void bubbleCollision(){
-        do {this.y-=1;System.out.println("x: "+x+", y: "+y);}
-        while(CheckGroundCollision());
-        
-    }
+    
     public int getCurrentHealth() {
                 return currentHealth;  // Return current health
             }
@@ -365,15 +358,9 @@ public class Player extends Rectangle implements Serializable {
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
 
     }
-    public void checkWinCondition() {
-        // Assuming you have a method to check if the player has reached the flag or completed the level
-        if (hasReachedWinCondition()) {
-            Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
-        }
-    }
     // Function to see if player is offscreen and makes them lose level if they are
    public boolean isPlayerOffScreen() {
-    if (y > 600) {
+    if (y > DEATH_LIMIT) {
         System.out.println("Player fell to death!");
          Cowboy_brothers.olly.VisibleMenu.loseMenu();
         return true; // Player is off-screen
@@ -390,20 +377,8 @@ public class Player extends Rectangle implements Serializable {
             }
         }, 0, 2000); // Run task every 5 seconds
     }
-    // Example method to check win condition (this would depend on your game's logic)
-    private boolean hasReachedWinCondition() {
-        // Implement your logic here to determine if the player has reached the win condition
-        // For example, checking if the player has touched a flag or reached a certain score
-        return false; // Replace with actual condition
-    }
     
-    private void Dispose()
-    {
-        if(gravityAndCollisionTimer!=null){gravityAndCollisionTimer = null;}
-        if(targetPanel!=null){targetPanel = null;}
-        //sprite = null;
-    }
-    
+
     
     private boolean CheckFlagCollision()
     {
@@ -413,6 +388,11 @@ public class Player extends Rectangle implements Serializable {
             if (x + this.width > f.GetXOffset() && x < f.GetXOffset() + f.width && 
                         this.y + this.height > f.GetY() && this.y +(((this.height*0.9))) < f.GetY() + f.height) {
                 Cowboy_brothers.olly.VisibleMenu.winMenu();
+                targetPanel.flag = null;
+                if (Cowboy_brothers.olly.Selectedlvl == maxUnlockedLevel)
+                {
+                    maxUnlockedLevel++;
+                }
                 
                 return true;
             }

@@ -17,6 +17,9 @@ public class GameMaster {
     String filePath = "player.ser"; // Path to the serialized player file
     public boolean IsThereASaloon = false;
     public int Selectedlvl;
+    
+    KeyHandler KH;
+    
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
@@ -25,6 +28,9 @@ public class GameMaster {
         VisibleMenu.gameplayPanel.setPlayer(player);
         gameplayPanel = VisibleMenu.gameplayPanel;
         gameWorld = new GameWorld(VisibleMenu);
+        
+        KH = new KeyHandler();
+        gameplayPanel.addKeyListener(KH);
 
     }
     
@@ -57,6 +63,7 @@ public class GameMaster {
                 System.out.println("Load level 1. --olly");
                 resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl1();
+                Selectedlvl = lvl;
                 new HUD(player,1,VisibleMenu.gameplayPanel);
             }
             case 2 -> 
@@ -64,6 +71,7 @@ public class GameMaster {
                 System.out.println("Load level 2. --olly");
                 resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl2();
+                Selectedlvl = lvl;
                 new HUD(player,2,VisibleMenu.gameplayPanel);
             }
             case 3 -> 
@@ -72,6 +80,7 @@ public class GameMaster {
                 resetCurrentLevel(105, 95);
                 new HUD(player,3,VisibleMenu.gameplayPanel);
                 LoadedLevel = new Lvl3();
+                Selectedlvl = lvl;
             }
             case 4 -> 
             {
@@ -79,6 +88,7 @@ public class GameMaster {
                 new HUD(player,4,VisibleMenu.gameplayPanel);
                 resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl4();
+                Selectedlvl = lvl;
             }
             case 5 -> 
             {
@@ -86,6 +96,7 @@ public class GameMaster {
                 resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl5();
                 new HUD(player,5,VisibleMenu.gameplayPanel);
+                Selectedlvl = lvl;
             }
             default -> System.out.println("ERROR. Please select a level between 1 and 5 inclusive! --olly");
         }

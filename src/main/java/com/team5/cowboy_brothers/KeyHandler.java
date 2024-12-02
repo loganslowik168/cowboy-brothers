@@ -74,6 +74,7 @@ public class KeyHandler extends KeyAdapter {
 
     public void update() {
         // Smoothly move the player based on whether keys are being held down
+        if (!Cowboy_brothers.olly.gameplayPanel.hasFocus()) {return;}
         if (movingLeft) {
             gw.MoveObjects(Cowboy_brothers.olly.player.GetMoveSpeed()); // Move left continuously
         }
