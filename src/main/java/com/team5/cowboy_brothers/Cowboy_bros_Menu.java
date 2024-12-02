@@ -254,8 +254,8 @@ public class Cowboy_bros_Menu extends JFrame {
     
     retryButton.addActionListener(e -> {
         // Logic to retry the level
-        resetCurrentLevel();
         switchState(GameState.GAMEPLAY);
+        resetCurrentLevel();
          // Reset player state for the retry
          
     });
@@ -400,7 +400,7 @@ public class Cowboy_bros_Menu extends JFrame {
         gameplayPanel.clearGameObjects(); // Clear bullets, enemies, and grounds
     
         // Reload the current level
-        int currentLevel = Cowboy_brothers.olly.gameWorld.Selectedlvl; // Get the current level
+        int currentLevel = Cowboy_brothers.olly.Selectedlvl; // Get the current level
         Cowboy_brothers.olly.LoadedLevel.DisposeEnemies();
         Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         Cowboy_brothers.olly.LoadLevel(currentLevel); // Reload the level

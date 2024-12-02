@@ -301,7 +301,7 @@ public class Player extends Rectangle implements Serializable {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
             int pX = x;
-            final int trueOffset = exOffset-3;
+            final int trueOffset = exOffset-10;
             //System.out.println("gnd @ " + g1.GetX() + "," + g1.GetY() + " p @ " + pX + "," + y);
             final int GND_WIDTH = 33*g.tilesize;
             final int GND_HEIGHT = 33;
