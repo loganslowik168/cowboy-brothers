@@ -50,8 +50,7 @@ public abstract class Map {
     }
     public void DisposeObjects()
     {
-        System.out.println("Nullifying gameobjects");
-        
+        Cowboy_brothers.olly.player.SetGravity(false);
         for (int i = 0; i < Cowboy_brothers.olly.gameWorld.objects.size(); i++) {
             GameObject obj = Cowboy_brothers.olly.gameWorld.objects.get(i);
             obj.Dispose();  // Clean up resources
