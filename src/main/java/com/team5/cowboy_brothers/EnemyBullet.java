@@ -42,7 +42,7 @@ public class EnemyBullet extends Bullet {
         try {
             sprite = ImageIO.read(new File("sprites/black.png"));
             super.setSprite(sprite);
-            System.out.println("Sprite loaded successfully.");
+        //    System.out.println("Sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
@@ -56,7 +56,7 @@ public class EnemyBullet extends Bullet {
         int P_HEIGHT = 74;
         if (this.x + this.width > pX && this.x < pX + P_WIDTH &&
                     this.y + this.height > pY && this.y < pY + P_HEIGHT) {
-            System.out.println("Bullet hit player!");
+          System.out.println("Bullet hit player!"); 
             Cowboy_brothers.olly.player.Hurt(1);
             Dispose();
             return true;

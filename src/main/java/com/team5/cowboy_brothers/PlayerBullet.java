@@ -32,7 +32,7 @@ public class PlayerBullet extends Bullet {
         try {
             sprite = ImageIO.read(new File(filePath));
             super.setSprite(sprite);
-            System.out.println("Sprite loaded successfully.");
+          //  System.out.println("Sprite loaded successfully."); 
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
@@ -41,7 +41,7 @@ public class PlayerBullet extends Bullet {
         try {
             sprite = ImageIO.read(new File("sprites/black.png"));
             super.setSprite(sprite);
-            System.out.println("Sprite loaded successfully.");
+          //  System.out.println("Sprite loaded successfully.");
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
@@ -71,7 +71,7 @@ public class PlayerBullet extends Bullet {
 
             if (this.x + this.width > e.GetX() && this.x < e.GetX() + ENEMY_WIDTH &&
                 this.y + this.height > e.GetY() && this.y < e.GetY() + ENEMY_HEIGHT) {
-                System.out.println("bullet hit enemy");
+               // System.out.println("bullet hit enemy");
 
                 // Dispose the enemy and remove it from the list
                 
@@ -91,7 +91,7 @@ public class PlayerBullet extends Bullet {
             final int ENEMY_HEIGHT = e.getHeight();
             if (this.x + this.width > e.GetX() && this.x < e.GetX() + ENEMY_WIDTH &&
                         this.y + this.height > e.GetY() && this.y < e.GetY() + ENEMY_HEIGHT) {
-                System.out.println("bullet hit boss!!");
+             //   System.out.println("bullet hit boss!!");
                 e.Hurt(1);
                 Dispose();
                 return true;

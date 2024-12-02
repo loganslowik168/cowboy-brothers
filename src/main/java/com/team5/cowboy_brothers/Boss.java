@@ -111,16 +111,16 @@ public class Boss{
     {
         int oldDir = direction;
         //int i1 = Cowboy_brothers.olly.player.GetX();//-Cowboy_brothers.olly.gameWorld.totalOffset;
-        //System.out.println(i1 + " vs " + x);
+        //System.out.println(i1 + " vs " + x); //This statement is not needed for now
         if (Cowboy_brothers.olly.player.GetX() > x) {direction = 1;}
         else {direction = -1;}
         CheckForDirectionChange(oldDir);
     }
     public void CheckForDirectionChange(int dir) {
-        //System.out.println(direction + " vs " + dir);
+        //System.out.println(direction + " vs " + dir); //This statement is not needed for now
         if (direction != dir)
         {
-            System.out.println("Boss face left = " + (sprite == spriteL));
+            //System.out.println("Boss face left = " + (sprite == spriteL)); //This statement is not needed for now
             switch (direction) {
                 case -1 -> 
                 {
@@ -164,13 +164,13 @@ public class Boss{
     private void loadSprites(String filePathL, String filePathR) {
         try {
             spriteL = ImageIO.read(new File(filePathL));
-            System.out.println("Left sprite loaded successfully.");
+            //System.out.println("Left sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading left sprite: " + e.getMessage());
         }
         try {
             spriteR = ImageIO.read(new File(filePathR));
-            System.out.println("Right sprite loaded successfully.");
+            //System.out.println("Right sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading right sprite: " + e.getMessage());
         }

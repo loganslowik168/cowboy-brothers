@@ -40,7 +40,7 @@ public abstract class Bullet extends MoveableGameObject{
             case -1 -> sprite=spriteL;
             default -> throw new IllegalArgumentException("Bullet irection must be 1 or -1");
         }
-        System.out.println("Bullet size = " + this.width + "x" + this.height);
+        //System.out.println("Bullet size = " + this.width + "x" + this.height); //This statement is not needed for now
         
         //Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
     }
@@ -48,13 +48,13 @@ public abstract class Bullet extends MoveableGameObject{
     private void loadSprites(String filePathL, String filePathR) {
         try {
             spriteL = ImageIO.read(new File(filePathL));
-            System.out.println("Left sprite loaded successfully.");
+        //    System.out.println("Left sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading left sprite: " + e.getMessage());
         }
         try {
             spriteR = ImageIO.read(new File(filePathR));
-            System.out.println("Right sprite loaded successfully.");
+          //  System.out.println("Right sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading right sprite: " + e.getMessage());
         }
