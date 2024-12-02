@@ -25,11 +25,9 @@ private void InitializeTerrain() {
         new Ground(GROUND_TILE_SIZE * 15, (int)(GROUND_TILE_SIZE * 13), 5, t);
         
        //Ground Level
-        new Ground(GROUND_TILE_SIZE * 22, (int)(GROUND_TILE_SIZE * 15), 1, t);
-        new Ground(GROUND_TILE_SIZE * 24, (int)(GROUND_TILE_SIZE * 15), 10, t);
+        new Ground(GROUND_TILE_SIZE * 23, (int)(GROUND_TILE_SIZE * 15), 10, t);
         new Ground(GROUND_TILE_SIZE * 36, (int)(GROUND_TILE_SIZE * 15), 5, t);
        //height increase platform
-        new Ground(GROUND_TILE_SIZE * 42, (int)(GROUND_TILE_SIZE * 14.8), 5, t);
 	new Ground(GROUND_TILE_SIZE * 42, (int)(GROUND_TILE_SIZE * 14.2), 5, t);
        
         //3 steps
@@ -49,14 +47,14 @@ private void InitializeTerrain() {
         new Ground(GROUND_TILE_SIZE * 90, (int)(GROUND_TILE_SIZE * 6.4), 5, t);
         new Ground(GROUND_TILE_SIZE * 96, (int)(GROUND_TILE_SIZE * 5.7), 5, t);
         new Ground(GROUND_TILE_SIZE * 102, (int)(GROUND_TILE_SIZE * 5.7), 5, t);
-        new Ground(GROUND_TILE_SIZE * 108, (int)(GROUND_TILE_SIZE * 5.0), 3, t);
+        new Ground(GROUND_TILE_SIZE * 108, (int)(GROUND_TILE_SIZE * 5.0), 5, t);
         new Ground(GROUND_TILE_SIZE * 111, (int)(GROUND_TILE_SIZE * 5.0), 1, t);
         
         //End Barrier wall
-        new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 14.8), 3, t);
+        /*new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 14.8), 3, t);
 	new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 14.2), 3, t);
 	new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 13.6), 3, t);
-	new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 13), 3, t);
+	new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 13), 3, t);*/
 	new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 12.6), 3, t);
         // Lower Path (Easier)
         new Ground(GROUND_TILE_SIZE * 62, (int)(GROUND_TILE_SIZE * 14.2), 3, t);
@@ -66,9 +64,7 @@ private void InitializeTerrain() {
         new Ground(GROUND_TILE_SIZE * 84, (int)(GROUND_TILE_SIZE * 14.2), 1, t);
         new Ground(GROUND_TILE_SIZE * 84, (int)(GROUND_TILE_SIZE * 13.8), 1, t);
         new Ground(GROUND_TILE_SIZE * 88, (int)(GROUND_TILE_SIZE * 14.2), 1, t);
-        new Ground(GROUND_TILE_SIZE * 92, (int)(GROUND_TILE_SIZE * 13.8), 1, t);
-        new Ground(GROUND_TILE_SIZE * 95, (int)(GROUND_TILE_SIZE * 13.2), 3, t);
-        new Ground(GROUND_TILE_SIZE * 99, (int)(GROUND_TILE_SIZE * 12.6), 1, t);
+        new Ground(GROUND_TILE_SIZE * 94, (int)(GROUND_TILE_SIZE * 13.2), 3, t);
         new Ground(GROUND_TILE_SIZE * 101, (int)(GROUND_TILE_SIZE * 12.0), 3, t);
         new Ground(GROUND_TILE_SIZE * 102, (int)(GROUND_TILE_SIZE * 11.4), 1, t);
         new Ground(GROUND_TILE_SIZE * 103, (int)(GROUND_TILE_SIZE * 11.4), 1, t);
