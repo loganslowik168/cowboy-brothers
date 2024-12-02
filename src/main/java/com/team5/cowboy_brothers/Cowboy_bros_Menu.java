@@ -136,7 +136,6 @@ public class Cowboy_bros_Menu extends JFrame {
                     System.out.println("You selected Level " + levelNumber + " MAX=" + Cowboy_brothers.olly.player.getMaxUnlockedLevel());
                     if(Cowboy_brothers.olly.CheckLevelUnlocked(levelNumber))
                     {
-                        Cowboy_brothers.olly.gameWorld.Selectedlvl = levelNumber; // Update the selected level
                         switchState(GameState.GAMEPLAY);  // Switch to gameplay
                         Cowboy_brothers.olly.LoadLevel(levelNumber);
                     }

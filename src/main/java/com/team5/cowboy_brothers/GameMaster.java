@@ -137,7 +137,8 @@ private void clearBossAndDynamite() {
     public void ResetPlayerProgress() 
     {
         System.out.println("PROGRESS HAS BEEN RESET");
-        player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);
+        player.setMaxUnlockedLevel(1);
+        //player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);
         VisibleMenu.gameplayPanel.setPlayer(player);
     }
 }
