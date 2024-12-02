@@ -157,6 +157,8 @@ public class Boss{
         sprite = null;
         spriteL = null;
         spriteR = null;
+        
+        if (targetPanel != null ) {targetPanel.clearGameObjects();}
     }
     
     

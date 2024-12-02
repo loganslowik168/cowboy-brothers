@@ -14,7 +14,7 @@ public class GameMaster {
 
     public GameWorld gameWorld; 
     public Map LoadedLevel;
-    String filePath = "player.ser"; // Path to the serialized player file
+    
     public boolean IsThereASaloon = false;
     public int Selectedlvl;
     

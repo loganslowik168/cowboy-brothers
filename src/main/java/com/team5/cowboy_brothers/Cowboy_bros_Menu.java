@@ -125,7 +125,9 @@ public class Cowboy_bros_Menu extends JFrame {
         "Boss Level"
     };
         for (int i = 1; i <= 5; i++) {
-            JButton levelButton = new JButton("Level " + i + " -- " + levelDescriptors[i-1]);
+            String t ="Level " + i + " -- " + levelDescriptors[i-1];
+            if (Cowboy_brothers.olly != null) {if (Cowboy_brothers.olly.player.getMaxUnlockedLevel() < i) {t="LOCKED";}}
+            JButton levelButton = new JButton(t);
             levelButton.setFont(new Font("Arial", Font.BOLD, 24));
             levelSelectPanel.add(levelButton);
 
@@ -178,11 +180,6 @@ public class Cowboy_bros_Menu extends JFrame {
         timerLabel.setText("Timer: 100");
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
         gameplayPanel.requestFocusInWindow();
-        
-        
-        
-        
-        
         
 
         backButton.addActionListener(new ActionListener() {
