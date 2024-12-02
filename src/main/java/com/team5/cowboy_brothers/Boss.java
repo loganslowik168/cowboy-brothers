@@ -15,7 +15,7 @@ public class Boss{
     
     private int x, y; // Player's position
     private int direction = -1;
-    private final int MAX_HEALTH = 5;
+    private final int MAX_HEALTH = 10;
     private int currentHealth;
     private int FALL_DISTANCE = 30;
     private BufferedImage sprite, spriteL, spriteR;
@@ -25,6 +25,7 @@ public class Boss{
     private boolean isPaused = false;
     public Boss(int x, int y, GamePanel t)     
     {
+        currentHealth = MAX_HEALTH;
         this.x = x;
         this.y = y;
         width = 44;
