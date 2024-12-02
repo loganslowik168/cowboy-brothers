@@ -10,9 +10,7 @@ import javax.swing.Timer;
 
 public class BossSaloon extends GameObject{
     private int x; // X position
-    private int y; // Y position
-    private int width; // Width of the object
-    private int height; // Height of the object
+    private int y;
     private BufferedImage sprite;
     private GamePanel targetPanel;
     Timer repaintTimer;
