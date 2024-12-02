@@ -83,4 +83,8 @@ public class KeyHandler extends KeyAdapter {
         }
 
     }
+    public void MenuRelease(){
+        movingLeft = false;
+        movingRight = false;
+    }
 }

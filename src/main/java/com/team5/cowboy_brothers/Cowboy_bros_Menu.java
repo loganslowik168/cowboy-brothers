@@ -325,6 +325,9 @@ public class Cowboy_bros_Menu extends JFrame {
             //dispose of objects if leaving gameplay screen
             Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         }
+        if(currentState==GameState.GAMEPLAY&&Menu!=GameState.GAMEPLAY){
+            gameplayPanel.releaseAllKeysUnfocused(KH);
+        }
         currentState=Menu;
         if (currentState == GameState.PAUSE_MENU) 
         {
