@@ -135,7 +135,7 @@ public class Cowboy_bros_Menu extends JFrame {
             levelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("You selected Level " + levelNumber);
+                    System.out.println("You selected Level " + levelNumber + " MAX=" + Cowboy_brothers.olly.player.getMaxUnlockedLevel());
                     if(Cowboy_brothers.olly.CheckLevelUnlocked(levelNumber))
                     {
                         Cowboy_brothers.olly.gameWorld.Selectedlvl = levelNumber; // Update the selected level
@@ -320,7 +320,9 @@ public class Cowboy_bros_Menu extends JFrame {
     // Function to switch between game states
     public void switchState(GameState Menu) {
         
-        if ((currentState == GameState.GAMEPLAY || currentState == GameState.PAUSE_MENU || currentState == GameState.WIN_MENU || currentState == GameState.LOSE_MENU) && (Menu == GameState.LEVEL_SELECT || Menu == GameState.MAIN_MENU))
+        if ((currentState == GameState.GAMEPLAY || currentState == GameState.PAUSE_MENU || currentState ==
+                GameState.WIN_MENU || currentState == GameState.LOSE_MENU) && (Menu == GameState.LEVEL_SELECT
+                || Menu == GameState.MAIN_MENU))
         {
             //dispose of objects if leaving gameplay screen
             Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
