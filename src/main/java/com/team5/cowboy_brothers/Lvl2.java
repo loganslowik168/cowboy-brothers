@@ -70,7 +70,7 @@ private void InitializeTerrain() {
         
         new Flag(GROUND_TILE_SIZE*179,(GROUND_TILE_SIZE*15-148), t);
 }
-    public void InitializeEnemies(){
+    private void InitializeEnemies(){
         //make the level's enemies
         int TileSize=33;
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
@@ -80,7 +80,8 @@ private void InitializeTerrain() {
         enemy2=new Enemy("Sam",t);
         enemy1.setPath(path);
         enemy2.setPath(path2);
-        
+        enemies.add(enemy1);
+        enemies.add(enemy2);
     }
     @Override
     public void loadMapStats() {

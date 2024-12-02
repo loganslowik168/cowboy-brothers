@@ -12,6 +12,8 @@ public class Flag extends GameObject {
     public Flag(int x, int y, GamePanel targetPanel) {
         super(x, y, "sprites/Flag.png",targetPanel);
         targetPanel.setFlag(this);
+        width = 64;
+        height = 148;
         //Cowboy_brothers.olly.gameWorld.objects.add(this);
     }
 
