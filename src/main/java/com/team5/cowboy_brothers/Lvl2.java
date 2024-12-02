@@ -37,7 +37,7 @@ private void InitializeTerrain() {
             new Ground((GROUND_TILE_SIZE*i*10), (GROUND_TILE_SIZE*10),10, t);
         }
         
-        new Ground(GROUND_TILE_SIZE*0, GROUND_TILE_SIZE*0,1, t);
+        
         //steps
         new Ground((GROUND_TILE_SIZE*59), (int)(GROUND_TILE_SIZE*15),5, t);
         new Ground((GROUND_TILE_SIZE*59), (int)(GROUND_TILE_SIZE*14.4),5, t);
@@ -65,7 +65,8 @@ private void InitializeTerrain() {
         new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*13.2),5, t);
         //Jump
         new Ground((GROUND_TILE_SIZE*109), (int)(GROUND_TILE_SIZE*13),5, t);
-        
+        new Ground((GROUND_TILE_SIZE*119), (int)(GROUND_TILE_SIZE*11.7),5, t);
+        new Ground((GROUND_TILE_SIZE*130), (int)(GROUND_TILE_SIZE*11),5, t);
        
         
         new Flag(GROUND_TILE_SIZE*179,(GROUND_TILE_SIZE*15-148), t);

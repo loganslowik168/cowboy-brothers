@@ -53,6 +53,7 @@ public class GameMaster {
     {
         // Reset the current level state
         clearBossAndDynamite();
+        player.SetGravity(true);
         
         switch(lvl)
         { 
@@ -103,7 +104,7 @@ public class GameMaster {
 
         // Clear game objects in the GamePanel
         gameplayPanel.clearGameObjects(); // Implement this method in GamePanel
-        player.serialize(filePath);
+        //player.serialize(filePath);
     }
     public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
 

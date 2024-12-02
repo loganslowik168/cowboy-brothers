@@ -31,11 +31,10 @@ public class KeyHandler extends KeyAdapter {
             case KeyEvent.VK_W -> {
                 //p.ChangeY(-p.JUMP_HEIGHT); // Handle jump
                 
-                    p.stopGravity();
-                
+                    p.AttemptJump();
             }
             case KeyEvent.VK_S -> {
-                p.ChangeY(p.JUMP_HEIGHT); // Handle crouch
+                //p.ChangeY(p.JUMP_HEIGHT); // Handle crouch
             }
             case KeyEvent.VK_A -> {
                 if (!movingLeft) {

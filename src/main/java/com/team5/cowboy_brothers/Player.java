@@ -102,12 +102,16 @@ public class Player extends Rectangle implements Serializable {
         }, 100, 1000 / 60); // ~60 FPS
     }
     //stop gravity for set time and jump a certain distance
-    public void stopGravity(){
+    public void AttemptJump(){
         //setup a timer to do a jump motion then to restart gravity
         if(ShouldGravitate&&!isFalling){
         jump();
-        ShouldGravitate=false;
+        SetGravity(false);
         }
+    }
+    public void SetGravity(boolean g)
+    {
+        ShouldGravitate = g;
     }
     int jumpDistanceTraveled=0;
     public void jump(){
@@ -117,7 +121,7 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 y-=1;
                 if(jumpDistanceTraveled==50){
-                    ShouldGravitate=true;
+                    SetGravity(true);
                     jumpDistanceTraveled=0;
                     jumpTimer.cancel();
                 }
