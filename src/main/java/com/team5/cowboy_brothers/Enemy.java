@@ -30,6 +30,7 @@ public class Enemy extends MoveableGameObject {
     private int screenWidth = 800;
     private int screenHeight = 600;
     private int[][] path; // Array to define the path with coordinates
+    private int[] stationaryPosit;
     private int pathIndex; // Current index in the path
     int count=0;
     BufferedImage LeftSprite,RightSprite;
@@ -78,6 +79,13 @@ public class Enemy extends MoveableGameObject {
         this.y = path[0][1];
         //check the direction of the path for the enemy to draw
         setSpriteDirection(0,1);
+        stationaryPosit=null;
+    }
+    public void setPath(int[] parapath){
+        stationaryPosit=parapath;
+        this.x=stationaryPosit[0];
+        this.y=stationaryPosit[1];
+        path=null;
     }
     public void setSpriteDirection(int currentIndexToCheck,int nextIndex){
         if(path[currentIndexToCheck][0]>path[nextIndex][0]){
@@ -90,13 +98,7 @@ public class Enemy extends MoveableGameObject {
             direction=1;
         }
     }
-    public void changePath(int dx){
-        for(int tx=0;tx<1;tx++){
-            for(int ty=0; ty<1;ty++){
-                
-            }
-        }
-    }
+    
     
     private void loadLSprite(String filePath) {
         try {
@@ -130,6 +132,7 @@ public class Enemy extends MoveableGameObject {
     boolean initDirect=true;
     @Override
     public void update() {
+        if(path!=null&&stationaryPosit==null){
         if(initDirect){
             if (pathIndex < path.length) {
                 destinationX = path[pathIndex][0];
@@ -205,14 +208,32 @@ public class Enemy extends MoveableGameObject {
                 update();
             }
         }
+        }else if(stationaryPosit!=null&&path==null){
+            if(targetPanel.player.GetX()<x){
+                facingLeft=true;
+                facingRight=false;
+                direction=-1;
+            }else{
+                facingLeft=false;
+                facingRight=true;
+                direction=1;
+            }
+        }
         
     }
     @Override
     public void ShiftPosition(int shift){
         x+= shift;
+    if(path!=null)
+    {
         for(int m=0;m<path.length;m++){
-            path[m][0]+=shift;
-        }
+            path[m][0]+=shift;}
+            
+    }
+    if(stationaryPosit!=null)
+    {
+        stationaryPosit[0]+=shift;
+    }
     }
 
     public void fireBullet() {
