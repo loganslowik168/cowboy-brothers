@@ -82,7 +82,7 @@ public class GameMaster {
                 //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("C:\\Users\\MONKE\\OneDrive\\Documents\\NetBeansProjects\\cowboy-brothers\\AudioFiles\\Western1.wav");
+                startMusic("AudioFiles/Western1.wav");
                 
                 new HUD(player,1,VisibleMenu.gameplayPanel);
             }
@@ -96,7 +96,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("C:\\Users\\MONKE\\OneDrive\\Documents\\NetBeansProjects\\cowboy-brothers\\AudioFiles\\Western2.wav");
+                startMusic("AudioFiles/Western2.wav");
                 
                 new HUD(player,2,VisibleMenu.gameplayPanel);
             }
@@ -109,7 +109,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("C:\\Users\\MONKE\\OneDrive\\Documents\\NetBeansProjects\\cowboy-brothers\\AudioFiles\\Western3.wav");
+                startMusic("AudioFiles/Western3.wav");
                 
                 LoadedLevel = new Lvl3();
                 Selectedlvl = lvl;
@@ -123,7 +123,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("C:\\Users\\MONKE\\OneDrive\\Documents\\NetBeansProjects\\cowboy-brothers\\AudioFiles\\Western4.wav");
+                startMusic("AudioFiles/Western4.wav");
                 
                 LoadedLevel = new Lvl4();
                 Selectedlvl = lvl;
@@ -136,7 +136,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("C:\\Users\\MONKE\\OneDrive\\Documents\\NetBeansProjects\\cowboy-brothers\\AudioFiles\\Western5.wav");
+                startMusic("AudioFiles/Western5.wav");
                 
                 LoadedLevel = new Lvl5();
                 new HUD(player,5,VisibleMenu.gameplayPanel);
