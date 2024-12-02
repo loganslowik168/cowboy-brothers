@@ -2,6 +2,7 @@ package com.team5.cowboy_brothers;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public abstract class Map {
@@ -9,6 +10,7 @@ public abstract class Map {
     protected int height;
     protected Player player;
      private Image backgroundImage;
+     protected ArrayList<Enemy> enemies = new ArrayList<>();
 
     public Map(int width, int height) {
         this.width = width;
@@ -23,6 +25,13 @@ public abstract class Map {
     private void loadBackgroundImage(String path) {
         ImageIcon icon = new ImageIcon(path); // Ensure the path is correct
         backgroundImage = icon.getImage();
+    }
+    
+    
+
+    protected void DisposeEnemies()
+    {
+      for (Enemy e : enemies) {e.Dispose();enemies.remove(e);}
     }
 
     // Render the background image

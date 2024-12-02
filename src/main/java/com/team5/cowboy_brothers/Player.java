@@ -32,7 +32,7 @@ public class Player extends Rectangle implements Serializable {
     private int bulletSpeed = 10; // Speed of the bullets
     private int screenWidth = 800; // Example screen width
     private int screenHeight = 600; // Example screen height
-    private Timer gravityTimer; // Timer for sending position messages
+    private Timer gravityAndCollisionTimer; // Timer for sending position messages
     private GamePanel targetPanel; // Panel to draw the player on
     private final int height = 74;
     private final int width = 44;
@@ -68,6 +68,10 @@ public class Player extends Rectangle implements Serializable {
         
         // Set up a timer to replebnish the player's ammo amount by 1 every 5 seconds
         startAmmoTimer();
+        
+        //Timer function to check every 3 seconds if player fell off screen and makes them lose level if they did
+        startOffScreenTimer();
+        
     }
 
     // Method to load the sprite
@@ -88,11 +92,12 @@ public class Player extends Rectangle implements Serializable {
 
     // Method to start a timer that sends position messages every second
     private void SetupGravityTimer() {
-        gravityTimer = new Timer();
-        gravityTimer.scheduleAtFixedRate(new TimerTask() {
+        gravityAndCollisionTimer = new Timer();
+        gravityAndCollisionTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (ShouldGravitate) ApplyGravity();
+                CheckFlagCollision();
             }
         }, 100, 1000 / 60); // ~60 FPS
     }
@@ -362,11 +367,25 @@ public class Player extends Rectangle implements Serializable {
             Cowboy_brothers.olly.VisibleMenu.transitionToWinScreen(); // Call the transition method
         }
     }
-    public boolean PlayerOffScreen() {
-        // Check if the player's Y-coordinate exceeds the death limit
-        return y > DEATH_LIMIT;
+    // Function to see if player is offscreen and makes them lose level if they are
+   public boolean isPlayerOffScreen() {
+    if (y > 600) {
+        System.out.println("Player fell to death!");
+         Cowboy_brothers.olly.VisibleMenu.loseMenu();
+        return true; // Player is off-screen
     }
-    
+    return false; // Player is still on screen
+}
+   // Timer function to check every 3 seconds if player fell off screen
+    private void startOffScreenTimer() {
+        Timer OffScreenTimer = new Timer();
+        OffScreenTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                isPlayerOffScreen();
+            }
+        }, 0, 2000); // Run task every 5 seconds
+    }
     // Example method to check win condition (this would depend on your game's logic)
     private boolean hasReachedWinCondition() {
         // Implement your logic here to determine if the player has reached the win condition
@@ -376,9 +395,24 @@ public class Player extends Rectangle implements Serializable {
     
     private void Dispose()
     {
-        if(gravityTimer!=null){gravityTimer = null;}
+        if(gravityAndCollisionTimer!=null){gravityAndCollisionTimer = null;}
         if(targetPanel!=null){targetPanel = null;}
         //sprite = null;
     }
     
+    
+    private boolean CheckFlagCollision()
+    {
+        // Use CopyOnWriteArrayList which allows for safe iteration even if modified
+        if(targetPanel.flag != null){
+        Flag f = targetPanel.flag;
+            if (x + this.width > f.GetXOffset() && x < f.GetXOffset() + f.width && 
+                        this.y + this.height > f.GetY() && this.y +(((this.height*0.9))) < f.GetY() + f.height) {
+                Cowboy_brothers.olly.VisibleMenu.winMenu();
+                
+                return true;
+            }
+        }
+        return false;
+    }
 }
