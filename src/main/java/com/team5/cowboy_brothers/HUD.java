@@ -25,17 +25,17 @@ public class HUD {
 
     // Method to draw the HUD
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.RED);
         g.setFont(new Font("Arial", Font.BOLD, 20));
 
         // Display health
         g.drawString("Health: " + player.getCurrentHealth(), 10, 20);
+        g.setColor(Color.GREEN);
         // Display ammo
         g.drawString("Ammo: " + player.getCurrentAmmo(), 10, 50);
-        // Display timer
-        //g.drawString("Time: " + timer + "s", 10, 80);
+        
         // Display level number
-        g.drawString("Level: " + levelNumber, 10, 110);
+        g.drawString("Level: " + levelNumber, 600, 20);
     }
 
     // Getters and Setters for level number, if needed

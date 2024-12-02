@@ -5,12 +5,13 @@ import java.awt.*;
 import java.lang.ref.WeakReference;
        
 public class Lvl1 extends Map {
-    Enemy enemy1;
+    Enemy enemy1, enemy2;
     
     public Lvl1() {
         super(800, 600); // Example dimensions
         loadMapStats();
         InitializeTerrain();
+        InitializeEnemies();
         
     }
 private void InitializeTerrain() {
@@ -48,18 +49,20 @@ private void InitializeTerrain() {
         //new Ground((GROUND_TILE_SIZE*100), (int)(GROUND_TILE_SIZE*12.4),1, t);
         new Flag((GROUND_TILE_SIZE*(20*10-1)),(GROUND_TILE_SIZE*14-148), t);
 
-        /*enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        int[][] path1={{100,100},{200,200}};
-        enemy1.setPath(path1);
-        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);*/
-        /*int GND_HEIGHT = 33;
-        int GND_WIDTH = 33*g.tilesize;
-        var bb = new BoundingBox(g.GetX(), g.GetY(), g.GetX()+GND_WIDTH, g.GetY(), g.GetX()+GND_WIDTH,
-                                g.GetY()+GND_HEIGHT,g.GetX(),g.GetY()+GND_HEIGHT, t);
-        t.AddBoundingBox(bb);*/
 
     }
+    private void InitializeEnemies(){
+            //make the level's enemies
+            int TileSize=33;
+            GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
+            int[][] path = {{TileSize*10*18,TileSize*14-84},{TileSize*10*19,TileSize*14-84}};
+            int[][] path2 = {{1000,TileSize*14-84},{1500,TileSize*14-84}};
+            enemy1=new Enemy("Kyle",t);
+            enemy2=new Enemy("Sam",t);
+            enemy1.setPath(path);
+            enemy2.setPath(path2);
 
+        }
     @Override
     public void loadMapStats() {
         // Load level 1 map statistics here

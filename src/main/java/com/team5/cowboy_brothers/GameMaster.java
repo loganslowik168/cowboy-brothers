@@ -1,6 +1,11 @@
 package com.team5.cowboy_brothers;
 import com.team5.cowboy_brothers.GamePanel;
 import java.awt.Frame;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.swing.JFrame;
 
 
@@ -14,13 +19,14 @@ public class GameMaster {
 
     public GameWorld gameWorld; 
     public Map LoadedLevel;
-    
+    String filePath = "player.ser"; // Path to the serialized player file
     public boolean IsThereASaloon = false;
     public int Selectedlvl;
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
-        player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel); //change max unlocked level (3rd param) back to 1
+        player = new Player(3, 6, 1, 0, hs, 400, 40, VisibleMenu.gameplayPanel); // Create new player using existing hs
+
         VisibleMenu.gameplayPanel.setPlayer(player);
         gameplayPanel = VisibleMenu.gameplayPanel;
         gameWorld = new GameWorld(VisibleMenu);
@@ -97,6 +103,7 @@ public class GameMaster {
 
         // Clear game objects in the GamePanel
         gameplayPanel.clearGameObjects(); // Implement this method in GamePanel
+        player.serialize(filePath);
     }
     public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
 
