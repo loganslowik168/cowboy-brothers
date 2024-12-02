@@ -37,7 +37,7 @@ public class Cowboy_bros_Menu extends JFrame {
     private JPanel winMenuPanel;
     private JPanel loseMenuPanel;
     
-    KeyHandler KH;
+    
 
     public Cowboy_bros_Menu() {
         this.gameplayPanel = new GamePanel();
@@ -65,8 +65,7 @@ public class Cowboy_bros_Menu extends JFrame {
 
         setVisible(true);
         //Add key listener
-        KH = new KeyHandler();
-        gameplayPanel.addKeyListener(KH);
+        
     }
 
     // Create the Main Menu panel with buttons
@@ -311,7 +310,7 @@ public class Cowboy_bros_Menu extends JFrame {
            @Override
            public void actionPerformed(ActionEvent e){
                //return to level select
-               Cowboy_brothers.olly.IncrementMaxLevelUnlocked();
+               //Cowboy_brothers.olly.IncrementMaxLevelUnlocked();
                switchState(GameState.LEVEL_SELECT);
            } 
         });
@@ -319,7 +318,7 @@ public class Cowboy_bros_Menu extends JFrame {
     }
     // Function to switch between game states
     public void switchState(GameState Menu) {
-        
+        if (Cowboy_brothers.olly != null) {Cowboy_brothers.olly.KH.MenuRelease();}
         if ((currentState == GameState.GAMEPLAY || currentState == GameState.PAUSE_MENU || currentState ==
                 GameState.WIN_MENU || currentState == GameState.LOSE_MENU) && (Menu == GameState.LEVEL_SELECT
                 || Menu == GameState.MAIN_MENU))
@@ -327,9 +326,9 @@ public class Cowboy_bros_Menu extends JFrame {
             //dispose of objects if leaving gameplay screen
             Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         }
-        if(currentState==GameState.GAMEPLAY&&Menu!=GameState.GAMEPLAY){
-            gameplayPanel.releaseAllKeysUnfocused(KH);
-        }
+        //if(currentState==GameState.GAMEPLAY&&Menu!=GameState.GAMEPLAY){
+         //   gameplayPanel.releaseAllKeysUnfocused(KH);
+        //}
         currentState=Menu;
         if (currentState == GameState.PAUSE_MENU) 
         {
@@ -352,7 +351,7 @@ public class Cowboy_bros_Menu extends JFrame {
                 }
            }
         
-
+        
         // Show/hide panels based on current state
         mainMenuPanel.setVisible(currentState == GameState.MAIN_MENU);
         levelSelectPanel.setVisible(currentState == GameState.LEVEL_SELECT);
