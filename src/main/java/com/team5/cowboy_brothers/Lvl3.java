@@ -2,13 +2,13 @@ package com.team5.cowboy_brothers;
 
 
 public class Lvl3 extends Map {
-      Enemy enemy1;
+      Enemy enemy1,enemy2, enemy3;
     
     public Lvl3() {
         super(800,600);
         loadMapStats();
         InitializeTerrain();
-        
+        Level3Enemies();
     }
 private void InitializeTerrain() {
         // example lvl 1{if (olly == null) olly = new GameMaster();}
@@ -25,9 +25,9 @@ private void InitializeTerrain() {
         new Ground(GROUND_TILE_SIZE * 15, (int)(GROUND_TILE_SIZE * 13), 5, t);
         
        //Ground Level
-        new Ground(GROUND_TILE_SIZE * 22, (int)(GROUND_TILE_SIZE * 14.8), 1, t);
-        new Ground(GROUND_TILE_SIZE * 24, (int)(GROUND_TILE_SIZE * 14.8), 10, t);
-        new Ground(GROUND_TILE_SIZE * 36, (int)(GROUND_TILE_SIZE * 14.8), 5, t);
+        new Ground(GROUND_TILE_SIZE * 22, (int)(GROUND_TILE_SIZE * 15), 1, t);
+        new Ground(GROUND_TILE_SIZE * 24, (int)(GROUND_TILE_SIZE * 15), 10, t);
+        new Ground(GROUND_TILE_SIZE * 36, (int)(GROUND_TILE_SIZE * 15), 5, t);
        //height increase platform
         new Ground(GROUND_TILE_SIZE * 42, (int)(GROUND_TILE_SIZE * 14.8), 5, t);
 	new Ground(GROUND_TILE_SIZE * 42, (int)(GROUND_TILE_SIZE * 14.2), 5, t);
@@ -84,11 +84,21 @@ private void InitializeTerrain() {
         // Flag Platform
         new Ground(GROUND_TILE_SIZE * 113, (int)(GROUND_TILE_SIZE * 9.4), 5, t);
         
-           /* enemy1 = new Enemy("Kyle", Cowboy_brothers.olly.VisibleMenu.gameplayPanel);
-        int[][] path1={{100,100},{200,200}};
-        enemy1.setPath(path1);
-        Cowboy_brothers.olly.VisibleMenu.gameplayPanel.setEnemy(enemy1);*/
-
+    }
+public void Level3Enemies(){
+        //make the level's enemies
+        int TileSize=33;
+        GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
+        int[][] path = {{1000,TileSize*15-84},{900,TileSize*15-84}};
+        int[][] path2 = {{2800,TileSize*15-84},{2900,TileSize*15-84}};
+        int[][] path3 = {{3470,TileSize*6-84},{3400,TileSize*6-84}};
+        enemy1=new Enemy("Arthur",t);
+        enemy2=new Enemy("John",t);
+        enemy3=new Enemy("Dutch",t);
+        enemy1.setPath(path);
+        enemy2.setPath(path2);
+        enemy3.setPath(path3);
+        
     }
     public void loadMapStats() {
         // Load level 1 map statistics here
