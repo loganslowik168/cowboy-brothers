@@ -1,8 +1,5 @@
 package com.team5.cowboy_brothers;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Flag extends GameObject {

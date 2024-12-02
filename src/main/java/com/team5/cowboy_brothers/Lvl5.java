@@ -1,11 +1,6 @@
 package com.team5.cowboy_brothers;
 
-import java.awt.Point;
 
-/**
- *
- * @author heyin
- */
 public class Lvl5 extends Map {
     
     public Lvl5() {

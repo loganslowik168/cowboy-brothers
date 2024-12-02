@@ -13,7 +13,6 @@ public class BossSaloon extends GameObject{
     private int y;
     private BufferedImage sprite;
     private GamePanel targetPanel;
-    Timer repaintTimer;
     private Boss B;
     public BossSaloon(int x, int y, GamePanel targetPanel, Boss B)
     {

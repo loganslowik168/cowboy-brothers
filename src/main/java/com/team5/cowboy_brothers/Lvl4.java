@@ -1,9 +1,5 @@
 package com.team5.cowboy_brothers;
 
-import javax.swing.*;
-import java.util.*;
-import java.awt.*;
-
 
 public class Lvl4 extends Map {
     Enemy enemy1;

@@ -24,7 +24,6 @@ public class Cowboy_bros_Menu extends JFrame {
     int v=99;
     // Milliseconds between timer ticks
     Timer gamePlayTimer = new Timer(DELAY, null);
-    PauseButtonValue tempPauseValue;
 
     
     //private Timer t1=new Timer();
@@ -302,7 +301,6 @@ public class Cowboy_bros_Menu extends JFrame {
            @Override
            public void actionPerformed(ActionEvent e){
                //continue from the pause menu
-               tempPauseValue=new PauseButtonValue();
                switchState(GameState.GAMEPLAY);
                if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.setPaused(false);}
            } 

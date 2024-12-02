@@ -1,6 +1,5 @@
 
 package com.team5.cowboy_brothers;
-import javax.swing.*;
 import java.awt.*;
 
 public class BoundingBox {
