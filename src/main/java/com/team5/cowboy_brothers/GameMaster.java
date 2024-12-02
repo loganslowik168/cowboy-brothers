@@ -121,7 +121,7 @@ public class GameMaster {
 
         // Clear game objects in the GamePanel
         gameplayPanel.clearGameObjects(); // Implement this method in GamePanel
-        player.serialize(filepath);
+        player.serialize(filePath);
     }
     public boolean CheckLevelUnlocked(int lvl) {return lvl<=player.getMaxUnlockedLevel();}
 
