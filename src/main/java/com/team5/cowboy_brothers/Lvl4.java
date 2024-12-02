@@ -113,7 +113,7 @@ public void InitializeEnemies(){
         GamePanel t = Cowboy_brothers.olly.VisibleMenu.gameplayPanel;
         int[][] path = {{1100,TileSize*14-84},{1500,TileSize*14-84}};
         int[][] path2 = {{3000,TileSize*14-84},{3500,TileSize*14-84}};
-        int[][] path3 = {{3000,TileSize*10-84},{3000,TileSize*10-84}};
+        int[] path3 = {3000,TileSize*10-84};
         int[][] path4 = {{1300,TileSize*10-84},{1500,TileSize*10-84}};
         enemy1=new Enemy("Kylie",t);
         enemy2=new Enemy("Sammy",t);

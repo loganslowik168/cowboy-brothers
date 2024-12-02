@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
-    private Player player;
+    public Player player;
     public ArrayList<Ground> grounds;
     private Flag flag;
     private HUD hud; // Reference to the HUD
