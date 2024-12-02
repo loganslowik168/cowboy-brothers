@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 public class HUD {
     private Player player; // Reference to the player
-    private int levelNumber;
+    private int levelNumber,bossHealth;
     //private int timer; // Timer in seconds
 
     // Constructor
@@ -14,7 +14,6 @@ public class HUD {
         this.player = player;
         this.levelNumber = levelNumber;
         targetPanel.setHUD(this);
-        
        // this.timer = 0; // Initialize timer
     }
 
@@ -36,6 +35,11 @@ public class HUD {
         
         // Display level number
         g.drawString("Level: " + levelNumber, 600, 20);
+        if(levelNumber==5&&Cowboy_brothers.olly.gameWorld.boss!=null){
+            g.setColor(Color.RED);
+            g.drawString("Boss Health: "+Cowboy_brothers.olly.gameWorld.boss.currentHealth,300,490);
+        }
+        
     }
 
     // Getters and Setters for level number, if needed
