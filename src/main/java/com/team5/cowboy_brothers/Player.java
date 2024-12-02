@@ -43,7 +43,7 @@ public class Player extends Rectangle implements Serializable {
     public Player(int currentHealth, int currentAmmo, int maxUnlockedLevel, int currentScore, int[] highScores, int startX, int startY, GamePanel targetPanel) {
         this.currentHealth = currentHealth;
         this.currentAmmo = currentAmmo;
-        this.maxUnlockedLevel = maxUnlockedLevel; 
+        this.maxUnlockedLevel = 5; 
         this.currentScore = currentScore;
         this.highScores = new int[NUM_OF_LEVELS];
         this.x = startX;
@@ -57,7 +57,7 @@ public class Player extends Rectangle implements Serializable {
         }
 
         // Load the sprite
-        System.out.println("LOADING SPRITE");
+      //  System.out.println("LOADING SPRITE"); //This statement is not needed for now
         loadSprites("sprites/playerLeft.png", "sprites/playerRight.png");
         sprite=spriteL;
         // Start the timer to send position messages
@@ -78,13 +78,13 @@ public class Player extends Rectangle implements Serializable {
     private void loadSprites(String filePathL, String filePathR) {
         try {
             spriteL = ImageIO.read(new File(filePathL));
-            System.out.println("Left sprite loaded successfully.");
+       //     System.out.println("Left sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading left sprite: " + e.getMessage());
         }
         try {
             spriteR = ImageIO.read(new File(filePathR));
-            System.out.println("Right sprite loaded successfully.");
+        //    System.out.println("Right sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading right sprite: " + e.getMessage());
         }
@@ -353,7 +353,7 @@ public class Player extends Rectangle implements Serializable {
     private void Die()
     {
         //change screen to lose screen
-        System.out.print("Hello Olly");
+       System.out.print("You died to bullets :( "); 
         if(Cowboy_brothers.olly.gameWorld.boss!=null){Cowboy_brothers.olly.gameWorld.boss.Die();}
         Cowboy_brothers.olly.VisibleMenu.loseMenu();
 
@@ -362,6 +362,7 @@ public class Player extends Rectangle implements Serializable {
    public boolean isPlayerOffScreen() {
     if (y > DEATH_LIMIT && targetPanel.hasFocus()) {
         System.out.println("Player fell to death!");
+
          Cowboy_brothers.olly.VisibleMenu.loseMenu();
         return true; // Player is off-screen
     }

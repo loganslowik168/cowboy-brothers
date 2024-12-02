@@ -36,7 +36,7 @@ public class Bomb extends MoveableGameObject{
         this.progress = 0.0; // Bomb hasn't moved yet
         this.targetPanel = targetPanel;
         this.SPEED = speed;
-        //System.out.println("Throwing bomb from point " + startPosition.x + ", " + startPosition.y);
+        //System.out.println("Throwing bomb from point " + startPosition.x + ", " + startPosition.y); //This statement is not needed for now
         // Load the sprite image from file
         try {
             this.sprite = ImageIO.read(new File("sprites/Dynamite.png"));
@@ -64,7 +64,7 @@ public class Bomb extends MoveableGameObject{
         // Calculate the distance between the start and target positions
         double distanceX = targetPosition.x - startPosition.x;
         double distanceY = targetPosition.y - startPosition.y;
-        //System.out.println("Bomb position: " + currentPosition);
+        //System.out.println("Bomb position: " + currentPosition); //This statement is not needed for now
                 // Progress goes from 0 to 1
         progress += SPEED; // Adjust the speed of the bomb's movement by modifying this value
 
@@ -83,7 +83,7 @@ public class Bomb extends MoveableGameObject{
         currentPosition.setLocation(x, y);
         
         if (hasReachedTarget() && !isExploded) {Explode();}
-        //System.out.println(currentPosition.x + "vs" + GetXOffset());
+        //System.out.println(currentPosition.x + "vs" + GetXOffset()); //This statement is not needed for now
     }
 
     // Render the bomb at its current position
@@ -96,7 +96,7 @@ public class Bomb extends MoveableGameObject{
     public void draw(Graphics2D g2) {
         if (sprite != null) {
             g2.drawImage(sprite, (int) currentPosition.x, (int) currentPosition.y, targetPanel);
-            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")");
+            //System.out.println("Drawing player sprite at position: (" + x + ", " + y + ")"); //This statement is not needed for now
         } else {
             //System.err.println("Sprite is not loaded.");
         }
@@ -180,12 +180,12 @@ public class Bomb extends MoveableGameObject{
             boolean withinY = ((currentPosition.y>saloonPosition.y) && (currentPosition.y<saloonPosition.y+261));
             if (withinX && withinY)
             {
-                //System.out.println("EGGASPLOSSSSION!!!");
+                //System.out.println("EGGASPLOSSSSION!!!"); //This statement is not needed for now
                 saloon.ExplodeSaloon();
                 saloon = null;
             }
-            //System.out.println("val"+lX+" "+rX+" / "+tY+" "+bY);
-            //System.out.println("("+currentPosition.x+","+currentPosition.y+") vs ("+saloonPosition.x+","+saloonPosition.y+")");
+            //System.out.println("val"+lX+" "+rX+" / "+tY+" "+bY); //This statement is not needed for now
+            //System.out.println("("+currentPosition.x+","+currentPosition.y+") vs ("+saloonPosition.x+","+saloonPosition.y+")"); //This statement is not needed for now
 
         }
         

@@ -67,7 +67,7 @@ public class Enemy extends MoveableGameObject {
         this.height = 84;
         Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
         
-        System.out.println("Enemy size = " + width + "x" + height);
+       // System.out.println("Enemy size = " + width + "x" + height); //This statement is not needed for now
     }
     //the path needs to be altered as a moveablegameobject meaning each x elemet will change according
     public void setPath(int[][] parapath){
@@ -100,7 +100,7 @@ public class Enemy extends MoveableGameObject {
     private void loadLSprite(String filePath) {
         try {
             LeftSprite = ImageIO.read(new File(filePath));
-            System.out.println("Sprite loaded successfully.");
+         //   System.out.println("Sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
@@ -108,7 +108,7 @@ public class Enemy extends MoveableGameObject {
     private void loadRSprite(String filePath) {
         try {
             RightSprite = ImageIO.read(new File(filePath));
-            System.out.println("Sprite loaded successfully.");
+       //     System.out.println("Sprite loaded successfully."); //This statement is not needed for now
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
@@ -146,7 +146,7 @@ public class Enemy extends MoveableGameObject {
                     if(pathIndex!=path.length){
                         setSpriteDirection(pathIndex-1,pathIndex);
                     }
-                    System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
+                  //  System.out.println("Reached: (" + destinationX + ", " + destinationY + ")"); //This statement is not needed for now
                 } else {
                     // Normalize the direction vector
                     double normDirX = dirX / distance;
@@ -183,7 +183,7 @@ public class Enemy extends MoveableGameObject {
                     if(pathIndex!=-1){
                         setSpriteDirection(pathIndex+1,pathIndex);
                     }
-                    System.out.println("Reached: (" + destinationX + ", " + destinationY + ")");
+                 //   System.out.println("Reached: (" + destinationX + ", " + destinationY + ")"); //This statement is not needed for now
                 } else {
                     // Normalize the direction vector
                     double normDirX = dirX / distance;
@@ -308,7 +308,8 @@ public class Enemy extends MoveableGameObject {
         bulletFireTimer.removeActionListener(bulletFireTimer.getActionListeners()[0]);
         bulletFireTimer.stop();
         bulletFireTimer = null;
-        System.out.print("HelloWorld!");}
+      //  System.out.print("HelloWorld!"); //This statement is not needed for now but this statement tells us if item was disposed
+        }
         if(targetPanel!=null){targetPanel.bulletDispose();targetPanel.listOfEnemys.remove(this);targetPanel=null;}
     }
     
