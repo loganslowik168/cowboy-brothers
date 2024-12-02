@@ -64,9 +64,11 @@ public class KeyHandler extends KeyAdapter {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A -> {
                 movingLeft = false; // Stop moving left when key is released
+                if(movingRight)Cowboy_brothers.olly.player.CheckForDirectionChange(1);
             }
             case KeyEvent.VK_D -> {
                 movingRight = false; // Stop moving right when key is released
+                if(movingLeft)Cowboy_brothers.olly.player.CheckForDirectionChange(-1);
             }
         }
     }
@@ -75,7 +77,8 @@ public class KeyHandler extends KeyAdapter {
         // Smoothly move the player based on whether keys are being held down
         if (movingLeft) {
             gw.MoveObjects(Cowboy_brothers.olly.player.GetMoveSpeed()); // Move left continuously
-        } else if (movingRight) {
+        }
+        if (movingRight) {
             gw.MoveObjects(-Cowboy_brothers.olly.player.GetMoveSpeed()); // Move right continuously
         }
 
