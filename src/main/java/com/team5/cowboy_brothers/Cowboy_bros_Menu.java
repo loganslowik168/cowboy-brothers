@@ -216,12 +216,15 @@ public class Cowboy_bros_Menu extends JFrame {
     winMenuPanel = new JPanel();
     winMenuPanel.setLayout(new GridLayout(2, 1, 10, 10));
     
-    JLabel winLabel = new JLabel("You Win!", SwingConstants.CENTER);
+    JLabel winLabel = new JLabel("You ", SwingConstants.RIGHT);
+    JLabel winLabel2 = new JLabel("Win!", SwingConstants.LEFT);
     winLabel.setFont(new Font("Arial", Font.BOLD, 32));
+    winLabel2.setFont(new Font("Arial", Font.BOLD, 32));
     JButton nextLevelButton = new JButton("Next Level");
     JButton mainMenuButton = new JButton("Main Menu");
     
     winMenuPanel.add(winLabel);
+    winMenuPanel.add(winLabel2);
     winMenuPanel.add(nextLevelButton);
     winMenuPanel.add(mainMenuButton);
     
@@ -241,12 +244,15 @@ public class Cowboy_bros_Menu extends JFrame {
     loseMenuPanel = new JPanel();
     loseMenuPanel.setLayout(new GridLayout(2, 1, 10, 10));
     
-    JLabel loseLabel = new JLabel("You Lose!", SwingConstants.CENTER);
+    JLabel loseLabel = new JLabel("You", SwingConstants.RIGHT);
+    JLabel loseLabel2 = new JLabel("Lose!", SwingConstants.LEFT);
     loseLabel.setFont(new Font("Arial", Font.BOLD, 32));
+    loseLabel2.setFont(new Font("Arial", Font.BOLD, 32));
     JButton retryButton = new JButton("Retry");
     JButton mainMenuButton = new JButton("Main Menu");
     
     loseMenuPanel.add(loseLabel);
+    loseMenuPanel.add(loseLabel2);
     loseMenuPanel.add(retryButton);
     loseMenuPanel.add(mainMenuButton);
     
