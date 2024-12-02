@@ -80,7 +80,8 @@ private void InitializeTerrain() {
         enemy2=new Enemy("Sam",t);
         enemy1.setPath(path);
         enemy2.setPath(path2);
-        
+        enemies.add(enemy1);
+        enemies.add(enemy2);
     }
     @Override
     public void loadMapStats() {

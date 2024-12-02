@@ -241,4 +241,9 @@ public class GamePanel extends JPanel {
         // Clear other objects as necessary
         repaint();
     }
+    public void releaseAllKeysUnfocused(KeyHandler kh){
+        if(!(this.hasFocus())){
+            kh.MenuRelease();
+        }
+    }
 }

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 public class GameMaster {
     
     //public static GameMaster olly;
-    int[] hs = {0,0,0,0,0};
+    int[] hs = {0,0,0,0,0},startCoordinate={400,40};
     public Cowboy_bros_Menu VisibleMenu;
     public GamePanel gameplayPanel;
     public Player player;// = new Player(3,6,1,0,hs,0,0,VisibleMenu.gameplayPanel);
@@ -127,5 +127,10 @@ private void clearBossAndDynamite() {
     }
 }
 
-    public void ResetPlayerProgress() {player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);System.out.println("PROGRESS HAS BEEN RESET");}
+    public void ResetPlayerProgress() 
+    {
+        System.out.println("PROGRESS HAS BEEN RESET");
+        player = new Player(3,6,1,0,hs,400,40,VisibleMenu.gameplayPanel);
+        VisibleMenu.gameplayPanel.setPlayer(player);
+    }
 }
