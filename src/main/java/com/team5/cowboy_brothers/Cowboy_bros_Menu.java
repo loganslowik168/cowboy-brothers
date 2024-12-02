@@ -325,7 +325,7 @@ public class Cowboy_bros_Menu extends JFrame {
             //dispose of objects if leaving gameplay screen
             Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         }
-        currentState = Menu;
+        currentState=Menu;
         if (currentState == GameState.PAUSE_MENU) 
         {
            if(Cowboy_brothers.olly.gameWorld.boss!=null)Cowboy_brothers.olly.gameWorld.boss.setPaused(true);
@@ -400,6 +400,8 @@ public class Cowboy_bros_Menu extends JFrame {
     
         // Reload the current level
         int currentLevel = Cowboy_brothers.olly.gameWorld.Selectedlvl; // Get the current level
+        Cowboy_brothers.olly.LoadedLevel.DisposeEnemies();
+        Cowboy_brothers.olly.LoadedLevel.DisposeObjects();
         Cowboy_brothers.olly.LoadLevel(currentLevel); // Reload the level
     }
     public void transitionToWinScreen() {
