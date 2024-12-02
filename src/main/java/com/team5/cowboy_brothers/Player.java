@@ -23,7 +23,7 @@ public class Player extends Rectangle implements Serializable {
     public final int JUMP_HEIGHT = 20;
     private final int MAX_AMMO = 6;
     final int MAX_HEALTH = 3;
-    private final int GRAVITY = 2;
+    private final int GRAVITY = 6;
     private final int INVERSE_GRAVITY = GRAVITY*3;
     public boolean ShouldGravitate = true; //see Cowboy_brothers.java
     private static final int DEATH_LIMIT = 600; // Y-coordinate limit for falling off the map

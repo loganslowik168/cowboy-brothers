@@ -25,7 +25,7 @@ public class GameMaster {
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
-        player = new Player(3, 6, 1, 0, hs, 400, 40, VisibleMenu.gameplayPanel); // Create new player using existing hs
+        player = new Player(3, 6, 5, 0, hs, 400, 40, VisibleMenu.gameplayPanel); // Create new player using existing hs
 
         VisibleMenu.gameplayPanel.setPlayer(player);
         gameplayPanel = VisibleMenu.gameplayPanel;

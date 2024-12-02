@@ -176,8 +176,9 @@ public class Cowboy_bros_Menu extends JFrame {
         
         //Add a timer as a label at top of screen
         timerLabel = new JLabel("",SwingConstants.CENTER);
-        timerLabel.setFont(new Font("Arial", Font.PLAIN,15));
+        timerLabel.setFont(new Font("Arial", Font.BOLD, 20));
         timerLabel.setText("Timer: 100");
+        timerLabel.setForeground(Color.GREEN);
         gameplayPanel.add(timerLabel, BorderLayout.NORTH);
         gameplayPanel.requestFocusInWindow();
         

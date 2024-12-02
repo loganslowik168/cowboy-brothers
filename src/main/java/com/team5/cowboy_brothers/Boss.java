@@ -16,7 +16,7 @@ public class Boss{
     private int x, y; // Player's position
     private int direction = -1;
     private final int MAX_HEALTH = 10;
-    private int currentHealth;
+    public int currentHealth;
     private int FALL_DISTANCE = 30;
     private BufferedImage sprite, spriteL, spriteR;
     private GamePanel targetPanel;
