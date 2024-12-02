@@ -25,25 +25,7 @@ public class GameMaster {
     public GameMaster()
     {
         VisibleMenu = new Cowboy_bros_Menu();
-        
-        player = null;
-        
-
-        // Check if the player.ser file exists
-        if (Files.exists(Paths.get(filePath))) {
-            // File exists, so try to deserialize the player
-            try {
-                player = player.deserialize(filePath); // Deserialize the player object
-                System.out.println("Player deserialized.");
-            } catch (Exception e) {
-                // Handle errors during deserialization
-                System.err.println("Error deserializing player: " + e.getMessage());
-            }
-        } else {
-            // File doesn't exist, create a new player using the existing hs variable
-            System.out.println("No saved player found. Creating a new player.");
-            player = new Player(3, 6, 1, 0, hs, 400, 40, VisibleMenu.gameplayPanel); // Create new player using existing hs
-        }
+        player = new Player(3, 6, 1, 0, hs, 400, 40, VisibleMenu.gameplayPanel); // Create new player using existing hs
 
         VisibleMenu.gameplayPanel.setPlayer(player);
         gameplayPanel = VisibleMenu.gameplayPanel;
