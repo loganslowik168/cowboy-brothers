@@ -19,6 +19,8 @@ public class GameMaster {
     public int Selectedlvl;
     
     KeyHandler KH;
+    // New MusicControl instance
+    private MusicControl musicControl;
     
     public GameMaster()
     {
@@ -32,6 +34,8 @@ public class GameMaster {
         KH = new KeyHandler();
         gameplayPanel.addKeyListener(KH);
 
+        // Initialize MusicControl
+        musicControl = new MusicControl();
     }
     
     
@@ -49,7 +53,17 @@ public class GameMaster {
         }
         return null;
     }
-    
+      // Method to start background music
+    public void startMusic(String filepath) {
+        System.out.println("Starting music...");
+        musicControl.playMusic(filepath);
+    }
+
+    // Method to stop background music
+    public void stopMusic() {
+        System.out.println("Stopping music...");
+        musicControl.stopMusic();
+    }
     public void LoadLevel(int lvl)
     {
         // Reset the current level state
@@ -64,6 +78,12 @@ public class GameMaster {
                 resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl1();
                 Selectedlvl = lvl;
+                
+                //stops any existing music
+                stopMusic();
+                // plays music for new level
+                startMusic("AudioFiles/Western1.wav");
+                
                 new HUD(player,1,VisibleMenu.gameplayPanel);
             }
             case 2 -> 
@@ -72,6 +92,12 @@ public class GameMaster {
                 resetCurrentLevel(200, 380);
                 LoadedLevel = new Lvl2();
                 Selectedlvl = lvl;
+                
+                 //stops any existing music
+                stopMusic();
+                // plays music for new level
+                startMusic("AudioFiles/Western2.wav");
+                
                 new HUD(player,2,VisibleMenu.gameplayPanel);
             }
             case 3 -> 
@@ -79,6 +105,12 @@ public class GameMaster {
                 System.out.println("Load level 3. --olly");
                 resetCurrentLevel(105, 95);
                 new HUD(player,3,VisibleMenu.gameplayPanel);
+                
+                 //stops any existing music
+                stopMusic();
+                // plays music for new level
+                startMusic("AudioFiles/Western3.wav");
+                
                 LoadedLevel = new Lvl3();
                 Selectedlvl = lvl;
             }
@@ -87,6 +119,12 @@ public class GameMaster {
                 System.out.println("Load level 4. --olly");
                 new HUD(player,4,VisibleMenu.gameplayPanel);
                 resetCurrentLevel(200, 380);
+                
+                 //stops any existing music
+                stopMusic();
+                // plays music for new level
+                startMusic("AudioFiles/Western4.wav");
+                
                 LoadedLevel = new Lvl4();
                 Selectedlvl = lvl;
             }
@@ -94,6 +132,12 @@ public class GameMaster {
             {
                 System.out.println("Load level 5. --olly");
                 resetCurrentLevel(200, 380);
+                
+                 //stops any existing music
+                stopMusic();
+                // plays music for new level
+                startMusic("AudioFiles/Western5.wav");
+                
                 LoadedLevel = new Lvl5();
                 new HUD(player,5,VisibleMenu.gameplayPanel);
                 Selectedlvl = lvl;
