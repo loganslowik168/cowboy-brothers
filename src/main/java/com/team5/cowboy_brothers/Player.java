@@ -360,7 +360,7 @@ public class Player extends Rectangle implements Serializable {
     }
     // Function to see if player is offscreen and makes them lose level if they are
    public boolean isPlayerOffScreen() {
-    if (y > DEATH_LIMIT) {
+    if (y > DEATH_LIMIT && targetPanel.hasFocus()) {
         System.out.println("Player fell to death!");
          Cowboy_brothers.olly.VisibleMenu.loseMenu();
         return true; // Player is off-screen
@@ -375,11 +375,10 @@ public class Player extends Rectangle implements Serializable {
             public void run() {
                 isPlayerOffScreen();
             }
-        }, 0, 2000); // Run task every 5 seconds
+        }, 0, 250); // Run task every 5 seconds
     }
     
 
-    
     private boolean CheckFlagCollision()
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
