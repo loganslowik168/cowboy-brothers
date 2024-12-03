@@ -167,6 +167,12 @@ public class Bomb extends MoveableGameObject{
         {
             Cowboy_brothers.olly.player.Hurt(1);
         }
+        Point b = new Point(Cowboy_brothers.olly.gameWorld.boss.GetX(),Cowboy_brothers.olly.gameWorld.boss.GetY());
+        if (currentPosition.distance(b)<=EXPLOSION_RADIUS)
+        {
+            Cowboy_brothers.olly.gameWorld.boss.Hurt(1);
+        }
+        
         if (Cowboy_brothers.olly.IsThereASaloon)
         {
             BossSaloon saloon = targetPanel.GetSaloon();
