@@ -287,16 +287,18 @@ public class Player extends Rectangle implements Serializable {
             if (pX + this.width > g.GetXOffset() && pX < g.GetXOffset() + GND_WIDTH && 
                         this.y + this.height > g.GetY() && this.y +(((this.height*0.9))) < g.GetY() + GND_HEIGHT) {
                 
-                if (CheckUnderGround(0,0)) {y-=INVERSE_GRAVITY;}
+                
                 isFalling = false;
+                if (CheckGroundCollisionSpecial(0,0)) {y-=INVERSE_GRAVITY; isFalling = true;}
                 return true;
             }
         }
         }
+        isFalling = true;
         return false;
     }
     
-    public boolean CheckUnderGround(int exOffset, int xOffset)
+    public boolean CheckGroundCollisionSpecial(int exOffset, int xOffset)
     {
         // Use CopyOnWriteArrayList which allows for safe iteration even if modified
         for (Ground g : new CopyOnWriteArrayList<>(targetPanel.grounds)) {
@@ -309,8 +311,6 @@ public class Player extends Rectangle implements Serializable {
                         this.y + this.height+trueOffset > g.GetY() && this.y-trueOffset < g.GetY() + GND_HEIGHT) {
 
                 return true;
-            }else{
-                isFalling = true;
             }
         }
         
