@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -63,12 +64,20 @@ public class GamePanel extends JPanel {
         return grounds;
     }
     private void loadBackgroundImage() {
-        try {
-            backgroundImage = ImageIO.read(new File("sprites/DesertBackground.png")); // Adjust the path as needed
+    try {
+        // Load the background image from the classpath (using getResourceAsStream)
+            InputStream backgroundStream = getClass().getResourceAsStream("/sprites/DesertBackground.png");
+            if (backgroundStream != null) {
+                backgroundImage = ImageIO.read(backgroundStream);
+                // System.out.println("Background image loaded successfully.");
+            } else {
+                System.err.println("Error: Background image not found at /sprites/DesertBackground.png");
+            }
         } catch (IOException e) {
             System.err.println("Error loading background image: " + e.getMessage());
         }
     }
+
 
     public void AddBullet(EnemyBullet bullet){
         Enbullets.add(bullet);
@@ -195,7 +204,6 @@ public class GamePanel extends JPanel {
         for(int i=0; i<Enbullets.size();i++){
             if(Enbullets.get(i).checkDeleteBullet()) 
             {
-                Enbullets.get(i).clearSprite();
                 repaint();
                 Enbullets.get(i).pauseTimers();
                 Enbullets.remove(i); 

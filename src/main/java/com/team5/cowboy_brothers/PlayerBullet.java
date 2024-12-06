@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 
@@ -17,30 +18,42 @@ public class PlayerBullet extends Bullet {
     protected GamePanel targetPanel;
 
     public PlayerBullet(int startX, int startY, int direction, int speed, GamePanel TPB, int width, int height)  {
-        super(startX,startY,direction,speed, TPB,"sprites/PlayerBulletLeft.png","sprites/PlayerBulletRight.png", width, height);
+        super(startX,startY,direction,speed, TPB,"/sprites/PlayerBulletLeft.png","/sprites/PlayerBulletRight.png", width, height);
         targetPanel = TPB;
         //loadSprite("sprites/PlayerBullet.png");
     }
     
     
-    private void loadSprite(String filePath) {
-        try {
-            sprite = ImageIO.read(new File(filePath));
-            super.setSprite(sprite);
-          //  System.out.println("Sprite loaded successfully."); 
-        } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
+    private void loadSprites(String filePathL, String filePathR) {
+    try {
+        // Load left sprite from the classpath (using getResourceAsStream)
+        InputStream spriteStreamL = getClass().getResourceAsStream(filePathL);
+        if (spriteStreamL != null) {
+            spriteL = ImageIO.read(spriteStreamL);
+            // System.out.println("Left sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Left sprite not found at " + filePathL);
         }
+    } catch (IOException e) {
+        System.err.println("Error loading left sprite: " + e.getMessage());
     }
-    public void clearSprite(){
-        try {
-            sprite = ImageIO.read(new File("sprites/black.png"));
-            super.setSprite(sprite);
-          //  System.out.println("Sprite loaded successfully.");
-        } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
+
+    try {
+        // Load right sprite from the classpath (using getResourceAsStream)
+        InputStream spriteStreamR = getClass().getResourceAsStream(filePathR);
+        if (spriteStreamR != null) {
+            spriteR = ImageIO.read(spriteStreamR);
+            // System.out.println("Right sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Right sprite not found at " + filePathR);
         }
+    } catch (IOException e) {
+        System.err.println("Error loading right sprite: " + e.getMessage());
     }
+    
+}
+
+    
     @Override
     protected void setupUpdateTimer(){
         updateTimer.addActionListener(new ActionListener(){

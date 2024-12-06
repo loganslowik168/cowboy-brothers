@@ -58,8 +58,8 @@ public class Enemy extends MoveableGameObject {
         
         pathIndex = 0; // Start at the first point in the path
         
-        loadLSprite("sprites/EnemySpriteLeft.png");
-        loadRSprite("sprites/EnemySprite.png");
+        loadLSprite("/sprites/EnemySpriteLeft.png");
+        loadRSprite("/sprites/EnemySprite.png");
         settupTimerEnemy();
         
         targetPanel.setEnemyList(this);
@@ -99,20 +99,34 @@ public class Enemy extends MoveableGameObject {
     
     private void loadLSprite(String filePath) {
         try {
-            LeftSprite = ImageIO.read(new File(filePath));
-         //   System.out.println("Sprite loaded successfully."); //This statement is not needed for now
+            // Load left sprite from the classpath (using getResourceAsStream)
+            InputStream spriteStreamL = getClass().getResourceAsStream(filePath);
+            if (spriteStreamL != null) {
+                LeftSprite = ImageIO.read(spriteStreamL);
+                // System.out.println("Left sprite loaded successfully.");
+            } else {
+                System.err.println("Error: Left sprite not found at " + filePath);
+            }
         } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
+            System.err.println("Error loading left sprite: " + e.getMessage());
         }
     }
+
     private void loadRSprite(String filePath) {
         try {
-            RightSprite = ImageIO.read(new File(filePath));
-       //     System.out.println("Sprite loaded successfully."); //This statement is not needed for now
+            // Load right sprite from the classpath (using getResourceAsStream)
+            InputStream spriteStreamR = getClass().getResourceAsStream(filePath);
+            if (spriteStreamR != null) {
+                RightSprite = ImageIO.read(spriteStreamR);
+                // System.out.println("Right sprite loaded successfully.");
+            } else {
+                System.err.println("Error: Right sprite not found at " + filePath);
+            }
         } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
+            System.err.println("Error loading right sprite: " + e.getMessage());
         }
     }
+
     public void draw(Graphics2D g2) {
         if (LeftSprite != null&&facingLeft&&alive) {
             g2.drawImage(LeftSprite, (int) x, (int) y, targetPanel);

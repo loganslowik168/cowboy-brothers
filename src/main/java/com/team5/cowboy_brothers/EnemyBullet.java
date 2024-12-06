@@ -19,7 +19,7 @@ public class EnemyBullet extends Bullet {
     GamePanel targetPanel;
 
     public EnemyBullet(int startX, int startY, int direction, int playerX, int playerY, int speed, GamePanel TPB, int width, int height) {
-        super(startX,startY,direction,speed, TPB,"sprites/EnemyBulleLeft.png","sprites/EnemyBulletRight.png", width, height);
+        super(startX,startY,direction,speed, TPB,"/sprites/EnemyBulleLeft.png","/sprites/EnemyBulletRight.png", width, height);
         targetPanel = TPB;
         Cowboy_brothers.olly.gameWorld.moveableObjects.add(this);
         // Calculate direction towards player
@@ -27,15 +27,6 @@ public class EnemyBullet extends Bullet {
         //Super setDirection()
     }
     
-    public void clearSprite(){
-        try {
-            sprite = ImageIO.read(new File("sprites/black.png"));
-            super.setSprite(sprite);
-        //    System.out.println("Sprite loaded successfully."); //This statement is not needed for now
-        } catch (IOException e) {
-            System.err.println("Error loading sprite: " + e.getMessage());
-        }
-    }
     @Override
     protected boolean CheckCollision()
     {

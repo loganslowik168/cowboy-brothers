@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -39,10 +40,18 @@ public class Bomb extends MoveableGameObject{
         //System.out.println("Throwing bomb from point " + startPosition.x + ", " + startPosition.y); //This statement is not needed for now
         // Load the sprite image from file
         try {
-            this.sprite = ImageIO.read(new File("sprites/Dynamite.png"));
-        } catch (IOException e) {
-            System.err.println("Error loading sprite image: " + e.getMessage());
+        // Load the sprite image from the classpath (using getResourceAsStream)
+        InputStream spriteStream = getClass().getResourceAsStream("/sprites/Dynamite.png");
+        if (spriteStream != null) {
+            this.sprite = ImageIO.read(spriteStream);
+            // System.out.println("Dynamite sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Dynamite sprite not found at /sprites/Dynamite.png");
         }
+    } catch (IOException e) {
+        System.err.println("Error loading sprite image: " + e.getMessage());
+    }
+
         
         
         updateTimer = new Timer(1000/60,null);
@@ -146,6 +155,7 @@ public class Bomb extends MoveableGameObject{
         } catch (IOException e) {
             System.err.println("Error loading sprite image: " + e.getMessage());
         }
+
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         
         // Schedule the Dispose() method to be called after 0.25 seconds (250 milliseconds)

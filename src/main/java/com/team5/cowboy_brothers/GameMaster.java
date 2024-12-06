@@ -1,6 +1,7 @@
 package com.team5.cowboy_brothers;
 import com.team5.cowboy_brothers.GamePanel;
 import java.awt.Frame;
+import java.io.InputStream;
 import javax.swing.JFrame;
 
 
@@ -56,7 +57,17 @@ public class GameMaster {
       // Method to start background music
     public void startMusic(String filepath) {
         System.out.println("Starting music...");
-        musicControl.playMusic(filepath);
+        try {
+            // Load music from the classpath (using getResourceAsStream)
+            InputStream musicStream = getClass().getResourceAsStream(filepath);
+            if (musicStream != null) {
+                musicControl.playMusic(musicStream);  // Assuming musicControl can accept InputStream
+            } else {
+                System.err.println("Error: Music file not found at " + filepath);
+            }
+        } catch (Exception e) {
+            System.err.println("Error playing music: " + e.getMessage());
+        }
     }
 
     // Method to stop background music
@@ -64,6 +75,7 @@ public class GameMaster {
         System.out.println("Stopping music...");
         musicControl.stopMusic();
     }
+
     public void LoadLevel(int lvl)
     {
         // Reset the current level state
@@ -82,7 +94,7 @@ public class GameMaster {
                 //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("AudioFiles/Western1.wav");
+                startMusic("/AudioFiles/Western1.wav");
                 
                 new HUD(player,1,VisibleMenu.gameplayPanel);
             }
@@ -96,7 +108,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("AudioFiles/Western2.wav");
+                startMusic("/AudioFiles/Western2.wav");
                 
                 new HUD(player,2,VisibleMenu.gameplayPanel);
             }
@@ -109,7 +121,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("AudioFiles/Western3.wav");
+                startMusic("/AudioFiles/Western3.wav");
                 
                 LoadedLevel = new Lvl3();
                 Selectedlvl = lvl;
@@ -123,7 +135,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("AudioFiles/Western4.wav");
+                startMusic("/AudioFiles/Western4.wav");
                 
                 LoadedLevel = new Lvl4();
                 Selectedlvl = lvl;
@@ -136,7 +148,7 @@ public class GameMaster {
                  //stops any existing music
                 stopMusic();
                 // plays music for new level
-                startMusic("AudioFiles/Western5.wav");
+                startMusic("/AudioFiles/Western5.wav");
                 
                 LoadedLevel = new Lvl5();
                 new HUD(player,5,VisibleMenu.gameplayPanel);

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -31,7 +32,7 @@ public class Boss{
         width = 44;
         height = 74;
         targetPanel = t;
-        loadSprites("sprites/bossLeft.png", "sprites/bossRight.png");
+        loadSprites("/sprites/bossLeft.png", "/sprites/bossRight.png");
         sprite=spriteL;
         targetPanel.SetBoss(this);
         Cowboy_brothers.olly.gameWorld.boss = this;
@@ -165,18 +166,32 @@ public class Boss{
     // Method to load the sprite
     private void loadSprites(String filePathL, String filePathR) {
         try {
-            spriteL = ImageIO.read(new File(filePathL));
-            //System.out.println("Left sprite loaded successfully."); //This statement is not needed for now
+            // Load left sprite from the classpath (using getResourceAsStream)
+            InputStream spriteStreamL = getClass().getResourceAsStream(filePathL);
+            if (spriteStreamL != null) {
+                spriteL = ImageIO.read(spriteStreamL);
+                // System.out.println("Left sprite loaded successfully.");
+            } else {
+                System.err.println("Error: Left sprite not found at " + filePathL);
+            }
         } catch (IOException e) {
             System.err.println("Error loading left sprite: " + e.getMessage());
         }
+
         try {
-            spriteR = ImageIO.read(new File(filePathR));
-            //System.out.println("Right sprite loaded successfully."); //This statement is not needed for now
+            // Load right sprite from the classpath (using getResourceAsStream)
+            InputStream spriteStreamR = getClass().getResourceAsStream(filePathR);
+            if (spriteStreamR != null) {
+                spriteR = ImageIO.read(spriteStreamR);
+                // System.out.println("Right sprite loaded successfully.");
+            } else {
+                System.err.println("Error: Right sprite not found at " + filePathR);
+            }
         } catch (IOException e) {
             System.err.println("Error loading right sprite: " + e.getMessage());
         }
     }
+
     
     public void draw(Graphics g) {
         g.drawImage(sprite, x, y, null); // Draw the bullet sprite

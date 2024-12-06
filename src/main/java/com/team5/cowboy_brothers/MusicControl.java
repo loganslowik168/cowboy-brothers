@@ -1,41 +1,29 @@
 package com.team5.cowboy_brothers;
 
-/**
- *
- * @author Ace
- */
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
+import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MusicControl {
-    
+
     private Clip clip;
 
-    public void playMusic(String filepath) {
+    public void playMusic(InputStream musicStream) {
         try {
-            // Load the audio file
-            File musicPath = new File(filepath);
-            if (musicPath.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                clip = AudioSystem.getClip();
-                clip.open(audioInput);
+            // Wrap the InputStream with a BufferedInputStream to support mark and reset
+            BufferedInputStream bufferedStream = new BufferedInputStream(musicStream);
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(bufferedStream);
+            clip = AudioSystem.getClip();
+            clip.open(audioInput);
 
-                // Set the volume control here
-                FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                volume.setValue(-10.0f); // Reduce volume by 10 decibels (adjust as needed)
+            // Set the volume control (optional)
+            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-10.0f); // Adjust volume as needed
 
-                // Start playing and loop continuously
-                clip.start();
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } else {
-                System.out.println("Cannot find the specified audio file: " + filepath);
-            }
+            // Start playing and loop continuously
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -58,7 +58,7 @@ public class Player extends Rectangle implements Serializable {
 
         // Load the sprite
       //  System.out.println("LOADING SPRITE"); //This statement is not needed for now
-        loadSprites("sprites/playerLeft.png", "sprites/playerRight.png");
+        loadSprites("/sprites/playerLeft.png", "/sprites/playerRight.png");
         sprite=spriteL;
         // Start the timer to send position messages
         SetupGravityTimer();
@@ -76,19 +76,33 @@ public class Player extends Rectangle implements Serializable {
 
     // Method to load the sprite
     private void loadSprites(String filePathL, String filePathR) {
-        try {
-            spriteL = ImageIO.read(new File(filePathL));
-       //     System.out.println("Left sprite loaded successfully."); //This statement is not needed for now
-        } catch (IOException e) {
-            System.err.println("Error loading left sprite: " + e.getMessage());
+    try {
+        // Load left sprite from the classpath
+        InputStream spriteStreamL = getClass().getResourceAsStream(filePathL);
+        if (spriteStreamL != null) {
+            spriteL = ImageIO.read(spriteStreamL);
+            // System.out.println("Left sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Left sprite not found at " + filePathL);
         }
-        try {
-            spriteR = ImageIO.read(new File(filePathR));
-        //    System.out.println("Right sprite loaded successfully."); //This statement is not needed for now
-        } catch (IOException e) {
-            System.err.println("Error loading right sprite: " + e.getMessage());
-        }
+    } catch (IOException e) {
+        System.err.println("Error loading left sprite: " + e.getMessage());
     }
+
+    try {
+        // Load right sprite from the classpath
+        InputStream spriteStreamR = getClass().getResourceAsStream(filePathR);
+        if (spriteStreamR != null) {
+            spriteR = ImageIO.read(spriteStreamR);
+            // System.out.println("Right sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Right sprite not found at " + filePathR);
+        }
+    } catch (IOException e) {
+        System.err.println("Error loading right sprite: " + e.getMessage());
+    }
+}
+
 
     // Method to start a timer that sends position messages every second
     private void SetupGravityTimer() {

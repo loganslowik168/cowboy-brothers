@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 
@@ -15,7 +16,7 @@ public abstract class Bullet extends MoveableGameObject{
     //protected int x, y; // Position of the bullet
     private int speed; // Speed of the bullet
     private int direction; 
-    private BufferedImage sprite, spriteR, spriteL;
+    protected BufferedImage sprite, spriteR, spriteL;
     private GamePanel targetPanelBullet;
     protected Timer updateTimer=new Timer(1000/60,null);;
     
@@ -44,19 +45,34 @@ public abstract class Bullet extends MoveableGameObject{
     }
     // Method to load the sprite
     private void loadSprites(String filePathL, String filePathR) {
-        try {
-            spriteL = ImageIO.read(new File(filePathL));
-        //    System.out.println("Left sprite loaded successfully."); //This statement is not needed for now
-        } catch (IOException e) {
-            System.err.println("Error loading left sprite: " + e.getMessage());
+    try {
+        // Load left sprite from the classpath (using getResourceAsStream)
+        InputStream spriteStreamL = getClass().getResourceAsStream(filePathL);
+        if (spriteStreamL != null) {
+            spriteL = ImageIO.read(spriteStreamL);
+            // System.out.println("Left sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Left sprite not found at " + filePathL);
         }
-        try {
-            spriteR = ImageIO.read(new File(filePathR));
-          //  System.out.println("Right sprite loaded successfully."); //This statement is not needed for now
-        } catch (IOException e) {
-            System.err.println("Error loading right sprite: " + e.getMessage());
-        }
+    } catch (IOException e) {
+        System.err.println("Error loading left sprite: " + e.getMessage());
     }
+
+    try {
+        // Load right sprite from the classpath (using getResourceAsStream)
+        InputStream spriteStreamR = getClass().getResourceAsStream(filePathR);
+        if (spriteStreamR != null) {
+            spriteR = ImageIO.read(spriteStreamR);
+            // System.out.println("Right sprite loaded successfully.");
+        } else {
+            System.err.println("Error: Right sprite not found at " + filePathR);
+        }
+    } catch (IOException e) {
+        System.err.println("Error loading right sprite: " + e.getMessage());
+    }
+}
+
+
     @Override
     public void update() {
        // Update the bullet's position based on its speed and direction

@@ -16,7 +16,7 @@ public class BossSaloon extends GameObject{
     private Boss B;
     public BossSaloon(int x, int y, GamePanel targetPanel, Boss B)
     {
-        super(x, y, "sprites/saloon.png", targetPanel);
+        super(x, y, "/sprites/saloon.png", targetPanel);
         this.B = B;
         targetPanel.SetSaloon(this);
        // System.out.println("Creating saloon"); //This statement is not needed for now
@@ -33,7 +33,7 @@ public class BossSaloon extends GameObject{
     public void ExplodeSaloon()
     {
         Cowboy_brothers.olly.IsThereASaloon = false;
-        loadSprite("sprites/saloonBoom.png");
+        loadSprite("/sprites/saloonBoom.png");
         
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         

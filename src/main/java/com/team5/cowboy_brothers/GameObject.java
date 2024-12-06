@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -33,12 +34,19 @@ public abstract class GameObject extends Rectangle{
     }
     protected void loadSprite(String filePath) {
         try {
-            sprite = ImageIO.read(new File(filePath));
-            //System.out.println("Sprite " + filePath + " loaded successfully.");
+            // Load sprite from the classpath (using getResourceAsStream)
+            InputStream spriteStream = getClass().getResourceAsStream(filePath);
+            if (spriteStream != null) {
+                sprite = ImageIO.read(spriteStream);
+                // System.out.println("Sprite " + filePath + " loaded successfully.");
+            } else {
+                System.err.println("Error: Sprite not found at " + filePath);
+            }
         } catch (IOException e) {
             System.err.println("Error loading sprite: " + e.getMessage());
         }
     }
+
 
     public void draw(Graphics g) {
         g.drawImage(sprite, x, y, null); // Draw the bullet sprite

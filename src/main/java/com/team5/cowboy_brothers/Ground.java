@@ -17,21 +17,21 @@ public class Ground extends GameObject {
     // Constructor
     public Ground(int x, int y, int tilesize, GamePanel targetPanel) {
         
-        super(x, y, "sprites/DesertGroundTile.png", targetPanel);
+        super(x, y, "/sprites/DesertGroundTile.png", targetPanel);
         String path = "";
         this.tilesize=tilesize;
         switch(tilesize){
             case 1:
-                path = "sprites/DesertGroundTile.png";
+                path = "/sprites/DesertGroundTile.png";
                 break;
             case 3:
-                path = "sprites/Ground3x1.png";
+                path = "/sprites/Ground3x1.png";
                 break;
             case 5:
-                path = "sprites/Ground5x1.png";
+                path = "/sprites/Ground5x1.png";
                 break;
             case 10:
-                path = "sprites/Ground10x1.png";
+                path = "/sprites/Ground10x1.png";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid tilesize value: " + tilesize);
